@@ -14,7 +14,6 @@ afterEach(() => {
 })
 
 test('Typeform api url is well defined when initialising', () => {
-
   createClient({
     token: '12345'
   })
@@ -22,7 +21,6 @@ test('Typeform api url is well defined when initialising', () => {
 })
 
 test('Api token is in the headers request', () => {
-
   createClient({
     token: '12345'
   })
