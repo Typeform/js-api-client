@@ -26,12 +26,15 @@ test('getForm sets get method', () => {
   expect(axios.request.args[0][0].method).toBe('get')
 })
 
-test('updateForm sends the correct UID', () => {
+test('updateForm sends the correct UID and data', () => {
   updateForm(axios, {
     uid: 'abc123',
-    payload: {}
+    data: {
+      title: 'hola'
+    }
   })
   expect(axios.request.args[0][0].url).toBe('/forms/abc123')
+  expect(axios.request.args[0][0].data.title).toBe('hola')
 })
 
 test('updateForm sets patch method in request by default', () => {
