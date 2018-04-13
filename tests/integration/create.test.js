@@ -13,7 +13,7 @@ const randomString = () => {
 test('Getting forms from my account', done => {
   typeformClient
     .getForms()
-    .then((response) => {
+    .then(response => {
       const {
         data,
         status
@@ -31,7 +31,7 @@ test('Gets the correct form by UID', done => {
     .getForm({
       uid: testTypeform
     })
-    .then((response) => {
+    .then(response => {
       const {
         data,
         status
@@ -43,7 +43,7 @@ test('Gets the correct form by UID', done => {
 })
 
 test('Update only title of typeform', done => {
-  const newTitle = randomString()
+  const newTitle = 'integration test - ' + randomString()
   typeformClient
     .updateForm({
       uid: testTypeform,
@@ -55,7 +55,7 @@ test('Update only title of typeform', done => {
         }
       ]
     })
-    .then((response) => {
+    .then(response => {
       const {
         data,
         status
@@ -66,8 +66,8 @@ test('Update only title of typeform', done => {
     })
 })
 
-test.only('Replaces the title sending the form schema', done => {
-  const newTitle = randomString()
+test('Replaces the title sending the form schema', done => {
+  const newTitle = 'integration test - ' + randomString()
   typeformClient
     .updateForm({
       uid: testTypeform,
@@ -79,7 +79,7 @@ test.only('Replaces the title sending the form schema', done => {
         }
       }
     })
-    .then((response) => {
+    .then(response => {
       const {
         data,
         status
@@ -87,6 +87,50 @@ test.only('Replaces the title sending the form schema', done => {
 
       expect(status).toBe(200)
       expect(data.title).toBe(newTitle)
+      done()
+    })
+})
+
+let formUId
+test('Create a form', done => {
+  const newTitle = randomString()
+
+  typeformClient
+    .createForm({
+      data: {
+        "title": newTitle,
+        "theme": {
+          "href": "https://api.typeform.com/themes/6lPNE6"
+        }
+      }
+    })
+    .then(response => {
+      const {
+        data,
+        status
+      } = response
+
+      expect(status).toBe(201)
+      expect(data.title).toBe(newTitle)
+      formUId = data.id
+
+      done()
+    })
+})
+
+test('Delete created form', done => {
+  const newTitle = randomString()
+
+  typeformClient
+    .deleteForm({
+      uid: formUId
+    })
+    .then(response => {
+      const {
+        status
+      } = response
+
+      expect(status).toBe(204)
       done()
     })
 })
