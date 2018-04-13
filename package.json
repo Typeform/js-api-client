@@ -1,4 +1,26 @@
 {
+  "name": "typeform-js-sdk",
+  "version": "0.1.0-alpha.1",
+  "description": "JS SDK for Typeform API",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jepser/typeform-js-sdk.git"
+  },
+  "keywords": [
+    "sdk",
+    "typeform",
+    "js"
+  ],
+  "author": "Jepser Bernardino",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jepser/typeform-js-sdk/issues"
+  },
+  "homepage": "https://github.com/jepser/typeform-js-sdk#readme",
   "dependencies": {
     "axios": "^0.18.0"
   },
