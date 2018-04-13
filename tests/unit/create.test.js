@@ -1,18 +1,12 @@
 import axios from 'axios'
-import MockAdapter from 'axios-mock-adapter'
-import {stub, spy} from 'sinon'
+import { stub, spy } from 'sinon'
 import { getForm, updateForm, deleteForm } from '../../lib/create'
 
-// const mock = new MockAdapter(axios)
-
 beforeEach(() => {
-  stub(axios, 'get').returns({})
   stub(axios, 'request').returns({})
 })
 
 afterEach(() => {
-  // mock.reset()
-  axios.get.restore()
   axios.request.restore()
 })
 
