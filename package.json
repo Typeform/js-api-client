@@ -41,6 +41,9 @@
   "scripts": {
     "commitmsg": "commitlint -e $GIT_PARAMS",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:unit": "jest ./tests/unit",
+    "test:unit:watch": "jest ./tests/unit --watch",
+    "test:integration": "TYPEFORM_TOKEN=$TYPEFORM_TOKEN jest ./tests/integration/",
+    "test:integration:watch": "TYPEFORM_TOKEN=$TYPEFORM_TOKEN jest ./tests/integration/ --watch"
   }
 }
