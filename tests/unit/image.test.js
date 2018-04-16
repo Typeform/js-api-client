@@ -4,7 +4,7 @@ import {
   getImages,
   getImage,
   addImage,
-  removeImage
+  deleteImage
 } from '../../lib/image'
 
 beforeEach(() => {
@@ -43,8 +43,8 @@ test('adding an image pass the required values', () => {
   })
 })
 
-test('removing an image sets the correct method and id', () => {
-  removeImage(axios, { id: 'abc123' })
+test('deleting an image sets the correct method and id', () => {
+  deleteImage(axios, { id: 'abc123' })
   expect(axios.request.args[0][0].url).toBe('/images/abc123')
   expect(axios.request.args[0][0].method).toBe('delete')
 })
