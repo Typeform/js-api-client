@@ -48,3 +48,27 @@ test('removing an image sets the correct method and id', () => {
   expect(axios.request.args[0][0].url).toBe('/images/abc123')
   expect(axios.request.args[0][0].method).toBe('delete')
 })
+
+test('it set the correct header when retrieving the image json description', () => {
+  getImage(axios, { id: 'abc123', returns: 'json' })
+  expect(axios.request.args[0][0].headers.Accept).toBe('application/json')
+})
+
+test('when getting an image by size it retrieves from the correct endpoint', () => {
+  getImage(axios, { id: 'abc123', returns: 'json', size: 'mobile'})
+  expect(axios.request.args[0][0].url).toBe('/images/abc123/image/mobile')
+})
+
+test('when getting an image by size what does not exists throws', () => {
+  expect(() => getImage(axios, { id: 'abc123', size: 'big' })).toThrow(`Image size doesn't exists`)
+})
+
+test('when getting an image by background size it retrieves from the correct endpoint', () => {
+  getImage(axios, { id: 'abc123', returns: 'json', backgroundSize: 'tablet' })
+  expect(axios.request.args[0][0].url).toBe('/images/abc123/background/tablet')
+})
+
+test('when getting an image by choice size it retrieves from the correct endpoint', () => {
+  getImage(axios, { id: 'abc123', choiceSize: 'supersize' })
+  expect(axios.request.args[0][0].url).toBe('/images/abc123/choice/supersize')
+})
