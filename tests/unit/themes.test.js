@@ -4,7 +4,8 @@ import {
   getThemes,
   getTheme,
   createTheme,
-  deleteTheme
+  deleteTheme,
+  updateTheme
 } from '../../lib/themes'
 
 const mockThemePayload = {
@@ -60,12 +61,22 @@ test('Throws if a font name is not supported', () => {
   })).toThrow()
 })
 
-test.only('Delete a theme has the correct path', () => {
+test('Delete a theme has the correct path', () => {
   deleteTheme(axios, { id: 2 })
   expect(axios.request.args[0][0].url).toBe('/themes/2')
 })
 
-test.only('Delete a theme has the correct method', () => {
+test('Delete a theme has the correct method', () => {
   deleteTheme(axios, mockThemePayload)
   expect(axios.request.args[0][0].method).toBe('delete')
+})
+
+test('Updating a theme has the correct path', () => {
+  updateTheme(axios, { id: 2, ...mockThemePayload })
+  expect(axios.request.args[0][0].url).toBe('/themes/2')
+})
+
+test('Delete a theme has the correct method', () => {
+  updateTheme(axios, { id: 2, ...mockThemePayload})
+  expect(axios.request.args[0][0].method).toBe('put')
 })
