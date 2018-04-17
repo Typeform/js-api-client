@@ -51,7 +51,7 @@ Each one of them encapsulates the operations related to it (like listing, updati
 
 ### Forms 
 
-#### `forms.list()`
+#### `forms.list({ page: 1, page_size: 10, search: '' })`
 - Get a list of your typeforms
 - Returns a list of typeform with the payload [refenced here](https://developer.typeform.com/create/reference/retrieve-forms/).
 ``` javascript
@@ -132,6 +132,90 @@ The theme property applies a `theme` to the form. If you don't specify a value f
     .delete({ uid: 'asdf' })
     .then(response => {
       //... removed typeform :( 
+    })
+
+```
+
+#### `forms.messages.get({ uid })`
+- Get custom messages typeform of a given UID
+``` javascript
+  const form = typeformClient
+    .forms
+    .messages
+    .get({ uid: 'asdf' })
+    .then(response => {
+      //...
+    })
+
+```
+
+#### `forms.messages.update({ uid })`
+- Updates custom messages typeform of a given UID
+``` javascript
+  const form = typeformClient
+    .forms
+    .messages
+    .update({ uid: 'asdf' })
+    .then(response => {
+      //...
+    })
+
+```
+
+### Images
+
+#### `images.list()`
+- Get your images collection
+``` javascript
+  const form = typeformClient
+    .images
+    .list()
+    .then(response => {
+      //...
+    })
+
+```
+
+#### `images.get({ id, returns, size, backgroundSize, choiceSize })`
+- Get custom image by ID
+- `returns`: json, binary (default)
+- `size`: default, thumbnail, mobile,
+- `backgroundSize`: default, thumbnail, mobile, tablet
+- `choiceSize`: default, thumbnail, supersize, supermobile, supersizefit, supermobilefit
+``` javascript
+  const form = typeformClient
+    .images
+    .get({ id: 'asdf', size: 'thumbnail' })
+    .then(response => {
+      //...
+    })
+
+```
+
+#### `images.add({ image, media_type, file_name })`
+- Update an image to Typeform
+``` javascript
+  const form = typeformClient
+    .images
+    .add({
+      "image": "bGRqZmxzZGpmbHNoZmtoc2RrZmpoc2tqZA==",
+      "media_type": "image/gif",
+      "file_name": "newimage.gif"
+    })
+    .then(response => {
+      //...
+    })
+
+```
+
+#### `images.delete({ id })`
+- Deletes an image with the given ID
+``` javascript
+  const form = typeformClient
+    .images
+    .remove({ id: 'asdf' })
+    .then(response => {
+      //...
     })
 
 ```
