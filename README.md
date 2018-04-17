@@ -55,7 +55,7 @@ Each one of them encapsulates the operations related to it (like listing, updati
 - Get a list of your typeforms
 - Returns a list of typeform with the payload [refenced here](https://developer.typeform.com/create/reference/retrieve-forms/).
 ``` javascript
-  const forms = typeformClient
+  typeformClient
     .forms
     .list()
     .then(response => {
@@ -68,7 +68,7 @@ Each one of them encapsulates the operations related to it (like listing, updati
 - Get a typeform by UID
 - Returns a typeform with the payload [refenced here](https://developer.typeform.com/create/reference/retrieve-form/).
 ``` javascript
-  const form = typeformClient
+  typeformClient
     .forms
     .get({ uid: 'asdf' })
     .then(response => {
@@ -84,7 +84,7 @@ Each one of them encapsulates the operations related to it (like listing, updati
 ##### Update specific typeform property, as [referenced here](https://developer.typeform.com/create/reference/update-form-patch/)
 
 ``` javascript
-  const form = typeformClient
+  typeformClient
     .forms
     .update({
       uid: 'asdf',
@@ -104,7 +104,7 @@ Each one of them encapsulates the operations related to it (like listing, updati
 ##### Update the whole typeform
 
 ``` javascript
-  const form = typeformClient
+  typeformClient
     .forms
     .update({
       uid: 'asdf',
@@ -127,7 +127,7 @@ The theme property applies a `theme` to the form. If you don't specify a value f
 #### `forms.delete({ uid })`
 - Deletes a typeform by UID
 ``` javascript
-  const form = typeformClient
+  typeformClient
     .forms
     .delete({ uid: 'asdf' })
     .then(response => {
@@ -139,7 +139,7 @@ The theme property applies a `theme` to the form. If you don't specify a value f
 #### `forms.messages.get({ uid })`
 - Get custom messages typeform of a given UID
 ``` javascript
-  const form = typeformClient
+  typeformClient
     .forms
     .messages
     .get({ uid: 'asdf' })
@@ -152,7 +152,7 @@ The theme property applies a `theme` to the form. If you don't specify a value f
 #### `forms.messages.update({ uid })`
 - Updates custom messages typeform of a given UID
 ``` javascript
-  const form = typeformClient
+  typeformClient
     .forms
     .messages
     .update({ uid: 'asdf' })
@@ -167,7 +167,7 @@ The theme property applies a `theme` to the form. If you don't specify a value f
 #### `images.list()`
 - Get your images collection
 ``` javascript
-  const form = typeformClient
+  typeformClient
     .images
     .list()
     .then(response => {
@@ -183,7 +183,7 @@ The theme property applies a `theme` to the form. If you don't specify a value f
 - `backgroundSize`: default, thumbnail, mobile, tablet
 - `choiceSize`: default, thumbnail, supersize, supermobile, supersizefit, supermobilefit
 ``` javascript
-  const form = typeformClient
+  typeformClient
     .images
     .get({ id: 'asdf', size: 'thumbnail' })
     .then(response => {
@@ -195,7 +195,7 @@ The theme property applies a `theme` to the form. If you don't specify a value f
 #### `images.add({ image, media_type, file_name })`
 - Update an image to Typeform
 ``` javascript
-  const form = typeformClient
+  typeformClient
     .images
     .add({
       "image": "bGRqZmxzZGpmbHNoZmtoc2RrZmpoc2tqZA==",
@@ -211,7 +211,7 @@ The theme property applies a `theme` to the form. If you don't specify a value f
 #### `images.delete({ id })`
 - Deletes an image with the given ID
 ``` javascript
-  const form = typeformClient
+  typeformClient
     .images
     .remove({ id: 'asdf' })
     .then(response => {
