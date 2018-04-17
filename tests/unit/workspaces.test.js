@@ -5,7 +5,8 @@ import {
   getWorkspace,
   createWorkspace,
   addMembers,
-  removeMembers
+  removeMembers,
+  deleteWorkspace
 } from '../../lib/workspaces'
 
 beforeEach(() => {
@@ -84,4 +85,10 @@ test(`remove a member to a workscape has the correct payload`, () => {
     }
   ])
   expect(axios.request.args[0][0].data.length).toEqual(1)
+})
+
+test(`Deleting a workscape has the correct path and method`, () => {
+  deleteWorkspace(axios, { id: 2 })
+  expect(axios.request.args[0][0].method).toBe(`delete`)
+  expect(axios.request.args[0][0].url).toBe(`/workspaces/2`)
 })
