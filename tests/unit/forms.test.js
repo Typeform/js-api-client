@@ -1,6 +1,13 @@
 import axios from 'axios'
 import { stub, spy } from 'sinon'
-import { getForm, updateForm, deleteForm } from '../../lib/forms'
+import {
+  getForm,
+  updateForm,
+  deleteForm,
+  createForm,
+  getMessages,
+  updateMessages
+} from '../../lib/forms'
 
 beforeEach(() => {
   stub(axios, 'request').returns({})
@@ -57,4 +64,29 @@ test('deleteForm removes the correct uid form ', () => {
 
   expect(axios.request.args[0][0].method).toBe('delete')
   expect(axios.request.args[0][0].url).toBe('/forms/abc123')
+})
+
+test('create form has the correct path and method ', () => {
+  createForm(axios, {})
+
+  expect(axios.request.args[0][0].method).toBe('post')
+  expect(axios.request.args[0][0].url).toBe('/forms')
+})
+
+test('get messages has the correct path and method ', () => {
+  getMessages(axios, {
+    uid: 'abc123'
+  })
+
+  expect(axios.request.args[0][0].method).toBe('get')
+  expect(axios.request.args[0][0].url).toBe('/forms/abc123/messages')
+})
+
+test('update messages has the correct path and method ', () => {
+  updateMessages(axios, {
+    uid: 'abc123'
+  })
+
+  expect(axios.request.args[0][0].method).toBe('put')
+  expect(axios.request.args[0][0].url).toBe('/forms/abc123/messages')
 })
