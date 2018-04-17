@@ -6,7 +6,8 @@ import {
   createWorkspace,
   addMembers,
   removeMembers,
-  deleteWorkspace
+  deleteWorkspace,
+  getWorkspaceForms
 } from '../../lib/workspaces'
 
 beforeEach(() => {
@@ -91,4 +92,10 @@ test(`Deleting a workscape has the correct path and method`, () => {
   deleteWorkspace(axios, { id: 2 })
   expect(axios.request.args[0][0].method).toBe(`delete`)
   expect(axios.request.args[0][0].url).toBe(`/workspaces/2`)
+})
+
+test(`Deleting a workscape has the correct path and method`, () => {
+  getWorkspaceForms(axios, { id: 2 })
+  expect(axios.request.args[0][0].method).toBe(`get`)
+  expect(axios.request.args[0][0].url).toBe(`/workspaces/2/forms`)
 })
