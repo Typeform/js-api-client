@@ -34,8 +34,8 @@ test('Get themes has the correct path', () => {
 
 test('Get themes has the correct parameters', () => {
   getThemes(axios, {page: 3, page_size: 15})
-  expect(axios.request.args[0][0].data.page).toBe(3)
-  expect(axios.request.args[0][0].data.page_size).toBe(15)
+  expect(axios.request.args[0][0].params.page).toBe(3)
+  expect(axios.request.args[0][0].params.page_size).toBe(15)
 })
 
 test('Get themes has the correct path', () => {
