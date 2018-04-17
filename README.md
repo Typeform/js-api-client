@@ -39,31 +39,44 @@ JS Client wrapper for Typeform API
   })
 ```
 
-#### `getForms()`
+Client returns the following properties:
+- `forms`
+- `images`
+- `teams`
+- `workspaces`
+- `themes`
+
+Each one of them encapsulates the operations related to it (like listing, updating, deleting the resource).
+
+### Forms 
+
+#### `forms.list()`
 - Get a list of your typeforms
 - Returns a list of typeform with the payload [refenced here](https://developer.typeform.com/create/reference/retrieve-forms/).
 ``` javascript
   const forms = typeformClient
-    .getForms()
+    .forms
+    .list()
     .then(response => {
       //... 
     })
 
 ```
 
-#### `getForm({ uid })`
+#### `forms.get({ uid })`
 - Get a typeform by UID
 - Returns a typeform with the payload [refenced here](https://developer.typeform.com/create/reference/retrieve-form/).
 ``` javascript
   const form = typeformClient
-    .getForm({ uid: 'asdf' })
+    .forms
+    .get({ uid: 'asdf' })
     .then(response => {
       //... 
     })
 
 ```
 
-#### `updateForm({ uid, data = {}, override: false })`
+#### `forms.update({ uid, data = {}, override: false })`
 - Get a typeform by UID
 - Returns a typeform with the payload [refenced here](https://developer.typeform.com/create/reference/retrieve-form/).
 
@@ -71,7 +84,8 @@ JS Client wrapper for Typeform API
 
 ``` javascript
   const form = typeformClient
-    .updateForm({
+    .forms
+    .update({
       uid: 'asdf',
       data: [
         {
@@ -90,7 +104,8 @@ JS Client wrapper for Typeform API
 
 ``` javascript
   const form = typeformClient
-    .updateForm({
+    .forms
+    .update({
       uid: 'asdf',
       override: true,
       data: {
@@ -108,11 +123,12 @@ JS Client wrapper for Typeform API
 **Note:**
 The theme property applies a `theme` to the form. If you don't specify a value for the 'theme' property, Typeform applies a new copy of the default theme to the form, **even if you already have a copy of the default theme applied to this form**. 
 
-#### `deleteForm({ uid })`
+#### `forms.delete({ uid })`
 - Deletes a typeform by UID
 ``` javascript
   const form = typeformClient
-    .removeForm({ uid: 'asdf' })
+    .forms
+    .delete({ uid: 'asdf' })
     .then(response => {
       //... removed typeform :( 
     })
