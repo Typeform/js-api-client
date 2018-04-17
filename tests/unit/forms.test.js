@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { stub, spy } from 'sinon'
-import { getForm, updateForm, deleteForm } from '../../lib/create'
+import { getForm, updateForm, deleteForm } from '../../lib/forms'
 
 beforeEach(() => {
   stub(axios, 'request').returns({})
