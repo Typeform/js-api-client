@@ -22,7 +22,8 @@ JS Client wrapper for Typeform API
 ``` javascript
   // will retrieve all forms
   typeformAPI
-    .getForms()
+    .forms
+    .list()
     .then(response => {
       // do what do you want with your typeforms
     })
