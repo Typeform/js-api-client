@@ -1,8 +1,8 @@
 {
-  "name": "typeform-js-sdk",
+  "name": "@typeform/js",
   "version": "0.1.0-alpha.1",
   "description": "JS SDK for Typeform API",
-  "main": "index.js",
+  "main": "dist/index.js",
   "directories": {
     "lib": "lib"
   },
@@ -22,9 +22,11 @@
   },
   "homepage": "https://github.com/jepser/typeform-js-sdk#readme",
   "dependencies": {
-    "axios": "^0.18.0"
+    "axios": "^0.18.0",
+    "in-publish": "^2.0.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.44",
     "@babel/core": "^7.0.0-beta.44",
     "@babel/node": "^7.0.0-beta.44",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.44",
@@ -32,18 +34,25 @@
     "@commitlint/cli": "^6.1.3",
     "@commitlint/config-conventional": "^6.1.3",
     "axios-mock-adapter": "^1.15.0",
-    "babel-core": "^7.0.0-0",
+    "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^22.4.3",
+    "babel-loader": "^7.1.4",
     "husky": "^0.14.3",
     "jest": "^22.4.3",
-    "sinon": "^4.5.0"
+    "sinon": "^4.5.0",
+    "webpack": "^4.6.0",
+    "webpack-cli": "^2.0.14"
   },
   "scripts": {
     "commitmsg": "commitlint -e $GIT_PARAMS",
-    "test": "jest",
+    "test": "TYPEFORM_TOKEN=$TYPEFORM_TOKEN jest",
     "test:unit": "jest ./tests/unit",
     "test:unit:watch": "jest ./tests/unit --watch",
     "test:integration": "TYPEFORM_TOKEN=$TYPEFORM_TOKEN jest ./tests/integration/",
-    "test:integration:watch": "TYPEFORM_TOKEN=$TYPEFORM_TOKEN jest ./tests/integration/ --watch"
-  }
+    "test:integration:watch": "TYPEFORM_TOKEN=$TYPEFORM_TOKEN jest ./tests/integration/ --watch",
+    "build:dist": "webpack --mode production",
+    "build:lib": "NODE_ENV=production babel src --out-dir lib",
+    "prepublish": "in-publish && npm run build:dist && npm run build:lib || not-in-publish"
+  },
+  "peerDependencies": {}
 }
