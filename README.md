@@ -6,7 +6,7 @@ JS Client wrapper for Typeform API
 
 - [Installation](#installation)
 - [Usage](#usage)
-  - [Initialize](#initialize)
+  - [Initialise](#initialise)
 - [Reference](#reference)
   - [Create Client](createclienttoken)
   - [Forms](#forms)
@@ -21,19 +21,19 @@ JS Client wrapper for Typeform API
 
 ``` bash
 # install with yarn
-yarn add @typeform/js-tracking
+yarn add @typeform/js
 
 # install with npm
-npm install @typeform/js-tracking --save
+npm install @typeform/js --save
 ```
 
 ## Usage
 
-### Intialisation
+### Intialise
 
 1. Import client library
 ``` javascript
-  import {createClient} from 'typeform-js-sdk'
+  import {createClient} from '@typeform/js'
 ```
 
 2. Create a instance with your personal token
