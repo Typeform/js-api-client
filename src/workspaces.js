@@ -1,4 +1,4 @@
-import { isMemberPropValid, createMemberPatchQuery } from "./utils";
+import { isMemberPropValid, createMemberPatchQuery } from './utils';
 
 export const workspaces = http => ({
   list: args => getWorkspaces(http, args),
@@ -11,8 +11,8 @@ export const workspaces = http => ({
 
 export const getWorkspaces = (http, { search, page, page_size } = {}) => {
   return http.request({
-    method: "get",
-    url: "/workspaces",
+    method: 'get',
+    url: '/workspaces',
     params: {
       page,
       page_size,
@@ -23,7 +23,7 @@ export const getWorkspaces = (http, { search, page, page_size } = {}) => {
 
 export const getWorkspace = (http, { id }) => {
   return http.request({
-    method: "get",
+    method: 'get',
     url: `/workspaces/${id}`
   });
 };
@@ -34,14 +34,14 @@ export const createWorkspace = (http, { name }) => {
   }
 
   return http.request({
-    method: "post",
+    method: 'post',
     url: `/workspaces`
   });
 };
 
 export const updateWorkspace = (http, { id, data } = {}) => {
   return http.request({
-    method: "patch",
+    method: 'patch',
     url: `/workspaces/${id}`,
     data
   });
@@ -55,7 +55,7 @@ export const addMembers = (http, { id, members }) => {
   const membersToAdd = !Array.isArray(members) ? [members] : members;
   const membersQuery = createMemberPatchQuery({
     members: membersToAdd,
-    operation: "add"
+    operation: 'add'
   });
 
   return updateWorkspace(http, { id, data: membersQuery });
@@ -69,7 +69,7 @@ export const removeMembers = (http, { id, members }) => {
   const membersToAdd = !Array.isArray(members) ? [members] : members;
   const membersQuery = createMemberPatchQuery({
     members: membersToAdd,
-    operation: "remove"
+    operation: 'remove'
   });
 
   return updateWorkspace(http, { id, data: membersQuery });
@@ -77,7 +77,7 @@ export const removeMembers = (http, { id, members }) => {
 
 export const deleteWorkspace = (http, { id }) => {
   return http.request({
-    method: "delete",
+    method: 'delete',
     url: `/workspaces/${id}`
   });
 };
@@ -87,7 +87,7 @@ export const getWorkspaceForms = (
   { id, from_id, page, page_size } = {}
 ) => {
   return http.request({
-    method: "get",
+    method: 'get',
     url: `/workspaces/${id}/forms`,
     params: {
       page,

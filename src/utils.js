@@ -3,7 +3,7 @@ export const isMemberPropValid = members => {
     return false;
   }
 
-  if (!(typeof members === "string" || Array.isArray(members))) {
+  if (!(typeof members === 'string' || Array.isArray(members))) {
     return false;
   }
 
@@ -13,7 +13,7 @@ export const isMemberPropValid = members => {
 export const createMemberPatchQuery = ({ members, operation }) => {
   return members.map(member => ({
     op: operation,
-    path: "/members",
+    path: '/members',
     value: {
       email: member
     }

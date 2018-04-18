@@ -1,13 +1,13 @@
-import { clientConstructor } from "./create-client";
-import { forms } from "./forms";
-import { images } from "./images";
-import { teams } from "./teams";
-import { themes } from "./themes";
-import { workspace } from "./workspaces";
+import { clientConstructor } from './create-client';
+import { forms } from './forms';
+import { images } from './images';
+import { teams } from './teams';
+import { themes } from './themes';
+import { workspace } from './workspaces';
 
 export const createClient = (args = {}) => {
   if (args.token === undefined) {
-    throw "Token is missing";
+    throw 'Token is missing';
   }
 
   const http = clientConstructor(args);

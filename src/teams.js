@@ -1,4 +1,4 @@
-import { isMemberPropValid, createMemberPatchQuery } from "./utils";
+import { isMemberPropValid, createMemberPatchQuery } from './utils';
 
 export const teams = http => {
   return {
@@ -16,8 +16,8 @@ export const teams = http => {
 
 export const getTeam = http => {
   return http.request({
-    method: "get",
-    url: "/teams/mine"
+    method: 'get',
+    url: '/teams/mine'
   });
 };
 
@@ -29,12 +29,12 @@ export const addMembers = (http, { members }) => {
   const membersToAdd = !Array.isArray(members) ? [members] : members;
   const membersQuery = createMemberPatchQuery({
     members: membersToAdd,
-    operation: "add"
+    operation: 'add'
   });
 
   return http.request({
-    method: "patch",
-    url: "/teams/mine",
+    method: 'patch',
+    url: '/teams/mine',
     data: membersQuery
   });
 };
@@ -47,12 +47,12 @@ export const removeMembers = (http, { members }) => {
   const membersToAdd = !Array.isArray(members) ? [members] : members;
   const membersQuery = createMemberPatchQuery({
     members: membersToAdd,
-    operation: "remove"
+    operation: 'remove'
   });
 
   return http.request({
-    method: "delete",
-    url: "/teams/mine",
+    method: 'delete',
+    url: '/teams/mine',
     data: membersQuery
   });
 };
