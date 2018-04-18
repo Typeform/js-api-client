@@ -1,10 +1,10 @@
-import axios from 'axios'
+import axios from "axios";
 
 export const clientConstructor = ({ token }) => {
   return axios.create({
-    baseURL: 'https://api.typeform.com',
+    baseURL: "https://api.typeform.com",
     headers: {
-      'Authorization': `bearer ${token}`
+      Authorization: `bearer ${token}`
     }
-  })
-}
+  });
+};
