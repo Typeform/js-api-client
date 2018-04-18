@@ -30,7 +30,7 @@ npm install @typeform/js --save
 
 ## Usage
 
-### Intialise
+### Initialise
 
 1. Import client library
 ``` javascript
