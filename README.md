@@ -219,3 +219,70 @@ The theme property applies a `theme` to the form. If you don't specify a value f
     })
 
 ```
+
+### Teams
+
+#### `teams.get({ id })`
+- Gets team information for the given ID
+
+#### `teams.addMembers({ id, members })`
+- Add members to a team for the given ID
+- `members`: `string` or an `array` and should be the email fo the user
+- Adding multiple members at once is possible using an array of emails
+
+#### `teams.removeMembers({ id, members })`
+- Remove members to a team for the given ID
+- `members`: `string` or an `array` and should be the email fo the user
+- Deleting multiple members at once is possible using an array of emails
+
+### Themes
+
+#### `themes.list({ page, page_size })`
+- Gets your themes collection
+- `page`: default `1`
+- `page_size: default `10` 
+
+#### `themes.get({ id })`
+- Gets a theme for the given ID
+
+#### `themes.create({ background, colors, font, has_transparent_button, name })`
+- Creates a theme with the given configuration
+- See more details of the payload in [the documentation](https://developer.typeform.com/create/reference/create-theme/)
+
+#### `themes.update({ background, colors, font, has_transparent_button, name })`
+- Creates a theme with the given configuration
+- See more details of the payload in [the documentation](https://developer.typeform.com/create/reference/update-theme/)
+
+#### `themes.delete({ id })`
+- Deletes the theme with the given ID
+
+### Workspaces
+
+#### `workspaces.list({ page, page_size, search })`
+- Gets your workspaces
+- `page`: default `1`
+- `page_size: default `10` 
+- `search`: search a workspace that partially matches the search string
+
+#### `workspaces.get({ id })`
+- Gets the workspace information for the given ID
+
+#### `workspaces.update({ id, data })`
+- Gets the workspace information for the given ID
+- `data`: operation that is wanted to perform, see more details in [the documentation](https://developer.typeform.com/create/reference/update-workspace/)
+
+#### `workspaces.delete({ id })`
+- Deletes the workspace for the given ID
+
+#### `workspaces.get({ id })`
+- Gets the workspace information for the given ID
+
+#### `workspaces.addMembers({ id, members })`
+- Add members to a workspace for the given ID
+- `members`: `string` or an `array` and should be the email fo the user
+- Adding multiple members at once is possible using an array of emails
+
+#### `workspaces.removeMembers({ id, members })`
+- Remove members to a workspace for the given ID
+- `members`: `string` or an `array` and should be the email fo the user
+- Removing multiple members at once is possible using an array of emails
