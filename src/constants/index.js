@@ -30,5 +30,5 @@ export const FONTS_AVAILABLE = [
   "Signika",
   "Sniglet",
   "Source Sans Pro",
-  "Vollkorn",
-]
+  "Vollkorn"
+];

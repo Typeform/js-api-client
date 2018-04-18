@@ -1,7 +1,4 @@
-import {
-  isMemberPropValid,
-  createMemberPatchQuery
-} from './utils'
+import { isMemberPropValid, createMemberPatchQuery } from "./utils";
 
 export const workspaces = http => ({
   list: args => getWorkspaces(http, args),
@@ -10,92 +7,92 @@ export const workspaces = http => ({
   delete: args => deleteWorkspace(http, args),
   addMembers: args => addMembers(http, args),
   removeMembers: args => removeMembers(http, args)
-})
+});
 
-export const getWorkspaces = (http, {search, page, page_size} = {}) => {
+export const getWorkspaces = (http, { search, page, page_size } = {}) => {
   return http.request({
-    method: 'get',
-    url: '/workspaces',
+    method: "get",
+    url: "/workspaces",
     params: {
       page,
       page_size,
       search
     }
-  })
-}
+  });
+};
 
 export const getWorkspace = (http, { id }) => {
   return http.request({
-    method: 'get',
+    method: "get",
     url: `/workspaces/${id}`
-  })
-}
+  });
+};
 
 export const createWorkspace = (http, { name }) => {
-
   if (name === undefined) {
-    throw `A name is required`
+    throw `A name is required`;
   }
 
   return http.request({
-    method: 'post',
+    method: "post",
     url: `/workspaces`
-  })
-}
+  });
+};
 
 export const updateWorkspace = (http, { id, data } = {}) => {
   return http.request({
-    method: 'patch',
+    method: "patch",
     url: `/workspaces/${id}`,
     data
-  })
-}
+  });
+};
 
 export const addMembers = (http, { id, members }) => {
-
   if (!isMemberPropValid(members)) {
-    throw `No member provided`
+    throw `No member provided`;
   }
 
-  const membersToAdd = !Array.isArray(members) ? [members] : members
+  const membersToAdd = !Array.isArray(members) ? [members] : members;
   const membersQuery = createMemberPatchQuery({
     members: membersToAdd,
-    operation: 'add'
-  })
+    operation: "add"
+  });
 
-  return updateWorkspace(http, { id, data: membersQuery })
-}
+  return updateWorkspace(http, { id, data: membersQuery });
+};
 
 export const removeMembers = (http, { id, members }) => {
-
   if (!isMemberPropValid(members)) {
-    throw `No member provided`
+    throw `No member provided`;
   }
 
-  const membersToAdd = !Array.isArray(members) ? [members] : members
+  const membersToAdd = !Array.isArray(members) ? [members] : members;
   const membersQuery = createMemberPatchQuery({
     members: membersToAdd,
-    operation: 'remove'
-  })
+    operation: "remove"
+  });
 
-  return updateWorkspace(http, { id, data: membersQuery })
-}
+  return updateWorkspace(http, { id, data: membersQuery });
+};
 
 export const deleteWorkspace = (http, { id }) => {
   return http.request({
-    method: 'delete',
+    method: "delete",
     url: `/workspaces/${id}`
-  })
-}
+  });
+};
 
-export const getWorkspaceForms = (http, { id, from_id, page, page_size } = {}) => {
+export const getWorkspaceForms = (
+  http,
+  { id, from_id, page, page_size } = {}
+) => {
   return http.request({
-    method: 'get',
+    method: "get",
     url: `/workspaces/${id}/forms`,
     params: {
       page,
       page_size,
       from_id
     }
-  })
-}
+  });
+};
