@@ -2,9 +2,34 @@
 
 JS Client wrapper for Typeform API
 
+## Table of contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Initialize](#initialize)
+- [Reference](#reference)
+  - [Create Client](createclienttoken)
+  - [Forms](#forms)
+  - [Images](#images)
+  - [Teams](#teams)
+  - [Themes](#themes)
+  - [Workspaces](#workspaces)
+- [Testing](#testing)
+- [Suggestions](#suggestions)
+
 ## Installation
 
+``` bash
+# install with yarn
+yarn add @typeform/js-tracking
+
+# install with npm
+npm install @typeform/js-tracking --save
+```
+
 ## Usage
+
+### Intialisation
 
 1. Import client library
 ``` javascript
@@ -286,3 +311,23 @@ The theme property applies a `theme` to the form. If you don't specify a value f
 - Remove members to a workspace for the given ID
 - `members`: `string` or an `array` and should be the email fo the user
 - Removing multiple members at once is possible using an array of emails
+
+### Testing
+
+The project has implemeted unit and integration tests.
+
+##### Unit test:
+``` javascript
+yarn install
+yarn test:unit
+```
+
+##### Integration test:
+``` javascript
+yarn install
+TYPEFORM_TOKEN='<your personal token>' yarn test:integration
+```
+
+### Suggestions
+
+Fill out this [typeform](https://jepser.typeform.com/to/q2JHJw) 🙂
