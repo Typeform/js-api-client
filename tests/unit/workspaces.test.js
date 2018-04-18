@@ -54,17 +54,17 @@ test(`add a member to a workscape has the correct payload`, () => {
   })
   expect(axios.request.args[0][0].data).toEqual([
     {
-      "op": "add",
-      "path": "/members",
-      "value": {
-        "email": "test@test.com"
+      op: 'add',
+      path: '/members',
+      value: {
+        email: 'test@test.com'
       }
     },
     {
-      "op": "add",
-      "path": "/members",
-      "value": {
-        "email": "test2@test.com"
+      op: 'add',
+      path: '/members',
+      value: {
+        email: 'test2@test.com'
       }
     }
   ])
@@ -78,10 +78,10 @@ test(`remove a member to a workscape has the correct payload`, () => {
   })
   expect(axios.request.args[0][0].data).toEqual([
     {
-      "op": "remove",
-      "path": "/members",
-      "value": {
-        "email": "test@test.com"
+      op: 'remove',
+      path: '/members',
+      value: {
+        email: 'test@test.com'
       }
     }
   ])

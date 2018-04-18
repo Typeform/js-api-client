@@ -31,4 +31,4 @@ export const FONTS_AVAILABLE = [
   'Sniglet',
   'Source Sans Pro',
   'Vollkorn'
-];
+]

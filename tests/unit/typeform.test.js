@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {stub} from 'sinon'
+import { stub } from 'sinon'
 import { createClient } from '../../src/typeform'
 
 const logHandlerStub = stub()

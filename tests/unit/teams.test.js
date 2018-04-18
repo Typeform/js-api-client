@@ -1,10 +1,6 @@
 import axios from 'axios'
 import { stub, spy } from 'sinon'
-import {
-  getTeam,
-  addMembers,
-  removeMembers
-} from '../../src/teams'
+import { getTeam, addMembers, removeMembers } from '../../src/teams'
 
 beforeEach(() => {
   stub(axios, 'request').returns({})
@@ -28,38 +24,38 @@ test('if a member is sent as string it will work as expected', () => {
   addMembers(axios, { members: 'test@test.com' })
   expect(axios.request.args[0][0].data).toEqual([
     {
-      "op": "add",
-      "path": "/members",
-      "value": {
-        "email": "test@test.com"
+      op: 'add',
+      path: '/members',
+      value: {
+        email: 'test@test.com'
       }
     }
   ])
 })
 
 test('it will support array or multiple members at a time', () => {
-  addMembers(axios, { members: ['test@test.com', 'test2@test.com']})
+  addMembers(axios, { members: ['test@test.com', 'test2@test.com'] })
   expect(axios.request.args[0][0].data.length).toEqual(2)
   expect(axios.request.args[0][0].data).toEqual([
     {
-      "op": "add",
-      "path": "/members",
-      "value": {
-        "email": "test@test.com"
+      op: 'add',
+      path: '/members',
+      value: {
+        email: 'test@test.com'
       }
     },
     {
-      "op": "add",
-      "path": "/members",
-      "value": {
-        "email": "test2@test.com"
+      op: 'add',
+      path: '/members',
+      value: {
+        email: 'test2@test.com'
       }
     }
   ])
 })
 
 test('if no members or incorrect format defined throws', () => {
-  expect(() => addMembers(axios, { members:  {}})).toThrow()
+  expect(() => addMembers(axios, { members: {} })).toThrow()
 })
 
 //removeMember
@@ -72,10 +68,10 @@ test('if a member is sent as string it will work as expected', () => {
   removeMembers(axios, { members: 'test@test.com' })
   expect(axios.request.args[0][0].data).toEqual([
     {
-      "op": "remove",
-      "path": "/members",
-      "value": {
-        "email": "test@test.com"
+      op: 'remove',
+      path: '/members',
+      value: {
+        email: 'test@test.com'
       }
     }
   ])

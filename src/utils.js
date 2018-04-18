@@ -1,14 +1,14 @@
 export const isMemberPropValid = members => {
   if (members === undefined) {
-    return false;
+    return false
   }
 
   if (!(typeof members === 'string' || Array.isArray(members))) {
-    return false;
+    return false
   }
 
-  return true;
-};
+  return true
+}
 
 export const createMemberPatchQuery = ({ members, operation }) => {
   return members.map(member => ({
@@ -17,5 +17,5 @@ export const createMemberPatchQuery = ({ members, operation }) => {
     value: {
       email: member
     }
-  }));
-};
+  }))
+}

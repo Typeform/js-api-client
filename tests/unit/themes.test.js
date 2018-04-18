@@ -33,7 +33,7 @@ test('Get themes has the correct path', () => {
 })
 
 test('Get themes has the correct parameters', () => {
-  getThemes(axios, {page: 3, page_size: 15})
+  getThemes(axios, { page: 3, page_size: 15 })
   expect(axios.request.args[0][0].params.page).toBe(3)
   expect(axios.request.args[0][0].params.page_size).toBe(15)
 })
@@ -49,16 +49,17 @@ test('Creating a theme has the correct method', () => {
 })
 
 test('Throws if required values are not sent', () => {
-
   const { name, ...incompletePayload } = mockThemePayload
   expect(() => createTheme(axios, incompletePayload)).toThrow()
 })
 
 test('Throws if a font name is not supported', () => {
-  expect(() => createTheme(axios, {
-    ...mockThemePayload,
-    font: 'asdf'
-  })).toThrow()
+  expect(() =>
+    createTheme(axios, {
+      ...mockThemePayload,
+      font: 'asdf'
+    })
+  ).toThrow()
 })
 
 test('Delete a theme has the correct path', () => {
@@ -77,6 +78,6 @@ test('Updating a theme has the correct path', () => {
 })
 
 test('Delete a theme has the correct method', () => {
-  updateTheme(axios, { id: 2, ...mockThemePayload})
+  updateTheme(axios, { id: 2, ...mockThemePayload })
   expect(axios.request.args[0][0].method).toBe('put')
 })

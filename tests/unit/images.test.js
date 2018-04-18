@@ -1,11 +1,6 @@
 import axios from 'axios'
 import { stub, spy } from 'sinon'
-import {
-  getImages,
-  getImage,
-  addImage,
-  deleteImage
-} from '../../src/images'
+import { getImages, getImage, addImage, deleteImage } from '../../src/images'
 
 beforeEach(() => {
   stub(axios, 'request').returns({})
@@ -28,18 +23,18 @@ test('get images by ID', () => {
 
 test('adding an image pass the required values', () => {
   addImage(axios, {
-    "image": "bGRqZmxzZGpmbHNoZmtoc2RrZmpoc2tqZA==",
-    "media_type": "image/gif",
-    "file_name": "newimage.gif"
+    image: 'bGRqZmxzZGpmbHNoZmtoc2RrZmpoc2tqZA==',
+    media_type: 'image/gif',
+    file_name: 'newimage.gif'
   })
 
   const imageData = axios.request.args[0][0].data
   expect(axios.request.args[0][0].url).toBe('/images')
   expect(axios.request.args[0][0].method).toBe('post')
   expect(imageData).toEqual({
-    "image": "bGRqZmxzZGpmbHNoZmtoc2RrZmpoc2tqZA==",
-    "media_type": "image/gif",
-    "file_name": "newimage.gif"
+    image: 'bGRqZmxzZGpmbHNoZmtoc2RrZmpoc2tqZA==',
+    media_type: 'image/gif',
+    file_name: 'newimage.gif'
   })
 })
 
@@ -55,12 +50,14 @@ test('it set the correct header when retrieving the image json description', () 
 })
 
 test('when getting an image by size it retrieves from the correct endpoint', () => {
-  getImage(axios, { id: 'abc123', returns: 'json', size: 'mobile'})
+  getImage(axios, { id: 'abc123', returns: 'json', size: 'mobile' })
   expect(axios.request.args[0][0].url).toBe('/images/abc123/image/mobile')
 })
 
 test('when getting an image by size what does not exists throws', () => {
-  expect(() => getImage(axios, { id: 'abc123', size: 'big' })).toThrow(`Image size doesn't exists`)
+  expect(() => getImage(axios, { id: 'abc123', size: 'big' })).toThrow(
+    `Image size doesn't exists`
+  )
 })
 
 test('when getting an image by background size it retrieves from the correct endpoint', () => {
