@@ -7,7 +7,7 @@ import {
   createForm,
   getMessages,
   updateMessages
-} from '../../lib/forms'
+} from '../../src/forms'
 
 beforeEach(() => {
   stub(axios, 'request').returns({})

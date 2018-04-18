@@ -33,3 +33,5 @@ export const createClient = (args = {}) => {
     workspaces: workspaces(http)
   }
 }
+
+export default createClient

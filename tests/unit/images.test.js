@@ -5,7 +5,7 @@ import {
   getImage,
   addImage,
   deleteImage
-} from '../../lib/images'
+} from '../../src/images'
 
 beforeEach(() => {
   stub(axios, 'request').returns({})

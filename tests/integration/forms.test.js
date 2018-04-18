@@ -1,6 +1,6 @@
 import {
   createClient
-} from '../../lib/typeform'
+} from '../../src/typeform'
 
 const typeformClient = createClient({
   token: process.env.TYPEFORM_TOKEN
@@ -12,7 +12,8 @@ const randomString = () => {
 
 test('Getting forms from my account', done => {
   typeformClient
-    .getForms()
+    .forms
+    .list()
     .then(response => {
       const {
         data,
@@ -28,7 +29,8 @@ test('Getting forms from my account', done => {
 test('Gets the correct form by UID', done => {
 
   typeformClient
-    .getForm({
+    .forms
+    .get({
       uid: testTypeform
     })
     .then(response => {
@@ -45,7 +47,8 @@ test('Gets the correct form by UID', done => {
 test('Update only title of typeform', done => {
   const newTitle = 'integration test - ' + randomString()
   typeformClient
-    .updateForm({
+    .forms
+    .update({
       uid: testTypeform,
       data: [
         {
@@ -69,7 +72,8 @@ test('Update only title of typeform', done => {
 test('Replaces the title sending the form schema', done => {
   const newTitle = 'integration test - ' + randomString()
   typeformClient
-    .updateForm({
+    .forms
+    .update({
       uid: testTypeform,
       override: true,
       data: {
@@ -96,7 +100,8 @@ test('Create a form', done => {
   const newTitle = randomString()
 
   typeformClient
-    .createForm({
+    .forms
+    .create({
       data: {
         "title": newTitle,
         "theme": {
@@ -122,7 +127,8 @@ test('Delete created form', done => {
   const newTitle = randomString()
 
   typeformClient
-    .deleteForm({
+    .forms
+    .delete({
       uid: formUId
     })
     .then(response => {

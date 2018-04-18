@@ -6,7 +6,7 @@ import {
   createTheme,
   deleteTheme,
   updateTheme
-} from '../../lib/themes'
+} from '../../src/themes'
 
 const mockThemePayload = {
   name: 'New theme',

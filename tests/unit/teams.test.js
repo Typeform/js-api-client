@@ -4,7 +4,7 @@ import {
   getTeam,
   addMembers,
   removeMembers
-} from '../../lib/teams'
+} from '../../src/teams'
 
 beforeEach(() => {
   stub(axios, 'request').returns({})

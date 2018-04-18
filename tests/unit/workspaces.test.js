@@ -8,7 +8,7 @@ import {
   removeMembers,
   deleteWorkspace,
   getWorkspaceForms
-} from '../../lib/workspaces'
+} from '../../src/workspaces'
 
 beforeEach(() => {
   stub(axios, 'request').returns({})
