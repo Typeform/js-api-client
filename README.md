@@ -22,10 +22,10 @@ JS Client wrapper for Typeform API
 
 ``` bash
 # install with yarn
-yarn add @typeform/js
+yarn add @typeform/api-client
 
 # install with npm
-npm install @typeform/js --save
+npm install @typeform/api-client --save
 ```
 
 ## Usage
@@ -34,7 +34,7 @@ npm install @typeform/js --save
 
 1. Import client library
 ``` javascript
-  import {createClient} from '@typeform/js'
+  import {createClient} from '@typeform/api-client'
 ```
 
 2. Create a instance with your personal token

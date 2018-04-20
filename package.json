@@ -1,8 +1,8 @@
 {
-  "name": "@typeform/js",
+  "name": "@typeform/api-client",
   "version": "0.1.0-alpha.1",
   "description": "JS SDK for Typeform API",
-  "main": "dist/index.js",
+  "main": "lib/typeform.js",
   "directories": {
     "lib": "lib"
   },
