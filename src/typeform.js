@@ -3,7 +3,7 @@ import { forms } from './forms'
 import { images } from './images'
 import { teams } from './teams'
 import { themes } from './themes'
-import { workspace } from './workspaces'
+import { workspaces } from './workspaces'
 
 export const createClient = (args = {}) => {
   if (args.token === undefined) {
