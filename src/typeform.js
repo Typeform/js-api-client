@@ -4,6 +4,7 @@ import { images } from './images'
 import { teams } from './teams'
 import { themes } from './themes'
 import { workspaces } from './workspaces'
+import { responses } from './responses'
 
 export const createClient = (args = {}) => {
   if (args.token === undefined) {
@@ -17,7 +18,8 @@ export const createClient = (args = {}) => {
     images: images(http),
     teams: teams(http),
     themes: themes(http),
-    workspaces: workspaces(http)
+    workspaces: workspaces(http),
+    responses: responses(http)
   }
 }
 
