@@ -1,10 +1,11 @@
 {
   "name": "@typeform/api-client",
-  "version": "0.1.0-alpha.1",
+  "version": "0.0.0-semantic-released",
   "description": "JS SDK for Typeform API",
   "main": "lib/typeform.js",
   "directories": {
-    "lib": "lib"
+    "lib": "lib",
+    "test": "tests"
   },
   "repository": {
     "type": "git",
