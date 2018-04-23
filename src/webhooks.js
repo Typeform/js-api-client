@@ -1,5 +1,8 @@
 export const webhooks = http => ({
-  list: args => getResponses(http, args)
+  list: args => getWebhook(http, args),
+  create: args => createWebhook(http, args),
+  update: args => updateWebhook(http, args),
+  delete: args => deleteWebhook(http, args)
 })
 
 export const getWebhook = (http, { uid, tag }) => {

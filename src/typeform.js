@@ -5,6 +5,7 @@ import { teams } from './teams'
 import { themes } from './themes'
 import { workspaces } from './workspaces'
 import { responses } from './responses'
+import { webhooks } from './webhooks'
 
 export const createClient = (args = {}) => {
   if (args.token === undefined) {
@@ -19,7 +20,8 @@ export const createClient = (args = {}) => {
     teams: teams(http),
     themes: themes(http),
     workspaces: workspaces(http),
-    responses: responses(http)
+    responses: responses(http),
+    webhooks: webhooks(http)
   }
 }
 
