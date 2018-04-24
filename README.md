@@ -72,12 +72,14 @@ Client returns the following properties:
 - `teams`
 - `workspaces`
 - `themes`
+- `responses`
+- `webhooks`
 
 Each one of them encapsulates the operations related to it (like listing, updating, deleting the resource).
 
 ### Forms 
 
-#### `forms.list({ page: 1, page_size: 10, search: '' })`
+#### `forms.list({ page: 1, page_size = 10, search = '' })`
 - Get a list of your typeforms
 - Returns a list of typeform with the payload [refenced here](https://developer.typeform.com/create/reference/retrieve-forms/).
 
@@ -85,7 +87,7 @@ Each one of them encapsulates the operations related to it (like listing, updati
 - Get a typeform by UID
 - Returns a typeform with the payload [refenced here](https://developer.typeform.com/create/reference/retrieve-form/).
 
-#### `forms.update({ uid, data = {}, override: false })`
+#### `forms.update({ uid, data = {}, override = false })`
 - Get a typeform by UID
 - Returns a typeform with the payload [refenced here](https://developer.typeform.com/create/reference/retrieve-form/).
 
@@ -182,6 +184,39 @@ Each one of them encapsulates the operations related to it (like listing, updati
 - `members`: `string` or an `array` and should be the email fo the user
 - Removing multiple members at once is possible using an array of emails
 
+### Responses
+
+#### `responses.list({ uid, page_size, since, until, after, before, completed, sort, query, fields })`
+- List responses from the given ID
+- `uid`: typeform UID
+- For parameter details check [the documentation](https://developer.typeform.com/responses/reference/retrieve-responses/)
+
+## Webhooks
+
+#### `webhook.get({ uid, tag })`
+- Get detailf for a webhook with the given tag
+- `uid`: typeform UID
+- `tag`: tag of the webhook created
+
+#### `webhook.create({ uid, tag, url, enable = false })`
+- Create a webhook with the given tag
+- `uid`: typeform UID
+- `tag`: (string) tag of the webhook, how are you going to identify it
+- `url`: (string) url of the service you want to notify
+- `enable`: (bool)
+
+#### `webhook.update({ uid, tag, url, enable = false })`
+- Update a webhook with the given tag
+- `uid`: typeform UID
+- `tag`: (string) tag of the webhook, how are you going to identify it
+- `url`: (string) url of the service you want to notify
+- `enable`: (bool)
+
+#### `webhook.delete({ uid, tag })`
+- Delete for a webhook with the given tag
+- `uid`: typeform UID
+- `tag`: (string) tag of the webhook
+
 ## Examples
 
 ##### Update specific typeform property, as [referenced here](https://developer.typeform.com/create/reference/update-form-patch/)
@@ -253,7 +288,6 @@ The theme property applies a `theme` to the form. If you don't specify a value f
     })
 
 ```
-
 
 ### Testing
 

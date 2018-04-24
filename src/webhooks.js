@@ -1,5 +1,5 @@
 export const webhooks = http => ({
-  list: args => getWebhook(http, args),
+  get: args => getWebhook(http, args),
   create: args => createWebhook(http, args),
   update: args => updateWebhook(http, args),
   delete: args => deleteWebhook(http, args)
