@@ -1,5 +1,9 @@
 # Typeform JavaScript SDK
 
+[![Build Status](https://travis-ci.com/Typeform/js-api-client.svg?token=nePyGZWpdyBxUnh9PswC&branch=master)](https://travis-ci.com/Typeform/js-api-client)
+
+------
+
 JS Client wrapper for Typeform API
 
 ## Table of contents
