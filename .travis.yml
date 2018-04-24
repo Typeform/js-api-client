@@ -1,0 +1,28 @@
+language: node_js
+
+node_js:
+  - "9"
+
+branches:
+  only:
+    - master
+
+cache:
+  directories:
+    - node_modules
+
+notifications:
+  email: false
+
+env:
+  VERSION: "$TRAVIS_BUILD_NUMBER"
+
+before_install:
+  - yarn
+
+script:
+  - TYPEFORM_TOKEN=${TYPEFORM_TOKEN} yarn test
+
+after_success:
+  - yarn semantic-release
+  
