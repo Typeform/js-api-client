@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 export const forms = http => ({
   list: args => getForms(http, args),
   get: args => getForm(http, args),
