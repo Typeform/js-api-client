@@ -1,18 +1,17 @@
-import axios from 'axios'
-
-import { stub, spy } from 'sinon'
-import { getResponses } from '../../src/responses'
+import { API_BASE_URL } from '../../src/constants'
+import { clientConstructor } from '../../src/create-client'
+import { responses, getResponses } from '../../src/responses'
 
 beforeEach(() => {
-  stub(axios, 'request').returns({})
-})
-
-afterEach(() => {
-  axios.request.restore()
+  fetch.resetMocks()
 })
 
 test('List responses has the correct path and method', () => {
-  getResponses(axios, { uid: 2 })
-  expect(axios.request.args[0][0].method).toBe('get')
-  expect(axios.request.args[0][0].url).toBe('/forms/2/responses')
+  const http = clientConstructor({
+    token: '123'
+  })
+  const responsesRequest = responses(http)
+  responsesRequest.list({ uid: 2 })
+  expect(fetch.mock.calls[0][1].method).toBe('get')
+  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/forms/2/responses`)
 })
