@@ -64,9 +64,10 @@ export const getMessages = (http, { uid }) => {
   })
 }
 
-export const updateMessages = (http, { uid }) => {
+export const updateMessages = (http, { uid, data }) => {
   return http.request({
     method: 'put',
-    url: `/forms/${uid}/messages`
+    url: `/forms/${uid}/messages`,
+    data
   })
 }
