@@ -7,6 +7,9 @@
     "lib": "lib",
     "test": "tests"
   },
+  "engines": {
+    "node": ">=8"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Typeform/js-api-client.git"
@@ -23,8 +26,7 @@
   },
   "homepage": "https://github.com/Typeform/js-api-clientk#readme",
   "dependencies": {
-    "axios": "^0.18.0",
-    "in-publish": "^2.0.0"
+    "axios": "^0.18.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.44",
@@ -43,6 +45,7 @@
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-prettier": "^2.6.0",
     "husky": "^0.14.3",
+    "in-publish": "^2.0.0",
     "jest": "^22.4.3",
     "lint-staged": "^7.0.4",
     "prettier": "^1.12.1",
