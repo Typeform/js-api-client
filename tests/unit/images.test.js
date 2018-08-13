@@ -1,36 +1,39 @@
-import axios from 'axios'
-import { stub, spy } from 'sinon'
-import { getImages, getImage, addImage, deleteImage } from '../../src/images'
+import { clientConstructor } from '../../src/create-client'
+import { images } from '../../src/images'
+import { API_BASE_URL } from '../../src/constants'
+
 
 beforeEach(() => {
-  stub(axios, 'request').returns({})
+  fetch.resetMocks()
 })
 
-afterEach(() => {
-  axios.request.restore()
+const http = clientConstructor({
+  token: '123'
 })
+const imagesRequest = images(http)
 
 test('get images collection', () => {
-  getImages(axios)
-  expect(axios.request.args[0][0].url).toBe('/images')
+  imagesRequest.list()
+  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/images`)
 })
 
 test('get images by ID', () => {
-  getImage(axios, { id: 'abc123' })
-  expect(axios.request.args[0][0].url).toBe('/images/abc123')
-  expect(axios.request.args[0][0].method).toBe('get')
+  imagesRequest.get({ id: 'abc123' })
+  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/images/abc123`)
+  expect(fetch.mock.calls[0][1].method).toBe('get')
 })
 
 test('adding an image pass the required values', () => {
-  addImage(axios, {
+  imagesRequest.add({
     image: 'bGRqZmxzZGpmbHNoZmtoc2RrZmpoc2tqZA==',
     media_type: 'image/gif',
     file_name: 'newimage.gif'
   })
 
-  const imageData = axios.request.args[0][0].data
-  expect(axios.request.args[0][0].url).toBe('/images')
-  expect(axios.request.args[0][0].method).toBe('post')
+  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/images`)
+  expect(fetch.mock.calls[0][1].method).toBe('post')
+
+  const imageData = fetch.mock.calls[0][1].data
   expect(imageData).toEqual({
     image: 'bGRqZmxzZGpmbHNoZmtoc2RrZmpoc2tqZA==',
     media_type: 'image/gif',
@@ -39,33 +42,33 @@ test('adding an image pass the required values', () => {
 })
 
 test('deleting an image sets the correct method and id', () => {
-  deleteImage(axios, { id: 'abc123' })
-  expect(axios.request.args[0][0].url).toBe('/images/abc123')
-  expect(axios.request.args[0][0].method).toBe('delete')
+  imagesRequest.delete({ id: 'abc123' })
+  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/images/abc123`)
+  expect(fetch.mock.calls[0][1].method).toBe('delete')
 })
 
 test('it set the correct header when retrieving the image json description', () => {
-  getImage(axios, { id: 'abc123', returns: 'json' })
-  expect(axios.request.args[0][0].headers.Accept).toBe('application/json')
+  imagesRequest.get({ id: 'abc123', returns: 'json' })
+  expect(fetch.mock.calls[0][1].headers.Accept).toBe('application/json')
 })
 
 test('when getting an image by size it retrieves from the correct endpoint', () => {
-  getImage(axios, { id: 'abc123', returns: 'json', size: 'mobile' })
-  expect(axios.request.args[0][0].url).toBe('/images/abc123/image/mobile')
+  imagesRequest.get({ id: 'abc123', returns: 'json', size: 'mobile' })
+  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/images/abc123/image/mobile`)
 })
 
 test('when getting an image by size what does not exists throws', () => {
-  expect(() => getImage(axios, { id: 'abc123', size: 'big' })).toThrow(
+  expect(() => imagesRequest.get({ id: 'abc123', size: 'big' })).toThrow(
     `Image size doesn't exists`
   )
 })
 
 test('when getting an image by background size it retrieves from the correct endpoint', () => {
-  getImage(axios, { id: 'abc123', returns: 'json', backgroundSize: 'tablet' })
-  expect(axios.request.args[0][0].url).toBe('/images/abc123/background/tablet')
+  imagesRequest.get({ id: 'abc123', returns: 'json', backgroundSize: 'tablet' })
+  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/images/abc123/background/tablet`)
 })
 
 test('when getting an image by choice size it retrieves from the correct endpoint', () => {
-  getImage(axios, { id: 'abc123', choiceSize: 'supersize' })
-  expect(axios.request.args[0][0].url).toBe('/images/abc123/choice/supersize')
+  imagesRequest.get({ id: 'abc123', choiceSize: 'supersize' })
+  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/images/abc123/choice/supersize`)
 })

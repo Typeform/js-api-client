@@ -1,13 +1,5 @@
 import { clientConstructor } from '../../src/create-client'
 import { forms } from '../../src/forms'
-import {
-  getForm,
-  updateForm,
-  deleteForm,
-  createForm,
-  getMessages,
-  updateMessages
-} from '../../src/forms'
 import { API_BASE_URL } from '../../src/constants'
 
 
