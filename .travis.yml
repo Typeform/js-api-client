@@ -20,8 +20,8 @@ env:
 before_install:
   - yarn
 
-  before_script:
-  - node ./tests/integration/mockServer.js &
+before_script:
+  - yarn server &
 
 script:
   - yarn test:unit
