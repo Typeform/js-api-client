@@ -21,7 +21,7 @@ before_install:
   - yarn
 
   before_script:
-  - yarn server &
+  - node ./tests/integration/mockServer.js &
 
 script:
   - yarn test:unit
