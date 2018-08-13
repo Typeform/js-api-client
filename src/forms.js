@@ -10,7 +10,7 @@ export const forms = http => ({
   }
 })
 
-export const getForms = (http, { page, page_size, search } = {}) => {
+const getForms = (http, { page, page_size, search } = {}) => {
   return http.request({
     method: 'get',
     url: `/forms`,
@@ -20,14 +20,14 @@ export const getForms = (http, { page, page_size, search } = {}) => {
   })
 }
 
-export const getForm = (http, { uid }) => {
+const getForm = (http, { uid }) => {
   return http.request({
     method: 'get',
     url: `/forms/${uid}`
   })
 }
 
-export const updateForm = (http, { uid, override, data } = {}) => {
+const updateForm = (http, { uid, override, data } = {}) => {
   let methodType = 'patch'
   if (override) {
     methodType = 'put'
@@ -40,7 +40,7 @@ export const updateForm = (http, { uid, override, data } = {}) => {
   })
 }
 
-export const createForm = (http, { data } = {}) => {
+const createForm = (http, { data } = {}) => {
   return http.request({
     method: 'post',
     url: `/forms`,
@@ -48,21 +48,21 @@ export const createForm = (http, { data } = {}) => {
   })
 }
 
-export const deleteForm = (http, { uid }) => {
+const deleteForm = (http, { uid }) => {
   return http.request({
     method: 'delete',
     url: `/forms/${uid}`
   })
 }
 
-export const getMessages = (http, { uid }) => {
+const getMessages = (http, { uid }) => {
   return http.request({
     method: 'get',
     url: `/forms/${uid}/messages`
   })
 }
 
-export const updateMessages = (http, { uid, data }) => {
+const updateMessages = (http, { uid, data }) => {
   return http.request({
     method: 'put',
     url: `/forms/${uid}/messages`,
