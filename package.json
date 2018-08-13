@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/Typeform/js-api-clientk#readme",
   "dependencies": {
-    "axios": "^0.18.0"
+    "isomorphic-fetch": "^2.2.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.44",
@@ -47,6 +47,7 @@
     "husky": "^0.14.3",
     "in-publish": "^2.0.0",
     "jest": "^22.4.3",
+    "jest-fetch-mock": "^1.6.5",
     "lint-staged": "^7.0.4",
     "prettier": "^1.12.1",
     "semantic-release": "^15.1.7",
@@ -58,6 +59,12 @@
     "*.js": [
       "eslint",
       "git add"
+    ]
+  },
+  "jest": {
+    "automock": false,
+    "setupFiles": [
+      "./tests/setupJest.js"
     ]
   },
   "scripts": {
