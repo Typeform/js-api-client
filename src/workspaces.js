@@ -1,15 +1,16 @@
 import { isMemberPropValid, createMemberPatchQuery } from './utils'
 
-export const workspaces = http => ({
+export default http => ({
   list: args => getWorkspaces(http, args),
   get: args => getWorkspace(http, args),
+  add: args => addWorkspace(http, args),
   update: args => updateWorkspace(http, args),
   delete: args => deleteWorkspace(http, args),
   addMembers: args => addMembers(http, args),
   removeMembers: args => removeMembers(http, args)
 })
 
-export const getWorkspaces = (http, { search, page, page_size } = {}) => {
+const getWorkspaces = (http, { search, page, page_size } = {}) => {
   return http.request({
     method: 'get',
     url: '/workspaces',
@@ -21,14 +22,14 @@ export const getWorkspaces = (http, { search, page, page_size } = {}) => {
   })
 }
 
-export const getWorkspace = (http, { id }) => {
+const getWorkspace = (http, { id }) => {
   return http.request({
     method: 'get',
     url: `/workspaces/${id}`
   })
 }
 
-export const createWorkspace = (http, { name }) => {
+const addWorkspace = (http, { name }) => {
   if (name === undefined) {
     throw `A name is required`
   }
@@ -39,7 +40,7 @@ export const createWorkspace = (http, { name }) => {
   })
 }
 
-export const updateWorkspace = (http, { id, data } = {}) => {
+const updateWorkspace = (http, { id, data } = {}) => {
   return http.request({
     method: 'patch',
     url: `/workspaces/${id}`,
@@ -47,7 +48,7 @@ export const updateWorkspace = (http, { id, data } = {}) => {
   })
 }
 
-export const addMembers = (http, { id, members }) => {
+const addMembers = (http, { id, members }) => {
   if (!isMemberPropValid(members)) {
     throw `No member provided`
   }
@@ -61,7 +62,7 @@ export const addMembers = (http, { id, members }) => {
   return updateWorkspace(http, { id, data: membersQuery })
 }
 
-export const removeMembers = (http, { id, members }) => {
+const removeMembers = (http, { id, members }) => {
   if (!isMemberPropValid(members)) {
     throw `No member provided`
   }
@@ -75,14 +76,14 @@ export const removeMembers = (http, { id, members }) => {
   return updateWorkspace(http, { id, data: membersQuery })
 }
 
-export const deleteWorkspace = (http, { id }) => {
+const deleteWorkspace = (http, { id }) => {
   return http.request({
     method: 'delete',
     url: `/workspaces/${id}`
   })
 }
 
-export const getWorkspaceForms = (
+const getWorkspaceForms = (
   http,
   { id, from_id, page, page_size } = {}
 ) => {

@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/Typeform/js-api-clientk#readme",
   "dependencies": {
-    "axios": "^0.18.0"
+    "isomorphic-fetch": "^2.2.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.44",
@@ -47,7 +47,10 @@
     "husky": "^0.14.3",
     "in-publish": "^2.0.0",
     "jest": "^22.4.3",
+    "jest-fetch-mock": "^1.6.5",
+    "json-server": "^0.14.0",
     "lint-staged": "^7.0.4",
+    "nodemon": "^1.18.3",
     "prettier": "^1.12.1",
     "semantic-release": "^15.1.7",
     "sinon": "^4.5.0",
@@ -60,18 +63,25 @@
       "git add"
     ]
   },
+  "jest": {
+    "automock": false,
+    "setupFiles": [
+      "./tests/setupJest.js"
+    ]
+  },
   "scripts": {
     "commitmsg": "commitlint -e $GIT_PARAMS",
-    "test": "TYPEFORM_TOKEN=$TYPEFORM_TOKEN jest",
-    "test:unit": "jest ./tests/unit",
-    "test:unit:watch": "jest ./tests/unit --watch",
-    "test:integration": "TYPEFORM_TOKEN=$TYPEFORM_TOKEN jest ./tests/integration/",
-    "test:integration:watch": "TYPEFORM_TOKEN=$TYPEFORM_TOKEN jest ./tests/integration/ --watch",
+    "test:unit": "MOCK_FETCH=true jest ./tests/unit",
+    "test:unit:watch": "MOCK_FETCH=true jest ./tests/unit --watch",
+    "test:integration": "jest ./tests/integration/",
+    "test:integration:watch": "jest ./tests/integration/ --watch",
     "build:dist": "webpack --mode production",
     "build:lib": "NODE_ENV=production babel src --out-dir lib",
     "prepublish": "in-publish && npm run build:dist && npm run build:lib || not-in-publish",
     "pretty": "prettier './{src,tests}/**/*.js' --write",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "server": "node ./tests/integration/mockServer.js",
+    "server:dev": "nodemon ./tests/integration/mockServer.js"
   },
   "peerDependencies": {}
 }

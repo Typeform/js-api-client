@@ -32,3 +32,5 @@ export const FONTS_AVAILABLE = [
   'Source Sans Pro',
   'Vollkorn'
 ]
+
+export const API_BASE_URL = 'https://api.typeform.com'

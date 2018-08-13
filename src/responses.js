@@ -1,4 +1,4 @@
-export const responses = http => ({
+export default http => ({
   list: args => getResponses(http, args)
 })
 

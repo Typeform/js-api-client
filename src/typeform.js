@@ -1,11 +1,11 @@
 import { clientConstructor } from './create-client'
-import { forms } from './forms'
-import { images } from './images'
-import { teams } from './teams'
-import { themes } from './themes'
-import { workspaces } from './workspaces'
-import { responses } from './responses'
-import { webhooks } from './webhooks'
+import forms from './forms'
+import images from './images'
+import teams from './teams'
+import themes from './themes'
+import workspaces from './workspaces'
+import responses from './responses'
+import webhooks from './webhooks'
 
 export const createClient = (args = {}) => {
   if (args.token === undefined) {

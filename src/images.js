@@ -1,8 +1,8 @@
-export const images = http => ({
+export default http => ({
   list: () => getImages(http),
   get: args => getImage(http, args),
   add: args => addImage(http, args),
-  remove: args => removeImage(http, args)
+  delete: args => deleteImage(http, args)
 })
 export const getImages = http => {
   return http.request({
