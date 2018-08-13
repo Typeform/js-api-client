@@ -74,7 +74,7 @@
     "test:unit": "MOCK_FETCH=true jest ./tests/unit",
     "test:unit:watch": "MOCK_FETCH=true jest ./tests/unit --watch",
     "test:integration": " jest ./tests/integration/",
-    "test:integration:watch": "TYPEFORM_TOKEN=$TYPEFORM_TOKEN jest ./tests/integration/ --watch",
+    "test:integration:watch": "jest ./tests/integration/ --watch",
     "build:dist": "webpack --mode production",
     "build:lib": "NODE_ENV=production babel src --out-dir lib",
     "prepublish": "in-publish && npm run build:dist && npm run build:lib || not-in-publish",
