@@ -5,34 +5,37 @@ export const webhooks = http => ({
   delete: args => deleteWebhook(http, args)
 })
 
-export const getWebhook = (http, { uid, tag }) => {
+const getWebhook = (http, { uid, tag }) => {
   return http.request({
     method: 'get',
     url: `/forms/${uid}/webhooks/${tag}`
   })
 }
 
-export const createWebhook = (http, args) => {
+const createWebhook = (http, args) => {
   return createOrUpdateWebhook(http, args)
 }
 
-export const updateWebhook = (http, args) => {
+const updateWebhook = (http, args) => {
   return createOrUpdateWebhook(http, args)
 }
 
-export const deleteWebhook = (http, { uid, tag }) => {
+const deleteWebhook = (http, { uid, tag }) => {
   return http.request({
     method: 'delete',
     url: `/forms/${uid}/webhooks/${tag}`
   })
 }
 
-export const createOrUpdateWebhook = (
+const createOrUpdateWebhook = (
   http,
   { uid, tag, url, enable = false }
 ) => {
   if (url === undefined) {
     throw `Please provide an url for ${tag}`
+  }
+  if (tag === undefined) {
+    throw `Please provide a tag name for the webhook`
   }
   return http.request({
     method: 'put',

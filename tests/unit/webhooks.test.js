@@ -1,52 +1,53 @@
-import axios from 'axios'
+import { clientConstructor } from '../../src/create-client'
+import { API_BASE_URL } from '../../src/constants'
 
-import { stub, spy } from 'sinon'
 import {
-  getWebhook,
-  createOrUpdateWebhook,
-  deleteWebhook
+  webhooks
 } from '../../src/webhooks'
 
 beforeEach(() => {
-  stub(axios, 'request').returns({})
+  fetch.resetMocks()
 })
 
-afterEach(() => {
-  axios.request.restore()
+const http = clientConstructor({
+  token: '123'
 })
+const webhooksRequest = webhooks(http)
 
 test('List webhooks has the correct path and method', () => {
-  getWebhook(axios, { uid: 2, tag: 'test' })
-  expect(axios.request.args[0][0].method).toBe('get')
-  expect(axios.request.args[0][0].url).toBe('/forms/2/webhooks/test')
+  webhooksRequest.get({ uid: 2, tag: 'test' })
+  expect(fetch.mock.calls[0][1].method).toBe('get')
+  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/forms/2/webhooks/test`)
 })
 
-test('Create a new webhooks has the correct path and method', () => {
-  createOrUpdateWebhook(axios, {
+test('Create a new webhooks has the correct path, method and url', () => {
+  webhooksRequest.create({
     uid: 2,
     tag: 'test',
     url: 'http://test.com',
     enable: true
   })
-  expect(axios.request.args[0][0].method).toBe('put')
-  expect(axios.request.args[0][0].url).toBe('/forms/2/webhooks/test')
+  expect(fetch.mock.calls[0][1].method).toBe('put')
+  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/forms/2/webhooks/test`)
+  expect(fetch.mock.calls[0][1].data.url).toBe('http://test.com')
 })
 
 test('Create a new webhooks requires a url', () => {
-  expect(() => createOrUpdateWebhook(axios, { uid: 2, tag: 'test' })).toThrow()
+  expect(() => webhooksRequest.create({ uid: 2, tag: 'test' })).toThrow()
 })
 
-test('Create a new webhooks sends the correct payload', () => {
-  createOrUpdateWebhook(axios, {
+test('update a new webhooks sends the correct payload', () => {
+  webhooksRequest.update({
     uid: 2,
     tag: 'test',
     url: 'http://example.com'
   })
-  expect(axios.request.args[0][0].data.url).toBe('http://example.com')
+  expect(fetch.mock.calls[0][1].data.url).toBe('http://example.com')
+  expect(fetch.mock.calls[0][1].method).toBe('put')
 })
 
 test('Delete a webhook has the correct path and method', () => {
-  deleteWebhook(axios, { uid: 2, tag: 'test' })
-  expect(axios.request.args[0][0].method).toBe('delete')
-  expect(axios.request.args[0][0].url).toBe('/forms/2/webhooks/test')
+  webhooksRequest.delete({ uid: 2, tag: 'test' })
+  expect(fetch.mock.calls[0][1].method).toBe('delete')
+  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/forms/2/webhooks/test`)
 })
