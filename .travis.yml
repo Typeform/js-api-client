@@ -20,6 +20,9 @@ env:
 before_install:
   - yarn
 
+  before_script:
+  - yarn server &
+
 script:
   - yarn test:unit
   - yarn test:integration
