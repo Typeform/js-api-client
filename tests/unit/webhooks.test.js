@@ -5,6 +5,7 @@ import webhooks from '../../src/webhooks'
 
 beforeEach(() => {
   fetch.resetMocks()
+  fetch.mockResponse(JSON.stringify({}))
 })
 
 const http = clientConstructor({

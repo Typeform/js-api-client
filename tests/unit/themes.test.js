@@ -15,6 +15,7 @@ const mockThemePayload = {
 
 beforeEach(() => {
   fetch.resetMocks()
+  fetch.mockResponse(JSON.stringify({}))
 })
 
 const http = clientConstructor({

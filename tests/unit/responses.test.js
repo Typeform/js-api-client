@@ -4,6 +4,7 @@ import responses from '../../src/responses'
 
 beforeEach(() => {
   fetch.resetMocks()
+  fetch.mockResponse(JSON.stringify({}))
 })
 
 test('List responses has the correct path and method', () => {

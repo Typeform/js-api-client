@@ -4,6 +4,7 @@ import workspaces from '../../src/workspaces'
 
 beforeEach(() => {
   fetch.resetMocks()
+  fetch.mockResponse(JSON.stringify({}))
 })
 
 const http = clientConstructor({

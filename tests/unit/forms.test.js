@@ -4,12 +4,19 @@ import forms from '../../src/forms'
 
 beforeEach(() => {
   fetch.resetMocks()
+  fetch.mockResponse(JSON.stringify({}))
 })
 
 const http = clientConstructor({
   token: '123'
 })
 const formsRequest = forms(http)
+
+test('get all forms has the correct method and path', () => {
+  formsRequest.list()
+  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/forms`)
+  expect(fetch.mock.calls[0][1].method).toBe('get')
+})
 
 test('getForm sends the correct UID', () => {
   formsRequest.get({ uid: 'abc123' })

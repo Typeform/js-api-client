@@ -4,6 +4,7 @@ import images from '../../src/images'
 
 beforeEach(() => {
   fetch.resetMocks()
+  fetch.mockResponse(JSON.stringify({}))
 })
 
 const http = clientConstructor({

@@ -3,6 +3,7 @@ import { createClient } from '../../src/typeform'
 
 beforeEach(() => {
   fetch.resetMocks()
+  fetch.mockResponse(JSON.stringify({}))
 })
 
 test('client costructor has a request function property', () => {
