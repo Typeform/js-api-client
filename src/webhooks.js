@@ -1,4 +1,4 @@
-export const webhooks = http => ({
+export default http => ({
   get: args => getWebhook(http, args),
   create: args => createWebhook(http, args),
   update: args => updateWebhook(http, args),

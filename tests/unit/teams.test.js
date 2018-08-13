@@ -1,6 +1,6 @@
 import { clientConstructor } from '../../src/create-client'
-import { teams } from '../../src/teams'
 import { API_BASE_URL } from '../../src/constants'
+import teams from '../../src/teams'
 
 beforeEach(() => {
   fetch.resetMocks()

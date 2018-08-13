@@ -1,9 +1,7 @@
 import { clientConstructor } from '../../src/create-client'
 import { API_BASE_URL } from '../../src/constants'
 
-import {
-  webhooks
-} from '../../src/webhooks'
+import webhooks from '../../src/webhooks'
 
 beforeEach(() => {
   fetch.resetMocks()

@@ -1,8 +1,6 @@
 import { clientConstructor } from '../../src/create-client'
 import { API_BASE_URL } from '../../src/constants'
-import {
-  themes
-} from '../../src/themes'
+import themes from '../../src/themes'
 
 const mockThemePayload = {
   name: 'New theme',

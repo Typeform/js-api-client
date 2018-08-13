@@ -1,7 +1,6 @@
 import { clientConstructor } from '../../src/create-client'
-import { forms } from '../../src/forms'
 import { API_BASE_URL } from '../../src/constants'
-
+import forms from '../../src/forms'
 
 beforeEach(() => {
   fetch.resetMocks()

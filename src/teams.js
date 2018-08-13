@@ -1,6 +1,6 @@
 import { isMemberPropValid, createMemberPatchQuery } from './utils'
 
-export const teams = http => {
+export default http => {
   return {
     get: () => {
       return getTeam(http)

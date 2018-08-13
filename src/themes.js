@@ -1,6 +1,6 @@
 import { FONTS_AVAILABLE } from './constants'
 
-export const themes = http => ({
+export default http => ({
   list: args => getThemes(http, args),
   get: args => getTheme(http, args),
   create: args => createTheme(http, args),

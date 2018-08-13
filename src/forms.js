@@ -1,4 +1,4 @@
-export const forms = http => ({
+export default http => ({
   list: args => getForms(http, args),
   get: args => getForm(http, args),
   update: args => updateForm(http, args),

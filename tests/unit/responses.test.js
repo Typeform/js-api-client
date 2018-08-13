@@ -1,6 +1,6 @@
 import { API_BASE_URL } from '../../src/constants'
 import { clientConstructor } from '../../src/create-client'
-import { responses, getResponses } from '../../src/responses'
+import responses from '../../src/responses'
 
 beforeEach(() => {
   fetch.resetMocks()

@@ -1,6 +1,6 @@
 import { clientConstructor } from '../../src/create-client'
 import { API_BASE_URL } from '../../src/constants'
-import { images } from '../../src/images'
+import images from '../../src/images'
 
 beforeEach(() => {
   fetch.resetMocks()

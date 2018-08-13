@@ -1,6 +1,6 @@
 import { clientConstructor } from '../../src/create-client'
 import { API_BASE_URL } from '../../src/constants'
-import { workspaces } from '../../src/workspaces'
+import workspaces from '../../src/workspaces'
 
 beforeEach(() => {
   fetch.resetMocks()
