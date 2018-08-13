@@ -21,7 +21,8 @@ before_install:
   - yarn
 
 script:
-  - TYPEFORM_TOKEN=${TYPEFORM_TOKEN} yarn test
+  - yarn test:unit
+  - yarn test:integration
 
 after_success:
   - yarn semantic-release
