@@ -1,11 +1,7 @@
-import axios from 'axios'
-import { stub, spy } from 'sinon'
+import { clientConstructor } from '../../src/create-client'
+import { API_BASE_URL } from '../../src/constants'
 import {
-  getThemes,
-  getTheme,
-  createTheme,
-  deleteTheme,
-  updateTheme
+  themes
 } from '../../src/themes'
 
 const mockThemePayload = {
@@ -20,64 +16,58 @@ const mockThemePayload = {
 }
 
 beforeEach(() => {
-  stub(axios, 'request').returns({})
+  fetch.resetMocks()
 })
 
-afterEach(() => {
-  axios.request.restore()
+const http = clientConstructor({
+  token: '123'
 })
+const themesRequest = themes(http)
 
 test('Get themes has the correct path', () => {
-  getThemes(axios)
-  expect(axios.request.args[0][0].url).toBe('/themes')
+  themesRequest.list()
+  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/themes`)
 })
 
 test('Get themes has the correct parameters', () => {
-  getThemes(axios, { page: 3, page_size: 15 })
-  expect(axios.request.args[0][0].params.page).toBe(3)
-  expect(axios.request.args[0][0].params.page_size).toBe(15)
+  themesRequest.list({ page: 3, page_size: 15 })
+  expect(fetch.mock.calls[0][1].params.page).toBe(3)
+  expect(fetch.mock.calls[0][1].params.page_size).toBe(15)
 })
 
 test('Get themes has the correct path', () => {
-  getTheme(axios, { id: 2 })
-  expect(axios.request.args[0][0].url).toBe('/themes/2')
+  themesRequest.get({ id: 2 })
+  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/themes/2`)
 })
 
 test('Creating a theme has the correct method', () => {
-  createTheme(axios, mockThemePayload)
-  expect(axios.request.args[0][0].method).toBe('post')
+  themesRequest.create(mockThemePayload)
+  expect(fetch.mock.calls[0][1].method).toBe('post')
 })
 
 test('Throws if required values are not sent', () => {
   const { name, ...incompletePayload } = mockThemePayload
-  expect(() => createTheme(axios, incompletePayload)).toThrow()
+  expect(() => themesRequest.create(incompletePayload)).toThrow()
 })
 
 test('Throws if a font name is not supported', () => {
   expect(() =>
-    createTheme(axios, {
+    themesRequest.create({
       ...mockThemePayload,
       font: 'asdf'
     })
   ).toThrow()
 })
 
-test('Delete a theme has the correct path', () => {
-  deleteTheme(axios, { id: 2 })
-  expect(axios.request.args[0][0].url).toBe('/themes/2')
+test('Delete a theme has the correct path and method', () => {
+  themesRequest.delete({ id: 2 })
+  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/themes/2`)
+  expect(fetch.mock.calls[0][1].method).toBe('delete')
 })
 
-test('Delete a theme has the correct method', () => {
-  deleteTheme(axios, mockThemePayload)
-  expect(axios.request.args[0][0].method).toBe('delete')
+test('Updating a theme has the correct path and method', () => {
+  themesRequest.update({ id: 2, ...mockThemePayload })
+  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/themes/2`)
+  expect(fetch.mock.calls[0][1].method).toBe('put')
 })
 
-test('Updating a theme has the correct path', () => {
-  updateTheme(axios, { id: 2, ...mockThemePayload })
-  expect(axios.request.args[0][0].url).toBe('/themes/2')
-})
-
-test('Delete a theme has the correct method', () => {
-  updateTheme(axios, { id: 2, ...mockThemePayload })
-  expect(axios.request.args[0][0].method).toBe('put')
-})
