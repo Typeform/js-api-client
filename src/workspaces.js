@@ -3,6 +3,7 @@ import { isMemberPropValid, createMemberPatchQuery } from './utils'
 export const workspaces = http => ({
   list: args => getWorkspaces(http, args),
   get: args => getWorkspace(http, args),
+  add: args => addWorkspace(http, args),
   update: args => updateWorkspace(http, args),
   delete: args => deleteWorkspace(http, args),
   addMembers: args => addMembers(http, args),
@@ -28,7 +29,7 @@ export const getWorkspace = (http, { id }) => {
   })
 }
 
-export const createWorkspace = (http, { name }) => {
+export const addWorkspace = (http, { name }) => {
   if (name === undefined) {
     throw `A name is required`
   }
