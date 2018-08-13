@@ -2,14 +2,14 @@ import { isMemberPropValid, createMemberPatchQuery } from './utils'
 
 export const teams = http => {
   return {
-    get(http) {
+    get: () => {
       return getTeam(http)
     },
-    addMembers(http, args) {
+    addMembers: args => {
       return addMembers(http, args)
     },
-    removeMembers(http, args) {
-      return addMembers(http, args)
+    removeMembers: args => {
+      return removeMembers(http, args)
     }
   }
 }
