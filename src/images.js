@@ -4,14 +4,14 @@ export default http => ({
   add: args => addImage(http, args),
   delete: args => deleteImage(http, args)
 })
-export const getImages = http => {
+const getImages = http => {
   return http.request({
     method: 'get',
     url: '/images'
   })
 }
 
-export const getImage = (
+const getImage = (
   http,
   { id, returns, size, backgroundSize, choiceSize }
 ) => {
@@ -61,7 +61,7 @@ export const getImage = (
   return http.request(requestQuery)
 }
 
-export const addImage = (http, { image, media_type, file_name }) => {
+const addImage = (http, { image, media_type, file_name }) => {
   return http.request({
     method: 'post',
     url: `/images`,
@@ -73,7 +73,7 @@ export const addImage = (http, { image, media_type, file_name }) => {
   })
 }
 
-export const deleteImage = (http, { id }) => {
+const deleteImage = (http, { id }) => {
   return http.request({
     method: 'delete',
     url: `/images/${id}`

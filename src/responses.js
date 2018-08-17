@@ -2,7 +2,7 @@ export default http => ({
   list: args => getResponses(http, args)
 })
 
-export const getResponses = (
+const getResponses = (
   http,
   {
     uid,

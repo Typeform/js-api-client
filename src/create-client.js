@@ -22,7 +22,7 @@ export const clientConstructor = ({ token, ...options }) => {
         ...requestParameters
       })
         .then(response => response.json())
-      // .catch(error => { throw `${error}` })
+      .catch(error => { throw `${error}` })
     }
   }
 }
