@@ -32,10 +32,10 @@ const createOrUpdateWebhook = (
   { uid, tag, url, enable = false }
 ) => {
   if (url === undefined) {
-    throw `Please provide an url for ${tag}`
+    throw new Error(`Please provide an url for ${tag}`)
   }
   if (tag === undefined) {
-    throw `Please provide a tag name for the webhook`
+    throw new Error(`Please provide a tag name for the webhook`)
   }
   return http.request({
     method: 'put',

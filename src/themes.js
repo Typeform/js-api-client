@@ -8,7 +8,7 @@ export default http => ({
   update: args => updateTheme(http, args)
 })
 
-export const getThemes = (http, { page, page_size } = {}) => {
+const getThemes = (http, { page, page_size } = {}) => {
   return http.request({
     method: 'get',
     url: '/themes',
@@ -19,14 +19,14 @@ export const getThemes = (http, { page, page_size } = {}) => {
   })
 }
 
-export const getTheme = (http, { id }) => {
+const getTheme = (http, { id }) => {
   return http.request({
     method: 'get',
     url: `/themes/${id}`
   })
 }
 
-export const createTheme = (
+const createTheme = (
   http,
   { background, colors, font, has_transparent_button, name }
 ) => {
@@ -50,14 +50,14 @@ export const createTheme = (
   })
 }
 
-export const deleteTheme = (http, { id }) => {
+const deleteTheme = (http, { id }) => {
   return http.request({
     method: 'delete',
     url: `/themes/${id}`
   })
 }
 
-export const updateTheme = (
+const updateTheme = (
   http,
   { id, background, colors, font, has_transparent_button, name }
 ) => {

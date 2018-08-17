@@ -4,14 +4,14 @@ export default http => ({
   add: args => addImage(http, args),
   delete: args => deleteImage(http, args)
 })
-export const getImages = http => {
+const getImages = http => {
   return http.request({
     method: 'get',
     url: '/images'
   })
 }
 
-export const getImage = (
+const getImage = (
   http,
   { id, returns, size, backgroundSize, choiceSize }
 ) => {
@@ -21,7 +21,7 @@ export const getImage = (
   }
 
   if (returns === 'json') {
-    requestQuery['headers'] = {
+    requestQuery.headers = {
       Accept: 'application/json'
     }
   }
@@ -30,7 +30,7 @@ export const getImage = (
     if (['default', 'thumbnail', 'mobile'].includes(size)) {
       requestQuery['url'] += `/image/${size}`
     } else {
-      throw `Image size doesn't exists`
+      throw new Error(`Image size doesn't exists`)
     }
   }
 
@@ -38,7 +38,7 @@ export const getImage = (
     if (['default', 'thumbnail', 'mobile', 'tablet'].includes(backgroundSize)) {
       requestQuery['url'] += `/background/${backgroundSize}`
     } else {
-      throw `Image background size doesn't exists`
+      throw new Error(`Image background size doesn't exists`)
     }
   }
 
@@ -54,26 +54,26 @@ export const getImage = (
     if (choiceImageSizes.includes(choiceSize)) {
       requestQuery['url'] += `/choice/${choiceSize}`
     } else {
-      throw `Image choice size doesn't exists`
+      throw new Error(`Image choice size doesn't exists`)
     }
   }
 
   return http.request(requestQuery)
 }
 
-export const addImage = (http, { image, media_type, file_name }) => {
+const addImage = (http, { image, mediaType, fileName }) => {
   return http.request({
     method: 'post',
     url: `/images`,
     data: {
       image,
-      file_name,
-      media_type
+      file_name: fileName,
+      media_type: mediaType
     }
   })
 }
 
-export const deleteImage = (http, { id }) => {
+const deleteImage = (http, { id }) => {
   return http.request({
     method: 'delete',
     url: `/images/${id}`

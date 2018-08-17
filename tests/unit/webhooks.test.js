@@ -26,9 +26,11 @@ test('Create a new webhooks has the correct path, method and url', () => {
     url: 'http://test.com',
     enable: true
   })
+
+  const bodyParsed = JSON.parse(fetch.mock.calls[0][1].body)
   expect(fetch.mock.calls[0][1].method).toBe('put')
   expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/forms/2/webhooks/test`)
-  expect(fetch.mock.calls[0][1].data.url).toBe('http://test.com')
+  expect(bodyParsed.url).toBe('http://test.com')
 })
 
 test('Create a new webhooks requires a url', () => {
@@ -41,7 +43,9 @@ test('update a new webhooks sends the correct payload', () => {
     tag: 'test',
     url: 'http://example.com'
   })
-  expect(fetch.mock.calls[0][1].data.url).toBe('http://example.com')
+
+  const bodyParsed = JSON.parse(fetch.mock.calls[0][1].body)
+  expect(bodyParsed.url).toBe('http://example.com')
   expect(fetch.mock.calls[0][1].method).toBe('put')
 })
 

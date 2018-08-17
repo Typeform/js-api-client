@@ -14,14 +14,14 @@ export default http => {
   }
 }
 
-export const getTeam = http => {
+const getTeam = http => {
   return http.request({
     method: 'get',
     url: '/teams/mine'
   })
 }
 
-export const addMembers = (http, { members }) => {
+const addMembers = (http, { members }) => {
   if (!isMemberPropValid(members)) {
     throw `No member provided`
   }
@@ -39,7 +39,7 @@ export const addMembers = (http, { members }) => {
   })
 }
 
-export const removeMembers = (http, { members }) => {
+const removeMembers = (http, { members }) => {
   if (!isMemberPropValid(members)) {
     throw `No member provided`
   }

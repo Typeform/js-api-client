@@ -24,7 +24,7 @@ test('addMember will set the proper method', () => {
 
 test('if a member is sent as string it will work as expected', () => {
   teamsRequest.addMembers({ members: 'test@test.com' })
-  expect(fetch.mock.calls[0][1].data).toEqual([
+  expect(fetch.mock.calls[0][1].body).toEqual(JSON.stringify([
     {
       op: 'add',
       path: '/members',
@@ -32,13 +32,12 @@ test('if a member is sent as string it will work as expected', () => {
         email: 'test@test.com'
       }
     }
-  ])
+  ]))
 })
 
 test('it will support array or multiple members at a time', () => {
   teamsRequest.addMembers({ members: ['test@test.com', 'test2@test.com'] })
-  expect(fetch.mock.calls[0][1].data.length).toEqual(2)
-  expect(fetch.mock.calls[0][1].data).toEqual([
+  expect(fetch.mock.calls[0][1].body).toEqual(JSON.stringify([
     {
       op: 'add',
       path: '/members',
@@ -53,14 +52,13 @@ test('it will support array or multiple members at a time', () => {
         email: 'test2@test.com'
       }
     }
-  ])
+  ]))
 })
 
 test('if no members or incorrect format defined throws', () => {
   expect(() => teamsRequest.addMembers({ members: {} })).toThrow()
 })
 
-//removeMember
 test('removeMember will set the proper method', () => {
   teamsRequest.removeMembers({ members: ['test@test.com'] })
   expect(fetch.mock.calls[0][1].method).toBe('delete')
@@ -68,7 +66,7 @@ test('removeMember will set the proper method', () => {
 
 test('if a member is sent as string it will work as expected', () => {
   teamsRequest.removeMembers({ members: 'test@test.com' })
-  expect(fetch.mock.calls[0][1].data).toEqual([
+  expect(fetch.mock.calls[0][1].body).toEqual(JSON.stringify([
     {
       op: 'remove',
       path: '/members',
@@ -76,5 +74,5 @@ test('if a member is sent as string it will work as expected', () => {
         email: 'test@test.com'
       }
     }
-  ])
+  ]))
 })
