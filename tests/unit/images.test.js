@@ -26,8 +26,8 @@ test('get images by ID', () => {
 test('adding an image pass the required values', () => {
   imagesRequest.add({
     image: 'bGRqZmxzZGpmbHNoZmtoc2RrZmpoc2tqZA==',
-    media_type: 'image/gif',
-    file_name: 'newimage.gif'
+    mediaType: 'image/gif',
+    fileName: 'newimage.gif'
   })
 
   expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/images`)

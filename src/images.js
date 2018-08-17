@@ -21,7 +21,7 @@ const getImage = (
   }
 
   if (returns === 'json') {
-    requestQuery['headers'] = {
+    requestQuery.headers = {
       Accept: 'application/json'
     }
   }
@@ -30,7 +30,7 @@ const getImage = (
     if (['default', 'thumbnail', 'mobile'].includes(size)) {
       requestQuery['url'] += `/image/${size}`
     } else {
-      throw `Image size doesn't exists`
+      throw new Error(`Image size doesn't exists`)
     }
   }
 
@@ -38,7 +38,7 @@ const getImage = (
     if (['default', 'thumbnail', 'mobile', 'tablet'].includes(backgroundSize)) {
       requestQuery['url'] += `/background/${backgroundSize}`
     } else {
-      throw `Image background size doesn't exists`
+      throw new Error(`Image background size doesn't exists`)
     }
   }
 
@@ -54,21 +54,21 @@ const getImage = (
     if (choiceImageSizes.includes(choiceSize)) {
       requestQuery['url'] += `/choice/${choiceSize}`
     } else {
-      throw `Image choice size doesn't exists`
+      throw new Error(`Image choice size doesn't exists`)
     }
   }
 
   return http.request(requestQuery)
 }
 
-const addImage = (http, { image, media_type, file_name }) => {
+const addImage = (http, { image, mediaType, fileName }) => {
   return http.request({
     method: 'post',
     url: `/images`,
     data: {
       image,
-      file_name,
-      media_type
+      file_name: fileName,
+      media_type: mediaType
     }
   })
 }
