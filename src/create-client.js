@@ -1,14 +1,19 @@
+/* globals fetch */
 import 'isomorphic-fetch'
 import { API_BASE_URL } from './constants'
 
 export const clientConstructor = ({ token, ...options }) => {
   return {
     request: (args) => {
-
       const {
         url,
+        headers: argsHeaders = {},
         ...otherArgs
       } = args
+
+      const {
+        headers = {}
+      } = options
 
       const requestParameters = {
         ...options,
@@ -16,13 +21,15 @@ export const clientConstructor = ({ token, ...options }) => {
       }
 
       return fetch(`${API_BASE_URL}${url}`, {
+        ...requestParameters,
         headers: {
+          ...headers,
+          ...argsHeaders,
           Authorization: `bearer ${token}`
-        },
-        ...requestParameters
+        }
       })
         .then(response => response.json())
-      .catch(error => { throw `${error}` })
+        .catch(error => { throw new Error(error) })
     }
   }
 }
