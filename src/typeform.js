@@ -9,7 +9,7 @@ import webhooks from './webhooks'
 
 export const createClient = (args = {}) => {
   if (args.token === undefined) {
-    throw 'Token is missing'
+    throw new Error('Token is missing')
   }
 
   const http = clientConstructor(args)

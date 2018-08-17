@@ -10,12 +10,12 @@ export default http => ({
   }
 })
 
-const getForms = (http, { page, page_size, search } = {}) => {
+const getForms = (http, { page, pageSize, search } = {}) => {
   return http.request({
     method: 'get',
     url: `/forms`,
     page,
-    page_size,
+    page_size: pageSize,
     search
   })
 }

@@ -33,12 +33,12 @@ test('adding an image pass the required values', () => {
   expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/images`)
   expect(fetch.mock.calls[0][1].method).toBe('post')
 
-  const imageData = fetch.mock.calls[0][1].data
-  expect(imageData).toEqual({
+  const imageData = fetch.mock.calls[0][1].body
+  expect(imageData).toEqual(JSON.stringify({
     image: 'bGRqZmxzZGpmbHNoZmtoc2RrZmpoc2tqZA==',
-    media_type: 'image/gif',
-    file_name: 'newimage.gif'
-  })
+    file_name: 'newimage.gif',
+    media_type: 'image/gif'
+  }))
 })
 
 test('deleting an image sets the correct method and id', () => {

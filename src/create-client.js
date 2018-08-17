@@ -7,6 +7,7 @@ export const clientConstructor = ({ token, ...options }) => {
     request: (args) => {
       const {
         url,
+        data,
         headers: argsHeaders = {},
         ...otherArgs
       } = args
@@ -22,6 +23,7 @@ export const clientConstructor = ({ token, ...options }) => {
 
       return fetch(`${API_BASE_URL}${url}`, {
         ...requestParameters,
+        body: JSON.stringify(data),
         headers: {
           ...headers,
           ...argsHeaders,

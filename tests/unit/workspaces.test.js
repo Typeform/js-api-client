@@ -48,7 +48,8 @@ test(`add a member to a workscape has the correct payload`, () => {
     id: 2,
     members: ['test@test.com', 'test2@test.com']
   })
-  expect(fetch.mock.calls[0][1].data).toEqual([
+  const body = fetch.mock.calls[0][1].body
+  expect(body).toEqual(JSON.stringify([
     {
       op: 'add',
       path: '/members',
@@ -63,8 +64,8 @@ test(`add a member to a workscape has the correct payload`, () => {
         email: 'test2@test.com'
       }
     }
-  ])
-  expect(fetch.mock.calls[0][1].data.length).toEqual(2)
+  ]))
+  expect(JSON.parse(body).length).toEqual(2)
 })
 
 test(`remove a member to a workscape has the correct payload`, () => {
@@ -72,7 +73,10 @@ test(`remove a member to a workscape has the correct payload`, () => {
     id: 2,
     members: ['test@test.com']
   })
-  expect(fetch.mock.calls[0][1].data).toEqual([
+
+  const body = fetch.mock.calls[0][1].body
+
+  expect(body).toEqual(JSON.stringify([
     {
       op: 'remove',
       path: '/members',
@@ -80,8 +84,8 @@ test(`remove a member to a workscape has the correct payload`, () => {
         email: 'test@test.com'
       }
     }
-  ])
-  expect(fetch.mock.calls[0][1].data.length).toEqual(1)
+  ]))
+  expect(JSON.parse(body).length).toEqual(1)
 })
 
 test(`Deleting a workscape has the correct path and method`, () => {

@@ -30,23 +30,25 @@ test('getForm sets get method', () => {
 
 test('updateForm sends the correct UID and data', () => {
   formsRequest.update({
-    uid: 'abc123', data: {
+    uid: 'abc123',
+    data: {
       title: 'hola'
     }
   })
+  const bodyParsed = JSON.parse(fetch.mock.calls[0][1].body)
   expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/forms/abc123`)
-  expect(fetch.mock.calls[0][1].data.title).toBe('hola')
+  expect(bodyParsed.title).toBe('hola')
 })
 
 test('updateForm sets patch method in request by default', () => {
   formsRequest.update({
-    uid: 'abc123', data: {
+    uid: 'abc123',
+    data: {
       title: 'hola'
     }
   })
   expect(fetch.mock.calls[0][1].method).toBe('patch')
 })
-
 
 test('updateForm sets put method in request when override option is set', () => {
   formsRequest.update({
