@@ -83,7 +83,7 @@ Each one of them encapsulates the operations related to it (like listing, updati
 
 ### Forms 
 
-#### `forms.list({ page: 1, page_size = 10, search = '' })`
+#### `forms.list({ page: 1, pageSize = 10, search = '' })`
 - Get a list of your typeforms
 - Returns a list of typeform with the payload [refenced here](https://developer.typeform.com/create/reference/retrieve-forms/).
 
@@ -115,7 +115,7 @@ Each one of them encapsulates the operations related to it (like listing, updati
 - `backgroundSize`: default, thumbnail, mobile, tablet
 - `choiceSize`: default, thumbnail, supersize, supermobile, supersizefit, supermobilefit
 
-#### `images.add({ image, media_type, file_name })`
+#### `images.add({ image, mediaType, fileName })`
 - Update an image to Typeform
 
 #### `images.delete({ id })`
@@ -138,7 +138,7 @@ Each one of them encapsulates the operations related to it (like listing, updati
 
 ### Themes
 
-#### `themes.list({ page, page_size })`
+#### `themes.list({ page, pageSize })`
 - Gets your themes collection
 - `page`: default `1`
 - `page_size: default `10` 
@@ -159,7 +159,7 @@ Each one of them encapsulates the operations related to it (like listing, updati
 
 ### Workspaces
 
-#### `workspaces.list({ page, page_size, search })`
+#### `workspaces.list({ page, pageSize, search })`
 - Gets your workspaces
 - `page`: default `1`
 - `page_size: default `10` 
