@@ -305,6 +305,6 @@ yarn test:unit
 
 ```
 
-### Suggestions
+### Suggestions or feedback?
 
-Fill out this [typeform](https://jepser.typeform.com/to/q2JHJw) 🙂
+Fill out this [conversation](https://bit.ly/2wmzCXi) 🙂
