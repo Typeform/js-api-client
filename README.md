@@ -10,7 +10,7 @@ JS Client wrapper for Typeform API
 
 - [Installation](#installation)
 - [Usage](#usage)
-  - [Initialise](#initialise)
+  - [Initialize](#initialize)
 - [Reference](#reference)
   - [Create Client](createclienttoken)
   - [Forms](#forms)
@@ -34,7 +34,7 @@ npm install @typeform/api-client --save
 
 ## Usage
 
-### Initialise
+### Initialize
 
 1. Import client library
 ``` javascript
@@ -271,9 +271,9 @@ The theme property applies a `theme` to the form. If you don't specify a value f
   typeformClient
     .images
     .add({
-      "image": "bGRqZmxzZGpmbHNoZmtoc2RrZmpoc2tqZA==",
-      "media_type": "image/gif",
-      "file_name": "newimage.gif"
+      image: "bGRqZmxzZGpmbHNoZmtoc2RrZmpoc2tqZA==",
+      mediaType: "image/gif",
+      fileName: "newimage.gif"
     })
     .then(response => {
       //...
@@ -295,7 +295,7 @@ The theme property applies a `theme` to the form. If you don't specify a value f
 
 ### Testing
 
-The project has implemeted unit and integration tests.
+The project has implemented unit tests.
 
 ``` bash
 yarn install
@@ -303,8 +303,6 @@ yarn install
 # Runs unit tests
 yarn test:unit
 
-# Runs integration tests 
-TYPEFORM_TOKEN='<your personal token>' yarn test:integration
 ```
 
 ### Suggestions
