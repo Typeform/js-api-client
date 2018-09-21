@@ -10,13 +10,16 @@ export default http => ({
   }
 })
 
-const getForms = (http, { page, pageSize, search } = {}) => {
+const getForms = (http, { page, pageSize, search, workspaceId } = {}) => {
   return http.request({
     method: 'get',
     url: `/forms`,
-    page,
-    page_size: pageSize,
-    search
+    params: {
+      page,
+      page_size: pageSize,
+      search,
+      workspace_id: workspaceId
+    }
   })
 }
 
