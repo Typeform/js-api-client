@@ -83,7 +83,7 @@ Each one of them encapsulates the operations related to it (like listing, updati
 
 ### Forms 
 
-#### `forms.list({ page: 1, pageSize = 10, search = '' })`
+#### `forms.list({ page: 1, pageSize = 10, search = '', page })`
 - Get a list of your typeforms
 - Returns a list of typeform with the payload [refenced here](https://developer.typeform.com/create/reference/retrieve-forms/).
 
