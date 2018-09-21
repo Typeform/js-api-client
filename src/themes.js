@@ -8,13 +8,13 @@ export default http => ({
   update: args => updateTheme(http, args)
 })
 
-const getThemes = (http, { page, page_size } = {}) => {
+const getThemes = (http, { page, pageSize } = {}) => {
   return http.request({
     method: 'get',
     url: '/themes',
     params: {
       page,
-      page_size
+      pageSize
     }
   })
 }
@@ -28,9 +28,9 @@ const getTheme = (http, { id }) => {
 
 const createTheme = (
   http,
-  { background, colors, font, has_transparent_button, name }
+  { background, colors, font, hasTransparentButton, name }
 ) => {
-  //check if required properties are defined
+  // check if required properties are defined
   if ([name, font, colors].includes(undefined)) {
     throw `Please add the required fields`
   }
@@ -45,7 +45,7 @@ const createTheme = (
     background,
     colors,
     font,
-    has_transparent_button,
+    has_transparent_button: hasTransparentButton,
     name
   })
 }
@@ -59,9 +59,9 @@ const deleteTheme = (http, { id }) => {
 
 const updateTheme = (
   http,
-  { id, background, colors, font, has_transparent_button, name }
+  { id, background, colors, font, hasTransparentButton, name }
 ) => {
-  //check if required properties are defined
+  // check if required properties are defined
   if ([name, font, colors].includes(undefined)) {
     throw `Please add the required fields`
   }
@@ -76,7 +76,7 @@ const updateTheme = (
     background,
     colors,
     font,
-    has_transparent_button,
+    has_transparent_button: hasTransparentButton,
     name
   })
 }

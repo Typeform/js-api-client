@@ -29,7 +29,7 @@ test('Get themes has the correct path', () => {
 })
 
 test('Get themes has the correct parameters', () => {
-  themesRequest.list({ page: 3, page_size: 15 })
+  themesRequest.list({ page: 3, pageSize: 15 })
   expect(fetch.mock.calls[0][1].params.page).toBe(3)
   expect(fetch.mock.calls[0][1].params.page_size).toBe(15)
 })

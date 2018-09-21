@@ -10,13 +10,13 @@ export default http => ({
   removeMembers: args => removeMembers(http, args)
 })
 
-const getWorkspaces = (http, { search, page, page_size } = {}) => {
+const getWorkspaces = (http, { search, page, pageSize } = {}) => {
   return http.request({
     method: 'get',
     url: '/workspaces',
     params: {
       page,
-      page_size,
+      page_size: pageSize,
       search
     }
   })
@@ -83,17 +83,17 @@ const deleteWorkspace = (http, { id }) => {
   })
 }
 
-const getWorkspaceForms = (
+export const getWorkspaceForms = (
   http,
-  { id, from_id, page, page_size } = {}
+  { id, fromId, page, pageSize } = {}
 ) => {
   return http.request({
     method: 'get',
     url: `/workspaces/${id}/forms`,
     params: {
       page,
-      page_size,
-      from_id
+      page_size: pageSize,
+      from_id: fromId
     }
   })
 }

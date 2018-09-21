@@ -6,7 +6,7 @@ const getResponses = (
   http,
   {
     uid,
-    page_size,
+    pageSize,
     since,
     until,
     after,
@@ -20,7 +20,7 @@ const getResponses = (
   return http.request({
     method: 'get',
     url: `/forms/${uid}/responses`,
-    page_size,
+    page_size: pageSize,
     since,
     until,
     after,

@@ -141,16 +141,16 @@ Each one of them encapsulates the operations related to it (like listing, updati
 #### `themes.list({ page, pageSize })`
 - Gets your themes collection
 - `page`: default `1`
-- `page_size: default `10` 
+- `pageSize: default `10` 
 
 #### `themes.get({ id })`
 - Gets a theme for the given ID
 
-#### `themes.create({ background, colors, font, has_transparent_button, name })`
+#### `themes.create({ background, colors, font, hasTransparentButton, name })`
 - Creates a theme with the given configuration
 - See more details of the payload in [the documentation](https://developer.typeform.com/create/reference/create-theme/)
 
-#### `themes.update({ background, colors, font, has_transparent_button, name })`
+#### `themes.update({ background, colors, font, hasTransparentButton, name })`
 - Creates a theme with the given configuration
 - See more details of the payload in [the documentation](https://developer.typeform.com/create/reference/update-theme/)
 
@@ -162,7 +162,7 @@ Each one of them encapsulates the operations related to it (like listing, updati
 #### `workspaces.list({ page, pageSize, search })`
 - Gets your workspaces
 - `page`: default `1`
-- `page_size: default `10` 
+- `pageSize: default `10` 
 - `search`: search a workspace that partially matches the search string
 
 #### `workspaces.get({ id })`
@@ -190,7 +190,7 @@ Each one of them encapsulates the operations related to it (like listing, updati
 
 ### Responses
 
-#### `responses.list({ uid, page_size, since, until, after, before, completed, sort, query, fields })`
+#### `responses.list({ uid, pageSize, since, until, after, before, completed, sort, query, fields })`
 - List responses from the given ID
 - `uid`: typeform UID
 - For parameter details check [the documentation](https://developer.typeform.com/responses/reference/retrieve-responses/)
