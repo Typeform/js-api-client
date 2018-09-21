@@ -30,8 +30,9 @@ test('Get themes has the correct path', () => {
 
 test('Get themes has the correct parameters', () => {
   themesRequest.list({ page: 3, pageSize: 15 })
-  expect(fetch.mock.calls[0][1].params.page).toBe(3)
-  expect(fetch.mock.calls[0][1].params.page_size).toBe(15)
+  const params = (new URL(fetch.mock.calls[0][0])).searchParams
+  expect(params.get('page')).toBe('3')
+  expect(params.get('page_size')).toBe('15')
 })
 
 test('Get themes has the correct path', () => {

@@ -20,14 +20,16 @@ const getResponses = (
   return http.request({
     method: 'get',
     url: `/forms/${uid}/responses`,
-    page_size: pageSize,
-    since,
-    until,
-    after,
-    before,
-    completed,
-    sort,
-    query,
-    fields
+    params: {
+      page_size: pageSize,
+      since,
+      until,
+      after,
+      before,
+      completed,
+      sort,
+      query,
+      fields
+    }
   })
 }
