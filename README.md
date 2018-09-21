@@ -85,15 +85,15 @@ Each one of them encapsulates the operations related to it (like listing, updati
 
 #### `forms.list({ page: 1, pageSize = 10, search = '', page })`
 - Get a list of your typeforms
-- Returns a list of typeform with the payload [refenced here](https://developer.typeform.com/create/reference/retrieve-forms/).
+- Returns a list of typeform with the payload [referenced here](https://developer.typeform.com/create/reference/retrieve-forms/).
 
 #### `forms.get({ uid })`
 - Get a typeform by UID
-- Returns a typeform with the payload [refenced here](https://developer.typeform.com/create/reference/retrieve-form/).
+- Returns a typeform with the payload [referenced here](https://developer.typeform.com/create/reference/retrieve-form/).
 
 #### `forms.update({ uid, data = {}, override = false })`
 - Get a typeform by UID
-- Returns a typeform with the payload [refenced here](https://developer.typeform.com/create/reference/retrieve-form/).
+- Returns a typeform with the payload [referenced here](https://developer.typeform.com/create/reference/retrieve-form/).
 
 #### `forms.delete({ uid })`
 
