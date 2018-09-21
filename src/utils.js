@@ -19,3 +19,21 @@ export const createMemberPatchQuery = ({ members, operation }) => {
     }
   }))
 }
+
+export const buildUrlWithParams = (url, params = {}) => {
+  const queryParams = Object.keys(params)
+    .reduce((list, key) => {
+      const currentValue = params[key]
+      if (currentValue) {
+        return [
+          ...list,
+          `${encodeURIComponent(key)}=${encodeURIComponent(currentValue)}`
+        ]
+      } else {
+        return list
+      }
+    }, [])
+    .join('&')
+
+  return queryParams ? `${url}?${queryParams}` : url
+}
