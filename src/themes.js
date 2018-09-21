@@ -14,7 +14,7 @@ const getThemes = (http, { page, pageSize } = {}) => {
     url: '/themes',
     params: {
       page,
-      pageSize
+      page_size: pageSize
     }
   })
 }
