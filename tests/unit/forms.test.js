@@ -14,8 +14,25 @@ const formsRequest = forms(http)
 
 test('get all forms has the correct method and path', () => {
   formsRequest.list()
-  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/forms`)
+
+  const url = fetch.mock.calls[0][0].split('?')
+  expect(url[0]).toBe(`${API_BASE_URL}/forms`)
   expect(fetch.mock.calls[0][1].method).toBe('get')
+})
+
+test('paramters are sent correctly', () => {
+  formsRequest.list({
+    page: 2,
+    pageSize: 10,
+    search: 'hola',
+    workspaceId: 'abc'
+  })
+  const url = fetch.mock.calls[0][0].split('?')
+  const params = new URLSearchParams(url[1])
+  expect(params.get('page')).toBe('2')
+  expect(params.get('page')).toBe('2')
+  expect(params.get('page')).toBe('2')
+  expect(params.get('page')).toBe('2')
 })
 
 test('getForm sends the correct UID', () => {

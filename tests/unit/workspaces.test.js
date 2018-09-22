@@ -12,10 +12,22 @@ const http = clientConstructor({
 })
 const workspacesRequest = workspaces(http)
 
-
 test(`Get workspaces has the correct path`, () => {
   workspacesRequest.list()
   expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/workspaces`)
+})
+
+test(`Get workspaces has the correct query parameters`, () => {
+  workspacesRequest.list({
+    search: 'hola',
+    page: 2,
+    pageSize: 10
+  })
+
+  const params = new URL(fetch.mock.calls[0][0]).searchParams
+  expect(params.get('search')).toBe('hola')
+  expect(params.get('page')).toBe('2')
+  expect(params.get('page_size')).toBe('10')
 })
 
 test(`Get specific workscape has the correct path and method`, () => {
