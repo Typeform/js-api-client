@@ -31,3 +31,13 @@ test.only('undefined values for parameter will be skipped', () => {
   }
   expect(buildUrlWithParams(url, params)).toBe('http://typeform.com?a=%401')
 })
+
+test.only('falsy values should be passed', () => {
+  const url = 'http://typeform.com'
+  const params = {
+    a: '0',
+    b: 0,
+    c: null
+  }
+  expect(buildUrlWithParams(url, params)).toBe('http://typeform.com?a=0&b=0')
+})

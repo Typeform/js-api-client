@@ -24,7 +24,7 @@ export const buildUrlWithParams = (url, params = {}) => {
   const queryParams = Object.keys(params)
     .reduce((list, key) => {
       const currentValue = params[key]
-      if (currentValue) {
+      if (currentValue !== undefined && currentValue !== null) {
         return [
           ...list,
           `${encodeURIComponent(key)}=${encodeURIComponent(currentValue)}`
