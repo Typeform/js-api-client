@@ -22,17 +22,8 @@ export const createMemberPatchQuery = ({ members, operation }) => {
 
 export const buildUrlWithParams = (url, params = {}) => {
   const queryParams = Object.keys(params)
-    .reduce((list, key) => {
-      const currentValue = params[key]
-      if (currentValue !== undefined && currentValue !== null) {
-        return [
-          ...list,
-          `${encodeURIComponent(key)}=${encodeURIComponent(currentValue)}`
-        ]
-      } else {
-        return list
-      }
-    }, [])
+    .filter((k) => params[k] !== undefined && params[k] !== null)
+    .map(k => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`)
     .join('&')
 
   return queryParams ? `${url}?${queryParams}` : url

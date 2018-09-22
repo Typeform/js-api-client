@@ -23,7 +23,7 @@ test('parameters should be enconded', () => {
   expect(buildUrlWithParams(url, params)).toBe('http://typeform.com?a=%401&b=%232')
 })
 
-test.only('undefined values for parameter will be skipped', () => {
+test('undefined values for parameter will be skipped', () => {
   const url = 'http://typeform.com'
   const params = {
     a: '@1',
@@ -32,7 +32,7 @@ test.only('undefined values for parameter will be skipped', () => {
   expect(buildUrlWithParams(url, params)).toBe('http://typeform.com?a=%401')
 })
 
-test.only('falsy values should be passed', () => {
+test('falsy values should be passed', () => {
   const url = 'http://typeform.com'
   const params = {
     a: '0',
