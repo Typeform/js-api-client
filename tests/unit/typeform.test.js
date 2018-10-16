@@ -6,7 +6,7 @@ beforeEach(() => {
   fetch.mockResponse(JSON.stringify({}))
 })
 
-test('client costructor has a request function property', () => {
+test('client constructor has a request function property', () => {
   const client = clientConstructor({
     token: '12345'
   })
