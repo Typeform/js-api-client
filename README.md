@@ -12,15 +12,17 @@ JS Client wrapper for Typeform API
 - [Usage](#usage)
   - [Initialize](#initialize)
 - [Reference](#reference)
-  - [Create Client](createclienttoken)
+  - [Create Client](#createclienttoken)
   - [Forms](#forms)
   - [Images](#images)
   - [Teams](#teams)
   - [Themes](#themes)
   - [Workspaces](#workspaces)
+  - [Responses](#responses)
+  - [Webhooks](#webhooks)
 - [Examples](#examples)
 - [Testing](#testing)
-- [Suggestions](#suggestions)
+- [Suggestions](#suggestions-or-feedback)
 
 ## Installation
 
@@ -195,7 +197,7 @@ Each one of them encapsulates the operations related to it (like listing, updati
 - `uid`: typeform UID
 - For parameter details check [the documentation](https://developer.typeform.com/responses/reference/retrieve-responses/)
 
-## Webhooks
+### Webhooks
 
 #### `webhook.get({ uid, tag })`
 - Get detailf for a webhook with the given tag
