@@ -40,7 +40,7 @@ npm install @typeform/api-client --save
 
 1. Import client library
 ``` javascript
-  import {createClient} from '@typeform/api-client'
+  import { createClient } from '@typeform/api-client'
 ```
 
 2. Create a instance with your personal token
@@ -50,7 +50,7 @@ npm install @typeform/api-client --save
   })
 ```
 
-3. Use any of the methods available in the reference
+3. Use any of the methods available in the [reference](#reference)
 ``` javascript
   // will retrieve all forms
   typeformAPI
@@ -100,10 +100,10 @@ Each one of them encapsulates the operations related to it (like listing, updati
 #### `forms.delete({ uid })`
 
 #### `forms.messages.get({ uid })`
-- Get custom messages typeform of a given UID
+- Get custom messages of a given UID
 
 #### `forms.messages.update({ uid })`
-- Updates custom messages typeform of a given UID
+- Updates custom messages typeform for the given UID
 
 ### Images
 
@@ -164,7 +164,7 @@ Each one of them encapsulates the operations related to it (like listing, updati
 #### `workspaces.list({ page, pageSize, search })`
 - Gets your workspaces
 - `page`: default `1`
-- `pageSize: default `10` 
+- `pageSize`: default `10` 
 - `search`: search a workspace that partially matches the search string
 
 #### `workspaces.get({ id })`
@@ -186,7 +186,7 @@ Each one of them encapsulates the operations related to it (like listing, updati
 - Adding multiple members at once is possible using an array of emails
 
 #### `workspaces.removeMembers({ id, members })`
-- Remove members to a workspace for the given ID
+- Remove members from a workspace for the given ID
 - `members`: `string` or an `array` and should be the email fo the user
 - Removing multiple members at once is possible using an array of emails
 
@@ -219,7 +219,7 @@ Each one of them encapsulates the operations related to it (like listing, updati
 - `enable`: (bool)
 
 #### `webhook.delete({ uid, tag })`
-- Delete for a webhook with the given tag
+- Delete a webhook with the given tag for a given typeform
 - `uid`: typeform UID
 - `tag`: (string) tag of the webhook
 
@@ -297,7 +297,7 @@ The theme property applies a `theme` to the form. If you don't specify a value f
 
 ### Testing
 
-The project has implemented unit tests.
+To run unit tests.
 
 ``` bash
 yarn install
