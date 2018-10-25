@@ -43,7 +43,7 @@ npm install @typeform/api-client --save
   import { createClient } from '@typeform/api-client'
 ```
 
-2. Create a instance with your personal token
+2. Create an instance with your personal token
 ``` javascript
   const typeformAPI = createClient({
     token: '<your token>'
@@ -200,7 +200,7 @@ Each one of them encapsulates the operations related to it (like listing, updati
 ### Webhooks
 
 #### `webhook.get({ uid, tag })`
-- Get detailf for a webhook with the given tag
+- Get details of a webhook with the given tag
 - `uid`: typeform UID
 - `tag`: tag of the webhook created
 
