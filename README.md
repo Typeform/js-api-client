@@ -130,12 +130,12 @@ Each one of them encapsulates the operations related to it (like listing, updati
 
 #### `teams.addMembers({ id, members })`
 - Add members to a team for the given ID
-- `members`: `string` or an `array` and should be the email fo the user
+- `members`: `string` or an `array` and should be the email for the user
 - Adding multiple members at once is possible using an array of emails
 
 #### `teams.removeMembers({ id, members })`
 - Remove members to a team for the given ID
-- `members`: `string` or an `array` and should be the email fo the user
+- `members`: `string` or an `array` and should be the email for the user
 - Deleting multiple members at once is possible using an array of emails
 
 ### Themes
@@ -182,12 +182,12 @@ Each one of them encapsulates the operations related to it (like listing, updati
 
 #### `workspaces.addMembers({ id, members })`
 - Add members to a workspace for the given ID
-- `members`: `string` or an `array` and should be the email fo the user
+- `members`: `string` or an `array` and should be the email for the user
 - Adding multiple members at once is possible using an array of emails
 
 #### `workspaces.removeMembers({ id, members })`
 - Remove members from a workspace for the given ID
-- `members`: `string` or an `array` and should be the email fo the user
+- `members`: `string` or an `array` and should be the email for the user
 - Removing multiple members at once is possible using an array of emails
 
 ### Responses
