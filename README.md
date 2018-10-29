@@ -2,8 +2,6 @@
 
 [![Build Status](https://travis-ci.com/Typeform/js-api-client.svg?token=nePyGZWpdyBxUnh9PswC&branch=master)](https://travis-ci.com/Typeform/js-api-client)
 
-------
-
 JS Client wrapper for Typeform API
 
 ## Table of contents
@@ -108,7 +106,7 @@ Each one of them encapsulates the operations related to it (like listing, updati
 ### Images
 
 #### `images.list()`
-- Get your images collection
+- Gets your images collection
 
 #### `images.get({ id, returns, size, backgroundSize, choiceSize })`
 - Get custom image by ID
