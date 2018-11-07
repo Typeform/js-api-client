@@ -24,7 +24,7 @@
   "bugs": {
     "url": "https://github.com/Typeform/js-api-client/issues"
   },
-  "homepage": "https://github.com/Typeform/js-api-clientk#readme",
+  "homepage": "https://github.com/Typeform/js-api-client#readme",
   "dependencies": {
     "isomorphic-fetch": "^2.2.1"
   },
