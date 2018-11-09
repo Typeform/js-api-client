@@ -43,7 +43,7 @@ npm install @typeform/api-client --save
   import { createClient } from '@typeform/api-client'
 ```
 
-2. Create a instance with your personal token
+2. Create an instance with your personal token
 ``` javascript
   const typeformAPI = createClient({
     token: '<your token>'
@@ -87,7 +87,7 @@ Each one of them encapsulates the operations related to it (like listing, updati
 
 #### `forms.list({ page: 1, pageSize = 10, search = '', page })`
 - Get a list of your typeforms
-- Returns a list of typeform with the payload [referenced here](https://developer.typeform.com/create/reference/retrieve-forms/).
+- Returns a list of typeforms with the payload [referenced here](https://developer.typeform.com/create/reference/retrieve-forms/).
 
 #### `forms.get({ uid })`
 - Get a typeform by UID
@@ -98,12 +98,13 @@ Each one of them encapsulates the operations related to it (like listing, updati
 - Returns a typeform with the payload [referenced here](https://developer.typeform.com/create/reference/update-form/).
 
 #### `forms.delete({ uid })`
+- Deletes a typeform by UID
 
 #### `forms.messages.get({ uid })`
-- Get custom messages of a given UID
+- Get custom messages of the typeform with the given UID
 
 #### `forms.messages.update({ uid })`
-- Updates custom messages typeform for the given UID
+- Updates custom messages of the typeform with the given UID
 
 ### Images
 
@@ -113,7 +114,7 @@ Each one of them encapsulates the operations related to it (like listing, updati
 #### `images.get({ id, returns, size, backgroundSize, choiceSize })`
 - Get custom image by ID
 - `returns`: json, binary (default)
-- `size`: default, thumbnail, mobile,
+- `size`: default, thumbnail, mobile
 - `backgroundSize`: default, thumbnail, mobile, tablet
 - `choiceSize`: default, thumbnail, supersize, supermobile, supersizefit, supermobilefit
 
@@ -153,7 +154,7 @@ Each one of them encapsulates the operations related to it (like listing, updati
 - See more details of the payload in [the documentation](https://developer.typeform.com/create/reference/create-theme/)
 
 #### `themes.update({ background, colors, font, hasTransparentButton, name })`
-- Creates a theme with the given configuration
+- Updates a theme with the given configuration
 - See more details of the payload in [the documentation](https://developer.typeform.com/create/reference/update-theme/)
 
 #### `themes.delete({ id })`
@@ -171,8 +172,9 @@ Each one of them encapsulates the operations related to it (like listing, updati
 - Gets the workspace information for the given ID
 
 #### `workspaces.update({ id, data })`
-- Gets the workspace information for the given ID
-- `data`: operation that is wanted to perform, see more details in [the documentation](https://developer.typeform.com/create/reference/update-workspace/)
+- Updates the workspace information for the given ID
+- `data`: operation to perform that is wanted 
+- See more details in [the documentation](https://developer.typeform.com/create/reference/update-workspace/)
 
 #### `workspaces.delete({ id })`
 - Deletes the workspace for the given ID
@@ -182,12 +184,12 @@ Each one of them encapsulates the operations related to it (like listing, updati
 
 #### `workspaces.addMembers({ id, members })`
 - Add members to a workspace for the given ID
-- `members`: `string` or an `array` and should be the email fo the user
+- `members`: `string` or an `array` that should be the email of the user
 - Adding multiple members at once is possible using an array of emails
 
 #### `workspaces.removeMembers({ id, members })`
 - Remove members from a workspace for the given ID
-- `members`: `string` or an `array` and should be the email fo the user
+- `members`: `string` or an `array` that should be the email of the user
 - Removing multiple members at once is possible using an array of emails
 
 ### Responses
@@ -200,21 +202,21 @@ Each one of them encapsulates the operations related to it (like listing, updati
 ### Webhooks
 
 #### `webhook.get({ uid, tag })`
-- Get detailf for a webhook with the given tag
+- Get details for a webhook with the given tag
 - `uid`: typeform UID
 - `tag`: tag of the webhook created
 
 #### `webhook.create({ uid, tag, url, enable = false })`
 - Create a webhook with the given tag
 - `uid`: typeform UID
-- `tag`: (string) tag of the webhook, how are you going to identify it
+- `tag`: (string) tag of the webhook (how are you going to identify it)
 - `url`: (string) url of the service you want to notify
 - `enable`: (bool)
 
 #### `webhook.update({ uid, tag, url, enable = false })`
 - Update a webhook with the given tag
 - `uid`: typeform UID
-- `tag`: (string) tag of the webhook, how are you going to identify it
+- `tag`: (string) tag of the webhook (how are you going to identify it)
 - `url`: (string) url of the service you want to notify
 - `enable`: (bool)
 
