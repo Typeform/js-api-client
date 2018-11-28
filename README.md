@@ -31,7 +31,7 @@ JS Client wrapper for Typeform API
 yarn add @typeform/api-client
 
 # install with npm
-npm install @typeform/api-client --save
+npm install @typeform/api-client
 ```
 
 ## Usage
@@ -39,18 +39,21 @@ npm install @typeform/api-client --save
 ### Initialize
 
 1. Import client library
+
 ``` javascript
-  import { createClient } from '@typeform/api-client'
+  import { TypeformClient } from '@typeform/api-client'
 ```
 
 2. Create an instance with your personal token
+
 ``` javascript
-  const typeformAPI = createClient({
+  const typeformAPI = new TypeformClient({
     token: '<your token>'
   })
 ```
 
 3. Use any of the methods available in the [reference](#reference)
+
 ``` javascript
   // will retrieve all forms
   typeformAPI
@@ -63,16 +66,19 @@ npm install @typeform/api-client --save
 
 ## Reference
 
-#### `createClient({token})`
+### `new TypeformClient({token})`
+
 - Creates a new instance of Typeform's JS client
 - Returns an instance with the methods described below
+
 ``` javascript
-  const typeformClient = createClient({
+  const typeformClient = new TypeformClient({
     token: '<your token>'
   })
 ```
 
 Client returns the following properties:
+
 - `forms`
 - `images`
 - `teams`
@@ -83,35 +89,43 @@ Client returns the following properties:
 
 Each one of them encapsulates the operations related to it (like listing, updating, deleting the resource).
 
-### Forms 
+### Forms
 
 #### `forms.list({ page: 1, pageSize = 10, search = '', page })`
+
 - Get a list of your typeforms
 - Returns a list of typeforms with the payload [referenced here](https://developer.typeform.com/create/reference/retrieve-forms/).
 
 #### `forms.get({ uid })`
+
 - Get a typeform by UID
 - Returns a typeform with the payload [referenced here](https://developer.typeform.com/create/reference/retrieve-form/).
 
 #### `forms.update({ uid, data = {}, override = false })`
+
 - Update a typeform by UID
 - Returns a typeform with the payload [referenced here](https://developer.typeform.com/create/reference/update-form/).
 
 #### `forms.delete({ uid })`
+
 - Deletes a typeform by UID
 
 #### `forms.messages.get({ uid })`
+
 - Get custom messages of the typeform with the given UID
 
 #### `forms.messages.update({ uid })`
+
 - Updates custom messages of the typeform with the given UID
 
 ### Images
 
 #### `images.list()`
+
 - Get your images collection
 
 #### `images.get({ id, returns, size, backgroundSize, choiceSize })`
+
 - Get custom image by ID
 - `returns`: json, binary (default)
 - `size`: default, thumbnail, mobile
@@ -119,22 +133,27 @@ Each one of them encapsulates the operations related to it (like listing, updati
 - `choiceSize`: default, thumbnail, supersize, supermobile, supersizefit, supermobilefit
 
 #### `images.add({ image, mediaType, fileName })`
+
 - Update an image to Typeform
 
 #### `images.delete({ id })`
+
 - Deletes an image with the given ID
 
 ### Teams
 
 #### `teams.get({ id })`
+
 - Gets team information for the given ID
 
 #### `teams.addMembers({ id, members })`
+
 - Add members to a team for the given ID
 - `members`: `string` or an `array` and should be the email fo the user
 - Adding multiple members at once is possible using an array of emails
 
 #### `teams.removeMembers({ id, members })`
+
 - Remove members to a team for the given ID
 - `members`: `string` or an `array` and should be the email fo the user
 - Deleting multiple members at once is possible using an array of emails
@@ -142,52 +161,60 @@ Each one of them encapsulates the operations related to it (like listing, updati
 ### Themes
 
 #### `themes.list({ page, pageSize })`
+
 - Gets your themes collection
 - `page`: default `1`
-- `pageSize: default `10` 
+- `pageSize`: default `10`
 
 #### `themes.get({ id })`
+
 - Gets a theme for the given ID
 
 #### `themes.create({ background, colors, font, hasTransparentButton, name })`
+
 - Creates a theme with the given configuration
 - See more details of the payload in [the documentation](https://developer.typeform.com/create/reference/create-theme/)
 
 #### `themes.update({ background, colors, font, hasTransparentButton, name })`
+
 - Updates a theme with the given configuration
 - See more details of the payload in [the documentation](https://developer.typeform.com/create/reference/update-theme/)
 
 #### `themes.delete({ id })`
+
 - Deletes the theme with the given ID
 
 ### Workspaces
 
 #### `workspaces.list({ page, pageSize, search })`
+
 - Gets your workspaces
 - `page`: default `1`
-- `pageSize`: default `10` 
+- `pageSize`: default `10`
 - `search`: search a workspace that partially matches the search string
 
 #### `workspaces.get({ id })`
+
 - Gets the workspace information for the given ID
 
 #### `workspaces.update({ id, data })`
+
 - Updates the workspace information for the given ID
-- `data`: operation to perform that is wanted 
+- `data`: operation to perform that is wanted
 - See more details in [the documentation](https://developer.typeform.com/create/reference/update-workspace/)
 
 #### `workspaces.delete({ id })`
+
 - Deletes the workspace for the given ID
 
-#### `workspaces.get({ id })`
-- Gets the workspace information for the given ID
-
 #### `workspaces.addMembers({ id, members })`
+
 - Add members to a workspace for the given ID
 - `members`: `string` or an `array` that should be the email of the user
 - Adding multiple members at once is possible using an array of emails
 
 #### `workspaces.removeMembers({ id, members })`
+
 - Remove members from a workspace for the given ID
 - `members`: `string` or an `array` that should be the email of the user
 - Removing multiple members at once is possible using an array of emails
@@ -195,6 +222,7 @@ Each one of them encapsulates the operations related to it (like listing, updati
 ### Responses
 
 #### `responses.list({ uid, pageSize, since, until, after, before, completed, sort, query, fields })`
+
 - List responses from the given ID
 - `uid`: typeform UID
 - For parameter details check [the documentation](https://developer.typeform.com/responses/reference/retrieve-responses/)
@@ -202,11 +230,13 @@ Each one of them encapsulates the operations related to it (like listing, updati
 ### Webhooks
 
 #### `webhook.get({ uid, tag })`
+
 - Get details for a webhook with the given tag
 - `uid`: typeform UID
 - `tag`: tag of the webhook created
 
 #### `webhook.create({ uid, tag, url, enable = false })`
+
 - Create a webhook with the given tag
 - `uid`: typeform UID
 - `tag`: (string) tag of the webhook (how are you going to identify it)
@@ -214,6 +244,7 @@ Each one of them encapsulates the operations related to it (like listing, updati
 - `enable`: (bool)
 
 #### `webhook.update({ uid, tag, url, enable = false })`
+
 - Update a webhook with the given tag
 - `uid`: typeform UID
 - `tag`: (string) tag of the webhook (how are you going to identify it)
@@ -221,13 +252,14 @@ Each one of them encapsulates the operations related to it (like listing, updati
 - `enable`: (bool)
 
 #### `webhook.delete({ uid, tag })`
+
 - Delete a webhook with the given tag for a given typeform
 - `uid`: typeform UID
 - `tag`: (string) tag of the webhook
 
 ## Examples
 
-##### Update specific typeform property, as [referenced here](https://developer.typeform.com/create/reference/update-form-patch/)
+### Update specific typeform property, as [referenced here](https://developer.typeform.com/create/reference/update-form-patch/)
 
 ``` javascript
   typeformClient
@@ -243,11 +275,11 @@ Each one of them encapsulates the operations related to it (like listing, updati
       ]
     })
     .then(response => {
-      //... 
+      //...
     })
 ```
 
-##### Update the whole typeform
+### Update the whole typeform
 
 ``` javascript
   typeformClient
@@ -263,14 +295,15 @@ Each one of them encapsulates the operations related to it (like listing, updati
       }
     })
     .then(response => {
-      //... 
+      //...
     })
 ```
 
 **Note:**
-The theme property applies a `theme` to the form. If you don't specify a value for the 'theme' property, Typeform applies a new copy of the default theme to the form, **even if you already have a copy of the default theme applied to this form**. 
+The theme property applies a `theme` to the form. If you don't specify a value for the 'theme' property, Typeform applies a new copy of the default theme to the form, **even if you already have a copy of the default theme applied to this form**.
 
-##### Uploading an image
+### Uploading an image
+
 ``` javascript
   typeformClient
     .images
@@ -285,7 +318,7 @@ The theme property applies a `theme` to the form. If you don't specify a value f
 
 ```
 
-##### Getting the thumbnail of an image
+### Getting the thumbnail of an image
 
 ``` javascript
   typeformClient
@@ -297,7 +330,7 @@ The theme property applies a `theme` to the form. If you don't specify a value f
 
 ```
 
-### Testing
+## Testing
 
 To run unit tests.
 
@@ -309,6 +342,6 @@ yarn test:unit
 
 ```
 
-### Suggestions or feedback?
+## Suggestions or feedback
 
 Fill out this [conversation](https://bit.ly/2wmzCXi) 🙂

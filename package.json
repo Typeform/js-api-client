@@ -9,6 +9,7 @@
     "test:integration": "jest ./tests/integration/",
     "test:integration:watch": "jest ./tests/integration/ --watch",
     "build": "rm -rf ./lib && rollup -c",
+    "prepare": "npm run build",
     "prepublish": "npm run build",
     "lint": "tslint --project ./tslint.json 'src/**/*.ts'",
     "semantic-release": "semantic-release",
