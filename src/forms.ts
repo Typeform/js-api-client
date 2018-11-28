@@ -14,7 +14,7 @@ export class TypeformForms {
    * @param args.data Form to be created.
    * @returns Promise that resolves on success.
    */
-  public create(args: { data: ITypeform.Forms.Create }): Promise<null> {
+  public create(args: { data: ITypeform.Forms.Create } = { data: undefined }): Promise<null> {
     const { data } = args;
 
     return this._http.request({
@@ -30,7 +30,7 @@ export class TypeformForms {
    * @param args.uid Unique ID for the form. Find in your form URL. For example, in the URL "https://mysite.typeform.com/to/u6nXL7" the form_id is u6nXL7.
    * @returns Promise that resolves on success.
    */
-  public delete(args: { uid: string }): Promise<null> {
+  public delete(args: { uid: string } = { uid: undefined }): Promise<null> {
     const { uid } = args;
 
     return this._http.request({
@@ -45,7 +45,7 @@ export class TypeformForms {
    * @param args.uid Unique ID for the form. Find in your form URL. For example, in the URL "https://mysite.typeform.com/to/u6nXL7" the form_id is u6nXL7.
    * @returns Promise that resolves with Form.
    */
-  public get(args: { uid: string }): Promise<ITypeform.Forms.Get> {
+  public get(args: { uid: string } = { uid: undefined }): Promise<ITypeform.Forms.Get> {
     const { uid } = args;
 
     return this._http.request({
@@ -63,7 +63,7 @@ export class TypeformForms {
    * @param args.workspaceId Retrieve typeforms for the specified workspace.
    * @returns Promise that resolves with list of all Form.
    */
-  public list(args: { page?: number, pageSize?: number, search?: string, workspaceId?: string }): Promise<ITypeform.Forms.List> {
+  public list(args: { page?: number, pageSize?: number, search?: string, workspaceId?: string } = {}): Promise<ITypeform.Forms.List> {
     const { page, pageSize, search, workspaceId } = args;
     return this._http.request({
       method: 'get',
@@ -85,7 +85,7 @@ export class TypeformForms {
    * @param args.data Update data
    * @returns Promise that resolves on success.
    */
-  public update(args: { uid: string, override?: boolean, data: any }): Promise<null> {
+  public update(args: { uid: string, override?: boolean, data: any } = { uid: undefined, data: undefined }): Promise<null> {
     const { uid, override, data } = args;
 
     return this._http.request({
@@ -106,7 +106,7 @@ class TypeformMessages {
    * @param args.uid Unique ID for the form. Find in your form URL. For example, in the URL "https://mysite.typeform.com/to/u6nXL7" the form_id is u6nXL7.
    * @returns Returns the customizable messages for a form.
    */
-  public get(args: { uid: string }): Promise<ITypeform.Forms.Messages> {
+  public get(args: { uid: string } = { uid: undefined }): Promise<ITypeform.Forms.Messages> {
     const { uid } = args;
 
     return this._http.request({
@@ -123,7 +123,7 @@ class TypeformMessages {
    * @param args.data Request body
    * @returns Promise that resolves on success.
    */
-  public update(args: { uid: string, data: ITypeform.Forms.Messages }): Promise<null> {
+  public update(args: { uid: string, data: ITypeform.Forms.Messages } = { uid: undefined, data: undefined }): Promise<null> {
     const { uid, data } = args;
 
     return this._http.request({

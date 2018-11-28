@@ -23,7 +23,7 @@ export class TypeformTeams {
    * @param args.members Array of strings, or string, of email address(es) to add to team.
    * @returns Promise that resolves on success.
    */
-  public addMembers(args: { members: string | string[] }): Promise<null> {
+  public addMembers(args: { members: string | string[] } = { members: undefined }): Promise<null> {
     const { members } = args;
 
     if (!isMemberPropValid(members)) {
@@ -49,7 +49,7 @@ export class TypeformTeams {
    * @param args.members Array of strings, or string, of email address(es) to remove from team.
    * @returns Promise that resolves on success.
    */
-  public removeMembers(args: { members: string | string[] }): Promise<null> {
+  public removeMembers(args: { members: string | string[] } = { members: undefined }): Promise<null> {
     const { members } = args;
 
     if (!isMemberPropValid(members)) {

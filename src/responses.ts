@@ -21,6 +21,8 @@ export class TypeformResponses {
   public list(args: { 
     uid: string, pageSize?: number, since?: string, until?: string, after?: string, before?: string,
     completed?: boolean, sort?: string, query?: string, fields?: string[]
+  } = {
+    uid: undefined
   }): Promise<Response> {
     const { uid, pageSize, since, until, after, before, completed, sort, query, fields } = args;
 

@@ -4,18 +4,23 @@ import { isMemberPropValid, createMemberPatchQuery } from './utils'
 export class TypeformWorkspaces {
   constructor(private _http: TypeformHttpClient) { }
 
-  public add({ name }): Promise<Response> {
+  public add(args: { name: string } = { name: undefined }): Promise<any> {
+    const { name } = args;
+
     if (name === undefined) {
       throw `A name is required`
     }
 
     return this._http.request({
       method: 'post',
-      url: `/workspaces`
+      url: `/workspaces`,
+      data: {
+        name
+      }
     });
   }
 
-  public addMembers({ id, members }): Promise<Response> {
+  public addMembers({ id, members }): Promise<any> {
     if (!isMemberPropValid(members)) {
       throw `No member provided`
     }
@@ -29,14 +34,26 @@ export class TypeformWorkspaces {
     return this.update({ id, data: membersQuery });
   }
 
-  public delete({ id }): Promise<Response> {
+  public delete(args: { id: string } = { id: undefined }): Promise<any> {
+    const { id } = args;
     return this._http.request({
       method: 'delete',
       url: `/workspaces/${id}`
     });
   }
 
-  public get({ search, page, pageSize } = { search, page, pageSize }): Promise<Response> {
+  public get(args: { id: string } = { id: undefined }): Promise<any> {
+    const { id } = args;
+
+    return this._http.request({
+      method: 'get',
+      url: `/workspaces/${id}`
+    });
+  }
+
+  public list(args: { search?: string, page?: number, pageSize?: number } = {}): Promise<any> {
+    const { search, page, pageSize } = args;
+
     return this._http.request({
       method: 'get',
       url: '/workspaces',
@@ -48,14 +65,9 @@ export class TypeformWorkspaces {
     });
   }
 
-  public list({ id }): Promise<Response> {
-    return this._http.request({
-      method: 'get',
-      url: `/workspaces/${id}`
-    });
-  }
+  public removeMembers(args: { id: string, members: string | string[] } = { id: undefined, members: undefined }): Promise<any> {
+    const { id, members } = args;
 
-  public removeMembers({ id, members }): Promise<Response> {
     if (!isMemberPropValid(members)) {
       throw `No member provided`
     }
@@ -69,7 +81,8 @@ export class TypeformWorkspaces {
     return this.update({ id, data: membersQuery });
   }
 
-  public update({ id, data } = { id, data }): Promise<Response> {
+  public update(args: { id: string, data: any } = { id: undefined, data: undefined }): Promise<any> {
+    const { id, data } = args;
     return this._http.request({
       method: 'patch',
       url: `/workspaces/${id}`,

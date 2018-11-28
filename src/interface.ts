@@ -27,7 +27,7 @@ namespace ICommon {
        */
       title: string;
       /**
-       * Valid values: "date", "dropdown", "email", "file_upload", "group", "legal", "long_text", "multiple_choice", "number", "opinion_scale", "payment", "picture_choice", "rating", "short_text", "statement", "website", "yes_no"
+       * Valid values: 'date", "dropdown", "email", "file_upload", "group", "legal", "long_text", "multiple_choice", "number", "opinion_scale", "payment", "picture_choice", "rating", "short_text", "statement", "website", "yes_no"
        * The type of field.
        */
       type: 'date' | 'dropdown' | 'email' | 'file_upload' | 'group' | 'legal' | 'long_text' | 'multiple_choice' | 'number' | 'opinion_scale' | 'payment' | 'picture_choice' | 'rating' | 'short_text' | 'statement' | 'website' | 'yes_no';
@@ -95,7 +95,7 @@ namespace ICommon {
          */
         supersized?: boolean;
         /**
-         * Default: ""
+         * Default: '"
          * true to show text labels and images as answer choices. false to show only images as answer choices. Available for picture_choice types.
          */
         show_labels?: boolean;
@@ -108,7 +108,7 @@ namespace ICommon {
          */
         hide_marks?: boolean;
         /**
-         * Default: "Continue"
+         * Default: 'Continue"
          * Text to display in the button associated with the object. Available for group, payment, and statement types.
          */
         button_text?: string;
@@ -117,8 +117,8 @@ namespace ICommon {
          */
         steps?: number;
         /**
-         * Valid values: "cat", "circle", "cloud", "crown", "dog", "droplet", "flag", "heart", "lightbulb", "pencil", "skull", "star", "thunderbolt", "tick", "trophy", "up", "user"
-         * Default: "star"
+         * Valid values: 'cat", "circle", "cloud", "crown", "dog", "droplet", "flag", "heart", "lightbulb", "pencil", "skull", "star", "thunderbolt", "tick", "trophy", "up", "user"
+         * Default: 'star"
          * Shape to display on the scale's steps. Available for opinion_scale and rating types.
          */
         shape?: 'cat' | 'circle' | 'cloud' | 'crown' | 'dog' | 'droplet' | 'flag' | 'heart' | 'lightbulb' | 'pencil' | 'skull' | 'star' | 'thunderbolt' | 'tick' | 'trophy' | 'up' | 'user';
@@ -149,14 +149,14 @@ namespace ICommon {
       }
       export interface GetForm extends Base {
         /**
-         * Valid values: "MMDDYYYY", "DDMMYYYY", "YYYYMMDD"
-         * Default: "DDMMYYYY"
+         * Valid values: 'MMDDYYYY", "DDMMYYYY", "YYYYMMDD"
+         * Default: 'DDMMYYYY"
          * Format for month, date, and year in answer. Available for date types.
          */
         structure?: 'MMDDYYYY' | 'DDMMYYYY' | 'YYYYMMDD';
         /**
-         * Valid values: "/", "-". ".""
-         * Default: "/"
+         * Valid values: '/", "-". ".""
+         * Default: '/"
          * Character to use between month, day, and year in answer. Available for date types.
          */
         separator?: '/' | '-' | '.';
@@ -171,11 +171,11 @@ namespace ICommon {
          */
         price?: {
           /**
-           * Valid values: "variable"
+           * Valid values: 'variable"
            */
-          type?: 'variable',
+          type?: 'variable';
           /**
-           * Valid values: "price"
+           * Valid values: 'price"
            */
           value?: 'price';
         },
@@ -213,7 +213,7 @@ namespace ICommon {
   export namespace Logic {
     interface Base {
       /**
-       * Valid values: "field", "hidden"
+       * Valid values: 'field", "hidden"
        * Specifies whether the Logic Jump is based on a question field or Hidden Field.
        */
       type: 'field' | 'hidden';
@@ -225,7 +225,7 @@ namespace ICommon {
     }
     interface Actions {
       /**
-       * Valid values: "jump", "add", "subtract", "multiply", "divide"
+       * Valid values: 'jump", "add", "subtract", "multiply", "divide"
        * Behavior the Logic Jump will take.
        */
       action: 'jump' | 'add' | 'subtract' | 'multiply' | 'divide';
@@ -238,7 +238,7 @@ namespace ICommon {
          */
         to?: {
           /**
-           * Valid values: "field", "hidden", "thankyou"
+           * Valid values: 'field", "hidden", "thankyou"
            * Logic Jump "to" option you are using.
            */
           type: 'field' | 'hidden' | 'thankyou';
@@ -252,12 +252,12 @@ namespace ICommon {
          */
         target?: {
           /**
-           * Valid values: "variable"
+           * Valid values: 'variable"
            * Specifies that the value is a variable.
            */
           type: 'variable';
           /**
-           * Valid values: "score", "price"
+           * Valid values: 'score", "price"
            * Variable value to use in calculation.
            */
           value: 'score' | 'price';
@@ -267,7 +267,7 @@ namespace ICommon {
          */
         value?: {
           /**
-           * Valid values: "constant"
+           * Valid values: 'constant"
            * Specifies that the numeric value is a constant.
            */
           type: 'constant';
@@ -282,7 +282,7 @@ namespace ICommon {
        */
       condition: {
         /**
-         * Valid values: "begins_with", "ends_with", "contains", "not_contains", "lower_than", "lower_equal_than", "greater_than", "greater_equal_than", "is", "is_not", "equal", "not_equal", "always", "on", "not_on", "earlier_than", "earlier_than_or_on", "later_than", "later_than_or_on"
+         * Valid values: 'begins_with", "ends_with", "contains", "not_contains", "lower_than", "lower_equal_than", "greater_than", "greater_equal_than", "is", "is_not", "equal", "not_equal", "always", "on", "not_on", "earlier_than", "earlier_than_or_on", "later_than", "later_than_or_on"
          * Operator for the condition.
          */
         op: 'begins_with' | 'ends_with' | 'contains' | 'not_contains' | 'lower_than' | 'lower_equal_than' | 'greater_than' | 'greater_equal_than' | 'is' | 'is_not' | 'equal' | 'not_equal' | 'always' | 'on' | 'not_on' | 'earlier_than' | 'earlier_than_or_on' | 'later_than' | 'later_than_or_on';
@@ -291,7 +291,7 @@ namespace ICommon {
          */
         vars: {
           /**
-           * Valid values: "field", "hidden", "variable", "constant", "end"
+           * Valid values: 'field", "hidden", "variable", "constant", "end"
            * Type of value the condition object refers to.
            */
           type: 'field' | 'hidden' | 'variable' | 'constant' | 'end';
@@ -322,24 +322,24 @@ namespace ICommon {
        */
       language?: 'en' | 'es' | 'ca' | 'fr' | 'de' | 'ru' | 'it' | 'da' | 'pt' | 'ch' | 'zh' | 'nl' | 'no' | 'uk' | 'ja' | 'ko' | 'hr' | 'fi' | 'sv' | 'pl' | 'el' | 'hu' | 'tr' | 'cs' | 'et' | 'di';
       /**
-       * Default: ""
+       * Default: '"
        * true if your form is public. Otherwise, false (your form is private).
        */
       is_public?: boolean;
       /**
-       * Valid values: "percentage", "proportion"
-       * Default: "proportion"
+       * Valid values: 'percentage", "proportion"
+       * Default: 'proportion"
        * Basis for the progress bar displayed on the screen. Choose "proportion" to show the number of questions answered so far. Choose "percentage" to show the percentage of questions answered so far.
        */
       progress_bar?: 'percentage' | 'proportion';
       /**
-       * Default: ""
+       * Default: '"
        * true to display progress bar on the typeform. Otherwise, false.
        */
       show_progress_bar?: boolean;
       meta?: {
         /**
-         * Default: ""
+         * Default: '"
          * true to allow search engines to index your typeform. Otherwise, false.
          */
         allow_indexing?: boolean;
@@ -373,7 +373,7 @@ namespace ICommon {
          */
         self?: {
           /**
-           * Default: ""
+           * Default: '"
            * true to send notifications. false to disable notifications.
            */
           enabled?: boolean;
@@ -399,7 +399,7 @@ namespace ICommon {
          */
         respondent?: {
           /**
-           * Default: ""
+           * Default: '"
            * true to send respondent notifications. false to disable respondent notifications.
            */
           enabled?: boolean;
@@ -424,14 +424,14 @@ namespace ICommon {
     }
     export interface CreateForm extends Base {
       /**
-       * Default: ""
+       * Default: '"
        * true to display Typeform brand on the typeform. false to hide Typeform branding on the typeform. Hiding Typeform branding is available for PRO+ accounts.
        */
       show_typeform_branding?: boolean;
     }
     export interface GetForm extends Base {
       /**
-       * Default: ""
+       * Default: '"
        * true to display Typeform brand on the typeform. false to hide Typeform branding on the typeform. Hiding Typeform branding is available for PRO+ accounts.
        */
       show_typeform_branding?: boolean;
@@ -456,7 +456,7 @@ namespace ICommon {
        */
       button_text?: string;
       /**
-       * Valid values: "reload", "redirect"
+       * Valid values: 'reload", "redirect"
        * Specify whether the form should reload or redirect to another URL when respondents click the 'Submit' button. PRO+ feature.
        */
       button_mode?: 'reload' | 'redirect';
@@ -532,7 +532,7 @@ export namespace ITypeform {
         href?: string;
       }
       /**
-       * Default: ""
+       * Default: '"
        * Array of Hidden Fields to use in the form.
        */
       hidden?: string[];
@@ -546,11 +546,11 @@ export namespace ITypeform {
       id?: string;
       title?: string;
       /**
-       * Default: "en"
+       * Default: 'en"
        */
       language?: string;
       /**
-       * Default: ""
+       * Default: '"
        */
       fields?: ICommon.Field.GetForm[];
       hidden?: string[];
@@ -816,7 +816,7 @@ export namespace ITypeform {
        */
       height?: number;
       /**
-       * Valid values: "image/gif", "image/jpeg", "image/png"
+       * Valid values: 'image/gif", "image/jpeg", "image/png"
        * The MIME type of the image.
        */
       media_type?: 'image/gif' | 'image/jpeg' | 'image/png';
@@ -863,7 +863,7 @@ export namespace ITypeform {
          */
         email?: string;
         /**
-         * Valid values: "owner", "member"
+         * Valid values: 'owner", "member"
          * The team member's role on the team. The account holder is owner, and all other team members are member.
          */
         role?: 'owner' | 'member';
@@ -881,7 +881,7 @@ export namespace ITypeform {
          */
         href?: string;
         /**
-         * Valid values: "fullscreen", "repeat", "no-repeat"
+         * Valid values: 'fullscreen", "repeat", "no-repeat"
          * Default:fullscreen
          * Layout for the background.
          */
@@ -896,29 +896,29 @@ export namespace ITypeform {
        */
       colors: {
         /**
-         * Default: "#4FB0AE"
+         * Default: '#4FB0AE"
          * Color the theme will apply to answers. Hexadecimal value.
          */
         answer: string;
         /**
-         * Default: "#FFFFFF"
+         * Default: '#FFFFFF"
          * Color the theme will apply to the background. Hexadecimal value.
          */
         background: string;
         /**
-         * Default: "#4FB0AE"
+         * Default: '#4FB0AE"
          * Color the theme will apply to buttons. Hexadecimal value.
          */
         button: string;
         /**
-         * Default: "#3D3D3D"
+         * Default: '#3D3D3D"
          * Color the theme will apply to questions. Hexadecimal value.
          */
         question: string;
       };
       /**
-       * Valid values: "Acme", "Arial", "Arvo", "Avenir Next", "Bangers", "Cabin", "Cabin Condensed", "Courier", "Crete Round", "Dancing Script", "Exo", "Georgia", "Handlee", "Helvetica Neue", "Karla", "Lato", "Lekton", "Lobster", "Lora", "McLaren", "Montserrat", "Nixie One", "Old Standard TT", "Open Sans", "Oswald", "Playfair Display", "Quicksand", "Raleway", "Signika", "Sniglet", "Source Sans Pro", "Vollkorn"
-       * Default: "Source Sans Pro"
+       * Valid values: 'Acme", "Arial", "Arvo", "Avenir Next", "Bangers", "Cabin", "Cabin Condensed", "Courier", "Crete Round", "Dancing Script", "Exo", "Georgia", "Handlee", "Helvetica Neue", "Karla", "Lato", "Lekton", "Lobster", "Lora", "McLaren", "Montserrat", "Nixie One", "Old Standard TT", "Open Sans", "Oswald", "Playfair Display", "Quicksand", "Raleway", "Signika", "Sniglet", "Source Sans Pro", "Vollkorn"
+       * Default: 'Source Sans Pro"
        * Font for the theme.
        */
       font: 'Acme' | 'Arial' | 'Arvo' | 'Avenir Next' | 'Bangers' | 'Cabin' | 'Cabin Condensed' | 'Courier' | 'Crete Round' | 'Dancing Script' | 'Exo' | 'Georgia' | 'Handlee' | 'Helvetica Neue' | 'Karla' | 'Lato' | 'Lekton' | 'Lobster' | 'Lora' | 'McLaren' | 'Montserrat' | 'Nixie One' | 'Old Standard TT' | 'Open Sans' | 'Oswald' | 'Playfair Display' | 'Quicksand' | 'Raleway' | 'Signika' | 'Sniglet' | 'Source Sans Pro' | 'Vollkorn';
@@ -943,8 +943,8 @@ export namespace ITypeform {
        */
       id?: string;
       /**
-       * Valid values: "public", "private"
-       * Default: "private"
+       * Valid values: 'public", "private"
+       * Default: 'private"
        * Specifies whether the theme is public (one of Typeform's built-in themes that are available in all accounts) or private (a theme you created). You can only change private themes. You can't change Typeform's public themes.
        */
       visibility?: 'public' | 'private';
@@ -978,7 +978,7 @@ export namespace ITypeform {
       /**
        * True if you want to send responses to the webhook immediately. Otherwise, false.
        */
-      enable: boolean;
+      enable?: boolean;
     }
     export interface WebHook {
       /**
@@ -1012,89 +1012,3 @@ export namespace ITypeform {
     }
   }
 }
-
-  // export namespace Forms {
-  //   export namespace Arguments {
-  //     export type Delete = UID;
-  //     export type Get = UID;
-  //     export interface List {
-  //       page?: number;
-  //       pageSize?: number;
-  //       search?: string;
-  //       workspaceId?: string;
-  //     }
-  //     export interface Update {
-  //       /**
-  //        * Unique ID for the form. Find in your form URL. For example, in the URL `https://mysite.typeform.com/to/u6nXL7` the form_id is
-  //        * `u6nXL7`.
-  //        */
-  //       uid: string,
-  //       /**
-  //        * Flag to use PUT instead of PATCH for update method. Defaults to PATCH.
-  //        */
-  //       override?: boolean,
-  //       data?: {
-  //         /**
-  //          * Title to use for the typeform.
-  //          */
-  //         title: string;
-  //         settings?: any;
-  //         /**
-  //          * URL of the theme to use for the typeform. If you don't specify a URL for the theme, Typeform applies a new copy of the default
-  //          * theme to the form.
-  //          */
-  //         theme?: string;
-  //         /**
-  //          * URL of the workspace to use for the typeform. If you don't specify a URL for the workspace, Typeform saves the form in the
-  //          * default workspace.
-  //          */
-  //         workspace?: any;
-  //         /**
-  //          * Array of Hidden Fields to use in the form.
-  //          */
-  //         hidden?: string[];
-  //         variables?: ITypeform.Variables;
-  //         welcome_screens?: any;
-  //       }
-  //     }
-  //   }
-  // }
-
-
-
-  // export interface UID {
-  //   /**
-  //    * Unique ID for the form. Find in your form URL. For example, in the URL `https://mysite.typeform.com/to/u6nXL7` the form_id is
-  //    * `u6nXL7`.
-  //    */
-  //   uid: string;
-  // }
-
-
-
-  // export interface DataOption {
-  //   label: string;
-  //   value: string;
-  // }
-
-  // export interface Data {
-  //   ref: string;
-  //   options: DataOption[];
-  // }
-
-
-  // export interface Attachment {
-  //   type: 'image' | 'video';
-  //   href: string;
-  //   scale: 0.4 | 0.6 | 0.8 | 1;
-  // }
-
-
-
-
-
-
-
-  // export interface Form {
-
-// }

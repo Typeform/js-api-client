@@ -13,7 +13,7 @@ export class TypeformImages {
    * @param args.fileName File name for the image.
    * @returns Promise that resolves on success.
    */
-  public add(args: { image?: string, mediaType?, fileName?: string }): Promise<null> {
+  public add(args: { image?: string, mediaType?, fileName?: string } = {}): Promise<null> {
     const { image, mediaType, fileName } = args;
 
     return this._http.request({
@@ -33,7 +33,7 @@ export class TypeformImages {
    * @param args.id Unique ID for the image to retrieve.
    * @returns Promise that resolves on success.
    */
-  public delete(args: { id: string }): Promise<null> {
+  public delete(args: { id: string } = { id: undefined }): Promise<null> {
     const { id } = args;
 
     return this._http.request({
@@ -59,6 +59,8 @@ export class TypeformImages {
     size?: 'default' | 'thumbnail' | 'mobile',
     backgroundSize?: 'default' | 'thumbnail' | 'mobile' | 'tablet',
     choiceSize?: 'default' | 'thumbnail' | 'supersize' | 'supermobile' | 'supersizefit' | 'supermobilefit'
+  } = {
+    id: undefined
   }): Promise<ITypeform.Images.Image> {
     const { id, returns, size, backgroundSize, choiceSize } = args;
 

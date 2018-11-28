@@ -11,7 +11,9 @@ export class TypeformWebhooks {
    * @param args Arguments to create a webhook;
    * @returns Promise that resolves with created webhook.
    */
-  public create(args: ITypeform.Webhooks.CreateOrUpdate): Promise<ITypeform.Webhooks.WebHook> {
+  public create(args: ITypeform.Webhooks.CreateOrUpdate = {
+    uid: undefined, tag: undefined, url: undefined
+  }): Promise<ITypeform.Webhooks.WebHook> {
     return createOrUpdateWebhook(this._http, args);
   }
 
@@ -22,7 +24,7 @@ export class TypeformWebhooks {
    * @param args.tag Unique name you want to use for the webhook.
    * @returns Promise that resolves on success.
    */
-  public delete(args: { uid: string, tag: string }): Promise<Response> {
+  public delete(args: { uid: string, tag: string } = { uid: undefined, tag: undefined }): Promise<Response> {
     const { uid, tag } = args;
 
     return this._http.request({
@@ -38,7 +40,7 @@ export class TypeformWebhooks {
    * @param args.tag Unique name you want to use for the webhook.
    * @returns Promise that resolves with created webhook.
    */
-  public get(args: { uid, tag }): Promise<ITypeform.Webhooks.WebHook> {
+  public get(args: { uid, tag } = { uid: undefined, tag: undefined }): Promise<ITypeform.Webhooks.WebHook> {
     const { uid, tag } = args;
 
     return this._http.request({
@@ -53,7 +55,9 @@ export class TypeformWebhooks {
    * @param args Arguments to update a webhook;
    * @returns Promise that resolves with updated webhook.
    */
-  public update(args: ITypeform.Webhooks.CreateOrUpdate): Promise<ITypeform.Webhooks.WebHook> {
+  public update(args: ITypeform.Webhooks.CreateOrUpdate = {
+    uid: undefined, tag: undefined, url: undefined
+  }): Promise<ITypeform.Webhooks.WebHook> {
     return createOrUpdateWebhook(this._http, args);
   }
 }

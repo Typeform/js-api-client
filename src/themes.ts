@@ -11,7 +11,9 @@ export class TypeformThemes {
    * @param args Theme to create.
    * @returns Promise that resolves with created theme.
    */
-  public create(args: ITypeform.Themes.Create): Promise<ITypeform.Themes.Theme> {
+  public create(args: ITypeform.Themes.Create = {
+    background: undefined, colors: undefined, font: undefined, hasTransparentButton: undefined, name: undefined
+  }): Promise<ITypeform.Themes.Theme> {
     const { background, colors, font, hasTransparentButton, name } = args;
 
     // check if required properties are defined
@@ -40,7 +42,7 @@ export class TypeformThemes {
    * @param args.id Theme ID.
    * @returns Promise that resolves on success.
    */
-  public delete(args: { id: string }): Promise<null> {
+  public delete(args: { id: string } = { id: undefined }): Promise<null> {
     const { id } = args;
 
     return this._http.request({
@@ -55,7 +57,7 @@ export class TypeformThemes {
    * @param args.id Theme ID.
    * @returns Promise that resolves with theme.
    */
-  public get(args: { id: string }): Promise<ITypeform.Themes.Theme> {
+  public get(args: { id: string } = { id: undefined }): Promise<ITypeform.Themes.Theme> {
     const { id } = args;
 
     return this._http.request({
@@ -71,7 +73,7 @@ export class TypeformThemes {
    * @param args.pageSize Number of results to retrieve per page. Default is 10. Maximum is 200.
    * @returns Promise that resolves with a list of themes.
    */
-  public list(args: { page, pageSize }): Promise<ITypeform.Themes.List> {
+  public list(args: { page?: number, pageSize?: number } = { page: undefined, pageSize: undefined }): Promise<ITypeform.Themes.List> {
     const { page, pageSize } = args;
 
     return this._http.request({
@@ -90,7 +92,9 @@ export class TypeformThemes {
    * @param Updated theme with theme ID. 
    * @returns Promise that resolves with created theme.
    */
-  public update(args: ITypeform.Themes.Update): Promise<ITypeform.Themes.Theme> {
+  public update(args: ITypeform.Themes.Update = {
+    id: undefined, background: undefined, colors: undefined, font: undefined, hasTransparentButton: undefined, name: undefined
+  }): Promise<ITypeform.Themes.Theme> {
     const { id, background, colors, font, hasTransparentButton, name } = args;
 
     // check if required properties are defined
