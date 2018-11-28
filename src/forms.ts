@@ -27,7 +27,8 @@ export class TypeformForms {
   /**
    * Deletes the form with the given form_id and all of the form's responses.
    * 
-   * @param args.uid Unique ID for the form. Find in your form URL. For example, in the URL "https://mysite.typeform.com/to/u6nXL7" the form_id is u6nXL7.
+   * @param args.uid Unique ID for the form. Find in your form URL.
+   * For example, in the URL "https://mysite.typeform.com/to/u6nXL7" the form_id is u6nXL7.
    * @returns Promise that resolves on success.
    */
   public delete(args: { uid: string } = { uid: undefined }): Promise<null> {
@@ -42,7 +43,8 @@ export class TypeformForms {
   /**
    * Retrieves a form by the given form_id. Includes any theme and images attached to the form as references.
    * 
-   * @param args.uid Unique ID for the form. Find in your form URL. For example, in the URL "https://mysite.typeform.com/to/u6nXL7" the form_id is u6nXL7.
+   * @param args.uid Unique ID for the form. Find in your form URL.
+   * For example, in the URL "https://mysite.typeform.com/to/u6nXL7" the form_id is u6nXL7.
    * @returns Promise that resolves with Form.
    */
   public get(args: { uid: string } = { uid: undefined }): Promise<ITypeform.Forms.Get> {
@@ -55,7 +57,8 @@ export class TypeformForms {
   }
 
   /**
-   * Retrieves a list of JSON descriptions for all forms in your Typeform account (public and private). Forms are listed in reverse-chronological order based on the last date they were modified.
+   * Retrieves a list of JSON descriptions for all forms in your Typeform account (public and private).
+   * Forms are listed in reverse-chronological order based on the last date they were modified.
    * 
    * @param args.page The page of results to retrieve. Default 1 is the first page of results.
    * @param args.pageSize Number of results to retrieve per page. Default is 10. Maximum is 200.
@@ -80,7 +83,8 @@ export class TypeformForms {
   /**
    * Updates an existing form.
    * 
-   * @param args.uid Unique ID for the form. Find in your form URL. For example, in the URL "https://mysite.typeform.com/to/u6nXL7" the form_id is u6nXL7.
+   * @param args.uid Unique ID for the form. Find in your form URL.
+   * For example, in the URL "https://mysite.typeform.com/to/u6nXL7" the form_id is u6nXL7.
    * @param args.override Set update to be put rather than patch
    * @param args.data Update data
    * @returns Promise that resolves on success.
@@ -103,7 +107,8 @@ class TypeformMessages {
    * Retrieves the customizable messages for a form (specified by form_id) using the form's specified language.
    * You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
    * 
-   * @param args.uid Unique ID for the form. Find in your form URL. For example, in the URL "https://mysite.typeform.com/to/u6nXL7" the form_id is u6nXL7.
+   * @param args.uid Unique ID for the form. Find in your form URL.
+   * For example, in the URL "https://mysite.typeform.com/to/u6nXL7" the form_id is u6nXL7.
    * @returns Returns the customizable messages for a form.
    */
   public get(args: { uid: string } = { uid: undefined }): Promise<ITypeform.Forms.Messages> {
@@ -119,7 +124,8 @@ class TypeformMessages {
    * Specifies new values for the customizable messages in a form (specified by form_id).
    * You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
    * 
-   * @param args.uid Unique ID for the form. Find in your form URL. For example, in the URL "https://mysite.typeform.com/to/u6nXL7" the form_id is u6nXL7.
+   * @param args.uid Unique ID for the form. Find in your form URL.
+   * For example, in the URL "https://mysite.typeform.com/to/u6nXL7" the form_id is u6nXL7.
    * @param args.data Request body
    * @returns Promise that resolves on success.
    */

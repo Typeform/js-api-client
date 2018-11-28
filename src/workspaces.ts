@@ -1,5 +1,5 @@
 import { TypeformHttpClient } from './http-client';
-import { isMemberPropValid, createMemberPatchQuery } from './utils'
+import { isMemberPropValid, createMemberPatchQuery } from './utils';
 
 export class TypeformWorkspaces {
   constructor(private _http: TypeformHttpClient) { }
@@ -8,7 +8,7 @@ export class TypeformWorkspaces {
     const { name } = args;
 
     if (name === undefined) {
-      throw `A name is required`
+      throw new Error(`A name is required`);
     }
 
     return this._http.request({
@@ -22,10 +22,10 @@ export class TypeformWorkspaces {
 
   public addMembers({ id, members }): Promise<any> {
     if (!isMemberPropValid(members)) {
-      throw `No member provided`
+      throw new Error(`No member provided`);
     }
 
-    const membersToAdd = !Array.isArray(members) ? [members] : members
+    const membersToAdd = !Array.isArray(members) ? [members] : members;
     const membersQuery = createMemberPatchQuery({
       members: membersToAdd,
       operation: 'add'
@@ -69,10 +69,10 @@ export class TypeformWorkspaces {
     const { id, members } = args;
 
     if (!isMemberPropValid(members)) {
-      throw `No member provided`
+      throw new Error(`No member provided`);
     }
 
-    const membersToAdd = !Array.isArray(members) ? [members] : members
+    const membersToAdd = !Array.isArray(members) ? [members] : members;
     const membersQuery = createMemberPatchQuery({
       members: membersToAdd,
       operation: 'remove'

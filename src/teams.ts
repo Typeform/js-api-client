@@ -1,12 +1,13 @@
 import { TypeformHttpClient } from './http-client';
 import { ITypeform } from './interface';
-import { isMemberPropValid, createMemberPatchQuery } from './utils'
+import { isMemberPropValid, createMemberPatchQuery } from './utils';
 
 export class TypeformTeams {
   constructor(private _http: TypeformHttpClient) { }
 
   /**
-   * Retrieve information about your team, including the total number of seats and which Typeform users are currently occupying seats on your team.
+   * Retrieve information about your team, including the total number of seats
+   * and which Typeform users are currently occupying seats on your team.
    * 
    * @returns Promise that resolves with information about your team as well as seats on your team.
    */
@@ -27,10 +28,10 @@ export class TypeformTeams {
     const { members } = args;
 
     if (!isMemberPropValid(members)) {
-      throw `No member provided`
+      throw new Error(`No member provided`);
     }
 
-    const membersToAdd = !Array.isArray(members) ? [members] : members
+    const membersToAdd = !Array.isArray(members) ? [members] : members;
     const membersQuery = createMemberPatchQuery({
       members: membersToAdd,
       operation: 'add'
@@ -53,10 +54,10 @@ export class TypeformTeams {
     const { members } = args;
 
     if (!isMemberPropValid(members)) {
-      throw `No member provided`
+      throw new Error(`No member provided`);
     }
 
-    const membersToAdd = !Array.isArray(members) ? [members] : members
+    const membersToAdd = !Array.isArray(members) ? [members] : members;
     const membersQuery = createMemberPatchQuery({
       members: membersToAdd,
       operation: 'remove'

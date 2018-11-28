@@ -1,18 +1,18 @@
-import { TypeformForms } from './forms'
-import { TypeformHttpClient } from './http-client'
-import { TypeformImages } from './images'
+import { TypeformForms } from './forms';
+import { TypeformHttpClient } from './http-client';
+import { TypeformImages } from './images';
 import { TypeformResponses } from './responses';
-import { TypeformTeams } from './teams'
-import { TypeformThemes } from './themes'
-import { TypeformWebhooks } from './webhooks'
-import { TypeformWorkspaces } from './workspaces'
+import { TypeformTeams } from './teams';
+import { TypeformThemes } from './themes';
+import { TypeformWebhooks } from './webhooks';
+import { TypeformWorkspaces } from './workspaces';
 
 export class TypeformClient {
   private _http: TypeformHttpClient;
 
   constructor(args: any = {}) {
     if (args['token'] === undefined) {
-      throw new Error('Token is missing')
+      throw new Error('Token is missing');
     }
     this._http = new TypeformHttpClient(args);
   }

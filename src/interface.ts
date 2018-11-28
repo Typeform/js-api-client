@@ -27,13 +27,16 @@ namespace ICommon {
        */
       title: string;
       /**
-       * Valid values: 'date", "dropdown", "email", "file_upload", "group", "legal", "long_text", "multiple_choice", "number", "opinion_scale", "payment", "picture_choice", "rating", "short_text", "statement", "website", "yes_no"
+       * Valid values: 'date", "dropdown", "email", "file_upload", "group", "legal", "long_text", "multiple_choice", "number",
+       * "opinion_scale", "payment", "picture_choice", "rating", "short_text", "statement", "website", "yes_no"
        * The type of field.
        */
-      type: 'date' | 'dropdown' | 'email' | 'file_upload' | 'group' | 'legal' | 'long_text' | 'multiple_choice' | 'number' | 'opinion_scale' | 'payment' | 'picture_choice' | 'rating' | 'short_text' | 'statement' | 'website' | 'yes_no';
+      type: 'date' | 'dropdown' | 'email' | 'file_upload' | 'group' | 'legal' | 'long_text' | 'multiple_choice' | 'number' |
+      'opinion_scale' | 'payment' | 'picture_choice' | 'rating' | 'short_text' | 'statement' | 'website' | 'yes_no';
       validations: Validations;
       /**
-       * Allows you to display images and videos. Available for welcome and thank you screens, as well as date, dropdown, email, group, long_text, multiple_choice, number, opinion_scale, payment, rating, short_text, statement, and yes_no fields.
+       * Allows you to display images and videos. Available for welcome and thank you screens, as well as date, dropdown, email, group,
+       * long_text, multiple_choice, number, opinion_scale, payment, rating, short_text, statement, and yes_no fields.
        */
       attachment: Attachment;
     }
@@ -46,9 +49,10 @@ namespace ICommon {
         /**
          * Answer choices. Available for dropdown, multiple_choice, and picture_choice types.
          */
-        choices?: {
+        choices?: Array<{
           /**
-           * Readable name you can use to reference the answer choice. Available for multiple_choice and picture_choice types. Not available for dropdown types.
+           * Readable name you can use to reference the answer choice.
+           * Available for multiple_choice and picture_choice types. Not available for dropdown types.
            */
           ref?: string;
           /**
@@ -69,21 +73,26 @@ namespace ICommon {
              */
             href?: string;
           }
-        }[];
+        }>;
         /**
-         * Contains the fields that belong in a question group. Only payment and group blocks are not allowed inside a question group. Available for the group type.
+         * Contains the fields that belong in a question group. Only payment and group blocks are not allowed inside a question group.
+         * Available for the group type.
          */
         fields?: any[][];
         /**
-         * true to allow respondents to select more than one answer choice. false to allow respondents to select only one answer choice. Available for multiple_choice and picture_choice types.
+         * true to allow respondents to select more than one answer choice. false to allow respondents to select only one answer choice.
+         * Available for multiple_choice and picture_choice types.
          */
         allow_multiple_selection?: boolean;
         /**
-         * true if answer choices should be presented in a new random order for each respondent. false if answer choices should be presented in the same order for each respondent. Available for multiple_choice and picture_choice types.
+         * true if answer choices should be presented in a new random order for each respondent.
+         * false if answer choices should be presented in the same order for each respondent.
+         * Available for multiple_choice and picture_choice types.
          */
         randomize?: boolean;
         /**
-         * true to include an "Other" option so respondents can enter a different answer choice from those listed. false to limit answer choices to those listed. Available for multiple_choice and picture_choice types.
+         * true to include an "Other" option so respondents can enter a different answer choice from those listed.
+         * false to limit answer choices to those listed. Available for multiple_choice and picture_choice types.
          */
         allow_other_choice?: boolean;
         /**
@@ -96,11 +105,14 @@ namespace ICommon {
         supersized?: boolean;
         /**
          * Default: '"
-         * true to show text labels and images as answer choices. false to show only images as answer choices. Available for picture_choice types.
+         * true to show text labels and images as answer choices.
+         * false to show only images as answer choices. Available for picture_choice types.
          */
         show_labels?: boolean;
         /**
-         * true if question should list dropdown answer choices in alphabetical order. false if question should list dropdown answer choices in the order they're listed in the "choices" array. Available for dropdown types.
+         * true if question should list dropdown answer choices in alphabetical order.
+         * false if question should list dropdown answer choices in the order they're listed in the "choices" array.
+         * Available for dropdown types.
          */
         alphabetical_order?: boolean;
         /**
@@ -117,11 +129,13 @@ namespace ICommon {
          */
         steps?: number;
         /**
-         * Valid values: 'cat", "circle", "cloud", "crown", "dog", "droplet", "flag", "heart", "lightbulb", "pencil", "skull", "star", "thunderbolt", "tick", "trophy", "up", "user"
+         * Valid values: 'cat", "circle", "cloud", "crown", "dog", "droplet", "flag", "heart", "lightbulb", "pencil", "skull", "star",
+         * "thunderbolt", "tick", "trophy", "up", "user"
          * Default: 'star"
          * Shape to display on the scale's steps. Available for opinion_scale and rating types.
          */
-        shape?: 'cat' | 'circle' | 'cloud' | 'crown' | 'dog' | 'droplet' | 'flag' | 'heart' | 'lightbulb' | 'pencil' | 'skull' | 'star' | 'thunderbolt' | 'tick' | 'trophy' | 'up' | 'user';
+        shape?: 'cat' | 'circle' | 'cloud' | 'crown' | 'dog' | 'droplet' | 'flag' | 'heart' | 'lightbulb' | 'pencil' | 'skull' | 'star' |
+        'thunderbolt' | 'tick' | 'trophy' | 'up' | 'user';
         /**
          * Label to help respondents understand the scale's range. Available for opinion_scale and rating types.
          */
@@ -138,7 +152,7 @@ namespace ICommon {
            * Text of the center-aligned label for the scale.
            */
           center?: string;
-        }
+        };
         /**
          * true if range numbering should start at 1. false if range numbering should start at 0. Available for opinion_scale types.
          */
@@ -178,16 +192,17 @@ namespace ICommon {
            * Valid values: 'price"
            */
           value?: 'price';
-        },
+        };
         /**
          * true to display a button. Otherwise, false. Available for group and payment types.
          */
-        show_button?: boolean
+        show_button?: boolean;
       }
     }
     interface Validations {
       /**
-       * true if respondents must provide an answer. Otherwise, false. Available for date, dropdown, email, file_upload, legal, long_text, multiple_choice, number, opinion_scale, payment, picture_choice, rating, short_text, website, and yes_no types.
+       * true if respondents must provide an answer. Otherwise, false. Available for date, dropdown, email, file_upload, legal, long_text
+       *  multiple_choice, number, opinion_scale, payment, picture_choice, rating, short_text, website, and yes_no types.
        */
       required?: boolean;
       /**
@@ -276,20 +291,25 @@ namespace ICommon {
            */
           value: number;
         }
-      }
+      };
       /**
-       * Conditions for executing the Logic Jump. Conditions answer the question, "Under what circumstances?" The condition object is the IF statement in your Logic Jump.
+       * Conditions for executing the Logic Jump. Conditions answer the question, "Under what circumstances?"
+       * The condition object is the IF statement in your Logic Jump.
        */
       condition: {
         /**
-         * Valid values: 'begins_with", "ends_with", "contains", "not_contains", "lower_than", "lower_equal_than", "greater_than", "greater_equal_than", "is", "is_not", "equal", "not_equal", "always", "on", "not_on", "earlier_than", "earlier_than_or_on", "later_than", "later_than_or_on"
+         * Valid values: 'begins_with", "ends_with", "contains", "not_contains", "lower_than", "lower_equal_than", "greater_than",
+         * "greater_equal_than", "is", "is_not", "equal", "not_equal", "always", "on", "not_on", "earlier_than", "earlier_than_or_on",
+         * "later_than", "later_than_or_on"
          * Operator for the condition.
          */
-        op: 'begins_with' | 'ends_with' | 'contains' | 'not_contains' | 'lower_than' | 'lower_equal_than' | 'greater_than' | 'greater_equal_than' | 'is' | 'is_not' | 'equal' | 'not_equal' | 'always' | 'on' | 'not_on' | 'earlier_than' | 'earlier_than_or_on' | 'later_than' | 'later_than_or_on';
+        op: 'begins_with' | 'ends_with' | 'contains' | 'not_contains' | 'lower_than' | 'lower_equal_than' | 'greater_than' |
+        'greater_equal_than' | 'is' | 'is_not' | 'equal' | 'not_equal' | 'always' | 'on' | 'not_on' | 'earlier_than' |
+        'earlier_than_or_on' | 'later_than' | 'later_than_or_on';
         /**
          * Object that defines the field type and value to evaluate with the operator.
          */
-        vars: {
+        vars: Array<{
           /**
            * Valid values: 'field", "hidden", "variable", "constant", "end"
            * Type of value the condition object refers to.
@@ -299,8 +319,8 @@ namespace ICommon {
            * Value to check for in the "type" field to evaluate with the operator.
            */
           value: any;
-        }[];
-      }
+        }>;
+      };
     }
     export interface CreateForm extends Base {
       /**
@@ -320,7 +340,8 @@ namespace ICommon {
       /**
        * Valid values: en, es, ca, fr, de, ru, it, da, pt, ch, zh, nl, no, uk, ja, ko, hr, fi, sv, pl, el, hu, tr, cs, et, di
        */
-      language?: 'en' | 'es' | 'ca' | 'fr' | 'de' | 'ru' | 'it' | 'da' | 'pt' | 'ch' | 'zh' | 'nl' | 'no' | 'uk' | 'ja' | 'ko' | 'hr' | 'fi' | 'sv' | 'pl' | 'el' | 'hu' | 'tr' | 'cs' | 'et' | 'di';
+      language?: 'en' | 'es' | 'ca' | 'fr' | 'de' | 'ru' | 'it' | 'da' | 'pt' | 'ch' | 'zh' | 'nl' | 'no' | 'uk' | 'ja' | 'ko' | 'hr' |
+      'fi' | 'sv' | 'pl' | 'el' | 'hu' | 'tr' | 'cs' | 'et' | 'di';
       /**
        * Default: '"
        * true if your form is public. Otherwise, false (your form is private).
@@ -329,7 +350,8 @@ namespace ICommon {
       /**
        * Valid values: 'percentage", "proportion"
        * Default: 'proportion"
-       * Basis for the progress bar displayed on the screen. Choose "proportion" to show the number of questions answered so far. Choose "percentage" to show the percentage of questions answered so far.
+       * Basis for the progress bar displayed on the screen. Choose "proportion" to show the number of questions answered so far.
+       * Choose "percentage" to show the percentage of questions answered so far.
        */
       progress_bar?: 'percentage' | 'proportion';
       /**
@@ -353,7 +375,7 @@ namespace ICommon {
            */
           href?: string;
         }
-      }
+      };
       /**
        * URL where the typeform should redirect upon submission.
        */
@@ -379,17 +401,20 @@ namespace ICommon {
           enabled?: boolean;
           recipients: string[];
           /**
-           * Email address to use for notification Reply-To. Must be a piped value based on respondent's answer to a field: {{field:ref}} or {{hidden:ref}}.
+           * Email address to use for notification Reply-To.
+           * Must be a piped value based on respondent's answer to a field: {{field:ref}} or {{hidden:ref}}.
            */
           reply_to?: string;
           /**
            * Subject to use for the notification email. Can combine text and piped value from one or more fields.
-           * Available piped values are {{form:title}}, {{account:email}}, {{account:name}}, {{link:report}}, and standard piping for fields {{field:ref}} and hidden fields {{hidden:ref}}.
+           * Available piped values are {{form:title}}, {{account:email}}, {{account:name}}, {{link:report}}
+           *  and standard piping for fields {{field:ref}} and hidden fields {{hidden:ref}}.
            */
           subject: string;
           /**
            * Message to include in the body of the notification email. Can combine text and piped value from one or more fields.
-           * Available piped values are {{form:title}}, {{account:email}}, {{account:name}}, {{link:report}}, {{form:all_answers}}, and standard piping for fields {{field:ref}} and hidden fields {{hidden:ref}}.
+           * Available piped values are {{form:title}}, {{account:email}}, {{account:name}}, {{link:report}}, {{form:all_answers}},
+           * and standard piping for fields {{field:ref}} and hidden fields {{hidden:ref}}.
            * You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
            */
           message: string;
@@ -404,35 +429,40 @@ namespace ICommon {
            */
           enabled?: boolean;
           /**
-           * Email where respondent notification will be sent. Must be a piped value based on respondent's answer to a field: {{field:ref}} or {{hidden:ref}}.
+           * Email where respondent notification will be sent.
+           * Must be a piped value based on respondent's answer to a field: {{field:ref}} or {{hidden:ref}}.
            */
           recipient: string;
           reply_to?: string[];
           /**
            * Subject to use for the notification email. Can combine text and piped value from one or more fields.
-           * Available piped values are {{form:title}}, {{account:fullname}}, {{account:email}}, {{account:name}}, {{link:report}}, and standard piping for fields {{field:ref}} and hidden fields {{hidden:ref}}.
+           * Available piped values are {{form:title}}, {{account:fullname}}, {{account:email}}, {{account:name}}, {{link:report}},
+           * and standard piping for fields {{field:ref}} and hidden fields {{hidden:ref}}.
            */
           subject: string;
           /**
            * Message to include in the body of the notification email. Can combine text and piped value from one or more fields.
-           * Available piped values are {{form:title}}, {{account:fullname}}, {{account:email}}, {{account:name}}, {{link:report}}, {{form:all_answers}}, and standard piping for fields {{field:ref}} and hidden fields {{hidden:ref}}.
+           * Available piped values are {{form:title}}, {{account:fullname}}, {{account:email}}, {{account:name}}, {{link:report}},
+           * {{form:all_answers}}, and standard piping for fields {{field:ref}} and hidden fields {{hidden:ref}}.
            * You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
            */
           message: string;
         }
-      }
+      };
     }
     export interface CreateForm extends Base {
       /**
        * Default: '"
-       * true to display Typeform brand on the typeform. false to hide Typeform branding on the typeform. Hiding Typeform branding is available for PRO+ accounts.
+       * true to display Typeform brand on the typeform. false to hide Typeform branding on the typeform.
+       * Hiding Typeform branding is available for PRO+ accounts.
        */
       show_typeform_branding?: boolean;
     }
     export interface GetForm extends Base {
       /**
        * Default: '"
-       * true to display Typeform brand on the typeform. false to hide Typeform branding on the typeform. Hiding Typeform branding is available for PRO+ accounts.
+       * true to display Typeform brand on the typeform. false to hide Typeform branding on the typeform.
+       * Hiding Typeform branding is available for PRO+ accounts.
        */
       show_typeform_branding?: boolean;
     }
@@ -465,10 +495,11 @@ namespace ICommon {
        */
       redirect_url?: string;
       /**
-       * true to display social media sharing icons on the thank you screen so respondents can post your typeform's link on Facebook, Twitter, LinkedIn, and Google+. Otherwise, false
+       * true to display social media sharing icons on the thank you screen so respondents can post your typeform's link on Facebook,
+       * Twitter, LinkedIn, and Google+. Otherwise, false
        */
       share_icons?: boolean;
-    }
+    };
     attachment?: Attachment;
   }
   export interface Variables {
@@ -505,9 +536,10 @@ namespace ICommon {
        * Text to display on the 'Start' button on the welcome screen.
        */
       button_text?: string;
-    }
+    };
     /**
-     * Allows you to display images and videos. Available for welcome and thank you screens, as well as date, dropdown, email, group, long_text, multiple_choice, number, opinion_scale, payment, rating, short_text, statement, and yes_no fields.
+     * Allows you to display images and videos. Available for welcome and thank you screens, as well as date, dropdown, email, group,
+     * long_text, multiple_choice, number, opinion_scale, payment, rating, short_text, statement, and yes_no fields.
      */
     attachment?: Attachment;
   }
@@ -522,15 +554,17 @@ export namespace ITypeform {
       title: string;
       settings?: ICommon.Settings.CreateForm;
       /**
-       * URL of the theme to use for the typeform. If you don't specify a URL for the theme, Typeform applies a new copy of the default theme to the form.
+       * URL of the theme to use for the typeform.
+       * If you don't specify a URL for the theme, Typeform applies a new copy of the default theme to the form.
        */
       theme?: string;
       /**
-       * URL of the workspace to use for the typeform. If you don't specify a URL for the workspace, Typeform saves the form in the default workspace.
+       * URL of the workspace to use for the typeform.
+       * If you don't specify a URL for the workspace, Typeform saves the form in the default workspace.
        */
       workspace?: {
         href?: string;
-      }
+      };
       /**
        * Default: '"
        * Array of Hidden Fields to use in the form.
@@ -559,19 +593,19 @@ export namespace ITypeform {
       logic?: ICommon.Logic.GetForm;
       theme?: {
         href?: string;
-      }
+      };
       workspace?: {
         href?: string;
-      }
+      };
       _links?: {
         display?: string;
-      }
-      settings?: ICommon.Settings.GetForm
+      };
+      settings?: ICommon.Settings.GetForm;
     }
     export interface List {
       total_items: number;
       page_count: number;
-      items: {
+      items: Array<{
         id: string;
         title: string;
         last_updated_at: string;
@@ -584,19 +618,22 @@ export namespace ITypeform {
         _links: {
           display: string;
         }
-      }[];
+      }>;
     }
     export interface Messages {
       /**
-       * Default tooltip button message. Maximum 28 characters. You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
+       * Default tooltip button message. Maximum 28 characters.
+       * You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
        */
       'label.buttonHint.default'?: string;
       /**
-       * Tooltip button message for long text blocks. Maximum 28 characters. You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
+       * Tooltip button message for long text blocks. Maximum 28 characters.
+       * You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
        */
       'label.buttonHint.longtext'?: string;
       /**
-       * Server connection error message. Maximum 128 characters. You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
+       * Server connection error message. Maximum 128 characters.
+       * You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
        */
       'label.warning.connection'?: string;
       /**
@@ -604,7 +641,8 @@ export namespace ITypeform {
        */
       'label.buttonNoAnswer.default'?: string;
       /**
-       * List of errors message. Maximum 128 characters. You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
+       * List of errors message. Maximum 128 characters.
+       * You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
        */
       'label.warning.correction'?: string;
       /**
@@ -628,7 +666,8 @@ export namespace ITypeform {
        */
       'block.shortText.placeholder'?: string;
       /**
-       * Invalid email error message. Maximum 64 characters. You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
+       * Invalid email error message. Maximum 64 characters.
+       * You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
        */
       'label.error.emailAddress'?: string;
       /**
@@ -644,15 +683,18 @@ export namespace ITypeform {
        */
       'label.warning.fallbackAlert'?: string;
       /**
-       * File upload button message. Maximum 34 characters. You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
+       * File upload button message. Maximum 34 characters.
+       * You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
        */
       'block.fileUpload.choose'?: string;
       /**
-       * File upload dragging action message. Maximum 35 characters. You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
+       * File upload dragging action message. Maximum 35 characters.
+       * You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
        */
       'block.fileUpload.drag'?: string;
       /**
-       * Still processing file upload message. You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
+       * Still processing file upload message.
+       * You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
        */
       'block.fileUpload.uploadingProgress'?: string;
       /**
@@ -660,11 +702,13 @@ export namespace ITypeform {
        */
       'label.error.sizeLimit'?: string;
       /**
-       * Private form error message. Accepts variable form:name. Maximum 128 characters. You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
+       * Private form error message. Accepts variable form:name. Maximum 128 characters.
+       * You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
        */
       'label.warning.formUnavailable'?: string;
       /**
-       * Incomplete fields error message. Maximum 42 characters. You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
+       * Incomplete fields error message. Maximum 42 characters.
+       * You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
        */
       'label.error.incompleteForm'?: string;
       /**
@@ -680,31 +724,38 @@ export namespace ITypeform {
        */
       'block.legal.accept'?: string;
       /**
-       * Number maximum value tooltip message. Accepts variable field:max. Maximum 64 characters. You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
+       * Number maximum value tooltip message. Accepts variable field:max. Maximum 64 characters.
+       * You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
        */
       'label.error.maxValue'?: string;
       /**
-       * Text fields maximum length tooltip message. Accepts variable field:max_length. Maximum 64 characters. You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
+       * Text fields maximum length tooltip message. Accepts variable field:max_length. Maximum 64 characters.
+       * You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
        */
       'label.error.maxLength'?: string;
       /**
-       * Number minimum value tooltip message. Accepts variable field:min. Maximum 64 characters. You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
+       * Number minimum value tooltip message. Accepts variable field:min. Maximum 64 characters.
+       * You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
        */
       'label.error.minValue'?: string;
       /**
-       * Number minimum and maximum range value tooltip message. Accepts variables field:min and field:max. Maximum 64 characters. You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
+       * Number minimum and maximum range value tooltip message. Accepts variables field:min and field:max. Maximum 64 characters.
+       * You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
        */
       'label.error.range'?: string;
       /**
-       * Choose as many as you like message for multiple choice fields. Maximum 45 characters. You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
+       * Choose as many as you like message for multiple choice fields. Maximum 45 characters.
+       * You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
        */
       'block.multipleChoice.hint'?: string;
       /**
-       * Required value error message. Maximum 64 characters. You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
+       * Required value error message. Maximum 64 characters.
+       * You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
        */
       'label.error.mustEnter'?: string;
       /**
-       * Required selection error message. Maximum 64 characters. You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
+       * Required selection error message. Maximum 64 characters.
+       * You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
        */
       'label.error.mustSelect'?: string;
       /**
@@ -716,7 +767,8 @@ export namespace ITypeform {
        */
       'label.no.default'?: string;
       /**
-       * Not suggestions found for dropdown fields error message. Maximum 64 characters. You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
+       * Not suggestions found for dropdown fields error message. Maximum 64 characters.
+       * You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
        */
       'block.dropdown.hint'?: string;
       /**
@@ -732,11 +784,13 @@ export namespace ITypeform {
        */
       'label.progress.proportion'?: string;
       /**
-       * Required field error message. Maximum 64 characters. You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
+       * Required field error message. Maximum 64 characters.
+       * You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
        */
       'label.error.required'?: string;
       /**
-       * Review fields error message. Accepts variable form:unanswered_fields. Maximum 64 characters. You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
+       * Review fields error message. Accepts variable form:unanswered_fields. Maximum 64 characters.
+       * You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
        */
       'label.preview'?: string;
       /**
@@ -744,7 +798,8 @@ export namespace ITypeform {
        */
       'label.button.review'?: string;
       /**
-       * Server error message. Maximum 128 characters. You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
+       * Server error message. Maximum 128 characters.
+       * You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
        */
       'label.error.server'?: string;
       /**
@@ -756,7 +811,8 @@ export namespace ITypeform {
        */
       'label.button.submit'?: string;
       /**
-       * Successful submit message. Maximum 128 characters. You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
+       * Successful submit message. Maximum 128 characters.
+       * You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
        */
       'label.warning.success'?: string;
       /**
@@ -764,11 +820,13 @@ export namespace ITypeform {
        */
       'label.button.ok'?: string;
       /**
-       * Legal field terms and conditions message. Maximum 64 characters. You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
+       * Legal field terms and conditions message. Maximum 64 characters.
+       * You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
        */
       'label.error.mustAccept'?: string;
       /**
-       * Long text field tooltip message. Maximum 128 characters. You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
+       * Long text field tooltip message. Maximum 128 characters.
+       * You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
        */
       'block.longtext.hint'?: string;
       /**
@@ -780,7 +838,8 @@ export namespace ITypeform {
        */
       'block.dropdown.placeholderTouch'?: string;
       /**
-       * Invalid URL error message. Maximum 64 characters. You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
+       * Invalid URL error message. Maximum 64 characters.
+       * You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
        */
       'label.error.url'?: string;
       /**
@@ -853,7 +912,7 @@ export namespace ITypeform {
       /**
        * Array of objects that include information about each team member.
        */
-      members?: {
+      members?: Array<{
         /**
          * Name of the team member's Typeform account.
          */
@@ -867,7 +926,7 @@ export namespace ITypeform {
          * The team member's role on the team. The account holder is owner, and all other team members are member.
          */
         role?: 'owner' | 'member';
-      }[];
+      }>;
     }
   }
   export namespace Themes {
@@ -917,11 +976,17 @@ export namespace ITypeform {
         question: string;
       };
       /**
-       * Valid values: 'Acme", "Arial", "Arvo", "Avenir Next", "Bangers", "Cabin", "Cabin Condensed", "Courier", "Crete Round", "Dancing Script", "Exo", "Georgia", "Handlee", "Helvetica Neue", "Karla", "Lato", "Lekton", "Lobster", "Lora", "McLaren", "Montserrat", "Nixie One", "Old Standard TT", "Open Sans", "Oswald", "Playfair Display", "Quicksand", "Raleway", "Signika", "Sniglet", "Source Sans Pro", "Vollkorn"
+       * Valid values: 'Acme", "Arial", "Arvo", "Avenir Next", "Bangers", "Cabin", "Cabin Condensed", "Courier", "Crete Round",
+       * "Dancing Script", "Exo", "Georgia", "Handlee", "Helvetica Neue", "Karla", "Lato", "Lekton", "Lobster", "Lora", "McLaren",
+       * "Montserrat", "Nixie One", "Old Standard TT", "Open Sans", "Oswald", "Playfair Display", "Quicksand", "Raleway", "Signika",
+       * "Sniglet", "Source Sans Pro", "Vollkorn"
        * Default: 'Source Sans Pro"
        * Font for the theme.
        */
-      font: 'Acme' | 'Arial' | 'Arvo' | 'Avenir Next' | 'Bangers' | 'Cabin' | 'Cabin Condensed' | 'Courier' | 'Crete Round' | 'Dancing Script' | 'Exo' | 'Georgia' | 'Handlee' | 'Helvetica Neue' | 'Karla' | 'Lato' | 'Lekton' | 'Lobster' | 'Lora' | 'McLaren' | 'Montserrat' | 'Nixie One' | 'Old Standard TT' | 'Open Sans' | 'Oswald' | 'Playfair Display' | 'Quicksand' | 'Raleway' | 'Signika' | 'Sniglet' | 'Source Sans Pro' | 'Vollkorn';
+      font: 'Acme' | 'Arial' | 'Arvo' | 'Avenir Next' | 'Bangers' | 'Cabin' | 'Cabin Condensed' | 'Courier' | 'Crete Round' |
+      'Dancing Script' | 'Exo' | 'Georgia' | 'Handlee' | 'Helvetica Neue' | 'Karla' | 'Lato' | 'Lekton' | 'Lobster' | 'Lora' |
+      'McLaren' | 'Montserrat' | 'Nixie One' | 'Old Standard TT' | 'Open Sans' | 'Oswald' | 'Playfair Display' | 'Quicksand' |
+      'Raleway' | 'Signika' | 'Sniglet' | 'Source Sans Pro' | 'Vollkorn';
       /**
        * Name for the theme.
        */
@@ -945,7 +1010,8 @@ export namespace ITypeform {
       /**
        * Valid values: 'public", "private"
        * Default: 'private"
-       * Specifies whether the theme is public (one of Typeform's built-in themes that are available in all accounts) or private (a theme you created). You can only change private themes. You can't change Typeform's public themes.
+       * Specifies whether the theme is public (one of Typeform's built-in themes that are available in all accounts)
+       * or private (a theme you created).You can only change private themes. You can't change Typeform's public themes.
        */
       visibility?: 'public' | 'private';
     }
@@ -964,7 +1030,8 @@ export namespace ITypeform {
   export namespace Webhooks {
     export interface CreateOrUpdate {
       /**
-       * Unique ID for the form. Find in your form URL. For example, in the URL "https://mysite.typeform.com/to/u6nXL7" the form_id is u6nXL7.
+       * Unique ID for the form. Find in your form URL.
+       * For example, in the URL "https://mysite.typeform.com/to/u6nXL7" the form_id is u6nXL7.
        */
       uid: string;
       /**
@@ -1002,7 +1069,8 @@ export namespace ITypeform {
        */
       enabled: boolean;
       /**
-       * Date and time when webhook was created. In ISO 8601 format, UTC time, to the second, with T as a delimiter between the date and time.
+       * Date and time when webhook was created.
+       * In ISO 8601 format, UTC time, to the second, with T as a delimiter between the date and time.
        */
       created_at: string;
       /**

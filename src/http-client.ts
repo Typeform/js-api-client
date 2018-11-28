@@ -8,8 +8,8 @@ export class TypeformHttpClient {
   private _token: any;
 
   constructor({ token, ...options }) {
-    this._options = options
-    this._token = token
+    this._options = options;
+    this._token = token;
   }
 
   public request(args: any): Promise<any> {
@@ -28,6 +28,6 @@ export class TypeformHttpClient {
       }
     })
       .then(response => response.json())
-      .catch(error => { throw new Error(error) })
+      .catch(error => { throw new Error(error); });
   }
 }

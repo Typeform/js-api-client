@@ -18,11 +18,11 @@ export class TypeformThemes {
 
     // check if required properties are defined
     if ([name, font, colors].includes(undefined)) {
-      throw `Please add the required fields`;
+      throw new Error(`Please add the required fields`);
     }
 
     if (!FONTS_AVAILABLE.includes(font)) {
-      throw `It's not a valid font`;
+      throw new Error(`It's not a valid font`);
     }
 
     return this._http.request({
@@ -67,7 +67,8 @@ export class TypeformThemes {
   }
 
   /**
-   * Retrieves a list of JSON descriptions for all themes in your Typeform account (public and private). Themes are listed in reverse-chronological order based on the date you added them to your account.
+   * Retrieves a list of JSON descriptions for all themes in your Typeform account (public and private).
+   * Themes are listed in reverse-chronological order based on the date you added them to your account.
    * 
    * @param args.page The page of results to retrieve. Default 1 is the first page of results.
    * @param args.pageSize Number of results to retrieve per page. Default is 10. Maximum is 200.
@@ -87,7 +88,8 @@ export class TypeformThemes {
   }
 
   /**
-   * Updates a theme in your Typeform account. NOTE: You can't change Typeform's public themes (the built-in themes that are available in all accounts).
+   * Updates a theme in your Typeform account.
+   * NOTE: You can't change Typeform's public themes (the built-in themes that are available in all accounts).
    * 
    * @param Updated theme with theme ID. 
    * @returns Promise that resolves with created theme.
@@ -99,11 +101,11 @@ export class TypeformThemes {
 
     // check if required properties are defined
     if ([name, font, colors].includes(undefined)) {
-      throw `Please add the required fields`
+      throw new Error(`Please add the required fields`);
     }
 
     if (!FONTS_AVAILABLE.includes(font)) {
-      throw `It's not a valid font`
+      throw new Error(`It's not a valid font`);
     }
 
     return this._http.request({

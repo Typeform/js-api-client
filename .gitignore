@@ -1,5 +1,5 @@
 node_modules
-dist
 lib
 .npmrc
 yarn-error.log
+.rpt2_cache

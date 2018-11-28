@@ -1,14 +1,14 @@
 export const isMemberPropValid = (members: string | string[]): boolean => {
   if (members === undefined) {
-    return false
+    return false;
   }
 
   if (!(typeof members === 'string' || Array.isArray(members))) {
-    return false
+    return false;
   }
 
-  return true
-}
+  return true;
+};
 
 export const createMemberPatchQuery = ({ members, operation }): any[] => {
   return members.map(member => ({
@@ -17,14 +17,14 @@ export const createMemberPatchQuery = ({ members, operation }): any[] => {
     value: {
       email: member
     }
-  }))
-}
+  }));
+};
 
 export const buildUrlWithParams = (url, params = {}): string => {
   const queryParams = Object.keys(params)
     .filter((k) => params[k] !== undefined && params[k] !== null)
     .map(k => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`)
-    .join('&')
+    .join('&');
 
-  return queryParams ? `${url}?${queryParams}` : url
-}
+  return queryParams ? `${url}?${queryParams}` : url;
+};
