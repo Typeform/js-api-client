@@ -36,6 +36,7 @@
     "@babel/preset-env": "^7.0.0-rc.1",
     "@commitlint/cli": "^6.1.3",
     "@commitlint/config-conventional": "^6.1.3",
+    "@types/jest": "^23.3.9",
     "@types/node": "^10.12.10",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^8.2.3",
@@ -50,6 +51,7 @@
     "nodemon": "^1.18.3",
     "semantic-release": "^15.1.7",
     "standard": "^11.0.1",
+    "ts-jest": "^23.10.5",
     "tslint": "^5.11.0",
     "typescript": "^3.1.6",
     "webpack": "^4.6.0",
@@ -63,6 +65,15 @@
   },
   "jest": {
     "automock": false,
+    "testEnvironment": "node",
+    "transform": {
+      ".ts": "ts-jest"
+    },
+    "testRegex": "(/tests/.*|\\.test)\\.ts$",
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
     "setupFiles": [
       "./tests/setupJest.js"
     ]
