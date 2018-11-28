@@ -6,6 +6,7 @@ import { TypeformTeams } from './teams';
 import { TypeformThemes } from './themes';
 import { TypeformWebhooks } from './webhooks';
 import { TypeformWorkspaces } from './workspaces';
+export { ITypeform } from './interface';
 
 export class TypeformClient {
   private _http: TypeformHttpClient;
