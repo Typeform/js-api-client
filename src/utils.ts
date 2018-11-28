@@ -1,4 +1,4 @@
-export const isMemberPropValid = members => {
+export const isMemberPropValid = (members: string | string[]): boolean => {
   if (members === undefined) {
     return false
   }
@@ -10,7 +10,7 @@ export const isMemberPropValid = members => {
   return true
 }
 
-export const createMemberPatchQuery = ({ members, operation }) => {
+export const createMemberPatchQuery = ({ members, operation }): any[] => {
   return members.map(member => ({
     op: operation,
     path: '/members',
@@ -20,7 +20,7 @@ export const createMemberPatchQuery = ({ members, operation }) => {
   }))
 }
 
-export const buildUrlWithParams = (url, params = {}) => {
+export const buildUrlWithParams = (url, params = {}): string => {
   const queryParams = Object.keys(params)
     .filter((k) => params[k] !== undefined && params[k] !== null)
     .map(k => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`)
