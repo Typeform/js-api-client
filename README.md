@@ -201,26 +201,26 @@ Each one of them encapsulates the operations related to it (like listing, updati
 
 ### Webhooks
 
-#### `webhook.get({ uid, tag })`
+#### `webhooks.get({ uid, tag })`
 - Get details for a webhook with the given tag
 - `uid`: typeform UID
 - `tag`: tag of the webhook created
 
-#### `webhook.create({ uid, tag, url, enable = false })`
+#### `webhooks.create({ uid, tag, url, enable = false })`
 - Create a webhook with the given tag
 - `uid`: typeform UID
 - `tag`: (string) tag of the webhook (how are you going to identify it)
 - `url`: (string) url of the service you want to notify
 - `enable`: (bool)
 
-#### `webhook.update({ uid, tag, url, enable = false })`
+#### `webhooks.update({ uid, tag, url, enable = false })`
 - Update a webhook with the given tag
 - `uid`: typeform UID
 - `tag`: (string) tag of the webhook (how are you going to identify it)
 - `url`: (string) url of the service you want to notify
 - `enable`: (bool)
 
-#### `webhook.delete({ uid, tag })`
+#### `webhooks.delete({ uid, tag })`
 - Delete a webhook with the given tag for a given typeform
 - `uid`: typeform UID
 - `tag`: (string) tag of the webhook
