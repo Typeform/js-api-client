@@ -1,7 +1,9 @@
 export default http => new Images(http);
 
 class Images {
-  constructor(_http) { }
+  constructor(_http) {
+    this._http = _http;
+  }
 
   /**
    * Adds an image in your Typeform account.

@@ -3,7 +3,9 @@ import { isMemberPropValid, createMemberPatchQuery } from './utils';
 export default http => new Workspaces(http);
 
 class Workspaces {
-  constructor(_http) { }
+  constructor(_http) {
+    this._http = _http;
+  }
 
   /**
    * Create a workspace.

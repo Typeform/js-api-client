@@ -1,7 +1,9 @@
 export default http => new Responses(http);
 
 class Responses {
-  constructor(_http) { }
+  constructor(_http) {
+    this._http = _http;
+  }
 
   /**
    * Returns form responses and date and time of form landing and submission.

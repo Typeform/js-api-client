@@ -3,7 +3,9 @@ import { isMemberPropValid, createMemberPatchQuery } from './utils';
 export default http => new Teams(http);
 
 class Teams {
-  constructor(_http) { }
+  constructor(_http) {
+    this._http = _http;
+  }
 
   /**
    * Retrieve information about your team, including the total number of seats

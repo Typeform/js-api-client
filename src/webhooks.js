@@ -3,7 +3,9 @@ import { createOrUpdateWebhook } from './utils';
 export default http => new Webhooks(http);
 
 class Webhooks {
-  constructor(_http) { }
+  constructor(_http) {
+    this._http = _http;
+  }
 
   /**
    * Create a webhook.
