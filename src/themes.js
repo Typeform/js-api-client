@@ -23,7 +23,7 @@ class Themes {
    * @param {string} args.name Name for the theme.
    * @returns {Promise} Promise that resolves with created theme.
    */
-  create({ background, colors, font, hasTransparentButton, name }) {
+  create({ background, colors, font, hasTransparentButton, name }  = {}) {
     // check if required properties are defined
     if ([name, font, colors].includes(undefined)) {
       throw new Error(`Please add the required fields`);
@@ -51,7 +51,7 @@ class Themes {
    * @param {string} args.id Theme ID.
    * @returns {Promise} Promise that resolves on success.
    */
-  delete({ id }) {
+  delete({ id }  = {}) {
     return this._http.request({
       method: 'delete',
       url: `/themes/${id}`
@@ -65,7 +65,7 @@ class Themes {
    * @param {string} args.id Theme ID.
    * @returns {Promise} Promise that resolves with theme.
    */
-  get({ id }) {
+  get({ id }  = {}) {
     return this._http.request({
       method: 'get',
       url: `/themes/${id}`
@@ -81,7 +81,7 @@ class Themes {
    * @param {number} [args.pageSize] Number of results to retrieve per page. Default is 10. Maximum is 200.
    * @returns {Promise} Promise that resolves with a list of themes.
    */
-  list({ page, pageSize }) {
+  list({ page, pageSize }  = {}) {
     return this._http.request({
       method: 'get',
       url: '/themes',
@@ -110,7 +110,7 @@ class Themes {
    * @param {string} args.name Name for the theme.
    * @returns {Promise} Promise that resolves with created theme.
    */
-  update({ id, background, colors, font, hasTransparentButton, name }) {
+  update({ id, background, colors, font, hasTransparentButton, name }  = {}) {
     // check if required properties are defined
     if ([name, font, colors].includes(undefined)) {
       throw new Error(`Please add the required fields`);

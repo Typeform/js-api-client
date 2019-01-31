@@ -17,7 +17,7 @@ export const createMemberPatchQuery = ({ members, operation }) => {
   }));
 }
 
-export const createOrUpdateWebhook = (http, { uid, tag, url, enable = false }) => {
+export const createOrUpdateWebhook = (http, { uid, tag, url, enable = false } = {}) => {
   if (url === undefined) {
     throw new Error(`Please provide an url for ${tag}`);
   }

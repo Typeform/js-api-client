@@ -27,7 +27,7 @@ class Teams {
    * @param {string|string[]} args.members Array of strings, or string, of email address(es) to add to team.
    * @returns {Promise} Promise that resolves on success.
    */
-  addMembers({ members }) {
+  addMembers({ members }  = {}) {
     if (!isMemberPropValid(members)) {
       throw new Error(`No member provided`);
     }

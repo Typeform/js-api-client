@@ -17,7 +17,7 @@ class Images {
    * @param {string} args.fileName File name for the image.
    * @returns {Promise} Promise that resolves on success.
    */
-  add({ image, mediaType, fileName }) {
+  add({ image, mediaType, fileName}  = {}) {
     return this._http.request({
       method: 'post',
       url: `/images`,
@@ -36,7 +36,7 @@ class Images {
    * @param {string} args.id Unique ID for the image to retrieve.
    * @returns {Promise} Promise that resolves on success.
    */
-  delete({ id }) {
+  delete({ id }  = {}) {
     return this._http.request({
       method: 'delete',
       url: `/images/${id}`
@@ -58,7 +58,7 @@ class Images {
    * Options include "default", "thumbnail", "supersize", "supermobile", "supersizefit", "supermobilefit"
    * @returns {Promise} Promise that resolves with image resource with associated metadata.
    */
-  get({ id, returns, size, backgroundSize, choiceSize }) {
+  get({ id, returns, size, backgroundSize, choiceSize }  = {}) {
     const requestQuery = {
       method: 'get',
       url: `/images/${id}`

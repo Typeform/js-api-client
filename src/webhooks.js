@@ -31,7 +31,7 @@ class Webhooks {
    * @param {string} args.tag Unique name you want to use for the webhook.
    * @returns {Promise} Promise that resolves on success.
    */
-  delete({ uid, tag }) {
+  delete({ uid, tag }  = {}) {
     return this._http.request({
       method: 'delete',
       url: `/forms/${uid}/webhooks/${tag}`
@@ -47,7 +47,7 @@ class Webhooks {
    * @param {string} args.tag Unique name you want to use for the webhook.
    * @returns {Promise} Promise that resolves with created webhook.
    */
-  get({ uid, tag }) {
+  get({ uid, tag }  = {}) {
     return this._http.request({
       method: 'get',
       url: `/forms/${uid}/webhooks/${tag}`

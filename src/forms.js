@@ -33,7 +33,7 @@ class Form {
    * For example, in the URL "https://mysite.typeform.com/to/u6nXL7" the form_id is u6nXL7.
    * @returns {Promise} Promise that resolves on success.
    */
-  delete({ uid }) {
+  delete({ uid } = {}) {
     return this._http.request({
       method: 'delete',
       url: `/forms/${uid}`
@@ -48,7 +48,7 @@ class Form {
    * For example, in the URL "https://mysite.typeform.com/to/u6nXL7" the form_id is u6nXL7.
    * @returns {Promise} Promise that resolves with Form.
    */
-  get({ uid }) {
+  get({ uid } = {}) {
     return this._http.request({
       method: 'get',
       url: `/forms/${uid}`
@@ -101,7 +101,9 @@ class Form {
 }
 
 class FormMessages {
-  constructor(_http) {}
+  constructor(_http) {
+    this._http = _http;
+  }
 
   /**
    * Retrieves the customizable messages for a form (specified by form_id) using the form's specified language.
@@ -112,7 +114,7 @@ class FormMessages {
    * For example, in the URL "https://mysite.typeform.com/to/u6nXL7" the form_id is u6nXL7.
    * @returns {Promise} Returns the customizable messages for a form.
    */
-  get({ uid }) {
+  get({ uid }  = {}) {
     return this._http.request({
       method: 'get',
       url: `/forms/${uid}/messages`
@@ -129,7 +131,7 @@ class FormMessages {
    * @param {Object} args.data Request body.
    * @returns {Promise} Promise that resolves on success.
    */
-  update({ uid, data }) {
+  update({ uid, data }  = {}) {
     return this._http.request({
       method: 'put',
       url: `/forms/${uid}/messages`,
