@@ -1,74 +1,97 @@
-export default http => ({
-  list: args => getForms(http, args),
-  get: args => getForm(http, args),
-  update: args => updateForm(http, args),
-  delete: args => deleteForm(http, args),
-  create: args => createForm(http, args),
-  messages: {
-    get: args => getMessages(http, args),
-    update: args => updateMessages(http, args)
-  }
-})
+export default http => new Form(http);
 
-const getForms = (http, { page, pageSize, search, workspaceId } = {}) => {
-  return http.request({
-    method: 'get',
-    url: `/forms`,
-    params: {
-      page,
-      page_size: pageSize,
-      search,
-      workspace_id: workspaceId
-    }
-  })
-}
-
-const getForm = (http, { uid }) => {
-  return http.request({
-    method: 'get',
-    url: `/forms/${uid}`
-  })
-}
-
-const updateForm = (http, { uid, override, data } = {}) => {
-  let methodType = 'patch'
-  if (override) {
-    methodType = 'put'
+class Form {
+  constructor(_http) {
+    this._http = _http;
+    this._messages = new FormMessages(_http);
   }
 
-  return http.request({
-    method: methodType,
-    url: `/forms/${uid}`,
-    data
-  })
+  get messages() {
+    return this._messages;
+  }
+
+  create({ data } = {}) {
+    return this._http.request({
+      method: 'post',
+      url: `/forms`,
+      data
+    });
+  }
+
+  delete({ uid } = {}) {
+    return this._http.request({
+      method: 'delete',
+      url: `/forms/${uid}`
+    });
+  }
+
+  get({ uid } = {}) {
+    return this._http.request({
+      method: 'get',
+      url: `/forms/${uid}`
+    });
+  }
+
+  list({ page, pageSize, search, workspaceId } = {}) {
+    return this._http.request({
+      method: 'get',
+      url: `/forms`,
+      params: {
+        page,
+        page_size: pageSize,
+        search,
+        workspace_id: workspaceId
+      }
+    });
+  }
+
+  update({ uid, override, data } = {}) {
+    const methodType = override ? 'put' : 'patch';
+
+    return this._http.request({
+      method: methodType,
+      url: `/forms/${uid}`,
+      data
+    });
+  }
 }
 
-const createForm = (http, { data } = {}) => {
-  return http.request({
-    method: 'post',
-    url: `/forms`,
-    data
-  })
-}
+class FormMessages {
+  constructor(_http) {
+    this._http = _http;
+  }
 
-const deleteForm = (http, { uid }) => {
-  return http.request({
-    method: 'delete',
-    url: `/forms/${uid}`
-  })
-}
+  /**
+   * Retrieves the customizable messages for a form (specified by form_id) using the form's specified language.
+   * You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
+   * 
+   * @param {Object} args
+   * @param {string} args.uid Unique ID for the form. Find in your form URL.
+   * For example, in the URL "https://mysite.typeform.com/to/u6nXL7" the form_id is u6nXL7.
+   * @returns {Promise} Returns the customizable messages for a form.
+   */
+  get({ uid }  = {}) {
+    return this._http.request({
+      method: 'get',
+      url: `/forms/${uid}/messages`
+    });
+  }
 
-const getMessages = (http, { uid }) => {
-  return http.request({
-    method: 'get',
-    url: `/forms/${uid}/messages`
-  })
-}
-
-const updateMessages = (http, { uid, data }) => {
-  return http.request({
-    method: 'put',
-    url: `/forms/${uid}/messages`,
-    data
-  })
+  /**
+   * Specifies new values for the customizable messages in a form (specified by form_id).
+   * You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
+   * 
+   * @param {Object} args
+   * @param {string} args.uid Unique ID for the form. Find in your form URL.
+   * For example, in the URL "https://mysite.typeform.com/to/u6nXL7" the form_id is u6nXL7.
+   * @param {Object} args.data Request body.
+   * @returns {Promise} Promise that resolves on success.
+   */
+  update({ uid, data }  = {}) {
+    return this._http.request({
+      method: 'put',
+      url: `/forms/${uid}/messages`,
+      data
+    });
+  }
 }

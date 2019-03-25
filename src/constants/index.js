@@ -31,6 +31,6 @@ export const FONTS_AVAILABLE = [
   'Sniglet',
   'Source Sans Pro',
   'Vollkorn'
-]
+];
 
-export const API_BASE_URL = 'https://api.typeform.com'
+export const API_BASE_URL = 'https://api.typeform.com';
