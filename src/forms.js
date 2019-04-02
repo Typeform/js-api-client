@@ -61,15 +61,6 @@ class FormMessages {
     this._http = _http;
   }
 
-  /**
-   * Retrieves the customizable messages for a form (specified by form_id) using the form's specified language.
-   * You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
-   * 
-   * @param {Object} args
-   * @param {string} args.uid Unique ID for the form. Find in your form URL.
-   * For example, in the URL "https://mysite.typeform.com/to/u6nXL7" the form_id is u6nXL7.
-   * @returns {Promise} Returns the customizable messages for a form.
-   */
   get({ uid }  = {}) {
     return this._http.request({
       method: 'get',
@@ -77,16 +68,6 @@ class FormMessages {
     });
   }
 
-  /**
-   * Specifies new values for the customizable messages in a form (specified by form_id).
-   * You can format messages with bold (*bold*) and italic (_italic_) text. HTML tags are forbidden.
-   * 
-   * @param {Object} args
-   * @param {string} args.uid Unique ID for the form. Find in your form URL.
-   * For example, in the URL "https://mysite.typeform.com/to/u6nXL7" the form_id is u6nXL7.
-   * @param {Object} args.data Request body.
-   * @returns {Promise} Promise that resolves on success.
-   */
   update({ uid, data }  = {}) {
     return this._http.request({
       method: 'put',
