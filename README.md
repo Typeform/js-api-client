@@ -93,6 +93,10 @@ Each one of them encapsulates the operations related to it (like listing, updati
 - Get a typeform by UID
 - Returns a typeform with the payload [referenced here](https://developer.typeform.com/create/reference/retrieve-form/).
 
+#### `forms.create({ data = {} })`
+- Create a typeform
+- Returns a typeform with the payload [referenced here](https://developer.typeform.com/create/reference/create-form/).
+
 #### `forms.update({ uid, data = {}, override = false })`
 - Update a typeform by UID
 - Returns a typeform with the payload [referenced here](https://developer.typeform.com/create/reference/update-form/).
