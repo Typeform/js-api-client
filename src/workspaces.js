@@ -36,7 +36,10 @@ const addWorkspace = (http, { name }) => {
 
   return http.request({
     method: 'post',
-    url: `/workspaces`
+    url: `/workspaces`,
+    data: {
+      name
+    }
   })
 }
 
