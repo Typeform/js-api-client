@@ -61,12 +61,10 @@ class Images {
       'supermobilefit'
     ];
 
-    if (choiceSize !== undefined) {
-      if (choiceImageSizes.includes(choiceSize)) {
+    if (typeof choiceSize !== 'undefined' && choiceImageSizes.includes(choiceSize)) {
         requestQuery.url += `/choice/${choiceSize}`;
-      } else {
-        throw new Error(`Image choice size doesn't exists`);
-      }
+    } else if (typeof choiceSize !== 'undefined' && !choiceImageSizes.includes(choiceSize)) {
+      throw new Error(`Image choice size doesn't exist`);
     }
   
     return this._http.request(requestQuery);

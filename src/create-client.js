@@ -34,8 +34,7 @@ export const clientConstructor = ({ token, ...options }) => {
           Authorization: `bearer ${token}`
         }
       })
-        .then(response => response.json())
-        .catch(error => { throw new Error(error) });
+        .then(response => response.json());
     }
   }
 };

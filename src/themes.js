@@ -14,7 +14,7 @@ class Themes {
     }
 
     if (!FONTS_AVAILABLE.includes(font)) {
-      throw new Error(`It's not a valid font`);
+      throw new Error(`${font} is not a valid font`);
     }
 
     return this._http.request({
@@ -55,12 +55,15 @@ class Themes {
 
   update({ id, background, colors, font, hasTransparentButton, name }  = {}) {
     // check if required properties are defined
-    if ([name, font, colors].includes(undefined)) {
-      throw new Error(`Please add the required fields`);
-    }
+    const requiredProperties = { name, font, colors };
+    Object.getOwnPropertyNames(requiredProperties).forEach((property) => {
+      if (!requiredProperties[property]) {
+        throw new Error(`The property, ${property}, is required`);
+      }
+    });
 
     if (!FONTS_AVAILABLE.includes(font)) {
-      throw new Error(`It's not a valid font`);
+      throw new Error(`${font} is not a valid font`);
     }
 
     return this._http.request({

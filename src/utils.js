@@ -1,7 +1,7 @@
 export const buildUrlWithParams = (url, params = {}) => {
   const queryParams = Object.keys(params)
-    .filter((k) => params[k] !== undefined && params[k] !== null)
-    .map(k => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`)
+    .filter((key) => params[key] !== undefined && params[key] !== null)
+    .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
     .join('&');
 
   return queryParams ? `${url}?${queryParams}` : url;
