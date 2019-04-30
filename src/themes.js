@@ -1,20 +1,20 @@
-import { FONTS_AVAILABLE } from './constants';
+import { FONTS_AVAILABLE } from './constants'
 
-export default http => new Themes(http);
+export default http => new Themes(http)
 
 class Themes {
-  constructor(_http) {
-    this._http = _http;
+  constructor (_http) {
+    this._http = _http
   }
 
-  create({ background, colors, font, hasTransparentButton, name }  = {}) {
+  create ({ background, colors, font, hasTransparentButton, name } = {}) {
     // check if required properties are defined
     if ([name, font, colors].includes(undefined)) {
-      throw new Error(`Please add the required fields`);
+      throw new Error(`Please add the required fields`)
     }
 
     if (!FONTS_AVAILABLE.includes(font)) {
-      throw new Error(`${font} is not a valid font`);
+      throw new Error(`${font} is not a valid font`)
     }
 
     return this._http.request({
@@ -25,24 +25,24 @@ class Themes {
       font,
       has_transparent_button: hasTransparentButton,
       name
-    });
+    })
   }
 
-  delete({ id }  = {}) {
+  delete ({ id } = {}) {
     return this._http.request({
       method: 'delete',
       url: `/themes/${id}`
-    });
+    })
   }
 
-  get({ id }  = {}) {
+  get ({ id } = {}) {
     return this._http.request({
       method: 'get',
       url: `/themes/${id}`
-    });
+    })
   }
 
-  list({ page, pageSize }  = {}) {
+  list ({ page, pageSize } = {}) {
     return this._http.request({
       method: 'get',
       url: '/themes',
@@ -50,20 +50,20 @@ class Themes {
         page,
         page_size: pageSize
       }
-    });
+    })
   }
 
-  update({ id, background, colors, font, hasTransparentButton, name }  = {}) {
+  update ({ id, background, colors, font, hasTransparentButton, name } = {}) {
     // check if required properties are defined
-    const requiredProperties = { name, font, colors };
+    const requiredProperties = { name, font, colors }
     Object.getOwnPropertyNames(requiredProperties).forEach((property) => {
       if (!requiredProperties[property]) {
-        throw new Error(`The property, ${property}, is required`);
+        throw new Error(`The property, ${property}, is required`)
       }
-    });
+    })
 
     if (!FONTS_AVAILABLE.includes(font)) {
-      throw new Error(`${font} is not a valid font`);
+      throw new Error(`${font} is not a valid font`)
     }
 
     return this._http.request({
@@ -74,6 +74,6 @@ class Themes {
       font,
       has_transparent_button: hasTransparentButton,
       name
-    });
+    })
   }
 }

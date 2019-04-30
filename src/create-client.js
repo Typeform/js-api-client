@@ -1,7 +1,7 @@
 /* globals fetch */
-import 'isomorphic-fetch';
-import { API_BASE_URL } from './constants';
-import { buildUrlWithParams } from './utils';
+import 'isomorphic-fetch'
+import { API_BASE_URL } from './constants'
+import { buildUrlWithParams } from './utils'
 
 export const clientConstructor = ({ token, ...options }) => {
   return {
@@ -12,18 +12,18 @@ export const clientConstructor = ({ token, ...options }) => {
         headers: argsHeaders = {},
         params,
         ...otherArgs
-      } = args;
+      } = args
 
-      const requestUrl = buildUrlWithParams(`${API_BASE_URL}${url}`, params);
+      const requestUrl = buildUrlWithParams(`${API_BASE_URL}${url}`, params)
 
       const {
         headers = {}
-      } = options;
+      } = options
 
       const requestParameters = {
         ...options,
         ...otherArgs
-      };
+      }
 
       return fetch(requestUrl, {
         ...requestParameters,
@@ -34,7 +34,7 @@ export const clientConstructor = ({ token, ...options }) => {
           Authorization: `bearer ${token}`
         }
       })
-        .then(response => response.json());
+        .then(response => response.json())
     }
   }
-};
+}

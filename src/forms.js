@@ -1,38 +1,38 @@
-export default http => new Form(http);
+export default http => new Form(http)
 
 class Form {
-  constructor(_http) {
-    this._http = _http;
-    this._messages = new FormMessages(_http);
+  constructor (_http) {
+    this._http = _http
+    this._messages = new FormMessages(_http)
   }
 
-  get messages() {
-    return this._messages;
+  get messages () {
+    return this._messages
   }
 
-  create({ data } = {}) {
+  create ({ data } = {}) {
     return this._http.request({
       method: 'post',
       url: `/forms`,
       data
-    });
+    })
   }
 
-  delete({ uid } = {}) {
+  delete ({ uid } = {}) {
     return this._http.request({
       method: 'delete',
       url: `/forms/${uid}`
-    });
+    })
   }
 
-  get({ uid } = {}) {
+  get ({ uid } = {}) {
     return this._http.request({
       method: 'get',
       url: `/forms/${uid}`
-    });
+    })
   }
 
-  list({ page, pageSize, search, workspaceId } = {}) {
+  list ({ page, pageSize, search, workspaceId } = {}) {
     return this._http.request({
       method: 'get',
       url: `/forms`,
@@ -42,37 +42,37 @@ class Form {
         search,
         workspace_id: workspaceId
       }
-    });
+    })
   }
 
-  update({ uid, override, data } = {}) {
-    const methodType = override ? 'put' : 'patch';
+  update ({ uid, override, data } = {}) {
+    const methodType = override ? 'put' : 'patch'
 
     return this._http.request({
       method: methodType,
       url: `/forms/${uid}`,
       data
-    });
+    })
   }
 }
 
 class FormMessages {
-  constructor(_http) {
-    this._http = _http;
+  constructor (_http) {
+    this._http = _http
   }
 
-  get({ uid }  = {}) {
+  get ({ uid } = {}) {
     return this._http.request({
       method: 'get',
       url: `/forms/${uid}/messages`
-    });
+    })
   }
 
-  update({ uid, data }  = {}) {
+  update ({ uid, data } = {}) {
     return this._http.request({
       method: 'put',
       url: `/forms/${uid}/messages`,
       data
-    });
+    })
   }
 }

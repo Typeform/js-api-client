@@ -2,9 +2,9 @@ export const buildUrlWithParams = (url, params = {}) => {
   const queryParams = Object.keys(params)
     .filter((key) => params[key] !== undefined && params[key] !== null)
     .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
-    .join('&');
+    .join('&')
 
-  return queryParams ? `${url}?${queryParams}` : url;
+  return queryParams ? `${url}?${queryParams}` : url
 }
 
 export const createMemberPatchQuery = ({ members, operation }) => {
@@ -14,16 +14,16 @@ export const createMemberPatchQuery = ({ members, operation }) => {
     value: {
       email: member
     }
-  }));
+  }))
 }
 
 export const createOrUpdateWebhook = (http, { uid, tag, url, enable = false } = {}) => {
   if (url === undefined) {
-    throw new Error(`Please provide an url for ${tag}`);
+    throw new Error(`Please provide an url for ${tag}`)
   }
 
   if (tag === undefined) {
-    throw new Error(`Please provide a tag name for the webhook`);
+    throw new Error(`Please provide a tag name for the webhook`)
   }
 
   return http.request({
@@ -33,13 +33,13 @@ export const createOrUpdateWebhook = (http, { uid, tag, url, enable = false } = 
       url,
       enable
     }
-  });
+  })
 }
 
 export const isMemberPropValid = members => {
   if (members === undefined || !(typeof members === 'string' || Array.isArray(members))) {
-    return false;
+    return false
   }
 
-  return true;
+  return true
 }
