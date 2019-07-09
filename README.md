@@ -198,7 +198,7 @@ Each one of them encapsulates the operations related to it (like listing, updati
 
 ### Responses
 
-#### `responses.list({ uid, pageSize, since, until, after, before, completed, sort, query, fields })`
+#### `responses.list({ uid, pageSize, since, until, after, before, includedResponseIds, completed, sort, query, fields })`
 - List responses from the given ID
 - `uid`: typeform UID
 - For parameter details check [the documentation](https://developer.typeform.com/responses/reference/retrieve-responses/)
