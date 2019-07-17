@@ -34,8 +34,15 @@ export const clientConstructor = ({ token, ...options }) => {
           Authorization: `bearer ${token}`
         }
       })
-        .then(response => response.json())
+        .then(handleResponse)
         .catch(error => { throw new Error(error) })
     }
   }
+}
+
+const handleResponse = (response) => {
+    if (response.status == 204) {
+        return;
+    }
+    return response.json();
 }

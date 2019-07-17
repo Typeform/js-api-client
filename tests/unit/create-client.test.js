@@ -24,3 +24,14 @@ test('request pass correct headers', () => {
     Authorization: 'bearer abc'
   })
 })
+
+test('handle empty response', async () => {
+    expect.assertions(1);
+    fetch.mockResponse('', {
+        status: 204
+    })
+
+    const response = await client.request({})
+
+    expect(response).toBeUndefined();
+})
