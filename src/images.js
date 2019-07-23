@@ -40,7 +40,7 @@ class Images {
       if (['default', 'thumbnail', 'mobile'].includes(size)) {
         requestQuery.url += `/image/${size}`
       } else {
-        throw new Error(`Image size doesn't exists`)
+        throw new Error(`Image size doesn't exist`)
       }
     }
 
@@ -48,7 +48,7 @@ class Images {
       if (['default', 'thumbnail', 'mobile', 'tablet'].includes(backgroundSize)) {
         requestQuery.url += `/background/${backgroundSize}`
       } else {
-        throw new Error(`Image background size doesn't exists`)
+        throw new Error(`Image background size doesn't exist`)
       }
     }
 
