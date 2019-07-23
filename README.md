@@ -205,29 +205,42 @@ Each one of them encapsulates the operations related to it (like listing, updati
 
 ### Webhooks
 
-#### `webhooks.get({ uid, tag })`
-- Get details for a webhook with the given tag
-- `uid`: typeform UID
-- `tag`: tag of the webhook created
+#### `webhooks.create({ uid, tag, url, enable = false, secret, verifySSL })`
 
-#### `webhooks.create({ uid, tag, url, enable = false })`
-- Create a webhook with the given tag
-- `uid`: typeform UID
-- `tag`: (string) tag of the webhook (how are you going to identify it)
-- `url`: (string) url of the service you want to notify
-- `enable`: (bool)
-
-#### `webhooks.update({ uid, tag, url, enable = false })`
-- Update a webhook with the given tag
-- `uid`: typeform UID
-- `tag`: (string) tag of the webhook (how are you going to identify it)
-- `url`: (string) url of the service you want to notify
-- `enable`: (bool)
+- Create a webhook.
+- `uid`: Unique ID for the form.
+- `tag`: Unique name you want to use for the webhook.
+- `url`: Webhook URL.
+- `enabled`: `true` if you want to send responses to the webhook immediately. Otherwise, `false`.
+- `secret`: If specified, will be used to sign the webhook payload with HMAC SHA256, so that you can verify that it came from Typeform.
+- `verifySSL`: `true` if you want Typeform to verify SSL certificates when delivering payloads.
 
 #### `webhooks.delete({ uid, tag })`
-- Delete a webhook with the given tag for a given typeform
-- `uid`: typeform UID
-- `tag`: (string) tag of the webhook
+
+- Delete a webhook.
+- `uid`: Unique ID for the form.
+- `tag`: Unique name of the webhook.
+
+#### `webhooks.get({ uid, tag })`
+
+- Get details for a webhook with the given tag
+- `uid`: Unique ID for the form.
+- `tag`: tag of the webhook created
+
+#### `webhooks.list({ uid })`
+
+- Retrieve all webhooks for the specified typeform.
+- `uid`: Unique ID for the form.
+
+#### `webhooks.update({ uid, tag, url, enable = false, secret, verifySSL })`
+
+- Update a webhook.
+- `uid`: Unique ID for the form.
+- `tag`: Unique name you want to use for the webhook.
+- `url`: Webhook URL.
+- `enabled`: `true` if you want to send responses to the webhook immediately. Otherwise, `false`.
+- `secret`: If specified, will be used to sign the webhook payload with HMAC SHA256, so that you can verify that it came from Typeform.
+- `verifySSL`: `true` if you want Typeform to verify SSL certificates when delivering payloads.
 
 ## Examples
 
