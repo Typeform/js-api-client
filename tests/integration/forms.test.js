@@ -7,17 +7,6 @@ const typeformClient = createClient({
 })
 const TYPEFORM_UID = 'abc123'
 
-const randomString = () => {
-  return (
-    Math.random()
-      .toString(36)
-      .substring(2, 15) +
-    Math.random()
-      .toString(36)
-      .substring(2, 15)
-  )
-}
-
 test('Getting forms from my account', done => {
   typeformClient.forms.list().then(response => {
     expect(response.total_items).toBe(2)

@@ -57,9 +57,9 @@ test('when getting an image by size it retrieves from the correct endpoint', () 
   expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/images/abc123/image/mobile`)
 })
 
-test('when getting an image by size what does not exists throws', () => {
+test('when getting an image by size what does not exist throws', () => {
   expect(() => imagesRequest.get({ id: 'abc123', size: 'big' })).toThrow(
-    `Image size doesn't exists`
+    `Image size doesn't exist`
   )
 })
 

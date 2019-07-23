@@ -24,6 +24,7 @@ before_script:
   - yarn server &
 
 script:
+  - yarn lint
   - yarn test:unit
   - yarn test:integration
 
