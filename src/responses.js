@@ -5,6 +5,16 @@ class Responses {
     this._http = _http
   }
 
+  delete ({ uid, ids }) {
+    return this._http.request({
+      method: 'delete',
+      url: `/forms/${uid}/responses`,
+      params: {
+        included_tokens: toCSL(ids)
+      }
+    })
+  }
+
   list ({ uid, pageSize, since, until, after, before, ids, completed, sort, query, fields } = {}) {
     return this._http.request({
       method: 'get',

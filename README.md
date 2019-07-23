@@ -198,6 +198,12 @@ Each one of them encapsulates the operations related to it (like listing, updati
 
 ### Responses
 
+#### `responses.delete({ uid, ids })`
+
+- Delete responses to a form.
+- `uid`: Unique ID for the form.
+- `ids`: Tokens of the responses to delete. You can list up to 1000 tokens. Accepts either a string or an array of strings.
+
 #### `responses.list({ uid, pageSize, since, until, after, before, ids, completed, sort, query, fields })`
 
 - Returns form responses and date and time of form landing and submission.
