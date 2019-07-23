@@ -115,9 +115,8 @@ Each one of them encapsulates the operations related to it (like listing, updati
 #### `images.list()`
 - Get your images collection
 
-#### `images.get({ id, returns, size, backgroundSize, choiceSize })`
+#### `images.get({ id, size, backgroundSize, choiceSize })`
 - Get custom image by ID
-- `returns`: json, binary (default)
 - `size`: default, thumbnail, mobile
 - `backgroundSize`: default, thumbnail, mobile, tablet
 - `choiceSize`: default, thumbnail, supersize, supermobile, supersizefit, supermobilefit

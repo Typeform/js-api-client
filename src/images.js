@@ -24,31 +24,12 @@ class Images {
     })
   }
 
-  get ({ id, returns, size, backgroundSize, choiceSize } = {}) {
+  get ({ id, size, backgroundSize, choiceSize } = {}) {
     const requestQuery = {
       method: 'get',
-      url: `/images/${id}`
-    }
-
-    if (returns === 'json') {
-      requestQuery.headers = {
+      url: `/images/${id}`,
+      headers: {
         Accept: 'application/json'
-      }
-    }
-
-    if (size) {
-      if (['default', 'thumbnail', 'mobile'].includes(size)) {
-        requestQuery.url += `/image/${size}`
-      } else {
-        throw new Error(`Image size doesn't exist`)
-      }
-    }
-
-    if (backgroundSize) {
-      if (['default', 'thumbnail', 'mobile', 'tablet'].includes(backgroundSize)) {
-        requestQuery.url += `/background/${backgroundSize}`
-      } else {
-        throw new Error(`Image background size doesn't exist`)
       }
     }
 
@@ -61,7 +42,19 @@ class Images {
       'supermobilefit'
     ]
 
-    if (choiceSize) {
+    if (size) {
+      if (['default', 'thumbnail', 'mobile'].includes(size)) {
+        requestQuery.url += `/image/${size}`
+      } else {
+        throw new Error(`Image size doesn't exist`)
+      }
+    } else if (backgroundSize) {
+      if (['default', 'thumbnail', 'mobile', 'tablet'].includes(backgroundSize)) {
+        requestQuery.url += `/background/${backgroundSize}`
+      } else {
+        throw new Error(`Image background size doesn't exist`)
+      }
+    } else if (choiceSize) {
       if (choiceImageSizes.includes(choiceSize)) {
         requestQuery.url += `/choice/${choiceSize}`
       } else {
