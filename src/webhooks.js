@@ -23,6 +23,13 @@ class Webhooks {
     })
   }
 
+  list ({ uid } = {}) {
+    return this._http.request({
+      method: 'get',
+      url: `/forms/${uid}/webhooks`
+    })
+  }
+
   update (args) {
     return createOrUpdateWebhook(this._http, args)
   }
