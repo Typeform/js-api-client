@@ -64,6 +64,9 @@ class Workspaces {
     return this._http.request({
       method: 'patch',
       url: `/workspaces/${id}`,
+      headers: {
+        'Content-Type': 'application/json'
+      },
       data
     })
   }
