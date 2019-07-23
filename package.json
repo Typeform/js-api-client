@@ -19,7 +19,10 @@
     "typeform",
     "js"
   ],
-  "author": "Jepser Bernardino",
+  "contributors": [
+    "Jepser Bernardino",
+    "Michael Solati <mkslt04@gmail.com>"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Typeform/js-api-client/issues"
