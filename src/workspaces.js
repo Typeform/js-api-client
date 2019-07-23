@@ -8,7 +8,7 @@ class Workspaces {
   }
 
   add ({ name } = {}) {
-    if (name === undefined) {
+    if (!name) {
       throw new Error(`A name is required`)
     }
 

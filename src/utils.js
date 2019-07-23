@@ -18,11 +18,11 @@ export const createMemberPatchQuery = ({ members, operation }) => {
 }
 
 export const createOrUpdateWebhook = (http, { uid, tag, url, enable = false } = {}) => {
-  if (url === undefined) {
+  if (!url) {
     throw new Error(`Please provide an url for ${tag}`)
   }
 
-  if (tag === undefined) {
+  if (!tag) {
     throw new Error(`Please provide a tag name for the webhook`)
   }
 
@@ -37,7 +37,7 @@ export const createOrUpdateWebhook = (http, { uid, tag, url, enable = false } = 
 }
 
 export const isMemberPropValid = members => {
-  if (members === undefined || !(typeof members === 'string' || Array.isArray(members))) {
+  if (!members || !(typeof members === 'string' || Array.isArray(members))) {
     return false
   }
 

@@ -36,7 +36,7 @@ class Images {
       }
     }
 
-    if (size !== undefined) {
+    if (size) {
       if (['default', 'thumbnail', 'mobile'].includes(size)) {
         requestQuery.url += `/image/${size}`
       } else {
@@ -44,7 +44,7 @@ class Images {
       }
     }
 
-    if (backgroundSize !== undefined) {
+    if (backgroundSize) {
       if (['default', 'thumbnail', 'mobile', 'tablet'].includes(backgroundSize)) {
         requestQuery.url += `/background/${backgroundSize}`
       } else {
@@ -61,10 +61,12 @@ class Images {
       'supermobilefit'
     ]
 
-    if (typeof choiceSize !== 'undefined' && choiceImageSizes.includes(choiceSize)) {
-      requestQuery.url += `/choice/${choiceSize}`
-    } else if (typeof choiceSize !== 'undefined' && !choiceImageSizes.includes(choiceSize)) {
-      throw new Error(`Image choice size doesn't exist`)
+    if (choiceSize) {
+      if (choiceImageSizes.includes(choiceSize)) {
+        requestQuery.url += `/choice/${choiceSize}`
+      } else {
+        throw new Error(`Image choice size doesn't exist`)
+      }
     }
 
     return this._http.request(requestQuery)
