@@ -23,22 +23,36 @@ test('get images by ID', () => {
   expect(fetch.mock.calls[0][1].method).toBe('get')
 })
 
-test('adding an image pass the required values', () => {
+test('adding an image using `image` passes the required values', () => {
   imagesRequest.add({
     image: 'bGRqZmxzZGpmbHNoZmtoc2RrZmpoc2tqZA==',
-    mediaType: 'image/gif',
     fileName: 'newimage.gif'
   })
 
   expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/images`)
   expect(fetch.mock.calls[0][1].method).toBe('post')
 
-  const imageData = fetch.mock.calls[0][1].body
-  expect(imageData).toEqual(JSON.stringify({
+  const imageData = JSON.parse(fetch.mock.calls[0][1].body)
+  expect(imageData).toEqual({
     image: 'bGRqZmxzZGpmbHNoZmtoc2RrZmpoc2tqZA==',
-    file_name: 'newimage.gif',
-    media_type: 'image/gif'
-  }))
+    file_name: 'newimage.gif'
+  })
+})
+
+test('adding an image using `url` passes the required values', () => {
+  imagesRequest.add({
+    url: 'https://www.typeform.com/logo.png',
+    fileName: 'logo.png'
+  })
+
+  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/images`)
+  expect(fetch.mock.calls[0][1].method).toBe('post')
+
+  const imageData = JSON.parse(fetch.mock.calls[0][1].body)
+  expect(imageData).toEqual({
+    url: 'https://www.typeform.com/logo.png',
+    file_name: 'logo.png'
+  })
 })
 
 test('deleting an image sets the correct method and id', () => {
