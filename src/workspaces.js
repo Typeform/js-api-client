@@ -14,7 +14,10 @@ class Workspaces {
 
     return this._http.request({
       method: 'post',
-      url: `/workspaces`,
+      url: '/workspaces',
+      headers: {
+        'Content-Type': 'application/json'
+      },
       data: {
         name
       }
