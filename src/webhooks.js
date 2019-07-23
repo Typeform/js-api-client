@@ -35,7 +35,7 @@ class Webhooks {
   }
 }
 
-const createOrUpdateWebhook = (http, { uid, tag, url, enable = false } = {}) => {
+const createOrUpdateWebhook = (http, { uid, tag, url, enable = false, secret, verifySSL } = {}) => {
   if (!url) {
     throw new Error(`Please provide an url for ${tag}`)
   }
@@ -49,7 +49,9 @@ const createOrUpdateWebhook = (http, { uid, tag, url, enable = false } = {}) => 
     url: `/forms/${uid}/webhooks/${tag}`,
     data: {
       url,
-      enable
+      enable,
+      secret,
+      verify_ssl: verifySSL ? true : undefined
     }
   })
 }
