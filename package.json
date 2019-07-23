@@ -68,7 +68,8 @@
     "automock": false,
     "setupFiles": [
       "./tests/setupJest.js"
-    ]
+    ],
+    "testURL": "http://localhost/"
   },
   "scripts": {
     "test:unit": "MOCK_FETCH=true jest ./tests/unit",
