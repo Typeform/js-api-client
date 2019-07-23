@@ -25,17 +25,8 @@ class Workspaces {
   }
 
   addMembers ({ id, members } = {}) {
-    if (!isMemberPropValid(members)) {
-      throw new Error(`No member provided`)
-    }
-
-    const membersToAdd = !Array.isArray(members) ? [members] : members
-    const membersQuery = createMemberPatchQuery({
-      members: membersToAdd,
-      operation: 'add'
-    })
-
-    return this.update({ id, data: membersQuery })
+    const data = addOrRemoveMembers('add', members)
+    return this.update({ id, data })
   }
 
   delete ({ id } = {}) {
@@ -65,17 +56,8 @@ class Workspaces {
   }
 
   removeMembers ({ id, members } = {}) {
-    if (!isMemberPropValid(members)) {
-      throw new Error(`No member provided`)
-    }
-
-    const membersToAdd = !Array.isArray(members) ? [members] : members
-    const membersQuery = createMemberPatchQuery({
-      members: membersToAdd,
-      operation: 'remove'
-    })
-
-    return this.update({ id, data: membersQuery })
+    const data = addOrRemoveMembers('remove', members)
+    return this.update({ id, data })
   }
 
   update ({ id, data } = {}) {
@@ -85,4 +67,16 @@ class Workspaces {
       data
     })
   }
+}
+
+const addOrRemoveMembers = (operation, members) => {
+  if (!isMemberPropValid(members)) {
+    throw new Error(`No member(s) provided`)
+  }
+
+  const membersToAdd = !Array.isArray(members) ? [members] : members
+  return createMemberPatchQuery({
+    members: membersToAdd,
+    operation
+  })
 }
