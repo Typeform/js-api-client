@@ -5,14 +5,14 @@ class Images {
     this._http = _http
   }
 
-  add ({ image, mediaType, fileName } = {}) {
+  add ({ image, url, fileName } = {}) {
     return this._http.request({
       method: 'post',
       url: `/images`,
       data: {
         image,
         file_name: fileName,
-        media_type: mediaType
+        url
       }
     })
   }
