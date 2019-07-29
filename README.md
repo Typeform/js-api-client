@@ -115,15 +115,18 @@ Each one of them encapsulates the operations related to it (like listing, updati
 #### `images.list()`
 - Get your images collection
 
-#### `images.get({ id, returns, size, backgroundSize, choiceSize })`
+#### `images.get({ id, size, backgroundSize, choiceSize })`
 - Get custom image by ID
-- `returns`: json, binary (default)
 - `size`: default, thumbnail, mobile
 - `backgroundSize`: default, thumbnail, mobile, tablet
 - `choiceSize`: default, thumbnail, supersize, supermobile, supersizefit, supermobilefit
 
-#### `images.add({ image, mediaType, fileName })`
-- Update an image to Typeform
+#### `images.add({ image, url, fileName })`
+
+- Add an image to Typeform
+- `image`: Base64 code for the image. Note that base64 encoders may add descriptors to the code (such as `data:image/png;base64,`). Do not include these descriptors in your image string---include only the base64 code. Use this or `url` (below)
+- `url`: URL of the image. Use this or `image` (above)
+- `fileName`: File name for the image
 
 #### `images.delete({ id })`
 - Deletes an image with the given ID
