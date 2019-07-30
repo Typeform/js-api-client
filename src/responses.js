@@ -1,8 +1,8 @@
-export default (http) => new Responses(http)
+export default http => new Responses(http)
 
 class Responses {
-  constructor(_http) {
-    this._http = _http;
+  constructor (_http) {
+    this._http = _http
   }
 
   list({
