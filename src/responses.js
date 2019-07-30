@@ -1,4 +1,4 @@
-export default (http) => new Responses(http);
+export default (http) => new Responses(http)
 
 class Responses {
   constructor(_http) {
@@ -19,7 +19,7 @@ class Responses {
     fields,
   } = {}) {
     return this._http.request({
-      method: "get",
+      method: 'get',
       url: `/forms/${uid}/responses`,
       params: {
         page_size: pageSize,
@@ -31,8 +31,8 @@ class Responses {
         completed,
         sort,
         query,
-        fields,
-      },
-    });
+        fields
+      }
+    })
   }
 }
