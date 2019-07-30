@@ -1,42 +1,42 @@
-export default http => ({
-  get: args => getWebhook(http, args),
-  create: args => createWebhook(http, args),
-  update: args => updateWebhook(http, args),
-  delete: args => deleteWebhook(http, args)
-})
+export default http => new Webhooks(http)
 
-const getWebhook = (http, { uid, tag }) => {
-  return http.request({
-    method: 'get',
-    url: `/forms/${uid}/webhooks/${tag}`
-  })
+class Webhooks {
+  constructor (_http) {
+    this._http = _http
+  }
+
+  create (args) {
+    return createOrUpdateWebhook(this._http, args)
+  }
+
+  delete ({ uid, tag } = {}) {
+    return this._http.request({
+      method: 'delete',
+      url: `/forms/${uid}/webhooks/${tag}`
+    })
+  }
+
+  get ({ uid, tag } = {}) {
+    return this._http.request({
+      method: 'get',
+      url: `/forms/${uid}/webhooks/${tag}`
+    })
+  }
+
+  update (args) {
+    return createOrUpdateWebhook(this._http, args)
+  }
 }
 
-const createWebhook = (http, args) => {
-  return createOrUpdateWebhook(http, args)
-}
-
-const updateWebhook = (http, args) => {
-  return createOrUpdateWebhook(http, args)
-}
-
-const deleteWebhook = (http, { uid, tag }) => {
-  return http.request({
-    method: 'delete',
-    url: `/forms/${uid}/webhooks/${tag}`
-  })
-}
-
-const createOrUpdateWebhook = (
-  http,
-  { uid, tag, url, enable = false }
-) => {
-  if (url === undefined) {
+const createOrUpdateWebhook = (http, { uid, tag, url, enable = false } = {}) => {
+  if (!url) {
     throw new Error(`Please provide an url for ${tag}`)
   }
-  if (tag === undefined) {
+
+  if (!tag) {
     throw new Error(`Please provide a tag name for the webhook`)
   }
+
   return http.request({
     method: 'put',
     url: `/forms/${uid}/webhooks/${tag}`,
