@@ -212,7 +212,7 @@ Each one of them encapsulates the operations related to it (like listing, updati
 - `tag`: Unique name you want to use for the webhook.
 - `url`: Webhook URL.
 - `enabled`: `true` if you want to send responses to the webhook immediately. Otherwise, `false`.
-- `secret`: If specified, will be used to sign the webhook payload with HMAC SHA256, so that you can verify that it came from Typeform.
+- `secret`: If specified, will be used to sign the webhook payload with HMAC SHA256, so that you can verify that it came from Typeform. (Recommended to add security)
 - `verifySSL`: `true` if you want Typeform to verify SSL certificates when delivering payloads.
 
 #### `webhooks.delete({ uid, tag })`
