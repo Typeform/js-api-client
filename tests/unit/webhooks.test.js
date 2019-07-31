@@ -13,12 +13,6 @@ const http = clientConstructor({
 })
 const webhooksRequest = webhooks(http)
 
-test('List webhooks has the correct path and method', () => {
-  webhooksRequest.get({ uid: 2, tag: 'test' })
-  expect(fetch.mock.calls[0][1].method).toBe('get')
-  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/forms/2/webhooks/test`)
-})
-
 test('Create a new webhooks has the correct path, method and url', () => {
   webhooksRequest.create({
     uid: 2,
@@ -35,6 +29,18 @@ test('Create a new webhooks has the correct path, method and url', () => {
 
 test('Create a new webhooks requires a url', () => {
   expect(() => webhooksRequest.create({ uid: 2, tag: 'test' })).toThrow()
+})
+
+test('`get()` webhooks has the correct path and method', () => {
+  webhooksRequest.get({ uid: 2, tag: 'test' })
+  expect(fetch.mock.calls[0][1].method).toBe('get')
+  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/forms/2/webhooks/test`)
+})
+
+test('`list()` webhooks has the correct path and method', () => {
+  webhooksRequest.list({ uid: 2 })
+  expect(fetch.mock.calls[0][1].method).toBe('get')
+  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/forms/2/webhooks`)
 })
 
 test('update a new webhooks sends the correct payload', () => {

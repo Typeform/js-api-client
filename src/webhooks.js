@@ -23,12 +23,19 @@ class Webhooks {
     })
   }
 
+  list ({ uid } = {}) {
+    return this._http.request({
+      method: 'get',
+      url: `/forms/${uid}/webhooks`
+    })
+  }
+
   update (args) {
     return createOrUpdateWebhook(this._http, args)
   }
 }
 
-const createOrUpdateWebhook = (http, { uid, tag, url, enable = false } = {}) => {
+const createOrUpdateWebhook = (http, { uid, tag, url, enable = false, secret, verifySSL } = {}) => {
   if (!url) {
     throw new Error(`Please provide an url for ${tag}`)
   }
@@ -42,7 +49,9 @@ const createOrUpdateWebhook = (http, { uid, tag, url, enable = false } = {}) => 
     url: `/forms/${uid}/webhooks/${tag}`,
     data: {
       url,
-      enable
+      enable,
+      secret,
+      verify_ssl: verifySSL ? true : undefined
     }
   })
 }
