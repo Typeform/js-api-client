@@ -201,9 +201,26 @@ Each one of them encapsulates the operations related to it (like listing, updati
 
 ### Responses
 
-#### `responses.list({ uid, pageSize, since, until, after, before, completed, sort, query, fields })`
-- List responses from the given ID
-- `uid`: typeform UID
+#### `responses.delete({ uid, ids })`
+
+- Delete responses to a form.
+- `uid`: Unique ID for the form.
+- `ids`: Tokens of the responses to delete. You can list up to 1000 tokens. Accepts either a string or an array of strings.
+
+#### `responses.list({ uid, pageSize, since, until, after, before, ids, completed, sort, query, fields })`
+
+- Returns form responses and date and time of form landing and submission.
+- `uid`: Unique ID for the form.
+- `pageSize`: Maximum number of responses. Default value is 25. Maximum value is 1000.
+- `since`: Limit request to responses submitted since the specified date and time. In ISO 8601 format, UTC time, to the second, with T as a delimiter between the date and time.
+- `until`: Limit request to responses submitted until the specified date and time. In ISO 8601 format, UTC time, to the second, with T as a delimiter between the date and time.
+- `after`: Limit request to responses submitted after the specified token. If you use the `after` parameter, the responses will be sorted in the order that our system processed them (instead of the default order, `submitted_at`).
+- `before`: Limit request to responses submitted before the specified token. If you use the `before` parameter, the responses will be sorted in the order that our system processed them (instead of the default order, `submitted_at`).
+- `ids`: Limit request to the specified ids. Accepts either a string or an array of strings.
+- `completed`: `true` if form was submitted. Otherwise, `false`.
+- `sort`: Order of responses. Currently, responses are automatically sorted by `submitted_at,desc`---the date they were submitted, from newest to oldest. We plan to add more options for sort order soon.
+- `query`: Limit request to only responses that that include the specified string. You can specify any string as the `query` value. The string will be escaped, and the query will include Hidden Fields.
+- `fields`: Limit request to only responses for the specified fields. Accepts either a string or an array of strings.
 - For parameter details check [the documentation](https://developer.typeform.com/responses/reference/retrieve-responses/)
 
 ### Webhooks
