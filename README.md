@@ -203,9 +203,9 @@ Each one of them encapsulates the operations related to it (like listing, updati
 
 #### `workspaces.update({ id, data })`
 
-- Update a workspace.information for the given ID
+- Update a workspace.
 - `id`: Unique ID for the workspace.
-- `data`: operation to perform that is wanted. See more details in [the documentation](https://developer.typeform.com/create/reference/update-workspace/)
+- `data`: Patch operation to perform in an array structure. See more details in [the documentation](https://developer.typeform.com/create/reference/update-workspace/)
 
 ### Responses
 
