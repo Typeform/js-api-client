@@ -1,7 +1,6 @@
 /* globals fetch */
 import 'isomorphic-fetch'
 import { API_BASE_URL } from './constants'
-import { buildUrlWithParams } from './utils';
 
 export const clientConstructor = ({ token, ...options }) => {
   return {
@@ -35,7 +34,15 @@ export const clientConstructor = ({ token, ...options }) => {
         }
       })
         .then(response => response.json())
-        .catch(error => { throw new Error(error) })
     }
   }
+}
+
+export const buildUrlWithParams = (url, params = {}) => {
+  const queryParams = Object.keys(params)
+    .filter((key) => params[key] !== undefined && params[key] !== null)
+    .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+    .join('&')
+
+  return queryParams ? `${url}?${queryParams}` : url
 }

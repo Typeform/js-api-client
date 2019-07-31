@@ -1,82 +1,66 @@
 import { FONTS_AVAILABLE } from './constants'
 
-export default http => ({
-  list: args => getThemes(http, args),
-  get: args => getTheme(http, args),
-  create: args => createTheme(http, args),
-  delete: args => deleteTheme(http, args),
-  update: args => updateTheme(http, args)
-})
+export default http => new Themes(http)
 
-const getThemes = (http, { page, pageSize } = {}) => {
-  return http.request({
-    method: 'get',
-    url: '/themes',
-    params: {
-      page,
-      page_size: pageSize
+class Themes {
+  constructor (_http) {
+    this._http = _http
+  }
+
+  create (args) {
+    return createOrUpdateTheme(this._http, args)
+  }
+
+  delete ({ id } = {}) {
+    return this._http.request({
+      method: 'delete',
+      url: `/themes/${id}`
+    })
+  }
+
+  get ({ id } = {}) {
+    return this._http.request({
+      method: 'get',
+      url: `/themes/${id}`
+    })
+  }
+
+  list ({ page, pageSize } = {}) {
+    return this._http.request({
+      method: 'get',
+      url: '/themes',
+      params: {
+        page,
+        page_size: pageSize
+      }
+    })
+  }
+
+  update (args) {
+    return createOrUpdateTheme(this._http, args)
+  }
+}
+
+const createOrUpdateTheme = (http, { id, background, colors, font, hasTransparentButton, name } = {}) => {
+  // check if required properties are defined
+  const requiredProperties = { name, font, colors }
+  Object.getOwnPropertyNames(requiredProperties).forEach((property) => {
+    if (!requiredProperties[property]) {
+      throw new Error(`The property, ${property}, is required`)
     }
   })
-}
-
-const getTheme = (http, { id }) => {
-  return http.request({
-    method: 'get',
-    url: `/themes/${id}`
-  })
-}
-
-const createTheme = (
-  http,
-  { background, colors, font, hasTransparentButton, name }
-) => {
-  // check if required properties are defined
-  if ([name, font, colors].includes(undefined)) {
-    throw `Please add the required fields`
-  }
 
   if (!FONTS_AVAILABLE.includes(font)) {
-    throw `It's not a valid font`
+    throw new Error(`${font} is not a valid font`)
   }
 
   return http.request({
-    method: 'post',
-    url: `/themes`,
+    method: id ? 'put' : 'post',
+    url: id ? `/themes/${id}` : '/themes',
     background,
     colors,
     font,
-    has_transparent_button: hasTransparentButton,
-    name
-  })
-}
-
-const deleteTheme = (http, { id }) => {
-  return http.request({
-    method: 'delete',
-    url: `/themes/${id}`
-  })
-}
-
-const updateTheme = (
-  http,
-  { id, background, colors, font, hasTransparentButton, name }
-) => {
-  // check if required properties are defined
-  if ([name, font, colors].includes(undefined)) {
-    throw `Please add the required fields`
-  }
-
-  if (!FONTS_AVAILABLE.includes(font)) {
-    throw `It's not a valid font`
-  }
-
-  return http.request({
-    method: 'put',
-    url: `/themes/${id}`,
-    background,
-    colors,
-    font,
-    has_transparent_button: hasTransparentButton,
+    has_transparent_button: !!hasTransparentButton,
     name
   })
 }

@@ -1,99 +1,85 @@
 import { isMemberPropValid, createMemberPatchQuery } from './utils'
 
-export default http => ({
-  list: args => getWorkspaces(http, args),
-  get: args => getWorkspace(http, args),
-  add: args => addWorkspace(http, args),
-  update: args => updateWorkspace(http, args),
-  delete: args => deleteWorkspace(http, args),
-  addMembers: args => addMembers(http, args),
-  removeMembers: args => removeMembers(http, args)
-})
+export default http => new Workspaces(http)
 
-const getWorkspaces = (http, { search, page, pageSize } = {}) => {
-  return http.request({
-    method: 'get',
-    url: '/workspaces',
-    params: {
-      page,
-      page_size: pageSize,
-      search
-    }
-  })
-}
-
-const getWorkspace = (http, { id }) => {
-  return http.request({
-    method: 'get',
-    url: `/workspaces/${id}`
-  })
-}
-
-const addWorkspace = (http, { name }) => {
-  if (name === undefined) {
-    throw `A name is required`
+class Workspaces {
+  constructor (_http) {
+    this._http = _http
   }
 
-  return http.request({
-    method: 'post',
-    url: `/workspaces`
-  })
+  add ({ name } = {}) {
+    if (!name) {
+      throw new Error(`A name is required`)
+    }
+
+    return this._http.request({
+      method: 'post',
+      url: '/workspaces',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: {
+        name
+      }
+    })
+  }
+
+  addMembers ({ id, members } = {}) {
+    const data = addOrRemoveMembers('add', members)
+    return this.update({ id, data })
+  }
+
+  delete ({ id } = {}) {
+    return this._http.request({
+      method: 'delete',
+      url: `/workspaces/${id}`
+    })
+  }
+
+  get ({ id } = {}) {
+    return this._http.request({
+      method: 'get',
+      url: `/workspaces/${id}`
+    })
+  }
+
+  list ({ search, page, pageSize } = {}) {
+    return this._http.request({
+      method: 'get',
+      url: '/workspaces',
+      params: {
+        page,
+        page_size: pageSize,
+        search
+      }
+    })
+  }
+
+  removeMembers ({ id, members } = {}) {
+    const data = addOrRemoveMembers('remove', members)
+    return this.update({ id, data })
+  }
+
+  update ({ id, data } = {}) {
+    return this._http.request({
+      method: 'patch',
+      url: `/workspaces/${id}`,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data
+    })
+  }
 }
 
-const updateWorkspace = (http, { id, data } = {}) => {
-  return http.request({
-    method: 'patch',
-    url: `/workspaces/${id}`,
-    data
-  })
-}
-
-const addMembers = (http, { id, members }) => {
+const addOrRemoveMembers = (operation, members) => {
   if (!isMemberPropValid(members)) {
-    throw `No member provided`
+    throw new Error(`No member(s) provided`)
   }
 
   const membersToAdd = !Array.isArray(members) ? [members] : members
-  const membersQuery = createMemberPatchQuery({
+  return createMemberPatchQuery({
     members: membersToAdd,
-    operation: 'add'
-  })
-
-  return updateWorkspace(http, { id, data: membersQuery })
-}
-
-const removeMembers = (http, { id, members }) => {
-  if (!isMemberPropValid(members)) {
-    throw `No member provided`
-  }
-
-  const membersToAdd = !Array.isArray(members) ? [members] : members
-  const membersQuery = createMemberPatchQuery({
-    members: membersToAdd,
-    operation: 'remove'
-  })
-
-  return updateWorkspace(http, { id, data: membersQuery })
-}
-
-const deleteWorkspace = (http, { id }) => {
-  return http.request({
-    method: 'delete',
-    url: `/workspaces/${id}`
-  })
-}
-
-export const getWorkspaceForms = (
-  http,
-  { id, fromId, page, pageSize } = {}
-) => {
-  return http.request({
-    method: 'get',
-    url: `/workspaces/${id}/forms`,
-    params: {
-      page,
-      page_size: pageSize,
-      from_id: fromId
-    }
+    operation
   })
 }

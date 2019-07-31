@@ -25,3 +25,15 @@ test('List responses with the given filters', () => {
   expect(params.get('page_size')).toBe('15')
   expect(params.get('after')).toBe('12345')
 })
+
+test('Delete responses has the correct path and method when given string for `ids`', () => {
+  responsesRequest.delete({ uid: 2, ids: '123' })
+  expect(fetch.mock.calls[0][1].method).toBe('delete')
+  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/forms/2/responses?included_tokens=123`)
+})
+
+test('Delete responses has the correct path and method when given array of strings for `ids`', () => {
+  responsesRequest.delete({ uid: 2, ids: ['123', '456', '789'] })
+  expect(fetch.mock.calls[0][1].method).toBe('delete')
+  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/forms/2/responses?included_tokens=123%2C456%2C789`)
+})

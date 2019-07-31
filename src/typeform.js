@@ -8,7 +8,7 @@ import responses from './responses'
 import webhooks from './webhooks'
 
 export const createClient = (args = {}) => {
-  if (args.token === undefined) {
+  if (!args.token) {
     throw new Error('Token is missing')
   }
 

@@ -70,4 +70,3 @@ test('Updating a theme has the correct path and method', () => {
   expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/themes/2`)
   expect(fetch.mock.calls[0][1].method).toBe('put')
 })
-
