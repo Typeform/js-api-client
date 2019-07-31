@@ -9,9 +9,5 @@ export const createMemberPatchQuery = ({ members, operation }) => {
 }
 
 export const isMemberPropValid = members => {
-  if (!members || !(typeof members === 'string' || Array.isArray(members))) {
-    return false
-  }
-
-  return true
+  return (members && (typeof members === 'string' || Array.isArray(members)))
 }

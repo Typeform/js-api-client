@@ -169,35 +169,46 @@ Each one of them encapsulates the operations related to it (like listing, updati
 
 ### Workspaces
 
-#### `workspaces.list({ page, pageSize, search })`
-- Gets your workspaces
-- `page`: default `1`
-- `pageSize`: default `10` 
-- `search`: search a workspace that partially matches the search string
+#### `workspaces.add({ name })`
 
-#### `workspaces.get({ id })`
-- Gets the workspace information for the given ID
-
-#### `workspaces.update({ id, data })`
-- Updates the workspace information for the given ID
-- `data`: operation to perform that is wanted 
-- See more details in [the documentation](https://developer.typeform.com/create/reference/update-workspace/)
-
-#### `workspaces.delete({ id })`
-- Deletes the workspace for the given ID
-
-#### `workspaces.get({ id })`
-- Gets the workspace information for the given ID
+- Create a workspace.
+- `name`: Name of the new workspace.
 
 #### `workspaces.addMembers({ id, members })`
+
 - Add members to a workspace for the given ID
+- `id`: Unique ID for the workspace.
 - `members`: `string` or an `array` that should be the email of the user
 - Adding multiple members at once is possible using an array of emails
 
+#### `workspaces.delete({ id })`
+
+- Delete a workspace.
+- `id`: Unique ID for the workspace.
+
+#### `workspaces.get({ id })`
+
+- Retrieve a workspace.
+- `id`: Unique ID for the workspace.
+
+#### `workspaces.list({ page, pageSize, search })`
+
+- Retrieve all workspaces in your account.
+- `page`: The page of results to retrieve. Default `1` is the first page of results.
+- `pageSize`: Number of results to retrieve per page. Default is 10. Maximum is 200.
+- `search`: Returns items that contain the specified string.
+
 #### `workspaces.removeMembers({ id, members })`
+
 - Remove members from a workspace for the given ID
 - `members`: `string` or an `array` that should be the email of the user
 - Removing multiple members at once is possible using an array of emails
+
+#### `workspaces.update({ id, data })`
+
+- Update a workspace.
+- `id`: Unique ID for the workspace.
+- `data`: Patch operation to perform in an array structure. See more details in [the documentation](https://developer.typeform.com/create/reference/update-workspace/)
 
 ### Responses
 

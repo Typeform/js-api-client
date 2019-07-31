@@ -14,7 +14,10 @@ class Workspaces {
 
     return this._http.request({
       method: 'post',
-      url: `/workspaces`,
+      url: '/workspaces',
+      headers: {
+        'Content-Type': 'application/json'
+      },
       data: {
         name
       }
@@ -22,17 +25,8 @@ class Workspaces {
   }
 
   addMembers ({ id, members } = {}) {
-    if (!isMemberPropValid(members)) {
-      throw new Error(`No member provided`)
-    }
-
-    const membersToAdd = !Array.isArray(members) ? [members] : members
-    const membersQuery = createMemberPatchQuery({
-      members: membersToAdd,
-      operation: 'add'
-    })
-
-    return this.update({ id, data: membersQuery })
+    const data = addOrRemoveMembers('add', members)
+    return this.update({ id, data })
   }
 
   delete ({ id } = {}) {
@@ -62,24 +56,30 @@ class Workspaces {
   }
 
   removeMembers ({ id, members } = {}) {
-    if (!isMemberPropValid(members)) {
-      throw new Error(`No member provided`)
-    }
-
-    const membersToAdd = !Array.isArray(members) ? [members] : members
-    const membersQuery = createMemberPatchQuery({
-      members: membersToAdd,
-      operation: 'remove'
-    })
-
-    return this.update({ id, data: membersQuery })
+    const data = addOrRemoveMembers('remove', members)
+    return this.update({ id, data })
   }
 
   update ({ id, data } = {}) {
     return this._http.request({
       method: 'patch',
       url: `/workspaces/${id}`,
+      headers: {
+        'Content-Type': 'application/json'
+      },
       data
     })
   }
+}
+
+const addOrRemoveMembers = (operation, members) => {
+  if (!isMemberPropValid(members)) {
+    throw new Error(`No member(s) provided`)
+  }
+
+  const membersToAdd = !Array.isArray(members) ? [members] : members
+  return createMemberPatchQuery({
+    members: membersToAdd,
+    operation
+  })
 }
