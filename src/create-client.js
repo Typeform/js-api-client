@@ -35,6 +35,7 @@ export const clientConstructor = ({ token, ...options }) => {
         }
       })
         .then(response => response.data)
+        .catch(error => error.response.data)
     }
   }
 }
