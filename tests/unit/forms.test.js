@@ -3,8 +3,8 @@ import { API_BASE_URL } from '../../src/constants'
 import forms from '../../src/forms'
 
 beforeEach(() => {
-  fetch.resetMocks()
-  fetch.mockResponse(JSON.stringify({}))
+  axios.reset()
+  axios.onAny().reply(200)
 })
 
 const http = clientConstructor({
@@ -12,101 +12,96 @@ const http = clientConstructor({
 })
 const formsRequest = forms(http)
 
-test('get all forms has the correct method and path', () => {
-  formsRequest.list()
-
-  const url = fetch.mock.calls[0][0].split('?')
-  expect(url[0]).toBe(`${API_BASE_URL}/forms`)
-  expect(fetch.mock.calls[0][1].method).toBe('get')
+test('get all forms has the correct method and path', async () => {
+  await formsRequest.list()
+  expect(axios.history.get[0].url).toBe(`${API_BASE_URL}/forms`)
+  expect(axios.history.get[0].method).toBe('get')
 })
 
-test('paramters are sent correctly', () => {
-  formsRequest.list({
+test('paramters are sent correctly', async () => {
+  await formsRequest.list({
     page: 2,
     pageSize: 10,
     search: 'hola',
     workspaceId: 'abc'
   })
-  const url = fetch.mock.calls[0][0].split('?')
+  const url = axios.history.get[0].url.split('?')
   const params = new URLSearchParams(url[1])
   expect(params.get('page')).toBe('2')
-  expect(params.get('page')).toBe('2')
-  expect(params.get('page')).toBe('2')
-  expect(params.get('page')).toBe('2')
+  expect(params.get('page_size')).toBe('10')
+  expect(params.get('search')).toBe('hola')
+  expect(params.get('workspace_id')).toBe('abc')
 })
 
-test('getForm sends the correct UID', () => {
-  formsRequest.get({ uid: 'abc123' })
-  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/forms/abc123`)
+test('getForm sends the correct UID', async () => {
+  await formsRequest.get({ uid: 'abc123' })
+  expect(axios.history.get[0].url).toBe(`${API_BASE_URL}/forms/abc123`)
 })
 
-test('getForm sets get method', () => {
-  formsRequest.get({ uid: 'abc123' })
-  expect(fetch.mock.calls[0][1].method).toBe('get')
+test('getForm sets get method', async () => {
+  await formsRequest.get({ uid: 'abc123' })
+  expect(axios.history.get[0].method).toBe('get')
 })
 
-test('updateForm sends the correct UID and data', () => {
-  formsRequest.update({
+test('updateForm sends the correct UID and data', async () => {
+  await formsRequest.update({
     uid: 'abc123',
     data: {
       title: 'hola'
     }
   })
-  const bodyParsed = JSON.parse(fetch.mock.calls[0][1].body)
-  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/forms/abc123`)
+  const bodyParsed = JSON.parse(axios.history.patch[0].data)
+  expect(axios.history.patch[0].url).toBe(`${API_BASE_URL}/forms/abc123`)
   expect(bodyParsed.title).toBe('hola')
 })
 
-test('updateForm sets patch method in request by default', () => {
-  formsRequest.update({
+test('updateForm sets patch method in request by default', async () => {
+  await formsRequest.update({
     uid: 'abc123',
     data: {
       title: 'hola'
     }
   })
-  expect(fetch.mock.calls[0][1].method).toBe('patch')
+  expect(axios.history.patch[0].method).toBe('patch')
 })
 
-test('updateForm sets put method in request when override option is set', () => {
-  formsRequest.update({
+test('updateForm sets put method in request when override option is set', async () => {
+  await formsRequest.update({
     uid: 'abc123',
     data: {
       title: 'hola'
     },
     override: true
   })
-
-  expect(fetch.mock.calls[0][1].method).toBe('put')
+  expect(axios.history.put[0].method).toBe('put')
 })
 
-test('deleteForm removes the correct uid form ', () => {
-  formsRequest.delete({
+test('deleteForm removes the correct uid form ', async () => {
+  await formsRequest.delete({
+    uid: 'abc123'
+  })
+  expect(axios.history.delete[0].method).toBe('delete')
+  expect(axios.history.delete[0].url).toBe(`${API_BASE_URL}/forms/abc123`)
+})
+
+test('create form has the correct path and method ', async () => {
+  await formsRequest.create({})
+  expect(axios.history.post[0].method).toBe('post')
+  expect(axios.history.post[0].url).toBe(`${API_BASE_URL}/forms`)
+})
+
+test('get messages has the correct path and method ', async () => {
+  await formsRequest.messages.get({ uid: 'abc123' })
+
+  expect(axios.history.get[0].method).toBe('get')
+  expect(axios.history.get[0].url).toBe(`${API_BASE_URL}/forms/abc123/messages`)
+})
+
+test('update messages has the correct path and method ', async () => {
+  await formsRequest.messages.update({
     uid: 'abc123'
   })
 
-  expect(fetch.mock.calls[0][1].method).toBe('delete')
-  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/forms/abc123`)
-})
-
-test('create form has the correct path and method ', () => {
-  formsRequest.create({})
-
-  expect(fetch.mock.calls[0][1].method).toBe('post')
-  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/forms`)
-})
-
-test('get messages has the correct path and method ', () => {
-  formsRequest.messages.get({ uid: 'abc123' })
-
-  expect(fetch.mock.calls[0][1].method).toBe('get')
-  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/forms/abc123/messages`)
-})
-
-test('update messages has the correct path and method ', () => {
-  formsRequest.messages.update({
-    uid: 'abc123'
-  })
-
-  expect(fetch.mock.calls[0][1].method).toBe('put')
-  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/forms/abc123/messages`)
+  expect(axios.history.put[0].method).toBe('put')
+  expect(axios.history.put[0].url).toBe(`${API_BASE_URL}/forms/abc123/messages`)
 })

@@ -3,8 +3,8 @@ import { API_BASE_URL } from '../../src/constants'
 import workspaces from '../../src/workspaces'
 
 beforeEach(() => {
-  fetch.resetMocks()
-  fetch.mockResponse(JSON.stringify({}))
+  axios.reset()
+  axios.onAny().reply(200)
 })
 
 const http = clientConstructor({
@@ -12,56 +12,56 @@ const http = clientConstructor({
 })
 const workspacesRequest = workspaces(http)
 
-test(`Get workspaces has the correct path`, () => {
-  workspacesRequest.list()
-  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/workspaces`)
+test(`Get workspaces has the correct path`, async () => {
+  await workspacesRequest.list()
+  expect(axios.history.get[0].url).toBe(`${API_BASE_URL}/workspaces`)
 })
 
-test(`Get workspaces has the correct query parameters`, () => {
-  workspacesRequest.list({
+test(`Get workspaces has the correct query parameters`, async () => {
+  await workspacesRequest.list({
     search: 'hola',
     page: 2,
     pageSize: 10
   })
-
-  const params = new URL(fetch.mock.calls[0][0]).searchParams
+  const params = new URL(axios.history.get[0].url).searchParams
   expect(params.get('search')).toBe('hola')
   expect(params.get('page')).toBe('2')
   expect(params.get('page_size')).toBe('10')
 })
 
-test(`Get specific workscape has the correct path and method`, () => {
-  workspacesRequest.get({ id: 2 })
-  expect(fetch.mock.calls[0][1].method).toBe(`get`)
-  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/workspaces/2`)
+test(`Get specific workscape has the correct path and method`, async () => {
+  await workspacesRequest.get({ id: 2 })
+  expect(axios.history.get[0].url).toBe(`${API_BASE_URL}/workspaces/2`)
+  expect(axios.history.get[0].method).toBe('get')
 })
 
 test(`Create a workscape requires a title`, () => {
   expect(() => workspacesRequest.add({})).toThrow(`A name is required`)
 })
 
-test(`Create a workscape has the correct method`, () => {
-  workspacesRequest.add({
+test(`Create a workscape has the correct method`, async () => {
+  await workspacesRequest.add({
     name: 'new workspace'
   })
-  expect(fetch.mock.calls[0][1].method).toBe(`post`)
+  expect(axios.history.post[0].method).toBe(`post`)
 })
 
-test(`add a member to a workscape has the correct method and path`, () => {
-  workspacesRequest.addMembers({
+test(`add a member to a workscape has the correct method and path`, async () => {
+  await workspacesRequest.addMembers({
     id: 2,
     members: 'test@test.com'
   })
-  expect(fetch.mock.calls[0][1].method).toBe(`patch`)
-  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/workspaces/2`)
+  expect(axios.history.patch[0].url).toBe(`${API_BASE_URL}/workspaces/2`)
+  expect(axios.history.patch[0].method).toBe(`patch`)
 })
-test(`add a member to a workscape has the correct payload`, () => {
-  workspacesRequest.addMembers({
+
+test(`add a member to a workscape has the correct payload`, async () => {
+  await workspacesRequest.addMembers({
     id: 2,
     members: ['test@test.com', 'test2@test.com']
   })
-  const body = fetch.mock.calls[0][1].body
-  expect(body).toEqual(JSON.stringify([
+  const body = JSON.parse(axios.history.patch[0].data)
+  expect(body).toEqual([
     {
       op: 'add',
       path: '/members',
@@ -76,19 +76,17 @@ test(`add a member to a workscape has the correct payload`, () => {
         email: 'test2@test.com'
       }
     }
-  ]))
-  expect(JSON.parse(body).length).toEqual(2)
+  ])
+  expect(body.length).toEqual(2)
 })
 
-test(`remove a member to a workscape has the correct payload`, () => {
-  workspacesRequest.removeMembers({
+test(`remove a member to a workscape has the correct payload`, async () => {
+  await workspacesRequest.removeMembers({
     id: 2,
     members: ['test@test.com']
   })
-
-  const body = fetch.mock.calls[0][1].body
-
-  expect(body).toEqual(JSON.stringify([
+  const body = JSON.parse(axios.history.patch[0].data)
+  expect(body).toEqual([
     {
       op: 'remove',
       path: '/members',
@@ -96,12 +94,12 @@ test(`remove a member to a workscape has the correct payload`, () => {
         email: 'test@test.com'
       }
     }
-  ]))
-  expect(JSON.parse(body).length).toEqual(1)
+  ])
+  expect(body.length).toEqual(1)
 })
 
-test(`Deleting a workscape has the correct path and method`, () => {
-  workspacesRequest.delete({ id: 2 })
-  expect(fetch.mock.calls[0][1].method).toBe(`delete`)
-  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/workspaces/2`)
+test(`Deleting a workscape has the correct path and method`, async () => {
+  await workspacesRequest.delete({ id: 2 })
+  expect(axios.history.delete[0].url).toBe(`${API_BASE_URL}/workspaces/2`)
+  expect(axios.history.delete[0].method).toBe(`delete`)
 })

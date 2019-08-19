@@ -2,24 +2,24 @@ import { clientConstructor, buildUrlWithParams } from '../../src/create-client'
 import { API_BASE_URL } from '../../src/constants'
 
 beforeEach(() => {
-  fetch.resetMocks()
-  fetch.mockResponse(JSON.stringify({}))
+  axios.reset()
+  axios.onAny().reply(200)
 })
 
 const client = clientConstructor({
   token: 'abc'
 })
 
-test('request pass correct headers', () => {
-  client.request({
+test('request pass correct headers', async () => {
+  await client.request({
     url: '/forms',
     headers: {
       Accepts: 'application/json'
     }
   })
-
-  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/forms`)
-  expect(fetch.mock.calls[0][1].headers).toEqual({
+  expect(axios.history.get[0].url).toBe(`${API_BASE_URL}/forms`)
+  expect(axios.history.get[0].headers).toEqual({
+    Accept: 'application/json, text/plain, */*',
     Accepts: 'application/json',
     Authorization: 'bearer abc'
   })

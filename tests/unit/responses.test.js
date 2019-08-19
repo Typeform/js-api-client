@@ -3,8 +3,8 @@ import { clientConstructor } from '../../src/create-client'
 import responses from '../../src/responses'
 
 beforeEach(() => {
-  fetch.resetMocks()
-  fetch.mockResponse(JSON.stringify({}))
+  axios.reset()
+  axios.onAny().reply(200)
 })
 
 const http = clientConstructor({
@@ -13,27 +13,27 @@ const http = clientConstructor({
 
 const responsesRequest = responses(http)
 
-test('List responses has the correct path and method', () => {
-  responsesRequest.list({ uid: 2 })
-  expect(fetch.mock.calls[0][1].method).toBe('get')
-  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/forms/2/responses`)
+test('List responses has the correct path and method', async () => {
+  await responsesRequest.list({ uid: 2 })
+  expect(axios.history.get[0].url).toBe(`${API_BASE_URL}/forms/2/responses`)
+  expect(axios.history.get[0].method).toBe('get')
 })
 
-test('List responses with the given filters', () => {
-  responsesRequest.list({ uid: 2, pageSize: 15, after: '12345' })
-  const params = (new URL(fetch.mock.calls[0][0])).searchParams
+test('List responses with the given filters', async () => {
+  await responsesRequest.list({ uid: 2, pageSize: 15, after: '12345' })
+  const params = new URL(axios.history.get[0].url).searchParams
   expect(params.get('page_size')).toBe('15')
   expect(params.get('after')).toBe('12345')
 })
 
-test('Delete responses has the correct path and method when given string for `ids`', () => {
-  responsesRequest.delete({ uid: 2, ids: '123' })
-  expect(fetch.mock.calls[0][1].method).toBe('delete')
-  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/forms/2/responses?included_tokens=123`)
+test('Delete responses has the correct path and method when given string for `ids`', async () => {
+  await responsesRequest.delete({ uid: 2, ids: '123' })
+  expect(axios.history.delete[0].url).toBe(`${API_BASE_URL}/forms/2/responses?included_tokens=123`)
+  expect(axios.history.delete[0].method).toBe('delete')
 })
 
-test('Delete responses has the correct path and method when given array of strings for `ids`', () => {
-  responsesRequest.delete({ uid: 2, ids: ['123', '456', '789'] })
-  expect(fetch.mock.calls[0][1].method).toBe('delete')
-  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/forms/2/responses?included_tokens=123%2C456%2C789`)
+test('Delete responses has the correct path and method when given array of strings for `ids`', async () => {
+  await responsesRequest.delete({ uid: 2, ids: ['123', '456', '789'] })
+  expect(axios.history.delete[0].url).toBe(`${API_BASE_URL}/forms/2/responses?included_tokens=123%2C456%2C789`)
+  expect(axios.history.delete[0].method).toBe('delete')
 })

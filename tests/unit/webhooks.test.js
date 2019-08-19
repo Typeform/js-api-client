@@ -4,8 +4,8 @@ import { API_BASE_URL } from '../../src/constants'
 import webhooks from '../../src/webhooks'
 
 beforeEach(() => {
-  fetch.resetMocks()
-  fetch.mockResponse(JSON.stringify({}))
+  axios.reset()
+  axios.onAny().reply(200)
 })
 
 const http = clientConstructor({
@@ -13,50 +13,50 @@ const http = clientConstructor({
 })
 const webhooksRequest = webhooks(http)
 
-test('Create a new webhooks has the correct path, method and url', () => {
-  webhooksRequest.create({
+test('Create a new webhooks has the correct path, method and url', async () => {
+  const request = {
     uid: 2,
     tag: 'test',
     url: 'http://test.com',
     enable: true
-  })
-
-  const bodyParsed = JSON.parse(fetch.mock.calls[0][1].body)
-  expect(fetch.mock.calls[0][1].method).toBe('put')
-  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/forms/2/webhooks/test`)
-  expect(bodyParsed.url).toBe('http://test.com')
+  }
+  await webhooksRequest.create(request)
+  const bodyParsed = JSON.parse(axios.history.put[0].data)
+  expect(axios.history.put[0].method).toBe('put')
+  expect(axios.history.put[0].url).toBe(`${API_BASE_URL}/forms/2/webhooks/test`)
+  expect(bodyParsed.url).toBe(request.url)
 })
 
 test('Create a new webhooks requires a url', () => {
   expect(() => webhooksRequest.create({ uid: 2, tag: 'test' })).toThrow()
 })
 
-test('`get()` webhooks has the correct path and method', () => {
-  webhooksRequest.get({ uid: 2, tag: 'test' })
-  expect(fetch.mock.calls[0][1].method).toBe('get')
-  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/forms/2/webhooks/test`)
+test('`get()` webhooks has the correct path and method', async () => {
+  await webhooksRequest.get({ uid: 2, tag: 'test' })
+  expect(axios.history.get[0].url).toBe(`${API_BASE_URL}/forms/2/webhooks/test`)
+  expect(axios.history.get[0].method).toBe('get')
 })
 
-test('`list()` webhooks has the correct path and method', () => {
-  webhooksRequest.list({ uid: 2 })
-  expect(fetch.mock.calls[0][1].method).toBe('get')
-  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/forms/2/webhooks`)
+test('`list()` webhooks has the correct path and method', async () => {
+  await webhooksRequest.list({ uid: 2 })
+  expect(axios.history.get[0].url).toBe(`${API_BASE_URL}/forms/2/webhooks`)
+  expect(axios.history.get[0].method).toBe('get')
 })
 
-test('update a new webhooks sends the correct payload', () => {
-  webhooksRequest.update({
+test('update a new webhooks sends the correct payload', async () => {
+  const request = {
     uid: 2,
     tag: 'test',
-    url: 'http://example.com'
-  })
-
-  const bodyParsed = JSON.parse(fetch.mock.calls[0][1].body)
-  expect(bodyParsed.url).toBe('http://example.com')
-  expect(fetch.mock.calls[0][1].method).toBe('put')
+    url: 'http://test.com'
+  }
+  await webhooksRequest.update(request)
+  const bodyParsed = JSON.parse(axios.history.put[0].data)
+  expect(axios.history.put[0].method).toBe('put')
+  expect(bodyParsed.url).toBe(request.url)
 })
 
-test('Delete a webhook has the correct path and method', () => {
-  webhooksRequest.delete({ uid: 2, tag: 'test' })
-  expect(fetch.mock.calls[0][1].method).toBe('delete')
-  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/forms/2/webhooks/test`)
+test('Delete a webhook has the correct path and method', async () => {
+  await webhooksRequest.delete({ uid: 2, tag: 'test' })
+  expect(axios.history.delete[0].url).toBe(`${API_BASE_URL}/forms/2/webhooks/test`)
+  expect(axios.history.delete[0].method).toBe('delete')
 })

@@ -1,5 +1,4 @@
-/* globals fetch */
-import 'isomorphic-fetch'
+import axios from 'axios'
 import { API_BASE_URL } from './constants'
 
 export const clientConstructor = ({ token, ...options }) => {
@@ -24,16 +23,18 @@ export const clientConstructor = ({ token, ...options }) => {
         ...otherArgs
       }
 
-      return fetch(requestUrl, {
+      return axios({
+        url: requestUrl,
         ...requestParameters,
-        body: JSON.stringify(data),
+        data,
         headers: {
+          Accept: 'application/json, text/plain, */*',
           ...headers,
           ...argsHeaders,
           Authorization: `bearer ${token}`
         }
       })
-        .then(response => response.json())
+        .then(response => response.data)
     }
   }
 }

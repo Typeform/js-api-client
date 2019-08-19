@@ -4,5 +4,8 @@ module.exports = {
         "browser": true,
         "jest": true,
         "node": true
+    },
+    "globals": {
+        "axios": "readonly"
     }
 };
