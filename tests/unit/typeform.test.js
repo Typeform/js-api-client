@@ -2,8 +2,8 @@ import { clientConstructor } from '../../src/create-client'
 import { createClient } from '../../src/typeform'
 
 beforeEach(() => {
-  fetch.resetMocks()
-  fetch.mockResponse(JSON.stringify({}))
+  axios.reset()
+  axios.onAny().reply(200)
 })
 
 test('client constructor has a request function property', () => {

@@ -3,8 +3,8 @@ import { API_BASE_URL } from '../../src/constants'
 import teams from '../../src/teams'
 
 beforeEach(() => {
-  fetch.resetMocks()
-  fetch.mockResponse(JSON.stringify({}))
+  axios.reset()
+  axios.onAny().reply(200)
 })
 
 const http = clientConstructor({
@@ -12,19 +12,20 @@ const http = clientConstructor({
 })
 const teamsRequest = teams(http)
 
-test('getTeam has the correct url in the request', () => {
-  teamsRequest.get()
-  expect(fetch.mock.calls[0][0]).toBe(`${API_BASE_URL}/teams/mine`)
+test('getTeam has the correct url in the request', async () => {
+  await teamsRequest.get()
+  expect(axios.history.get[0].url).toBe(`${API_BASE_URL}/teams/mine`)
 })
 
-test('addMember will set the proper method', () => {
-  teamsRequest.addMembers({ members: ['test@test.com'] })
-  expect(fetch.mock.calls[0][1].method).toBe('patch')
+test('addMember will set the proper method', async () => {
+  await teamsRequest.addMembers({ members: ['test@test.com'] })
+  expect(axios.history.patch[0].method).toBe('patch')
 })
 
-test('if a member is sent as string it will work as expected', () => {
-  teamsRequest.addMembers({ members: 'test@test.com' })
-  expect(fetch.mock.calls[0][1].body).toEqual(JSON.stringify([
+test('if a member is sent as string it will work as expected', async () => {
+  await teamsRequest.addMembers({ members: 'test@test.com' })
+  const addMemberData = JSON.parse(axios.history.patch[0].data)
+  expect(addMemberData).toEqual([
     {
       op: 'add',
       path: '/members',
@@ -32,12 +33,13 @@ test('if a member is sent as string it will work as expected', () => {
         email: 'test@test.com'
       }
     }
-  ]))
+  ])
 })
 
-test('it will support array or multiple members at a time', () => {
-  teamsRequest.addMembers({ members: ['test@test.com', 'test2@test.com'] })
-  expect(fetch.mock.calls[0][1].body).toEqual(JSON.stringify([
+test('it will support array or multiple members at a time', async () => {
+  await teamsRequest.addMembers({ members: ['test@test.com', 'test2@test.com'] })
+  const addMembersData = JSON.parse(axios.history.patch[0].data)
+  expect(addMembersData).toEqual([
     {
       op: 'add',
       path: '/members',
@@ -52,21 +54,22 @@ test('it will support array or multiple members at a time', () => {
         email: 'test2@test.com'
       }
     }
-  ]))
+  ])
 })
 
 test('if no members or incorrect format defined throws', () => {
   expect(() => teamsRequest.addMembers({ members: {} })).toThrow()
 })
 
-test('removeMember will set the proper method', () => {
-  teamsRequest.removeMembers({ members: ['test@test.com'] })
-  expect(fetch.mock.calls[0][1].method).toBe('delete')
+test('removeMember will set the proper method', async () => {
+  await teamsRequest.removeMembers({ members: ['test@test.com'] })
+  expect(axios.history.delete[0].method).toBe('delete')
 })
 
-test('if a member is sent as string it will work as expected', () => {
-  teamsRequest.removeMembers({ members: 'test@test.com' })
-  expect(fetch.mock.calls[0][1].body).toEqual(JSON.stringify([
+test('if a member is sent as string it will work as expected', async () => {
+  await teamsRequest.removeMembers({ members: 'test@test.com' })
+  const removeMemberData = JSON.parse(axios.history.delete[0].data)
+  expect(removeMemberData).toEqual([
     {
       op: 'remove',
       path: '/members',
@@ -74,5 +77,5 @@ test('if a member is sent as string it will work as expected', () => {
         email: 'test@test.com'
       }
     }
-  ]))
+  ])
 })
