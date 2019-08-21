@@ -35,7 +35,13 @@ export const clientConstructor = ({ token, ...options }) => {
         }
       })
         .then(response => response.data)
-        .catch(error => error.response.data)
+        .catch(error => {
+          if (error && error.response && error.response.data && error.response.data.description) {
+            throw new Error(error.response.data.description)
+          } else {
+            throw new Error('Couldn\'t make request')
+          }
+        })
     }
   }
 }
