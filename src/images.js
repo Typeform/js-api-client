@@ -1,6 +1,4 @@
-export default http => new Images(http)
-
-class Images {
+export class Images {
   constructor (_http) {
     this._http = _http
   }

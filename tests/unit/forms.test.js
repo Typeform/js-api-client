@@ -1,6 +1,6 @@
 import { clientConstructor } from '../../src/create-client'
 import { API_BASE_URL } from '../../src/constants'
-import forms from '../../src/forms'
+import { Forms } from '../../src/forms'
 
 beforeEach(() => {
   axios.reset()
@@ -10,7 +10,7 @@ beforeEach(() => {
 const http = clientConstructor({
   token: '123'
 })
-const formsRequest = forms(http)
+const formsRequest = new Forms(http)
 
 test('get all forms has the correct method and path', async () => {
   await formsRequest.list()

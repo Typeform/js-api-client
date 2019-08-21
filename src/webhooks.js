@@ -1,6 +1,4 @@
-export default http => new Webhooks(http)
-
-class Webhooks {
+export class Webhooks {
   constructor (_http) {
     this._http = _http
   }

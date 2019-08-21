@@ -1,6 +1,4 @@
-export default http => new Responses(http)
-
-class Responses {
+export class Responses {
   constructor (_http) {
     this._http = _http
   }

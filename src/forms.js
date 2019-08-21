@@ -1,6 +1,4 @@
-export default http => new Form(http)
-
-class Form {
+export class Forms {
   constructor (_http) {
     this._http = _http
     this._messages = new FormMessages(_http)

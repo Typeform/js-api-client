@@ -1,5 +1,5 @@
 import { clientConstructor } from '../../src/create-client'
-import { createClient } from '../../src/typeform'
+import { createClient } from '../../src'
 
 beforeEach(() => {
   axios.reset()
