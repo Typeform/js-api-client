@@ -1,6 +1,6 @@
 import { API_BASE_URL } from '../../src/constants'
 import { clientConstructor } from '../../src/create-client'
-import responses from '../../src/responses'
+import { Responses } from '../../src/responses'
 
 beforeEach(() => {
   axios.reset()
@@ -11,7 +11,7 @@ const http = clientConstructor({
   token: '123'
 })
 
-const responsesRequest = responses(http)
+const responsesRequest = new Responses(http)
 
 test('List responses has the correct path and method', async () => {
   await responsesRequest.list({ uid: 2 })

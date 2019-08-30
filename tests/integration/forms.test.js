@@ -1,4 +1,4 @@
-import { createClient } from '../../src/typeform'
+import { createClient } from '../../src'
 
 jest.mock('../../src/constants', () => ({ API_BASE_URL: 'http://localhost:3000' }))
 

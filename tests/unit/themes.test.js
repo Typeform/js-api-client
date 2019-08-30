@@ -1,6 +1,6 @@
 import { clientConstructor } from '../../src/create-client'
 import { API_BASE_URL } from '../../src/constants'
-import themes from '../../src/themes'
+import { Themes } from '../../src/themes'
 
 const mockThemePayload = {
   name: 'New theme',
@@ -21,7 +21,7 @@ beforeEach(() => {
 const http = clientConstructor({
   token: '123'
 })
-const themesRequest = themes(http)
+const themesRequest = new Themes(http)
 
 test('Get themes has the correct path', async () => {
   await themesRequest.list()

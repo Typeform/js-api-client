@@ -1,8 +1,6 @@
 import { FONTS_AVAILABLE } from './constants'
 
-export default http => new Themes(http)
-
-class Themes {
+export class Themes {
   constructor (_http) {
     this._http = _http
   }

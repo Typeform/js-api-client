@@ -1,6 +1,6 @@
 import { clientConstructor } from '../../src/create-client'
 import { API_BASE_URL } from '../../src/constants'
-import teams from '../../src/teams'
+import { Teams } from '../../src/teams'
 
 beforeEach(() => {
   axios.reset()
@@ -10,7 +10,7 @@ beforeEach(() => {
 const http = clientConstructor({
   token: '123'
 })
-const teamsRequest = teams(http)
+const teamsRequest = new Teams(http)
 
 test('getTeam has the correct url in the request', async () => {
   await teamsRequest.get()

@@ -1,6 +1,6 @@
 import { clientConstructor } from '../../src/create-client'
 import { API_BASE_URL } from '../../src/constants'
-import images from '../../src/images'
+import { Images } from '../../src/images'
 
 beforeEach(() => {
   axios.reset()
@@ -10,7 +10,7 @@ beforeEach(() => {
 const http = clientConstructor({
   token: '123'
 })
-const imagesRequest = images(http)
+const imagesRequest = new Images(http)
 
 test('get images collection', async () => {
   await imagesRequest.list()

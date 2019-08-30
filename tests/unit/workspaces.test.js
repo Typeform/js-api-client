@@ -1,6 +1,6 @@
 import { clientConstructor } from '../../src/create-client'
 import { API_BASE_URL } from '../../src/constants'
-import workspaces from '../../src/workspaces'
+import { Workspaces } from '../../src/workspaces'
 
 beforeEach(() => {
   axios.reset()
@@ -10,7 +10,7 @@ beforeEach(() => {
 const http = clientConstructor({
   token: '123'
 })
-const workspacesRequest = workspaces(http)
+const workspacesRequest = new Workspaces(http)
 
 test(`Get workspaces has the correct path`, async () => {
   await workspacesRequest.list()

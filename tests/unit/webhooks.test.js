@@ -1,7 +1,6 @@
 import { clientConstructor } from '../../src/create-client'
 import { API_BASE_URL } from '../../src/constants'
-
-import webhooks from '../../src/webhooks'
+import { Webhooks } from '../../src/webhooks'
 
 beforeEach(() => {
   axios.reset()
@@ -11,7 +10,7 @@ beforeEach(() => {
 const http = clientConstructor({
   token: '123'
 })
-const webhooksRequest = webhooks(http)
+const webhooksRequest = new Webhooks(http)
 
 test('Create a new webhooks has the correct path, method and url', async () => {
   const request = {

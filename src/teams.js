@@ -1,8 +1,6 @@
 import { isMemberPropValid, createMemberPatchQuery } from './utils'
 
-export default http => new Teams(http)
-
-class Teams {
+export class Teams {
   constructor (_http) {
     this._http = _http
   }
