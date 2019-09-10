@@ -18,6 +18,7 @@
   "main": "dist/index.cjs.js",
   "browser": "dist/typeform-api.js",
   "module": "dist/index.esm.js",
+  "typings": "dist/index.d.ts",
   "engines": {
     "node": ">=8"
   },
