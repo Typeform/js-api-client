@@ -1,3 +1,4 @@
+import { axios } from '../common'
 import { clientConstructor } from '../../src/create-client'
 import { API_BASE_URL } from '../../src/constants'
 import { Forms } from '../../src/forms'
@@ -85,6 +86,7 @@ test('deleteForm removes the correct uid form ', async () => {
 })
 
 test('create form has the correct path and method ', async () => {
+  // @ts-ignore
   await formsRequest.create({})
   expect(axios.history.post[0].method).toBe('post')
   expect(axios.history.post[0].url).toBe(`${API_BASE_URL}/forms`)
@@ -99,7 +101,8 @@ test('get messages has the correct path and method ', async () => {
 
 test('update messages has the correct path and method ', async () => {
   await formsRequest.messages.update({
-    uid: 'abc123'
+    uid: 'abc123',
+    data: {}
   })
 
   expect(axios.history.put[0].method).toBe('put')

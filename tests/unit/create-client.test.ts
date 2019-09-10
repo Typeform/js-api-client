@@ -1,3 +1,4 @@
+import { axios } from '../common'
 import { clientConstructor, buildUrlWithParams } from '../../src/create-client'
 import { API_BASE_URL } from '../../src/constants'
 
@@ -13,6 +14,7 @@ const client = clientConstructor({
 test('request pass correct headers', async () => {
   await client.request({
     url: '/forms',
+    method: 'get',
     headers: {
       Accepts: 'application/json'
     }

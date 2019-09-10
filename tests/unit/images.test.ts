@@ -1,3 +1,4 @@
+import { axios } from '../common'
 import { clientConstructor } from '../../src/create-client'
 import { API_BASE_URL } from '../../src/constants'
 import { Images } from '../../src/images'
@@ -58,17 +59,17 @@ test('deleting an image sets the correct method and id', async () => {
 })
 
 test('it set the correct header when retrieving the image json description', async () => {
-  await imagesRequest.get({ id: 'abc123', returns: 'json' })
+  await imagesRequest.get({ id: 'abc123' })
   expect(axios.history.get[0].headers.Accept).toBe('application/json')
 })
 
 test('when getting an image by size it retrieves from the correct endpoint', async () => {
-  await imagesRequest.get({ id: 'abc123', returns: 'json', size: 'mobile' })
+  await imagesRequest.get({ id: 'abc123', size: 'mobile' })
   expect(axios.history.get[0].url).toBe(`${API_BASE_URL}/images/abc123/image/mobile`)
 })
 
 test('when getting an image by background size it retrieves from the correct endpoint', async () => {
-  await imagesRequest.get({ id: 'abc123', returns: 'json', backgroundSize: 'tablet' })
+  await imagesRequest.get({ id: 'abc123', backgroundSize: 'tablet' })
   expect(axios.history.get[0].url).toBe(`${API_BASE_URL}/images/abc123/background/tablet`)
 })
 

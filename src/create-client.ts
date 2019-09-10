@@ -1,9 +1,10 @@
 import axios from 'axios'
 import { API_BASE_URL } from './constants'
+import { Typeform } from './typeform-types'
 
-export const clientConstructor = ({ token, ...options }) => {
+export const clientConstructor = ({ token, ...options }: Typeform.ClientArg): Typeform.HTTPClient => {
   return {
-    request: (args) => {
+    request: (args: Typeform.Request) => {
       const {
         url,
         data,
@@ -23,6 +24,7 @@ export const clientConstructor = ({ token, ...options }) => {
         ...otherArgs
       }
 
+      // @ts-ignore
       return axios({
         url: requestUrl,
         ...requestParameters,
@@ -34,8 +36,8 @@ export const clientConstructor = ({ token, ...options }) => {
           Authorization: `bearer ${token}`
         }
       })
-        .then(response => response.data)
-        .catch(error => {
+        .then((response): any => response.data)
+        .catch((error: any) => {
           if (error && error.response && error.response.data && error.response.data.description) {
             throw new Error(error.response.data.description)
           } else {
@@ -46,7 +48,7 @@ export const clientConstructor = ({ token, ...options }) => {
   }
 }
 
-export const buildUrlWithParams = (url, params = {}) => {
+export const buildUrlWithParams = (url: string, params: Typeform.DocumentData = {}): string => {
   const queryParams = Object.keys(params)
     .filter((key) => params[key] !== undefined && params[key] !== null)
     .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)

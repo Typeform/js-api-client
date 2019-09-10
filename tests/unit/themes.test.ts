@@ -1,3 +1,4 @@
+import { axios } from '../common'
 import { clientConstructor } from '../../src/create-client'
 import { API_BASE_URL } from '../../src/constants'
 import { Themes } from '../../src/themes'
@@ -36,7 +37,7 @@ test('Get themes has the correct parameters', async () => {
 })
 
 test('Get themes has the correct path', async () => {
-  await themesRequest.get({ id: 2 })
+  await themesRequest.get({ id: '2' })
   expect(axios.history.get[0].url).toBe(`${API_BASE_URL}/themes/2`)
 })
 
@@ -47,6 +48,7 @@ test('Creating a theme has the correct method', async () => {
 
 test('Throws if required values are not sent', () => {
   const { name, ...incompletePayload } = mockThemePayload
+  // @ts-ignore
   expect(() => themesRequest.create(incompletePayload)).toThrow()
 })
 
@@ -60,13 +62,13 @@ test('Throws if a font name is not supported', () => {
 })
 
 test('Delete a theme has the correct path and method', async () => {
-  await themesRequest.delete({ id: 2 })
+  await themesRequest.delete({ id: '2' })
   expect(axios.history.delete[0].url).toBe(`${API_BASE_URL}/themes/2`)
   expect(axios.history.delete[0].method).toBe('delete')
 })
 
 test('Updating a theme has the correct path and method', async () => {
-  await themesRequest.update({ id: 2, ...mockThemePayload })
+  await themesRequest.update({ id: '2', ...mockThemePayload })
   expect(axios.history.put[0].url).toBe(`${API_BASE_URL}/themes/2`)
   expect(axios.history.put[0].method).toBe('put')
 })

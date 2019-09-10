@@ -3,14 +3,14 @@
   "version": "0.0.0-semantic-released",
   "description": "JS SDK for Typeform API",
   "scripts": {
-    "test:unit": "MOCK_AXIOS=true jest ./tests/unit",
-    "test:unit:watch": "MOCK_AXIOS=true jest ./tests/unit --watch",
-    "test:integration": "jest ./tests/integration/",
-    "test:integration:watch": "jest ./tests/integration/ --watch",
+    "test:unit": "jest ./tests/unit",
+    "test:unit:watch": "jest ./tests/unit --watch",
+    "test:integration": "jest ./tests/integration",
+    "test:integration:watch": "jest ./tests/integration --watch",
     "build": "rm -rf ./dist && rollup -c",
     "prepublish": "in-publish && npm run build || not-in-publish",
     "prepare": "npm run build",
-    "lint": "standard ./src",
+    "lint": "tslint --project tsconfig.json --config tslint.json",
     "semantic-release": "semantic-release",
     "server": "node ./tests/integration/mockServer.js",
     "server:dev": "nodemon ./tests/integration/mockServer.js"
@@ -51,61 +51,37 @@
     "axios": "^0.19.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0-rc.1",
-    "@babel/core": "^7.0.0-rc.1",
-    "@babel/node": "^7.0.0-rc.1",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-rc.1",
-    "@babel/preset-env": "^7.0.0-rc.1",
     "@commitlint/cli": "^7.5.2",
     "@commitlint/config-conventional": "^7.5.0",
+    "@types/jest": "^24.0.18",
     "axios-mock-adapter": "^1.17.0",
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-eslint": "^8.2.3",
-    "babel-jest": "^22.4.3",
-    "babel-loader": "^7.1.4",
-    "eslint": "^5.16.0",
-    "eslint-config-standard": "^12.0.0",
-    "eslint-plugin-import": "^2.17.2",
-    "eslint-plugin-node": "^8.0.1",
-    "eslint-plugin-promise": "^4.1.1",
-    "eslint-plugin-standard": "^4.0.0",
     "husky": "^2.1.0",
     "in-publish": "^2.0.0",
-    "jest": "^22.4.3",
+    "jest": "^24.9.0",
     "json-server": "^0.14.0",
-    "lint-staged": "^7.0.4",
+    "lint-staged": "^9.2.5",
     "nodemon": "^1.18.3",
     "rollup": "^1.20.0",
     "rollup-plugin-commonjs": "^10.0.2",
+    "rollup-plugin-copier": "^1.1.0",
     "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-terser": "^5.1.1",
+    "rollup-plugin-typescript2": "^0.24.0",
     "semantic-release": "^15.13.19",
-    "standard": "^11.0.1"
-  },
-  "lint-staged": {
-    "*.js": [
-      "standard",
-      "git add"
-    ]
+    "ts-jest": "^24.0.2",
+    "tslint": "^5.19.0",
+    "tslint-config-standard": "^8.0.1",
+    "typescript": "^3.6.2"
   },
   "jest": {
     "automock": false,
-    "setupFiles": [
-      "./tests/setupJest.js"
-    ],
-    "testURL": "http://localhost/"
-  },
-  "standard": {
-    "env": [
-      "jest"
-    ],
-    "globals": [
-      "axios"
-    ]
+    "testURL": "http://localhost/",
+    "preset": "ts-jest"
   },
   "husky": {
     "hooks": {
+      "pre-commit": "npm run lint",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   }

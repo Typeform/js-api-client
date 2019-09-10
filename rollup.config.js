@@ -1,8 +1,18 @@
 import commonjs from 'rollup-plugin-commonjs'
+import copier from 'rollup-plugin-copier'
 import json from 'rollup-plugin-json'
 import resolveModule from 'rollup-plugin-node-resolve'
+import typescript from 'rollup-plugin-typescript2'
 import pkg from './package.json'
 import { terser } from 'rollup-plugin-terser'
+
+const copy = copier({
+  items: [{
+    src: 'src/typeform-types.ts',
+    dest: 'dist/typeform-types.ts',
+    createPath: true
+  }]
+})
 
 const onwarn = (warning, rollupWarn) => {
   if (warning.code !== 'CIRCULAR_DEPENDENCY') {
@@ -14,11 +24,13 @@ const plugins = [
   commonjs({
     include: ['node_modules/**']
   }),
-  json()
+  typescript(),
+  json(),
+  copy
 ]
 
 export default [{
-  input: 'src/index.js',
+  input: 'src/index.ts',
   output: [{
     file: pkg.main,
     format: 'cjs',
@@ -36,14 +48,17 @@ export default [{
     }),
     ...plugins
   ],
-  external: ['http', 'https', 'url', 'zlib', 'assert', 'stream', 'tty', 'util', 'os']
+  external: ['http', 'https', 'url', 'zlib', 'assert', 'stream', 'tty', 'util', 'os', 'tslib']
 }, {
-  input: 'src/index.js',
+  input: 'src/index.ts',
   output: {
     file: pkg.browser,
     format: 'umd',
     name: 'typeformAPI',
-    exports: 'named'
+    exports: 'named',
+    globals: {
+      tslib: 'tslib'
+    }
   },
   onwarn,
   plugins: [
@@ -52,5 +67,6 @@ export default [{
     }),
     terser(),
     ...plugins
-  ]
+  ],
+  external: ['tslib']
 }]

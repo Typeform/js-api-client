@@ -6,8 +6,11 @@ import { Themes } from './themes'
 import { Workspaces } from './workspaces'
 import { Responses } from './responses'
 import { Webhooks } from './webhooks'
+import { Typeform } from './typeform-types'
 
-export const createClient = (args = {}) => {
+export { Typeform } from './typeform-types'
+
+export const createClient = (args: Typeform.ClientArg = { token: null }) => {
   if (!args.token) {
     throw new Error('Token is missing')
   }

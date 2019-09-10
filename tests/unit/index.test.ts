@@ -1,3 +1,4 @@
+import { axios } from '../common'
 import { clientConstructor } from '../../src/create-client'
 import { createClient } from '../../src'
 

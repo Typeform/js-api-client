@@ -1,3 +1,4 @@
+import { axios } from '../common'
 import { clientConstructor } from '../../src/create-client'
 import { API_BASE_URL } from '../../src/constants'
 import { Workspaces } from '../../src/workspaces'
@@ -30,12 +31,13 @@ test(`Get workspaces has the correct query parameters`, async () => {
 })
 
 test(`Get specific workscape has the correct path and method`, async () => {
-  await workspacesRequest.get({ id: 2 })
+  await workspacesRequest.get({ id: '2' })
   expect(axios.history.get[0].url).toBe(`${API_BASE_URL}/workspaces/2`)
   expect(axios.history.get[0].method).toBe('get')
 })
 
 test(`Create a workscape requires a title`, () => {
+  // @ts-ignore
   expect(() => workspacesRequest.add({})).toThrow(`A name is required`)
 })
 
@@ -48,7 +50,7 @@ test(`Create a workscape has the correct method`, async () => {
 
 test(`add a member to a workscape has the correct method and path`, async () => {
   await workspacesRequest.addMembers({
-    id: 2,
+    id: '2',
     members: 'test@test.com'
   })
   expect(axios.history.patch[0].url).toBe(`${API_BASE_URL}/workspaces/2`)
@@ -57,7 +59,7 @@ test(`add a member to a workscape has the correct method and path`, async () => 
 
 test(`add a member to a workscape has the correct payload`, async () => {
   await workspacesRequest.addMembers({
-    id: 2,
+    id: '2',
     members: ['test@test.com', 'test2@test.com']
   })
   const body = JSON.parse(axios.history.patch[0].data)
@@ -82,7 +84,7 @@ test(`add a member to a workscape has the correct payload`, async () => {
 
 test(`remove a member to a workscape has the correct payload`, async () => {
   await workspacesRequest.removeMembers({
-    id: 2,
+    id: '2',
     members: ['test@test.com']
   })
   const body = JSON.parse(axios.history.patch[0].data)
@@ -99,7 +101,7 @@ test(`remove a member to a workscape has the correct payload`, async () => {
 })
 
 test(`Deleting a workscape has the correct path and method`, async () => {
-  await workspacesRequest.delete({ id: 2 })
+  await workspacesRequest.delete({ id: '2' })
   expect(axios.history.delete[0].url).toBe(`${API_BASE_URL}/workspaces/2`)
   expect(axios.history.delete[0].method).toBe(`delete`)
 })
