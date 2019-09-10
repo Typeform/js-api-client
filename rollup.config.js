@@ -1,10 +1,12 @@
+import builtins from 'rollup-plugin-node-builtins'
 import commonjs from 'rollup-plugin-commonjs'
 import copier from 'rollup-plugin-copier'
 import json from 'rollup-plugin-json'
+import globals from 'rollup-plugin-node-globals'
 import resolveModule from 'rollup-plugin-node-resolve'
+import { terser } from 'rollup-plugin-terser'
 import typescript from 'rollup-plugin-typescript2'
 import pkg from './package.json'
-import { terser } from 'rollup-plugin-terser'
 
 const copy = copier({
   items: [{
@@ -21,9 +23,6 @@ const onwarn = (warning, rollupWarn) => {
 }
 
 const plugins = [
-  commonjs({
-    include: ['node_modules/**']
-  }),
   typescript(),
   json(),
   copy
@@ -42,13 +41,13 @@ export default [{
   }],
   onwarn,
   plugins: [
-    resolveModule({
-      mainFields: ['main', 'module'],
-      preferBuiltins: true
+    resolveModule(),
+    commonjs({
+      include: ['node_modules/**']
     }),
     ...plugins
   ],
-  external: ['http', 'https', 'url', 'zlib', 'assert', 'stream', 'tty', 'util', 'os', 'tslib']
+  external: ['http', 'https', 'url', 'zlib', 'assert', 'stream', 'tty', 'util', 'os']
 }, {
   input: 'src/index.ts',
   output: {
@@ -56,17 +55,22 @@ export default [{
     format: 'umd',
     name: 'typeformAPI',
     exports: 'named',
-    globals: {
-      tslib: 'tslib'
-    }
+    intro: 'const global = window;'
   },
   onwarn,
   plugins: [
     resolveModule({
-      mainFields: ['browser']
+      browser: true
     }),
-    terser(),
-    ...plugins
-  ],
-  external: ['tslib']
+    commonjs({
+      include: ['node_modules/**'],
+      browser: true,
+      preferBuiltins: false,
+      ignoreGlobal: false
+    }),
+    ...plugins,
+    globals(),
+    builtins(),
+    terser()
+  ]
 }]
