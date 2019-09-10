@@ -36,7 +36,7 @@ export const clientConstructor = ({ token, ...options }: Typeform.ClientArg): Ty
           Authorization: `bearer ${token}`
         }
       })
-        .then((response): any => response.data)
+        .then((response: any) => response.data)
         .catch((error: any) => {
           if (error && error.response && error.response.data && error.response.data.description) {
             throw new Error(error.response.data.description)
