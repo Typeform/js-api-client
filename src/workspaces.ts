@@ -1,11 +1,12 @@
+import { Typeform } from './typeform-types'
 import { isMemberPropValid, createMemberPatchQuery } from './utils'
 
 export class Workspaces {
-  constructor (_http) {
-    this._http = _http
-  }
+  constructor (private _http: Typeform.HTTPClient) { }
 
-  add ({ name } = {}) {
+  public add (args: { name: string }): Promise<Typeform.Webhook> {
+    const { name } = args
+
     if (!name) {
       throw new Error(`A name is required`)
     }
@@ -22,26 +23,34 @@ export class Workspaces {
     })
   }
 
-  addMembers ({ id, members } = {}) {
+  public addMembers (args: { id: string, members: string | string[] }): Promise<null> {
+    const { id, members } = args
+
     const data = addOrRemoveMembers('add', members)
     return this.update({ id, data })
   }
 
-  delete ({ id } = {}) {
+  public delete (args: { id: string }): Promise<null> {
+    const { id } = args
+
     return this._http.request({
       method: 'delete',
       url: `/workspaces/${id}`
     })
   }
 
-  get ({ id } = {}) {
+  public get (args: { id: string }): Promise<Typeform.Webhook> {
+    const { id } = args
+
     return this._http.request({
       method: 'get',
       url: `/workspaces/${id}`
     })
   }
 
-  list ({ search, page, pageSize } = {}) {
+  public list (args?: { search?: string, page?: number, pageSize?: number }): Promise<Typeform.API.Workspaces.List> {
+    const { search, page, pageSize } = args || { search: null, page: null, pageSize: null }
+
     return this._http.request({
       method: 'get',
       url: '/workspaces',
@@ -53,12 +62,16 @@ export class Workspaces {
     })
   }
 
-  removeMembers ({ id, members } = {}) {
+  public removeMembers (args: { id: string, members: string | string[] }): Promise<null> {
+    const { id, members } = args
     const data = addOrRemoveMembers('remove', members)
+
     return this.update({ id, data })
   }
 
-  update ({ id, data } = {}) {
+  public update (args: { id: string, data: Typeform.API.PATCH[] }): Promise<null> {
+    const { id, data } = args
+
     return this._http.request({
       method: 'patch',
       url: `/workspaces/${id}`,
@@ -70,14 +83,12 @@ export class Workspaces {
   }
 }
 
-const addOrRemoveMembers = (operation, members) => {
+const addOrRemoveMembers = (operation: string, members: string | string[]): Typeform.API.PATCH[] => {
   if (!isMemberPropValid(members)) {
     throw new Error(`No member(s) provided`)
   }
 
-  const membersToAdd = !Array.isArray(members) ? [members] : members
-  return createMemberPatchQuery({
-    members: membersToAdd,
-    operation
-  })
+  const membersArray = !Array.isArray(members) ? [members] : members
+
+  return createMemberPatchQuery(membersArray, operation)
 }

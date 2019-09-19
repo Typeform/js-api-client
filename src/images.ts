@@ -1,9 +1,11 @@
-export class Images {
-  constructor (_http) {
-    this._http = _http
-  }
+import { Typeform } from './typeform-types'
 
-  add ({ image, url, fileName } = {}) {
+export class Images {
+  constructor (private _http: Typeform.HTTPClient) { }
+
+  public add (args: { image?: string, url?: string, fileName: string }): Promise<Typeform.Image> {
+    const { image, url, fileName } = args
+
     return this._http.request({
       method: 'post',
       url: `/images`,
@@ -15,15 +17,18 @@ export class Images {
     })
   }
 
-  delete ({ id } = {}) {
+  public delete (args: { id: string }): Promise<null> {
+    const { id } = args
+
     return this._http.request({
       method: 'delete',
       url: `/images/${id}`
     })
   }
 
-  get ({ id, size, backgroundSize, choiceSize } = {}) {
-    const requestQuery = {
+  public get (args: { id: string, size?: string, backgroundSize?: string, choiceSize?: string }): Promise<Typeform.Image> {
+    const { id, size, backgroundSize, choiceSize } = args
+    const requestQuery: Typeform.Request = {
       method: 'get',
       url: `/images/${id}`,
       headers: {
@@ -63,7 +68,7 @@ export class Images {
     return this._http.request(requestQuery)
   }
 
-  list () {
+  public list (): Promise<Typeform.Image[]> {
     return this._http.request({
       method: 'get',
       url: '/images'

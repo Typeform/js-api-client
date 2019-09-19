@@ -1,3 +1,4 @@
+import { axios } from '../common'
 import { clientConstructor } from '../../src/create-client'
 import { API_BASE_URL } from '../../src/constants'
 import { Webhooks } from '../../src/webhooks'
@@ -14,7 +15,7 @@ const webhooksRequest = new Webhooks(http)
 
 test('Create a new webhooks has the correct path, method and url', async () => {
   const request = {
-    uid: 2,
+    uid: '2',
     tag: 'test',
     url: 'http://test.com',
     enable: true
@@ -27,24 +28,25 @@ test('Create a new webhooks has the correct path, method and url', async () => {
 })
 
 test('Create a new webhooks requires a url', () => {
-  expect(() => webhooksRequest.create({ uid: 2, tag: 'test' })).toThrow()
+  // @ts-ignore
+  expect(() => webhooksRequest.create({ uid: '2', tag: 'test' })).toThrow()
 })
 
 test('`get()` webhooks has the correct path and method', async () => {
-  await webhooksRequest.get({ uid: 2, tag: 'test' })
+  await webhooksRequest.get({ uid: '2', tag: 'test' })
   expect(axios.history.get[0].url).toBe(`${API_BASE_URL}/forms/2/webhooks/test`)
   expect(axios.history.get[0].method).toBe('get')
 })
 
 test('`list()` webhooks has the correct path and method', async () => {
-  await webhooksRequest.list({ uid: 2 })
+  await webhooksRequest.list({ uid: '2' })
   expect(axios.history.get[0].url).toBe(`${API_BASE_URL}/forms/2/webhooks`)
   expect(axios.history.get[0].method).toBe('get')
 })
 
 test('update a new webhooks sends the correct payload', async () => {
   const request = {
-    uid: 2,
+    uid: '2',
     tag: 'test',
     url: 'http://test.com'
   }
@@ -55,7 +57,7 @@ test('update a new webhooks sends the correct payload', async () => {
 })
 
 test('Delete a webhook has the correct path and method', async () => {
-  await webhooksRequest.delete({ uid: 2, tag: 'test' })
+  await webhooksRequest.delete({ uid: '2', tag: 'test' })
   expect(axios.history.delete[0].url).toBe(`${API_BASE_URL}/forms/2/webhooks/test`)
   expect(axios.history.delete[0].method).toBe('delete')
 })

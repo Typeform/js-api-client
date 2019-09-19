@@ -1,27 +1,25 @@
+import { Typeform } from './typeform-types'
 import { isMemberPropValid, createMemberPatchQuery } from './utils'
 
 export class Teams {
-  constructor (_http) {
-    this._http = _http
-  }
+  constructor (private _http: Typeform.HTTPClient) { }
 
-  get () {
+  public get (): Promise<any> {
     return this._http.request({
       method: 'get',
       url: '/teams/mine'
     })
   }
 
-  addMembers ({ members } = {}) {
+  public addMembers (args: { members: string | string[] }): Promise<any> {
+    const { members } = args
+
     if (!isMemberPropValid(members)) {
       throw new Error(`No member provided`)
     }
 
     const membersToAdd = !Array.isArray(members) ? [members] : members
-    const membersQuery = createMemberPatchQuery({
-      members: membersToAdd,
-      operation: 'add'
-    })
+    const membersQuery = createMemberPatchQuery(membersToAdd, 'add')
 
     return this._http.request({
       method: 'patch',
@@ -30,16 +28,15 @@ export class Teams {
     })
   }
 
-  removeMembers ({ members }) {
+  public removeMembers (args: { members: string | string[] }): Promise<void> {
+    const { members } = args
+
     if (!isMemberPropValid(members)) {
       throw new Error(`No member provided`)
     }
 
     const membersToRemove = !Array.isArray(members) ? [members] : members
-    const membersQuery = createMemberPatchQuery({
-      members: membersToRemove,
-      operation: 'remove'
-    })
+    const membersQuery = createMemberPatchQuery(membersToRemove, 'remove')
 
     return this._http.request({
       method: 'delete',

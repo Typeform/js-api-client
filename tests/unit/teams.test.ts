@@ -1,3 +1,4 @@
+import { axios } from '../common'
 import { clientConstructor } from '../../src/create-client'
 import { API_BASE_URL } from '../../src/constants'
 import { Teams } from '../../src/teams'
@@ -58,6 +59,7 @@ test('it will support array or multiple members at a time', async () => {
 })
 
 test('if no members or incorrect format defined throws', () => {
+  // @ts-ignore
   expect(() => teamsRequest.addMembers({ members: {} })).toThrow()
 })
 

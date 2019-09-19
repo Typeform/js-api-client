@@ -1,4 +1,6 @@
-export const FONTS_AVAILABLE = [
+import { Typeform } from '../typeform-types'
+
+export const FONTS_AVAILABLE: Typeform.Font[] = [
   'Acme',
   'Arial',
   'Arvo',
@@ -33,4 +35,4 @@ export const FONTS_AVAILABLE = [
   'Vollkorn'
 ]
 
-export const API_BASE_URL = 'https://api.typeform.com'
+export const API_BASE_URL: Typeform.API_URL = 'https://api.typeform.com'
