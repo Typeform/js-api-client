@@ -11,10 +11,6 @@ import { Typeform } from './typeform-types'
 export { Typeform } from './typeform-types'
 
 export const createClient = (args: Typeform.ClientArg = { token: null }) => {
-  if (!args.token) {
-    throw new Error('Token is missing')
-  }
-
   const http = clientConstructor(args)
 
   return {

@@ -2,7 +2,7 @@ import axios from 'axios'
 import { API_BASE_URL } from './constants'
 import { Typeform } from './typeform-types'
 
-export const clientConstructor = ({ token, ...options }: Typeform.ClientArg): Typeform.HTTPClient => {
+export const clientConstructor = ({ token, ...options }: Typeform.ClientArg = {}): Typeform.HTTPClient => {
   return {
     request: (args: Typeform.Request) => {
       const {
@@ -15,14 +15,9 @@ export const clientConstructor = ({ token, ...options }: Typeform.ClientArg): Ty
 
       const requestUrl = buildUrlWithParams(`${API_BASE_URL}${url}`, params)
 
-      const {
-        headers = {}
-      } = options
-
-      const requestParameters = {
-        ...options,
-        ...otherArgs
-      }
+      const { headers = {} } = options
+      const authorization = token ? { Authorization: `bearer ${token}` } : {}
+      const requestParameters = { ...options, ...otherArgs }
 
       // @ts-ignore
       return axios({
@@ -33,7 +28,7 @@ export const clientConstructor = ({ token, ...options }: Typeform.ClientArg): Ty
           Accept: 'application/json, text/plain, */*',
           ...headers,
           ...argsHeaders,
-          Authorization: `bearer ${token}`
+          ...authorization
         }
       })
         .then((response: any) => response.data)
