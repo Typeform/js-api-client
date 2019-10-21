@@ -14,6 +14,6 @@ test('client constructor has a request function property', () => {
   expect(client.request).toBeDefined()
 })
 
-test('Initialising fails when missing the token', () => {
-  expect(() => createClient()).toThrow('Token is missing')
+test('Initialising does not fail when missing the token', () => {
+  expect(() => createClient()).not.toThrow()
 })
