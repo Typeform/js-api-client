@@ -156,7 +156,7 @@ export namespace Typeform {
    * Argument object for Typeform API client
    */
   export interface ClientArg extends DocumentData {
-    token: string
+    token?: string
   }
   /**
    * Conditions for executing the Logic Jump. Conditions answer the question, "Under what circumstances?"

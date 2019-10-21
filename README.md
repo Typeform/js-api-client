@@ -50,9 +50,7 @@ npm install @typeform/api-client --save
 2. Create an instance with your personal token
 
 ``` javascript
-  const typeformAPI = createClient({
-    token: '<your token>'
-  })
+  const typeformAPI = createClient({ token: '<your token>' })
 ```
 
 3. Use any of the methods available in the [reference](#reference)
@@ -75,9 +73,10 @@ npm install @typeform/api-client --save
 - Returns an instance with the methods described below
 
 ``` javascript
-  const typeformClient = createClient({
-    token: '<your token>'
-  })
+  const typeformClient = createClient({ token: '<your token>' })
+
+  // If what you are trying to acces doesn't require a token, you can construct the client without any argument
+  const typeformAPI = createClient()
 ```
 
 Client returns the following properties:
