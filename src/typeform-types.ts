@@ -208,7 +208,7 @@ export namespace Typeform {
     /**
      * The type of field.
      */
-    type?: Type[]
+    type?: Type
     /**
      * Properties of a field.
      */
