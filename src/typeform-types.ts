@@ -209,7 +209,7 @@ export namespace Typeform {
   /**
    * Object that defines the field type and value to evaluate with the operator.
    */
-    vars: AndOrOperator[] | Condition[]
+    vars: Array<AndOrOperator | Condition>
   }
   /**
    * Generic document.
