@@ -1,3 +1,6 @@
+version: ~> 1.0
+import: Typeform/travis-shared-config:package-config.yml@master
+
 language: node_js
 
 node_js:
