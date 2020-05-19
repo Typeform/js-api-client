@@ -1,6 +1,3 @@
-version: ~> 1.0
-import: Typeform/travis-shared-config:public-package-config.yml@master
-
 language: node_js
 node_js:
   - '12'
@@ -31,4 +28,7 @@ script:
   - yarn test:integration
 
 after_success:
-  - yarn semantic-release
+  - yarn run semantic-release
+  - npm config set '//npm.pkg.github.com/:_authToken' ${GH_TOKEN}
+  - npm config set registry https://npm.pkg.github.com/@typeform
+  - test $TRAVIS_EVENT_TYPE = "push" && test $TRAVIS_BRANCH = "master" && echo "It did not work!"
