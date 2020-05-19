@@ -1,9 +1,9 @@
 version: ~> 1.0
-import: Typeform/travis-shared-config:package-config.yml@master
+import: Typeform/travis-shared-config:public-package-config.yml@master
 
 language: node_js
 node_js:
-  - "12"
+  - '12'
 
 branches:
   only:
@@ -17,7 +17,7 @@ notifications:
   email: false
 
 env:
-  VERSION: "$TRAVIS_BUILD_NUMBER"
+  VERSION: '$TRAVIS_BUILD_NUMBER'
 
 before_install:
   - yarn
@@ -32,4 +32,3 @@ script:
 
 after_success:
   - yarn semantic-release
-  
