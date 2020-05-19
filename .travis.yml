@@ -31,4 +31,4 @@ after_success:
   - yarn run semantic-release
   - npm config set '//npm.pkg.github.com/:_authToken' $GH_TOKEN
   - npm config set registry https://npm.pkg.github.com/@typeform
-  - echo "Hello" && test $TRAVIS_EVENT_TYPE = "push" && test $TRAVIS_BRANCH = "master" && echo "It did not work!"
+  - test $TRAVIS_EVENT_TYPE = "push" && test $TRAVIS_BRANCH = "master" && npm publish
