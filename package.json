@@ -13,14 +13,15 @@
     "lint": "tslint --project tsconfig.json --config tslint.json",
     "semantic-release": "semantic-release",
     "server": "node ./tests/integration/mockServer.js",
-    "server:dev": "nodemon ./tests/integration/mockServer.js"
+    "server:dev": "nodemon ./tests/integration/mockServer.js",
+    "publish:github": "npm config set '//npm.pkg.github.com/:_authToken' $GH_TOKEN && npm publish --registry https://npm.pkg.github.com"
   },
   "main": "dist/index.cjs.js",
   "browser": "dist/typeform-api.js",
   "module": "dist/index.esm.js",
   "typings": "dist/index.d.ts",
   "engines": {
-    "node": ">=8"
+    "node": ">=12"
   },
   "repository": {
     "type": "git",
@@ -54,6 +55,7 @@
   "devDependencies": {
     "@commitlint/cli": "^8.1.0",
     "@commitlint/config-conventional": "^8.1.0",
+    "@semantic-release/exec": "^5.0.0",
     "@types/jest": "^24.0.18",
     "axios-mock-adapter": "^1.17.0",
     "husky": "^4.0.0-beta.1",
@@ -87,5 +89,19 @@
       "pre-commit": "npm run lint",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
+  },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/npm",
+      [
+        "@semantic-release/exec",
+        {
+          "successCmd": "yarn run publish:github"
+        }
+      ],
+      "@semantic-release/github"
+    ]
   }
 }
