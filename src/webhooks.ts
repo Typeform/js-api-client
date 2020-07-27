@@ -4,7 +4,7 @@ export class Webhooks {
   constructor (private _http: Typeform.HTTPClient) { }
 
   public create (
-    args: { uid: string, tag: string, url: string, enable?: boolean, secret?: string, verifySSL?: boolean }
+    args: { uid: string, tag: string, url: string, enabled?: boolean, secret?: string, verifySSL?: boolean }
   ): Promise<Typeform.Webhook> {
     return createOrUpdateWebhook(this._http, args)
   }
@@ -37,7 +37,7 @@ export class Webhooks {
   }
 
   update (
-    args: { uid: string, tag: string, url: string, enable?: boolean, secret?: string, verifySSL?: boolean }
+    args: { uid: string, tag: string, url: string, enabled?: boolean, secret?: string, verifySSL?: boolean }
   ): Promise<Typeform.Webhook> {
     return createOrUpdateWebhook(this._http, args)
   }
@@ -45,9 +45,9 @@ export class Webhooks {
 
 const createOrUpdateWebhook = (
   http: Typeform.HTTPClient,
-  args: { uid: string, tag: string, url: string, enable?: boolean, secret?: string, verifySSL?: boolean }
+  args: { uid: string, tag: string, url: string, enabled?: boolean, secret?: string, verifySSL?: boolean }
 ): Promise<Typeform.Webhook> => {
-  const { uid, tag, url, enable = false, secret, verifySSL } = args
+  const { uid, tag, url, enabled = false, secret, verifySSL } = args
 
   if (!url) {
     throw new Error(`Please provide an url for ${tag}`)
@@ -62,7 +62,7 @@ const createOrUpdateWebhook = (
     url: `/forms/${uid}/webhooks/${tag}`,
     data: {
       url,
-      enable,
+      enabled,
       secret,
       verify_ssl: verifySSL ? true : undefined
     }

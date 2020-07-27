@@ -262,7 +262,7 @@ Each one of them encapsulates the operations related to it (like listing, updati
 
 ### Webhooks
 
-#### `webhooks.create({ uid, tag, url, enable = false, secret, verifySSL })`
+#### `webhooks.create({ uid, tag, url, enabled = false, secret, verifySSL })`
 
 - Create a webhook.
 - `uid`: Unique ID for the form.
@@ -289,7 +289,7 @@ Each one of them encapsulates the operations related to it (like listing, updati
 - Retrieve all webhooks for the specified typeform.
 - `uid`: Unique ID for the form.
 
-#### `webhooks.update({ uid, tag, url, enable = false, secret, verifySSL })`
+#### `webhooks.update({ uid, tag, url, enabled = false, secret, verifySSL })`
 
 - Update a webhook.
 - `uid`: Unique ID for the form.
