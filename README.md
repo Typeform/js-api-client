@@ -15,6 +15,7 @@ JS Client wrapper for Typeform API
   - [Create Client](#createclienttoken)
   - [Forms](#forms)
   - [Images](#images)
+  - [Account](#account)
   - [Teams](#teams)
   - [Themes](#themes)
   - [Workspaces](#workspaces)
@@ -149,7 +150,23 @@ Each one of them encapsulates the operations related to it (like listing, updati
 
 - Deletes an image with the given ID
 
-### Teams
+### Account 
+
+#### `account.get({ accountId })`
+
+- Gets account information for the given accountId
+
+#### `account.addMember(accountId, member)`
+
+- Add member to a team for the given ID
+- `members`: `object` containing email and role for the user
+
+#### `account.removeMember(accountId, memberId)`
+
+- Remove member to a team for the given Uid
+- `member`: `object` containing email and role for user
+
+### Teams (__Deprecated__)
 
 #### `teams.get({ id })`
 
@@ -166,6 +183,7 @@ Each one of them encapsulates the operations related to it (like listing, updati
 - Remove members to a team for the given ID
 - `members`: `string` or an `array` and should be the email for the user
 - Deleting multiple members at once is possible using an array of emails
+
 
 ### Themes
 
