@@ -1,6 +1,6 @@
 {
   "name": "@typeform/api-client",
-  "version": "0.0.0-semantic-released",
+  "version": "0.0.0",
   "description": "JS SDK for Typeform API",
   "scripts": {
     "test:unit": "jest ./tests/unit",
