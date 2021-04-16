@@ -790,7 +790,7 @@ export namespace Typeform {
       /**
        * Text to display on the 'Submit' button on the thank you screen.
        */
-      button_text?: boolean
+      button_text?: string
       /**
        * Specify whether the form should reload or redirect to another URL when respondents click the 'Submit' button. PRO+ feature.
        */
@@ -817,7 +817,7 @@ export namespace Typeform {
       /**
        * Text to display on the 'Start' button on the welcome screen.
        */
-      button_text?: boolean
+      button_text?: string
     }
   }
   /**
