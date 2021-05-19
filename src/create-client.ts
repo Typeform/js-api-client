@@ -13,7 +13,9 @@ export const clientConstructor = ({ token, ...options }: Typeform.ClientArg = {}
         ...otherArgs
       } = args
 
-      const requestUrl = buildUrlWithParams(`${API_BASE_URL}${url}`, params)
+      const { apiBaseUrl } = options
+      const requestApiBaseUrl = apiBaseUrl || API_BASE_URL
+      const requestUrl = buildUrlWithParams(`${requestApiBaseUrl}${url}`, params)
 
       const { headers = {} } = options
       const authorization = token ? { Authorization: `bearer ${token}` } : {}

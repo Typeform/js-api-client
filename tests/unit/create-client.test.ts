@@ -68,3 +68,23 @@ test('falsy values should be passed', () => {
   }
   expect(buildUrlWithParams(url, params)).toBe('http://typeform.com?a=0&b=0')
 })
+
+test('Specify apiBaseUrl', async () => {
+
+
+  const rainbowApi = 'https://api.rainbow.typeform.com'
+
+  const clientWithApiBaseUrl = clientConstructor({
+    token: 'abc',
+    apiBaseUrl: rainbowApi
+  })
+
+  await clientWithApiBaseUrl.request({
+    url: '/forms',
+    method: 'get',
+    headers: {
+      Accepts: 'application/json'
+    }
+  })
+  expect(axios.history.get[0].url).toBe(`${rainbowApi}/forms`)
+})
