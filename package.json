@@ -50,7 +50,7 @@
     "yarn.lock"
   ],
   "dependencies": {
-    "axios": "^0.21.1"
+    "axios": "^0.21.3"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.1.0",
