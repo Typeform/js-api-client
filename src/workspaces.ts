@@ -4,7 +4,7 @@ import { isMemberPropValid, createMemberPatchQuery } from './utils'
 export class Workspaces {
   constructor (private _http: Typeform.HTTPClient) { }
 
-  public add (args: { name: string }): Promise<Typeform.Webhook> {
+  public add (args: { name: string }): Promise<Typeform.Workspace> {
     const { name } = args
 
     if (!name) {
@@ -39,7 +39,7 @@ export class Workspaces {
     })
   }
 
-  public get (args: { id: string }): Promise<Typeform.Webhook> {
+  public get (args: { id: string }): Promise<Typeform.Workspace> {
     const { id } = args
 
     return this._http.request({
