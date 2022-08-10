@@ -35,8 +35,8 @@ export const clientConstructor = ({ token, ...options }: Typeform.ClientArg = {}
       })
         .then((response: any) => response.data)
         .catch((error: any) => {
-          if (error && error.response && error.response.data && error.response.data.description) {
-            throw new Error(error.response.data.description)
+          if (error && error.response && error.response.data) {
+            throw new Error(error.response.data)
           } else {
             throw new Error('Couldn\'t make request')
           }
