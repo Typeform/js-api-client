@@ -29,7 +29,7 @@ export class Themes {
     })
   }
 
-  public list (args?: { page?: number, pageSize?: number }): Promise<Typeform.Theme[]> {
+  public list (args?: { page?: number, pageSize?: number }): Promise<Typeform.API.Themes.List> {
     const { page, pageSize } = args || { page: null, pageSize: null }
 
     return this._http.request({

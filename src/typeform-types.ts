@@ -92,6 +92,13 @@ export namespace Typeform {
         items: Response[]
       }
     }
+    export namespace Themes {
+      export interface List {
+        total_items: number
+        page_count: number
+        items: Theme[]
+      }
+    }
     export namespace Webhooks {
       export interface List {
         items: Webhook[]
