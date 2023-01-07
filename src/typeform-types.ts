@@ -71,6 +71,7 @@ export namespace Typeform {
           id: string
           title: string
           last_updated_at: string
+          created_at: string
           settings: {
           },
           self: {
