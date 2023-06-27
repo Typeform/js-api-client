@@ -1,6 +1,6 @@
 # Typeform JavaScript SDK
 
-[![Build Status](https://travis-ci.com/Typeform/js-api-client.svg?token=nePyGZWpdyBxUnh9PswC&branch=master)](https://travis-ci.com/Typeform/js-api-client)
+[![Build Status](https://travis-ci.com/Typeform/js-api-client.svg?token=nePyGZWpdyBxUnh9PswC&branch=main)](https://travis-ci.com/Typeform/js-api-client)
 
 ------
 
