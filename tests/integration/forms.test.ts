@@ -1,26 +1,28 @@
 import { createClient } from '../../src'
 
-jest.mock('../../src/constants', () => ({ API_BASE_URL: 'http://localhost:3000' }))
+jest.mock('../../src/constants', () => ({
+  API_BASE_URL: 'http://localhost:3000',
+}))
 
 const typeformClient = createClient({
-  token: '123456'
+  token: '123456',
 })
 const TYPEFORM_UID = 'abc123'
 
-test('Getting forms from my account', done => {
-  typeformClient.forms.list().then(response => {
+test('Getting forms from my account', (done) => {
+  typeformClient.forms.list().then((response) => {
     expect(response.total_items).toBe(2)
     expect(response.items).toBeTruthy()
     done()
   })
 })
 
-test('Gets the correct form by UID', done => {
+test('Gets the correct form by UID', (done) => {
   typeformClient.forms
     .get({
-      uid: TYPEFORM_UID
+      uid: TYPEFORM_UID,
     })
-    .then(response => {
+    .then((response) => {
       expect(response.id).toEqual(TYPEFORM_UID)
       done()
     })
