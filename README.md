@@ -53,6 +53,18 @@ const { createClient } = require('@typeform/api-client')
 const typeformAPI = createClient({ token: '<your token>' })
 ```
 
+If your account is configured to store responses in the EU Data Center
+you can pass the `apiBaseUrl` as `https://api.eu.typeform.com`.
+
+```javascript
+const typeformAPI = createClient(
+  {
+    token: '<your token>',
+    apiBaseUrl: 'https://api.eu.typeform.com'
+  }
+)
+```
+
 3. Use any of the methods available in the [reference](#reference)
 
 ```javascript
@@ -72,8 +84,20 @@ typeformAPI.forms.list().then((response) => {
 ```javascript
 const typeformClient = createClient({ token: '<your token>' })
 
-// If what you are trying to acces doesn't require a token, you can construct the client without any argument
+// If what you are trying to access doesn't require a token, you can construct the client without any argument
 const typeformAPI = createClient()
+```
+
+If your account is configured to store responses in the EU Data Center
+you can pass the `apiBaseUrl` as `https://api.eu.typeform.com`.
+
+```javascript
+const typeformAPI = createClient(
+  {
+    token: '<your token>',
+    apiBaseUrl: 'https://api.eu.typeform.com'
+  }
+)
 ```
 
 Client returns the following properties:
