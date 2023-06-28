@@ -9,7 +9,7 @@ beforeEach(() => {
 
 test('client constructor has a request function property', () => {
   const client = clientConstructor({
-    token: '12345'
+    token: '12345',
   })
   expect(client.request).toBeDefined()
 })

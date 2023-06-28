@@ -10,7 +10,9 @@
     "build": "rm -rf ./dist && rollup -c",
     "prepublish": "in-publish && npm run build || not-in-publish",
     "prepare": "npm run build",
-    "lint": "tslint --project tsconfig.json --config tslint.json",
+    "lint": "eslint . --max-warnings=0",
+    "lint-staged": "lint-staged",
+    "prettier": "prettier --write . --ignore-path .eslintignore",
     "semantic-release": "semantic-release",
     "server": "node ./tests/integration/mockServer.js",
     "server:dev": "nodemon ./tests/integration/mockServer.js",
@@ -56,14 +58,17 @@
     "@commitlint/cli": "^8.1.0",
     "@commitlint/config-conventional": "^8.1.0",
     "@semantic-release/exec": "^5.0.0",
+    "@typeform/eslint-config": "^6.0.2",
     "@types/jest": "^24.0.18",
     "axios-mock-adapter": "^1.17.0",
+    "eslint": "^8.43.0",
     "husky": "^4.0.0-beta.1",
     "in-publish": "^2.0.0",
     "jest": "^24.9.0",
     "json-server": "^0.15.1",
-    "lint-staged": "^9.2.5",
+    "lint-staged": "^13.2.2",
     "nodemon": "^1.19.2",
+    "prettier": "^2.8.8",
     "rollup": "^1.21.2",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-copier": "^1.1.0",
@@ -75,18 +80,23 @@
     "rollup-plugin-typescript2": "^0.24.1",
     "semantic-release": "^17.0.7",
     "ts-jest": "^24.0.2",
-    "tslint": "^5.20.0",
-    "tslint-config-standard": "^8.0.1",
-    "typescript": "^3.6.2"
+    "typescript": "^4.9.5"
   },
   "jest": {
     "automock": false,
     "testURL": "http://localhost/",
     "preset": "ts-jest"
   },
+  "prettier": "@typeform/eslint-config/prettier",
+  "lint-staged": {
+    "*.ts": [
+      "prettier --write",
+      "eslint --max-warnings=0"
+    ]
+  },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint",
+      "pre-commit": "lint-staged",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },

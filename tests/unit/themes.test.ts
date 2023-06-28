@@ -9,9 +9,9 @@ const mockThemePayload = {
     answer: '#4FB0AE',
     background: '#FFFFF',
     button: '#4FB0AE',
-    question: '#DDDDDD'
+    question: '#DDDDDD',
   },
-  font: 'Arial'
+  font: 'Arial',
 }
 
 beforeEach(() => {
@@ -20,7 +20,7 @@ beforeEach(() => {
 })
 
 const http = clientConstructor({
-  token: '123'
+  token: '123',
 })
 const themesRequest = new Themes(http)
 
@@ -56,7 +56,7 @@ test('Throws if a font name is not supported', () => {
   expect(() =>
     themesRequest.create({
       ...mockThemePayload,
-      font: 'asdf'
+      font: 'asdf',
     })
   ).toThrow()
 })

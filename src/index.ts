@@ -18,6 +18,6 @@ export const createClient = (args: Typeform.ClientArg = { token: null }) => {
     themes: new Themes(http),
     workspaces: new Workspaces(http),
     responses: new Responses(http),
-    webhooks: new Webhooks(http)
+    webhooks: new Webhooks(http),
   }
 }

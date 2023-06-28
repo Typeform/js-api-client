@@ -32,7 +32,7 @@ export const FONTS_AVAILABLE: Typeform.Font[] = [
   'Signika',
   'Sniglet',
   'Source Sans Pro',
-  'Vollkorn'
+  'Vollkorn',
 ]
 
 export const API_BASE_URL: Typeform.API_URL = 'https://api.typeform.com'
