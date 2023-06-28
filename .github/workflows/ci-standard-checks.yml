@@ -2,11 +2,11 @@ name: CI Standard Checks
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     types: [opened, edited, synchronize, reopened]
     branches:
-      - master
+      - main
 
 jobs:
   ci-standard-checks:
