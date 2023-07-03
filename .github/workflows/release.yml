@@ -2,7 +2,9 @@ name: Release
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+      - beta
 
 jobs:
   release:
@@ -41,6 +43,9 @@ jobs:
 
       - run: yarn build
       - run: yarn semantic-release
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - uses: 8398a7/action-slack@v3
         if: failure()
