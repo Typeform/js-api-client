@@ -1,6 +1,10 @@
 name: Release
 
 on:
+  pull_request:
+    branches:
+      - main
+
   push:
     branches:
       - main
@@ -42,7 +46,9 @@ jobs:
       - run: (yarn server &) && sleep 1 && yarn test:integration
 
       - run: yarn build
+
       - run: yarn semantic-release
+        if: ${{ contains(github.ref, 'refs/heads/main') || contains(github.ref, 'refs/heads/beta') }}
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
