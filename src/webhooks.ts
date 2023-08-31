@@ -1,53 +1,70 @@
 import { Typeform } from './typeform-types'
 
 export class Webhooks {
-  constructor (private _http: Typeform.HTTPClient) { }
+  constructor(private _http: Typeform.HTTPClient) {}
 
-  public create (
-    args: { uid: string, tag: string, url: string, enable?: boolean, secret?: string, verifySSL?: boolean }
-  ): Promise<Typeform.Webhook> {
+  public create(args: {
+    uid: string
+    tag: string
+    url: string
+    enabled?: boolean
+    secret?: string
+    verifySSL?: boolean
+  }): Promise<Typeform.Webhook> {
     return createOrUpdateWebhook(this._http, args)
   }
 
-  public delete (args: { uid: string, tag: string }): Promise<null> {
+  public delete(args: { uid: string; tag: string }): Promise<null> {
     const { uid, tag } = args
 
     return this._http.request({
       method: 'delete',
-      url: `/forms/${uid}/webhooks/${tag}`
+      url: `/forms/${uid}/webhooks/${tag}`,
     })
   }
 
-  public get (args: { uid: string, tag: string }): Promise<Typeform.Webhook> {
+  public get(args: { uid: string; tag: string }): Promise<Typeform.Webhook> {
     const { uid, tag } = args
 
     return this._http.request({
       method: 'get',
-      url: `/forms/${uid}/webhooks/${tag}`
+      url: `/forms/${uid}/webhooks/${tag}`,
     })
   }
 
-  public list (args: { uid: string }): Promise<Typeform.API.Webhooks.List> {
+  public list(args: { uid: string }): Promise<Typeform.API.Webhooks.List> {
     const { uid } = args
 
     return this._http.request({
       method: 'get',
-      url: `/forms/${uid}/webhooks`
+      url: `/forms/${uid}/webhooks`,
     })
   }
 
-  update (
-    args: { uid: string, tag: string, url: string, enable?: boolean, secret?: string, verifySSL?: boolean }
-  ): Promise<Typeform.Webhook> {
+  update(args: {
+    uid: string
+    tag: string
+    url: string
+    enabled?: boolean
+    secret?: string
+    verifySSL?: boolean
+  }): Promise<Typeform.Webhook> {
     return createOrUpdateWebhook(this._http, args)
   }
 }
 
 const createOrUpdateWebhook = (
   http: Typeform.HTTPClient,
-  args: { uid: string, tag: string, url: string, enable?: boolean, secret?: string, verifySSL?: boolean }
+  args: {
+    uid: string
+    tag: string
+    url: string
+    enabled?: boolean
+    secret?: string
+    verifySSL?: boolean
+  }
 ): Promise<Typeform.Webhook> => {
-  const { uid, tag, url, enable = false, secret, verifySSL } = args
+  const { uid, tag, url, enabled = false, secret, verifySSL } = args
 
   if (!url) {
     throw new Error(`Please provide an url for ${tag}`)
@@ -62,9 +79,9 @@ const createOrUpdateWebhook = (
     url: `/forms/${uid}/webhooks/${tag}`,
     data: {
       url,
-      enable,
+      enabled,
       secret,
-      verify_ssl: verifySSL ? true : undefined
-    }
+      verify_ssl: verifySSL ? true : undefined,
+    },
   })
 }

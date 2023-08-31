@@ -1,8 +1,8 @@
 # Typeform JavaScript SDK
 
-[![Build Status](https://travis-ci.com/Typeform/js-api-client.svg?token=nePyGZWpdyBxUnh9PswC&branch=master)](https://travis-ci.com/Typeform/js-api-client)
+[![Build Status](https://travis-ci.com/Typeform/js-api-client.svg?token=nePyGZWpdyBxUnh9PswC&branch=main)](https://travis-ci.com/Typeform/js-api-client)
 
-------
+---
 
 JS Client wrapper for Typeform API
 
@@ -26,7 +26,7 @@ JS Client wrapper for Typeform API
 
 ## Installation
 
-``` bash
+```bash
 # install with yarn
 yarn add @typeform/api-client
 
@@ -40,29 +40,38 @@ npm install @typeform/api-client --save
 
 1. Import client library
 
-``` javascript
-  // If using ESM syntax
-  import { createClient } from '@typeform/api-client'
-  // If using CJS syntax
-  const { createClient } = require('@typeform/api-client')
+```javascript
+// If using ESM syntax
+import { createClient } from '@typeform/api-client'
+// If using CJS syntax
+const { createClient } = require('@typeform/api-client')
 ```
 
 2. Create an instance with your personal token
 
-``` javascript
-  const typeformAPI = createClient({ token: '<your token>' })
+```javascript
+const typeformAPI = createClient({ token: '<your token>' })
+```
+
+If your account is configured to store responses in the EU Data Center
+you can pass the `apiBaseUrl` as `https://api.eu.typeform.com`.
+
+```javascript
+const typeformAPI = createClient(
+  {
+    token: '<your token>',
+    apiBaseUrl: 'https://api.eu.typeform.com'
+  }
+)
 ```
 
 3. Use any of the methods available in the [reference](#reference)
 
-``` javascript
-  // will retrieve all forms
-  typeformAPI
-    .forms
-    .list()
-    .then(response => {
-      // do what do you want with your typeforms
-    })
+```javascript
+// will retrieve all forms
+typeformAPI.forms.list().then((response) => {
+  // do what do you want with your typeforms
+})
 ```
 
 ## Reference
@@ -72,11 +81,23 @@ npm install @typeform/api-client --save
 - Creates a new instance of Typeform's JS client
 - Returns an instance with the methods described below
 
-``` javascript
-  const typeformClient = createClient({ token: '<your token>' })
+```javascript
+const typeformClient = createClient({ token: '<your token>' })
 
-  // If what you are trying to acces doesn't require a token, you can construct the client without any argument
-  const typeformAPI = createClient()
+// If what you are trying to access doesn't require a token, you can construct the client without any argument
+const typeformAPI = createClient()
+```
+
+If your account is configured to store responses in the EU Data Center
+you can pass the `apiBaseUrl` as `https://api.eu.typeform.com`.
+
+```javascript
+const typeformAPI = createClient(
+  {
+    token: '<your token>',
+    apiBaseUrl: 'https://api.eu.typeform.com'
+  }
+)
 ```
 
 Client returns the following properties:
@@ -148,24 +169,6 @@ Each one of them encapsulates the operations related to it (like listing, updati
 #### `images.delete({ id })`
 
 - Deletes an image with the given ID
-
-### Teams
-
-#### `teams.get({ id })`
-
-- Gets team information for the given ID
-
-#### `teams.addMembers({ id, members })`
-
-- Add members to a team for the given ID
-- `members`: `string` or an `array` and should be the email for the user
-- Adding multiple members at once is possible using an array of emails
-
-#### `teams.removeMembers({ id, members })`
-
-- Remove members to a team for the given ID
-- `members`: `string` or an `array` and should be the email for the user
-- Deleting multiple members at once is possible using an array of emails
 
 ### Themes
 
@@ -262,7 +265,7 @@ Each one of them encapsulates the operations related to it (like listing, updati
 
 ### Webhooks
 
-#### `webhooks.create({ uid, tag, url, enable = false, secret, verifySSL })`
+#### `webhooks.create({ uid, tag, url, enabled = false, secret, verifySSL })`
 
 - Create a webhook.
 - `uid`: Unique ID for the form.
@@ -289,7 +292,7 @@ Each one of them encapsulates the operations related to it (like listing, updati
 - Retrieve all webhooks for the specified typeform.
 - `uid`: Unique ID for the form.
 
-#### `webhooks.update({ uid, tag, url, enable = false, secret, verifySSL })`
+#### `webhooks.update({ uid, tag, url, enabled = false, secret, verifySSL })`
 
 - Update a webhook.
 - `uid`: Unique ID for the form.
@@ -303,80 +306,74 @@ Each one of them encapsulates the operations related to it (like listing, updati
 
 ### Update specific typeform property, as [referenced here](https://developer.typeform.com/create/reference/update-form-patch/)
 
-``` javascript
-  typeformClient
-    .forms
-    .update({
-      uid: 'asdf',
-      data: [
-        {
-          "op": "replace",
-          "path": "/title",
-          "value": 'new title'
-        }
-      ]
-    })
-    .then(response => {
-      //...
-    })
+```javascript
+typeformClient.forms
+  .update({
+    uid: 'asdf',
+    data: [
+      {
+        op: 'replace',
+        path: '/title',
+        value: 'new title',
+      },
+    ],
+  })
+  .then((response) => {
+    //...
+  })
 ```
 
 ### Update the whole typeform
 
-``` javascript
-  typeformClient
-    .forms
-    .update({
-      uid: 'asdf',
-      override: true,
-      data: {
-        "title": newTitle,
-        "theme": {
-          "href": "https://api.typeform.com/themes/6lPNE6"
-        }
-      }
-    })
-    .then(response => {
-      //...
-    })
+```javascript
+typeformClient.forms
+  .update({
+    uid: 'asdf',
+    override: true,
+    data: {
+      title: newTitle,
+      theme: {
+        href: 'https://api.typeform.com/themes/6lPNE6',
+      },
+    },
+  })
+  .then((response) => {
+    //...
+  })
 ```
 
 **Note:**
-The theme property applies a `theme` to the form. If you don't specify a value for the 'theme' property, Typeform applies a new copy of the default theme to the form, **even if you already have a copy of the default theme applied to this form**. 
+The theme property applies a `theme` to the form. If you don't specify a value for the 'theme' property, Typeform applies a new copy of the default theme to the form, **even if you already have a copy of the default theme applied to this form**.
 
 ### Uploading an image
 
-``` javascript
-  typeformClient
-    .images
-    .add({
-      image: "bGRqZmxzZGpmbHNoZmtoc2RrZmpoc2tqZA==",
-      mediaType: "image/gif",
-      fileName: "newimage.gif"
-    })
-    .then(response => {
-      //...
-    })
-
+```javascript
+typeformClient.images
+  .add({
+    image: 'bGRqZmxzZGpmbHNoZmtoc2RrZmpoc2tqZA==',
+    mediaType: 'image/gif',
+    fileName: 'newimage.gif',
+  })
+  .then((response) => {
+    //...
+  })
 ```
 
 ### Getting the thumbnail of an image
 
-``` javascript
-  typeformClient
-    .images
-    .get({ id: 'asdf', size: 'thumbnail' })
-    .then(response => {
-      //...
-    })
-
+```javascript
+typeformClient.images
+  .get({ id: 'asdf', size: 'thumbnail' })
+  .then((response) => {
+    //...
+  })
 ```
 
 ## Testing
 
 To run unit tests.
 
-``` bash
+```bash
 yarn install
 
 # Runs unit tests

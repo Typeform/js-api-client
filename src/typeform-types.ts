@@ -1,4 +1,4 @@
-/* tslint:disable:no-import-side-effect no-namespace no-shadowed-variable */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export namespace Typeform {
   /**
    * Object that defines the Logic Jump's behavior.
@@ -71,14 +71,13 @@ export namespace Typeform {
           id: string
           title: string
           last_updated_at: string
-          settings: {
-          },
+          settings: {}
           self: {
             href: string
-          },
+          }
           theme: {
             href: string
-          },
+          }
           _links: {
             display: string
           }
@@ -150,7 +149,6 @@ export namespace Typeform {
      * Identifies the image to use for the answer choice. Available only for `picture_choice` types.
      */
     attachment?: Attachment
-
   }
   /**
    * Argument object for Typeform API client
@@ -166,9 +164,26 @@ export namespace Typeform {
     /**
      * Operator for the condition.
      */
-    op?: 'begins_with' | 'ends_with' | 'contains' | 'not_contains' | 'lower_than' | 'lower_equal_than' | 'greater_than'
-    | 'greater_equal_than' | 'is' | 'is_not' | 'equal' | 'not_equal' | 'always' | 'on' | 'not_on' | 'earlier_than' | 'earlier_than_or_on'
-    | 'later_than' | 'later_than_or_on'
+    op?:
+      | 'begins_with'
+      | 'ends_with'
+      | 'contains'
+      | 'not_contains'
+      | 'lower_than'
+      | 'lower_equal_than'
+      | 'greater_than'
+      | 'greater_equal_than'
+      | 'is'
+      | 'is_not'
+      | 'equal'
+      | 'not_equal'
+      | 'always'
+      | 'on'
+      | 'not_on'
+      | 'earlier_than'
+      | 'earlier_than_or_on'
+      | 'later_than'
+      | 'later_than_or_on'
     /**
      * Object that defines the field type and value to evaluate with the operator.
      */
@@ -225,10 +240,39 @@ export namespace Typeform {
   /**
    * Font for the theme.
    */
-  export type Font = 'Acme' | 'Arial' | 'Arvo' | 'Avenir Next' | 'Bangers' | 'Cabin' | 'Cabin Condensed' | 'Courier' | 'Crete Round'
-    | 'Dancing Script' | 'Exo' | 'Georgia' | 'Handlee' | 'Helvetica Neue' | 'Karla' | 'Lato' | 'Lekton' | 'Lobster' | 'Lora' | 'McLaren'
-    | 'Montserrat' | 'Nixie One' | 'Old Standard TT' | 'Open Sans' | 'Oswald' | 'Playfair Display' | 'Quicksand' | 'Raleway' | 'Signika'
-    | 'Sniglet' | 'Source Sans Pro' | 'Vollkorn'
+  export type Font =
+    | 'Acme'
+    | 'Arial'
+    | 'Arvo'
+    | 'Avenir Next'
+    | 'Bangers'
+    | 'Cabin'
+    | 'Cabin Condensed'
+    | 'Courier'
+    | 'Crete Round'
+    | 'Dancing Script'
+    | 'Exo'
+    | 'Georgia'
+    | 'Handlee'
+    | 'Helvetica Neue'
+    | 'Karla'
+    | 'Lato'
+    | 'Lekton'
+    | 'Lobster'
+    | 'Lora'
+    | 'McLaren'
+    | 'Montserrat'
+    | 'Nixie One'
+    | 'Old Standard TT'
+    | 'Open Sans'
+    | 'Oswald'
+    | 'Playfair Display'
+    | 'Quicksand'
+    | 'Raleway'
+    | 'Signika'
+    | 'Sniglet'
+    | 'Source Sans Pro'
+    | 'Vollkorn'
   export interface Form {
     /**
      * ID of a form.
@@ -267,13 +311,15 @@ export namespace Typeform {
      * Theme to use for the form.
      * Treat as string when creating a form/
      */
-    theme?: {
-      /**
-       * URL of the theme to use for the typeform.
-       * If you don't specify a URL for the theme, Typeform applies a new copy of the default theme to the form.
-       */
-      href?: string
-    } | string
+    theme?:
+      | {
+          /**
+           * URL of the theme to use for the typeform.
+           * If you don't specify a URL for the theme, Typeform applies a new copy of the default theme to the form.
+           */
+          href?: string
+        }
+      | string
     /**
      * Workspace that contains the form.
      */
@@ -357,8 +403,33 @@ export namespace Typeform {
   /**
    * Language that Typeform can be in.
    */
-  export type Language = 'en' | 'es' | 'ca' | 'fr' | 'de' | 'ru' | 'it' | 'da' | 'pt' | 'ch' | 'zh' | 'nl' | 'no' | 'uk' | 'ja' | 'ko'
-    | 'hr' | 'fi' | 'sv' | 'pl' | 'el' | 'hu' | 'tr' | 'cs' | 'et' | 'di'
+  export type Language =
+    | 'en'
+    | 'es'
+    | 'ca'
+    | 'fr'
+    | 'de'
+    | 'ru'
+    | 'it'
+    | 'da'
+    | 'pt'
+    | 'ch'
+    | 'zh'
+    | 'nl'
+    | 'no'
+    | 'uk'
+    | 'ja'
+    | 'ko'
+    | 'hr'
+    | 'fi'
+    | 'sv'
+    | 'pl'
+    | 'el'
+    | 'hu'
+    | 'tr'
+    | 'cs'
+    | 'et'
+    | 'di'
   /**
    * Logic object of a form.
    */
@@ -747,8 +818,24 @@ export namespace Typeform {
        * Default: `"star"`
        * Shape to display on the scale's steps. Available for `opinion_scale` and `rating` types.
        */
-      shape?: 'cat' | 'circle' | 'cloud' | 'crown' | 'dog' | 'droplet' | 'flag' | 'heart' | 'lightbulb' | 'pencil' | 'skull' | 'star'
-      | 'thunderbolt' | 'tick' | 'trophy' | 'up' | 'user'
+      shape?:
+        | 'cat'
+        | 'circle'
+        | 'cloud'
+        | 'crown'
+        | 'dog'
+        | 'droplet'
+        | 'flag'
+        | 'heart'
+        | 'lightbulb'
+        | 'pencil'
+        | 'skull'
+        | 'star'
+        | 'thunderbolt'
+        | 'tick'
+        | 'trophy'
+        | 'up'
+        | 'user'
       /**
        * Label to help respondents understand the scale's range. Available for `opinion_scale` and `rating` types.
        */
@@ -780,7 +867,18 @@ export namespace Typeform {
        * Character to use between month, day, and year in answer. Available for `date` types.
        */
       separator?: '/' | '-' | '.'
-      currency?: 'AUD' | 'BRL' | 'CAD' | 'CHF' | 'DKK' | 'EUR' | 'GBP' | 'MXN' | 'NOK' | 'SEK' | 'USD'
+      currency?:
+        | 'AUD'
+        | 'BRL'
+        | 'CAD'
+        | 'CHF'
+        | 'DKK'
+        | 'EUR'
+        | 'GBP'
+        | 'MXN'
+        | 'NOK'
+        | 'SEK'
+        | 'USD'
     }
     export interface ThankYouScreen {
       /**
@@ -790,7 +888,7 @@ export namespace Typeform {
       /**
        * Text to display on the 'Submit' button on the thank you screen.
        */
-      button_text?: boolean
+      button_text?: string
       /**
        * Specify whether the form should reload or redirect to another URL when respondents click the 'Submit' button. PRO+ feature.
        */
@@ -817,7 +915,7 @@ export namespace Typeform {
       /**
        * Text to display on the 'Start' button on the welcome screen.
        */
-      button_text?: boolean
+      button_text?: string
     }
   }
   /**
@@ -896,7 +994,17 @@ export namespace Typeform {
       /**
        * The answer-field's type.
        */
-      type?: 'choice' | 'choices' | 'date' | 'email' | 'url' | 'file_url' | 'number' | 'boolean' | 'text' | 'payment'
+      type?:
+        | 'choice'
+        | 'choices'
+        | 'date'
+        | 'email'
+        | 'url'
+        | 'file_url'
+        | 'number'
+        | 'boolean'
+        | 'text'
+        | 'payment'
       /**
        * Represents single choice answers for dropdown-like fields.
        */
@@ -1097,8 +1205,25 @@ export namespace Typeform {
   /**
    * The type of field.
    */
-  type Type = 'date' | 'dropdown' | 'email' | 'file_upload' | 'group' | 'legal' | 'long_text' | 'multiple_choice' | 'number'
-    | 'opinion_scale' | 'payment' | 'picture_choice' | 'rating' | 'short_text' | 'statement' | 'website' | 'yes_no' | 'phone_number'
+  type Type =
+    | 'date'
+    | 'dropdown'
+    | 'email'
+    | 'file_upload'
+    | 'group'
+    | 'legal'
+    | 'long_text'
+    | 'multiple_choice'
+    | 'number'
+    | 'opinion_scale'
+    | 'payment'
+    | 'picture_choice'
+    | 'rating'
+    | 'short_text'
+    | 'statement'
+    | 'website'
+    | 'yes_no'
+    | 'phone_number'
   /**
    * Validations of a field.
    */

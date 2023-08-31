@@ -1,7 +1,6 @@
 import { clientConstructor } from './create-client'
 import { Forms } from './forms'
 import { Images } from './images'
-import { Teams } from './teams'
 import { Themes } from './themes'
 import { Workspaces } from './workspaces'
 import { Responses } from './responses'
@@ -16,10 +15,9 @@ export const createClient = (args: Typeform.ClientArg = { token: null }) => {
   return {
     forms: new Forms(http),
     images: new Images(http),
-    teams: new Teams(http),
     themes: new Themes(http),
     workspaces: new Workspaces(http),
     responses: new Responses(http),
-    webhooks: new Webhooks(http)
+    webhooks: new Webhooks(http),
   }
 }

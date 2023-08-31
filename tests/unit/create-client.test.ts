@@ -8,7 +8,7 @@ beforeEach(() => {
 })
 
 const client = clientConstructor({
-  token: 'abc'
+  token: 'abc',
 })
 
 test('request pass correct headers', async () => {
@@ -16,14 +16,14 @@ test('request pass correct headers', async () => {
     url: '/forms',
     method: 'get',
     headers: {
-      Accepts: 'application/json'
-    }
+      Accepts: 'application/json',
+    },
   })
   expect(axios.history.get[0].url).toBe(`${API_BASE_URL}/forms`)
   expect(axios.history.get[0].headers).toEqual({
     Accept: 'application/json, text/plain, */*',
     Accepts: 'application/json',
-    Authorization: 'bearer abc'
+    Authorization: 'bearer abc',
   })
 })
 
@@ -36,7 +36,7 @@ test('the url has a query string if parameters are passed', () => {
   const url = 'http://typeform.com'
   const params = {
     a: '1',
-    b: '2'
+    b: '2',
   }
   expect(buildUrlWithParams(url, params)).toBe('http://typeform.com?a=1&b=2')
 })
@@ -45,16 +45,18 @@ test('parameters should be enconded', () => {
   const url = 'http://typeform.com'
   const params = {
     a: '@1',
-    b: '#2'
+    b: '#2',
   }
-  expect(buildUrlWithParams(url, params)).toBe('http://typeform.com?a=%401&b=%232')
+  expect(buildUrlWithParams(url, params)).toBe(
+    'http://typeform.com?a=%401&b=%232'
+  )
 })
 
 test('undefined values for parameter will be skipped', () => {
   const url = 'http://typeform.com'
   const params = {
     a: '@1',
-    b: undefined
+    b: undefined,
   }
   expect(buildUrlWithParams(url, params)).toBe('http://typeform.com?a=%401')
 })
@@ -64,7 +66,25 @@ test('falsy values should be passed', () => {
   const params = {
     a: '0',
     b: 0,
-    c: null
+    c: null,
   }
   expect(buildUrlWithParams(url, params)).toBe('http://typeform.com?a=0&b=0')
+})
+
+test('Specify apiBaseUrl', async () => {
+  const rainbowApi = 'https://api.rainbow.typeform.com'
+
+  const clientWithApiBaseUrl = clientConstructor({
+    token: 'abc',
+    apiBaseUrl: rainbowApi,
+  })
+
+  await clientWithApiBaseUrl.request({
+    url: '/forms',
+    method: 'get',
+    headers: {
+      Accepts: 'application/json',
+    },
+  })
+  expect(axios.history.get[0].url).toBe(`${rainbowApi}/forms`)
 })

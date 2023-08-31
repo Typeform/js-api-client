@@ -9,7 +9,7 @@ beforeEach(() => {
 })
 
 const http = clientConstructor({
-  token: '123'
+  token: '123',
 })
 
 const responsesRequest = new Responses(http)
@@ -29,12 +29,16 @@ test('List responses with the given filters', async () => {
 
 test('Delete responses has the correct path and method when given string for `ids`', async () => {
   await responsesRequest.delete({ uid: '2', ids: '123' })
-  expect(axios.history.delete[0].url).toBe(`${API_BASE_URL}/forms/2/responses?included_tokens=123`)
+  expect(axios.history.delete[0].url).toBe(
+    `${API_BASE_URL}/forms/2/responses?included_tokens=123`
+  )
   expect(axios.history.delete[0].method).toBe('delete')
 })
 
 test('Delete responses has the correct path and method when given array of strings for `ids`', async () => {
   await responsesRequest.delete({ uid: '2', ids: ['123', '456', '789'] })
-  expect(axios.history.delete[0].url).toBe(`${API_BASE_URL}/forms/2/responses?included_tokens=123%2C456%2C789`)
+  expect(axios.history.delete[0].url).toBe(
+    `${API_BASE_URL}/forms/2/responses?included_tokens=123%2C456%2C789`
+  )
   expect(axios.history.delete[0].method).toBe('delete')
 })
