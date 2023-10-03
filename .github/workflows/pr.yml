@@ -1,26 +1,17 @@
-name: Build
+name: Pull Request
 
 on:
   pull_request:
     branches:
       - main
 
-  push:
-    branches:
-      - main
-      - beta
-
 jobs:
-  release:
-    name: Release
+  build-lint-test:
+    name: build-lint-test
     runs-on: ubuntu-latest
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-          persist-credentials: false
-          token: ${{ secrets.GH_TOKEN }}
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -40,15 +31,14 @@ jobs:
         if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
 
-      - run: yarn lint
+      - name: Build
+        run: yarn build
 
-      - run: yarn test:unit
-      - run: (yarn server &) && sleep 1 && yarn test:integration
+      - name: Lint
+        run: yarn lint
 
-      - run: yarn build
+      - name: Unit tests
+        run: yarn test:unit
 
-      - run: yarn semantic-release
-        if: ${{ contains(github.ref, 'refs/heads/main') || contains(github.ref, 'refs/heads/beta') }}
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Integration tests
+        run: (yarn server &) && sleep 1 && yarn test:integration

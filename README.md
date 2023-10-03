@@ -1,8 +1,6 @@
 # Typeform JavaScript SDK
 
-[![Build Status](https://travis-ci.com/Typeform/js-api-client.svg?token=nePyGZWpdyBxUnh9PswC&branch=main)](https://travis-ci.com/Typeform/js-api-client)
-
----
+[![Pull Request](https://github.com/Typeform/js-api-client/actions/workflows/pr.yml/badge.svg)](https://github.com/Typeform/js-api-client/actions/workflows/pr.yml)
 
 JS Client wrapper for Typeform API
 
@@ -378,9 +376,8 @@ yarn install
 
 # Runs unit tests
 yarn test:unit
-
 ```
 
 ## Suggestions or feedback
 
-Fill out this [conversation](https://bit.ly/2wmzCXi) 🙂
+Feel free to [open a Github issue](https://github.com/Typeform/js-api-client/issues). 
