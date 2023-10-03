@@ -7,8 +7,14 @@ on:
 
 jobs:
   build-lint-test:
-    name: build-lint-test
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node_version:
+          - 16 # end of life 2023-09-11
+          - 18 # end of life 2025-04-30
+          - 20 # end of life 2025-04-30
+    name: build-lint-test - node ${{ matrix.node_version }}
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v3
@@ -16,7 +22,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: ${{ matrix.node_version }}
 
       - name: Get yarn cache
         uses: actions/cache@v3
@@ -25,10 +31,11 @@ jobs:
           path: |
             **/node_modules
             ~/.cache
-          key: ${{ runner.os }}-node-16-yarn-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('.github/workflows/**.yml') }}
+          key: ${{ runner.os }}-repo-${{ github.event.pull_request.head.repo.full_name }}-node-${{ matrix.node_version }}-yarn-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('.github/workflows/**.yml') }}
 
       - name: Install Node.js dependencies
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        # run when cache not found or PR is external (build fails for external PRs if dependencies are not installed)
+        if: steps.yarn-cache.outputs.cache-hit != 'true' || github.event.pull_request.head.repo.full_name != github.repository
         run: yarn install --frozen-lockfile
 
       - name: Build
