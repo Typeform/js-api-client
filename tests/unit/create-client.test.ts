@@ -1,6 +1,7 @@
 import { axios } from '../common'
 import { clientConstructor, buildUrlWithParams } from '../../src/create-client'
 import { API_BASE_URL } from '../../src/constants'
+import { Typeform } from '../../src'
 
 beforeEach(() => {
   axios.reset()
@@ -54,7 +55,7 @@ test('parameters should be enconded', () => {
 
 test('undefined values for parameter will be skipped', () => {
   const url = 'http://typeform.com'
-  const params = {
+  const params: Typeform.DocumentData = {
     a: '@1',
     b: undefined,
   }
@@ -63,7 +64,7 @@ test('undefined values for parameter will be skipped', () => {
 
 test('falsy values should be passed', () => {
   const url = 'http://typeform.com'
-  const params = {
+  const params: Typeform.DocumentData = {
     a: '0',
     b: 0,
     c: null,
