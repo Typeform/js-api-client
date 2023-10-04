@@ -1,4 +1,4 @@
-/* tslint:disable:no-import-side-effect no-namespace no-shadowed-variable */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export namespace Typeform {
   /**
    * Object that defines the Logic Jump's behavior.
@@ -16,7 +16,7 @@ export namespace Typeform {
      * Conditions for executing the Logic Jump. Conditions answer the question, "Under what circumstances?"
      * The condition object is the IF statement in your Logic Jump.
      */
-    condition?: Condition
+    condition?: Condition | AndOrOperator
   }
   /**
    * Properties that further specify how the Logic Jump will behave.
@@ -69,19 +69,20 @@ export namespace Typeform {
         page_count: number
         items: {
           id: string
+          type: string
           title: string
           last_updated_at: string
           created_at: string
-          settings: {
-          },
+          settings: {}
           self: {
             href: string
-          },
+          }
           theme: {
             href: string
-          },
+          }
           _links: {
             display: string
+            responses: string
           }
         }[]
       }
@@ -151,7 +152,6 @@ export namespace Typeform {
      * Identifies the image to use for the answer choice. Available only for `picture_choice` types.
      */
     attachment?: Attachment
-
   }
   /**
    * Argument object for Typeform API client
@@ -167,9 +167,26 @@ export namespace Typeform {
     /**
      * Operator for the condition.
      */
-    op?: 'begins_with' | 'ends_with' | 'contains' | 'not_contains' | 'lower_than' | 'lower_equal_than' | 'greater_than'
-    | 'greater_equal_than' | 'is' | 'is_not' | 'equal' | 'not_equal' | 'always' | 'on' | 'not_on' | 'earlier_than' | 'earlier_than_or_on'
-    | 'later_than' | 'later_than_or_on'
+    op?:
+      | 'begins_with'
+      | 'ends_with'
+      | 'contains'
+      | 'not_contains'
+      | 'lower_than'
+      | 'lower_equal_than'
+      | 'greater_than'
+      | 'greater_equal_than'
+      | 'is'
+      | 'is_not'
+      | 'equal'
+      | 'not_equal'
+      | 'always'
+      | 'on'
+      | 'not_on'
+      | 'earlier_than'
+      | 'earlier_than_or_on'
+      | 'later_than'
+      | 'later_than_or_on'
     /**
      * Object that defines the field type and value to evaluate with the operator.
      */
@@ -177,12 +194,25 @@ export namespace Typeform {
       /**
        * Type of value the condition object refers to.
        */
-      type?: 'field' | 'hidden' | 'variable' | 'constant' | 'end'
+      type?: 'field' | 'hidden' | 'variable' | 'constant' | 'end'| 'choice'
       /**
        * Value to check for in the "type" field to evaluate with the operator.
        */
       value?: any
     }[]
+  }
+  /**
+   * Conditions for a logic jump can be combined using the `and` and `or` operators
+   */
+  export interface AndOrOperator {
+  /**
+   * Operator for the condition.
+   */
+    op?: 'and' | 'or'
+  /**
+   * Object that defines the field type and value to evaluate with the operator.
+   */
+    vars: Array<AndOrOperator | Condition>
   }
   /**
    * Generic document.
@@ -226,10 +256,39 @@ export namespace Typeform {
   /**
    * Font for the theme.
    */
-  export type Font = 'Acme' | 'Arial' | 'Arvo' | 'Avenir Next' | 'Bangers' | 'Cabin' | 'Cabin Condensed' | 'Courier' | 'Crete Round'
-    | 'Dancing Script' | 'Exo' | 'Georgia' | 'Handlee' | 'Helvetica Neue' | 'Karla' | 'Lato' | 'Lekton' | 'Lobster' | 'Lora' | 'McLaren'
-    | 'Montserrat' | 'Nixie One' | 'Old Standard TT' | 'Open Sans' | 'Oswald' | 'Playfair Display' | 'Quicksand' | 'Raleway' | 'Signika'
-    | 'Sniglet' | 'Source Sans Pro' | 'Vollkorn'
+  export type Font =
+    | 'Acme'
+    | 'Arial'
+    | 'Arvo'
+    | 'Avenir Next'
+    | 'Bangers'
+    | 'Cabin'
+    | 'Cabin Condensed'
+    | 'Courier'
+    | 'Crete Round'
+    | 'Dancing Script'
+    | 'Exo'
+    | 'Georgia'
+    | 'Handlee'
+    | 'Helvetica Neue'
+    | 'Karla'
+    | 'Lato'
+    | 'Lekton'
+    | 'Lobster'
+    | 'Lora'
+    | 'McLaren'
+    | 'Montserrat'
+    | 'Nixie One'
+    | 'Old Standard TT'
+    | 'Open Sans'
+    | 'Oswald'
+    | 'Playfair Display'
+    | 'Quicksand'
+    | 'Raleway'
+    | 'Signika'
+    | 'Sniglet'
+    | 'Source Sans Pro'
+    | 'Vollkorn'
   export interface Form {
     /**
      * ID of a form.
@@ -268,13 +327,15 @@ export namespace Typeform {
      * Theme to use for the form.
      * Treat as string when creating a form/
      */
-    theme?: {
-      /**
-       * URL of the theme to use for the typeform.
-       * If you don't specify a URL for the theme, Typeform applies a new copy of the default theme to the form.
-       */
-      href?: string
-    } | string
+    theme?:
+      | {
+          /**
+           * URL of the theme to use for the typeform.
+           * If you don't specify a URL for the theme, Typeform applies a new copy of the default theme to the form.
+           */
+          href?: string
+        }
+      | string
     /**
      * Workspace that contains the form.
      */
@@ -358,8 +419,33 @@ export namespace Typeform {
   /**
    * Language that Typeform can be in.
    */
-  export type Language = 'en' | 'es' | 'ca' | 'fr' | 'de' | 'ru' | 'it' | 'da' | 'pt' | 'ch' | 'zh' | 'nl' | 'no' | 'uk' | 'ja' | 'ko'
-    | 'hr' | 'fi' | 'sv' | 'pl' | 'el' | 'hu' | 'tr' | 'cs' | 'et' | 'di'
+  export type Language =
+    | 'en'
+    | 'es'
+    | 'ca'
+    | 'fr'
+    | 'de'
+    | 'ru'
+    | 'it'
+    | 'da'
+    | 'pt'
+    | 'ch'
+    | 'zh'
+    | 'nl'
+    | 'no'
+    | 'uk'
+    | 'ja'
+    | 'ko'
+    | 'hr'
+    | 'fi'
+    | 'sv'
+    | 'pl'
+    | 'el'
+    | 'hu'
+    | 'tr'
+    | 'cs'
+    | 'et'
+    | 'di'
   /**
    * Logic object of a form.
    */
@@ -692,7 +778,7 @@ export namespace Typeform {
        * Contains the fields that belong in a question group. Only `payment` and `group` blocks are not allowed inside a question group.
        * Available for the `group` type.
        */
-      fields?: any[][]
+      fields?: any[]
       /**
        * true to allow respondents to select more than one answer choice. false to allow respondents to select only one answer choice.
        * Available for `multiple_choice` and `picture_choice` types.
@@ -748,8 +834,24 @@ export namespace Typeform {
        * Default: `"star"`
        * Shape to display on the scale's steps. Available for `opinion_scale` and `rating` types.
        */
-      shape?: 'cat' | 'circle' | 'cloud' | 'crown' | 'dog' | 'droplet' | 'flag' | 'heart' | 'lightbulb' | 'pencil' | 'skull' | 'star'
-      | 'thunderbolt' | 'tick' | 'trophy' | 'up' | 'user'
+      shape?:
+        | 'cat'
+        | 'circle'
+        | 'cloud'
+        | 'crown'
+        | 'dog'
+        | 'droplet'
+        | 'flag'
+        | 'heart'
+        | 'lightbulb'
+        | 'pencil'
+        | 'skull'
+        | 'star'
+        | 'thunderbolt'
+        | 'tick'
+        | 'trophy'
+        | 'up'
+        | 'user'
       /**
        * Label to help respondents understand the scale's range. Available for `opinion_scale` and `rating` types.
        */
@@ -781,7 +883,18 @@ export namespace Typeform {
        * Character to use between month, day, and year in answer. Available for `date` types.
        */
       separator?: '/' | '-' | '.'
-      currency?: 'AUD' | 'BRL' | 'CAD' | 'CHF' | 'DKK' | 'EUR' | 'GBP' | 'MXN' | 'NOK' | 'SEK' | 'USD'
+      currency?:
+        | 'AUD'
+        | 'BRL'
+        | 'CAD'
+        | 'CHF'
+        | 'DKK'
+        | 'EUR'
+        | 'GBP'
+        | 'MXN'
+        | 'NOK'
+        | 'SEK'
+        | 'USD'
     }
     export interface ThankYouScreen {
       /**
@@ -897,7 +1010,17 @@ export namespace Typeform {
       /**
        * The answer-field's type.
        */
-      type?: 'choice' | 'choices' | 'date' | 'email' | 'url' | 'file_url' | 'number' | 'boolean' | 'text' | 'payment'
+      type?:
+        | 'choice'
+        | 'choices'
+        | 'date'
+        | 'email'
+        | 'url'
+        | 'file_url'
+        | 'number'
+        | 'boolean'
+        | 'text'
+        | 'payment'
       /**
        * Represents single choice answers for dropdown-like fields.
        */
@@ -1098,8 +1221,25 @@ export namespace Typeform {
   /**
    * The type of field.
    */
-  type Type = 'date' | 'dropdown' | 'email' | 'file_upload' | 'group' | 'legal' | 'long_text' | 'multiple_choice' | 'number'
-    | 'opinion_scale' | 'payment' | 'picture_choice' | 'rating' | 'short_text' | 'statement' | 'website' | 'yes_no' | 'phone_number'
+  type Type =
+    | 'date'
+    | 'dropdown'
+    | 'email'
+    | 'file_upload'
+    | 'group'
+    | 'legal'
+    | 'long_text'
+    | 'multiple_choice'
+    | 'number'
+    | 'opinion_scale'
+    | 'payment'
+    | 'picture_choice'
+    | 'rating'
+    | 'short_text'
+    | 'statement'
+    | 'website'
+    | 'yes_no'
+    | 'phone_number'
   /**
    * Validations of a field.
    */

@@ -1,0 +1,51 @@
+name: Pull Request
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-lint-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node_version:
+          - 16 # end of life 2023-09-11
+          - 18 # end of life 2025-04-30
+          - 20 # end of life 2025-04-30
+    name: build-lint-test - node ${{ matrix.node_version }}
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node_version }}
+
+      - name: Get yarn cache
+        uses: actions/cache@v3
+        id: yarn-cache
+        with:
+          path: |
+            **/node_modules
+            ~/.cache
+          key: ${{ runner.os }}-repo-${{ github.event.pull_request.head.repo.full_name }}-node-${{ matrix.node_version }}-yarn-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('.github/workflows/**.yml') }}
+
+      - name: Install Node.js dependencies
+        # run when cache not found or PR is external (build fails for external PRs if dependencies are not installed)
+        if: steps.yarn-cache.outputs.cache-hit != 'true' || github.event.pull_request.head.repo.full_name != github.repository
+        run: yarn install --frozen-lockfile
+
+      - name: Build
+        run: yarn build
+
+      - name: Lint
+        run: yarn lint
+
+      - name: Unit tests
+        run: yarn test:unit
+
+      - name: Integration tests
+        run: (yarn server &) && sleep 1 && yarn test:integration
