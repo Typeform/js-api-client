@@ -1,2 +1,3 @@
 # output folder
 dist/
+rollup.config.js
