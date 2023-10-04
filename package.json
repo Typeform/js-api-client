@@ -52,13 +52,13 @@
     "yarn.lock"
   ],
   "dependencies": {
-    "axios": "^0.21.1"
+    "axios": "^0.27.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.1.0",
     "@commitlint/config-conventional": "^8.1.0",
     "@semantic-release/exec": "^5.0.0",
-    "@typeform/eslint-config": "^6.0.2",
+    "@typeform/eslint-config": "^6.0.3",
     "@types/jest": "^24.0.18",
     "axios-mock-adapter": "^1.17.0",
     "eslint": "^8.43.0",
