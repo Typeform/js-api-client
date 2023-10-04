@@ -69,8 +69,10 @@ export namespace Typeform {
         page_count: number
         items: {
           id: string
+          type: string
           title: string
           last_updated_at: string
+          created_at: string
           settings: {}
           self: {
             href: string
@@ -80,6 +82,7 @@ export namespace Typeform {
           }
           _links: {
             display: string
+            responses: string
           }
         }[]
       }
