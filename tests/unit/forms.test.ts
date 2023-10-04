@@ -9,7 +9,7 @@ beforeEach(() => {
 })
 
 const http = clientConstructor({
-  token: '123'
+  token: '123',
 })
 const formsRequest = new Forms(http)
 
@@ -24,7 +24,7 @@ test('paramters are sent correctly', async () => {
     page: 2,
     pageSize: 10,
     search: 'hola',
-    workspaceId: 'abc'
+    workspaceId: 'abc',
   })
   const url = axios.history.get[0].url.split('?')
   const params = new URLSearchParams(url[1])
@@ -48,8 +48,8 @@ test('updateForm sends the correct UID and data', async () => {
   await formsRequest.update({
     uid: 'abc123',
     data: {
-      title: 'hola'
-    }
+      title: 'hola',
+    },
   })
   const bodyParsed = JSON.parse(axios.history.patch[0].data)
   expect(axios.history.patch[0].url).toBe(`${API_BASE_URL}/forms/abc123`)
@@ -60,8 +60,8 @@ test('updateForm sets patch method in request by default', async () => {
   await formsRequest.update({
     uid: 'abc123',
     data: {
-      title: 'hola'
-    }
+      title: 'hola',
+    },
   })
   expect(axios.history.patch[0].method).toBe('patch')
 })
@@ -70,16 +70,16 @@ test('updateForm sets put method in request when override option is set', async 
   await formsRequest.update({
     uid: 'abc123',
     data: {
-      title: 'hola'
+      title: 'hola',
     },
-    override: true
+    override: true,
   })
   expect(axios.history.put[0].method).toBe('put')
 })
 
 test('deleteForm removes the correct uid form ', async () => {
   await formsRequest.delete({
-    uid: 'abc123'
+    uid: 'abc123',
   })
   expect(axios.history.delete[0].method).toBe('delete')
   expect(axios.history.delete[0].url).toBe(`${API_BASE_URL}/forms/abc123`)
@@ -102,7 +102,7 @@ test('get messages has the correct path and method ', async () => {
 test('update messages has the correct path and method ', async () => {
   await formsRequest.messages.update({
     uid: 'abc123',
-    data: {}
+    data: {},
   })
 
   expect(axios.history.put[0].method).toBe('put')

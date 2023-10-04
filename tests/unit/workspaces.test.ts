@@ -9,7 +9,7 @@ beforeEach(() => {
 })
 
 const http = clientConstructor({
-  token: '123'
+  token: '123',
 })
 const workspacesRequest = new Workspaces(http)
 
@@ -22,7 +22,7 @@ test(`Get workspaces has the correct query parameters`, async () => {
   await workspacesRequest.list({
     search: 'hola',
     page: 2,
-    pageSize: 10
+    pageSize: 10,
   })
   const params = new URL(axios.history.get[0].url).searchParams
   expect(params.get('search')).toBe('hola')
@@ -43,7 +43,7 @@ test(`Create a workscape requires a title`, () => {
 
 test(`Create a workscape has the correct method`, async () => {
   await workspacesRequest.add({
-    name: 'new workspace'
+    name: 'new workspace',
   })
   expect(axios.history.post[0].method).toBe(`post`)
 })
@@ -51,7 +51,7 @@ test(`Create a workscape has the correct method`, async () => {
 test(`add a member to a workscape has the correct method and path`, async () => {
   await workspacesRequest.addMembers({
     id: '2',
-    members: 'test@test.com'
+    members: 'test@test.com',
   })
   expect(axios.history.patch[0].url).toBe(`${API_BASE_URL}/workspaces/2`)
   expect(axios.history.patch[0].method).toBe(`patch`)
@@ -60,7 +60,7 @@ test(`add a member to a workscape has the correct method and path`, async () => 
 test(`add a member to a workscape has the correct payload`, async () => {
   await workspacesRequest.addMembers({
     id: '2',
-    members: ['test@test.com', 'test2@test.com']
+    members: ['test@test.com', 'test2@test.com'],
   })
   const body = JSON.parse(axios.history.patch[0].data)
   expect(body).toEqual([
@@ -68,16 +68,16 @@ test(`add a member to a workscape has the correct payload`, async () => {
       op: 'add',
       path: '/members',
       value: {
-        email: 'test@test.com'
-      }
+        email: 'test@test.com',
+      },
     },
     {
       op: 'add',
       path: '/members',
       value: {
-        email: 'test2@test.com'
-      }
-    }
+        email: 'test2@test.com',
+      },
+    },
   ])
   expect(body.length).toEqual(2)
 })
@@ -85,7 +85,7 @@ test(`add a member to a workscape has the correct payload`, async () => {
 test(`remove a member to a workscape has the correct payload`, async () => {
   await workspacesRequest.removeMembers({
     id: '2',
-    members: ['test@test.com']
+    members: ['test@test.com'],
   })
   const body = JSON.parse(axios.history.patch[0].data)
   expect(body).toEqual([
@@ -93,9 +93,9 @@ test(`remove a member to a workscape has the correct payload`, async () => {
       op: 'remove',
       path: '/members',
       value: {
-        email: 'test@test.com'
-      }
-    }
+        email: 'test@test.com',
+      },
+    },
   ])
   expect(body.length).toEqual(1)
 })

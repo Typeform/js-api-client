@@ -4,3 +4,4 @@ lib
 .npmrc
 yarn-error.log
 .DS_STORE
+.idea/

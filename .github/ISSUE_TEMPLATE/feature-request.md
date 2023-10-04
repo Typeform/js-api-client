@@ -1,7 +1,6 @@
 ---
 name: Feature Request
 about: Suggest an idea for this project
-
 ---
 
 <!-- Make sure to include as much information as possible so we can add it as quickly as possible. -->
@@ -9,13 +8,17 @@ about: Suggest an idea for this project
 <!-- If you can't answer some sections, please delete them -->
 
 ## Description
+
 <!-- Provide a description of this change or addition -->
 
 ## Context
+
 <!-- Why is this change important to you? How would you use it? How can it benefit other users? -->
 
 ## Possible Solution
+
 <!-- Suggest an idea for implementing this change or addition -->
 
 ## Screenshots
+
 <!-- Add optional screenshots of this change or addition -->

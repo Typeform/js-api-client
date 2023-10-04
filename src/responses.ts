@@ -1,27 +1,46 @@
 import { Typeform } from './typeform-types'
 
 export class Responses {
-  constructor (private _http: Typeform.HTTPClient) { }
+  constructor(private _http: Typeform.HTTPClient) {}
 
-  public delete (args: { uid: string, ids: string | string[] }): Promise<null> {
+  public delete(args: { uid: string; ids: string | string[] }): Promise<null> {
     const { uid, ids } = args
 
     return this._http.request({
       method: 'delete',
       url: `/forms/${uid}/responses`,
       params: {
-        included_tokens: toCSL(ids)
-      }
+        included_tokens: toCSL(ids),
+      },
     })
   }
 
-  public list (
-    args: {
-      uid: string, pageSize?: number, since?: string, until?: string, after?: string, before?: string, ids?: string | string[],
-      completed?: boolean, sort?: string, query?: string, fields?: string | string[]
-    }
-  ): Promise<Typeform.API.Responses.List> {
-    const { uid, pageSize, since, until, after, before, ids, completed, sort, query, fields } = args
+  public list(args: {
+    uid: string
+    pageSize?: number
+    since?: string
+    until?: string
+    after?: string
+    before?: string
+    ids?: string | string[]
+    completed?: boolean
+    sort?: string
+    query?: string
+    fields?: string | string[]
+  }): Promise<Typeform.API.Responses.List> {
+    const {
+      uid,
+      pageSize,
+      since,
+      until,
+      after,
+      before,
+      ids,
+      completed,
+      sort,
+      query,
+      fields,
+    } = args
 
     return this._http.request({
       method: 'get',
@@ -36,8 +55,8 @@ export class Responses {
         completed,
         sort,
         query,
-        fields: toCSL(fields)
-      }
+        fields: toCSL(fields),
+      },
     })
   }
 }
@@ -47,5 +66,5 @@ const toCSL = (args: string | string[]): string => {
     return null
   }
 
-  return (typeof args === 'string') ? args : args.join(',')
+  return typeof args === 'string' ? args : args.join(',')
 }

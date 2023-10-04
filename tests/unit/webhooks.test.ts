@@ -9,7 +9,7 @@ beforeEach(() => {
 })
 
 const http = clientConstructor({
-  token: '123'
+  token: '123',
 })
 const webhooksRequest = new Webhooks(http)
 
@@ -18,7 +18,7 @@ test('Create a new webhooks has the correct path, method and url', async () => {
     uid: '2',
     tag: 'test',
     url: 'http://test.com',
-    enable: true
+    enable: true,
   }
   await webhooksRequest.create(request)
   const bodyParsed = JSON.parse(axios.history.put[0].data)
@@ -48,7 +48,7 @@ test('update a new webhooks sends the correct payload', async () => {
   const request = {
     uid: '2',
     tag: 'test',
-    url: 'http://test.com'
+    url: 'http://test.com',
   }
   await webhooksRequest.update(request)
   const bodyParsed = JSON.parse(axios.history.put[0].data)
@@ -58,6 +58,8 @@ test('update a new webhooks sends the correct payload', async () => {
 
 test('Delete a webhook has the correct path and method', async () => {
   await webhooksRequest.delete({ uid: '2', tag: 'test' })
-  expect(axios.history.delete[0].url).toBe(`${API_BASE_URL}/forms/2/webhooks/test`)
+  expect(axios.history.delete[0].url).toBe(
+    `${API_BASE_URL}/forms/2/webhooks/test`
+  )
   expect(axios.history.delete[0].method).toBe('delete')
 })

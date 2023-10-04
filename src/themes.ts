@@ -2,34 +2,41 @@ import { Typeform } from './typeform-types'
 import { FONTS_AVAILABLE } from './constants'
 
 export class Themes {
-  constructor (private _http: Typeform.HTTPClient) { }
+  constructor(private _http: Typeform.HTTPClient) {}
 
-  public create (args: {
-    id?: string, background?: Typeform.ThemeBackground, colors: Typeform.ThemeColors, font: string, hasTransparentButton?: boolean,
+  public create(args: {
+    id?: string
+    background?: Typeform.ThemeBackground
+    colors: Typeform.ThemeColors
+    font: Typeform.Font
+    hasTransparentButton?: boolean
     name: string
   }): Promise<Typeform.Theme> {
     return createOrUpdateTheme(this._http, args)
   }
 
-  public delete (args: { id: string }): Promise<null> {
+  public delete(args: { id: string }): Promise<null> {
     const { id } = args
 
     return this._http.request({
       method: 'delete',
-      url: `/themes/${id}`
+      url: `/themes/${id}`,
     })
   }
 
-  public get (args: { id: string }): Promise<Typeform.Theme> {
+  public get(args: { id: string }): Promise<Typeform.Theme> {
     const { id } = args
 
     return this._http.request({
       method: 'get',
-      url: `/themes/${id}`
+      url: `/themes/${id}`,
     })
   }
 
-  public list (args?: { page?: number, pageSize?: number }): Promise<Typeform.API.Themes.List> {
+  public list(args?: {
+    page?: number
+    pageSize?: number
+  }): Promise<Typeform.API.Themes.List> {
     const { page, pageSize } = args || { page: null, pageSize: null }
 
     return this._http.request({
@@ -37,17 +44,19 @@ export class Themes {
       url: '/themes',
       params: {
         page,
-        page_size: pageSize
-      }
+        page_size: pageSize,
+      },
     })
   }
 
-  public update (
-    args: {
-      id?: string, background?: Typeform.ThemeBackground, colors: Typeform.ThemeColors, font: string, hasTransparentButton?: boolean,
-      name: string
-    }
-  ): Promise<Typeform.Theme> {
+  public update(args: {
+    id?: string
+    background?: Typeform.ThemeBackground
+    colors: Typeform.ThemeColors
+    font: Typeform.Font
+    hasTransparentButton?: boolean
+    name: string
+  }): Promise<Typeform.Theme> {
     return createOrUpdateTheme(this._http, args)
   }
 }
@@ -55,18 +64,24 @@ export class Themes {
 const createOrUpdateTheme = (
   http: Typeform.HTTPClient,
   args: {
-    id?: string, background?: Typeform.ThemeBackground, colors: Typeform.ThemeColors, font: string, hasTransparentButton?: boolean,
+    id?: string
+    background?: Typeform.ThemeBackground
+    colors: Typeform.ThemeColors
+    font: Typeform.Font
+    hasTransparentButton?: boolean
     name: string
   }
 ): Promise<Typeform.Theme> => {
   const { id, background, colors, font, hasTransparentButton, name } = args
   // check if required properties are defined
-  const requiredProperties = { name, font, colors }
-  Object.getOwnPropertyNames(requiredProperties).forEach((property) => {
-    if (!requiredProperties[property]) {
-      throw new Error(`The property, ${property}, is required`)
+  const requiredProperties: Typeform.Theme = { name, font, colors }
+  Object.getOwnPropertyNames(requiredProperties).forEach(
+    (property: keyof Typeform.Theme) => {
+      if (!requiredProperties[property]) {
+        throw new Error(`The property, ${property}, is required`)
+      }
     }
-  })
+  )
 
   if (!FONTS_AVAILABLE.includes(font as Typeform.Font)) {
     throw new Error(`${font} is not a valid font`)
@@ -79,6 +94,6 @@ const createOrUpdateTheme = (
     colors,
     font,
     has_transparent_button: !!hasTransparentButton,
-    name
+    name,
   })
 }

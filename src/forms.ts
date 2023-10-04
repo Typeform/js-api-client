@@ -3,44 +3,54 @@ import { Typeform } from './typeform-types'
 export class Forms {
   private _messages: FormMessages
 
-  constructor (private _http: Typeform.HTTPClient) {
+  constructor(private _http: Typeform.HTTPClient) {
     this._messages = new FormMessages(_http)
   }
 
-  get messages (): FormMessages {
+  get messages(): FormMessages {
     return this._messages
   }
 
-  public create (args: { data: Typeform.Form }): Promise<Typeform.Form> {
+  public create(args: { data: Typeform.Form }): Promise<Typeform.Form> {
     const { data } = args
 
     return this._http.request({
       method: 'post',
       url: `/forms`,
-      data
+      data,
     })
   }
 
-  public delete (args: { uid: string }): Promise<null> {
+  public delete(args: { uid: string }): Promise<null> {
     const { uid } = args
 
     return this._http.request({
       method: 'delete',
-      url: `/forms/${uid}`
+      url: `/forms/${uid}`,
     })
   }
 
-  public get (args: { uid: string }): Promise<Typeform.Form> {
+  public get(args: { uid: string }): Promise<Typeform.Form> {
     const { uid } = args
 
     return this._http.request({
       method: 'get',
-      url: `/forms/${uid}`
+      url: `/forms/${uid}`,
     })
   }
 
-  public list (args?: { page?: number, pageSize?: number, search?: string, workspaceId?: string }): Promise<Typeform.API.Forms.List> {
-    const { page, pageSize, search, workspaceId } = args || { page: null, pageSize: null, search: null, workspaceId: null }
+  public list(args?: {
+    page?: number
+    pageSize?: number
+    search?: string
+    workspaceId?: string
+  }): Promise<Typeform.API.Forms.List> {
+    const { page, pageSize, search, workspaceId } = args || {
+      page: null,
+      pageSize: null,
+      search: null,
+      workspaceId: null,
+    }
 
     return this._http.request({
       method: 'get',
@@ -49,42 +59,46 @@ export class Forms {
         page,
         page_size: pageSize,
         search,
-        workspace_id: workspaceId
-      }
+        workspace_id: workspaceId,
+      },
     })
   }
 
-  public update (args: { uid: string, override?: boolean, data: Typeform.Form }): Promise<Typeform.Form> {
+  public update(args: {
+    uid: string
+    override?: boolean
+    data: Typeform.Form
+  }): Promise<Typeform.Form> {
     const { uid, override, data } = args
     const methodType = override ? 'put' : 'patch'
 
     return this._http.request({
       method: methodType,
       url: `/forms/${uid}`,
-      data
+      data,
     })
   }
 }
 
 class FormMessages {
-  constructor (private _http: Typeform.HTTPClient) { }
+  constructor(private _http: Typeform.HTTPClient) {}
 
-  public get (args: { uid: string }): Promise<Typeform.Messages> {
+  public get(args: { uid: string }): Promise<Typeform.Messages> {
     const { uid } = args
 
     return this._http.request({
       method: 'get',
-      url: `/forms/${uid}/messages`
+      url: `/forms/${uid}/messages`,
     })
   }
 
-  public update (args: { uid: string, data: Typeform.Messages }): Promise<null> {
+  public update(args: { uid: string; data: Typeform.Messages }): Promise<null> {
     const { uid, data } = args
 
     return this._http.request({
       method: 'put',
       url: `/forms/${uid}/messages`,
-      data
+      data,
     })
   }
 }
