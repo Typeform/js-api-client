@@ -2,10 +2,10 @@
 
 We'd love for you to contribute to our source code and to help make Typeform products even better than they are today! Here are the guidelines we'd like you to follow:
 
-* [Code of Conduct](#code-of-conduct)
-* [Issues and Bugs](#issues-and-bugs)
-* [Submission Guidelines](#submission-guidelines)
-* [Commit Message Guidelines](#commit-message-guidelines)
+- [Code of Conduct](#code-of-conduct)
+- [Issues and Bugs](#issues-and-bugs)
+- [Submission Guidelines](#submission-guidelines)
+- [Commit Message Guidelines](#commit-message-guidelines)
 
 ## Code of Conduct
 
@@ -33,29 +33,29 @@ Before you submit your issue, try searching [past issues][archive] or [StackOver
 
 If your issue appears to be a bug, and hasn't been reported, open a new issue. Providing the following information will increase the chances of your issue being dealt with quickly:
 
-* **Description of the Issue** - if an error is being thrown a non-minified stack trace helps
-* **Motivation for or Use Case** - explain why this is a bug for you
-* **Related Issues** - has a similar issue been reported before?
-* **Environment Configuration** - is this a problem with Node.js, or only a specific browser? Is this only in a specific version of the library?
-* **Reproduce the Error** - provide a live example (like on [StackBlitz](https://stackblitz.com/)), a Github repo, or an unambiguous set of steps
-* **Suggest a Fix** - if you can't fix the bug yourself, perhaps you can point to what might be causing the problem (line of code or commit)
+- **Description of the Issue** - if an error is being thrown a non-minified stack trace helps
+- **Motivation for or Use Case** - explain why this is a bug for you
+- **Related Issues** - has a similar issue been reported before?
+- **Environment Configuration** - is this a problem with Node.js, or only a specific browser? Is this only in a specific version of the library?
+- **Reproduce the Error** - provide a live example (like on [StackBlitz](https://stackblitz.com/)), a Github repo, or an unambiguous set of steps
+- **Suggest a Fix** - if you can't fix the bug yourself, perhaps you can point to what might be causing the problem (line of code or commit)
 
 ### Submitting a Pull Request
 
 #### Pull Request Guidelines
 
-* Search [GitHub][pulls] for an open or closed Pull Request that relates to your submission. You don't want to duplicate effort.
-* Create an issue to discuss a change before submitting a PR. We'd hate to have to turn down your contributions because of something that could have been communicated early on.
-* [Create a fork of the GitHub repo][fork-repo] to ensure that you can push your changes for us to review.
-* Make your changes in a new git branch:
+- Search [GitHub][pulls] for an open or closed Pull Request that relates to your submission. You don't want to duplicate effort.
+- Create an issue to discuss a change before submitting a PR. We'd hate to have to turn down your contributions because of something that could have been communicated early on.
+- [Create a fork of the GitHub repo][fork-repo] to ensure that you can push your changes for us to review.
+- Make your changes in a new git branch:
 
   ```shell
   git checkout -b my-fix-branch dev
   ```
 
-* Create your patch, **including appropriate test cases**. Patches with tests are more likely to be merged.
-* Avoid checking in files that shouldn't be tracked (e.g `node_modules`, `gulp-cache`, `.tmp`, `.idea`). If your development setup automatically creates some of these files, please add them to the `.gitignore` at the root of the package (click [here][gitignore] to read more on how to add entries to the `.gitignore`).
-* Commit your changes using a commit message that follows our [commit message guidelines](#commit-message-guidelines).
+- Create your patch, **including appropriate test cases**. Patches with tests are more likely to be merged.
+- Avoid checking in files that shouldn't be tracked (e.g `node_modules`, `gulp-cache`, `.tmp`, `.idea`). If your development setup automatically creates some of these files, please add them to the `.gitignore` at the root of the package (click [here][gitignore] to read more on how to add entries to the `.gitignore`).
+- Commit your changes using a commit message that follows our [commit message guidelines](#commit-message-guidelines).
 
   ```shell
   git commit -a
@@ -63,7 +63,7 @@ If your issue appears to be a bug, and hasn't been reported, open a new issue. P
 
   _Note: the optional commit `-a` command line option will automatically "add" and "rm" edited files._
 
-* Test your changes locally to ensure everything is in good working order:
+- Test your changes locally to ensure everything is in good working order:
 
   ```shell
   # Run the server in one terminal window
@@ -76,22 +76,22 @@ If your issue appears to be a bug, and hasn't been reported, open a new issue. P
   yarn test:integration
   ```
 
-* Push your branch to your fork on GitHub:
+- Push your branch to your fork on GitHub:
 
   ```shell
   git push origin my-fix-branch
   ```
 
-* In GitHub, send a pull request to `js-api-client:master`.
-* All pull requests must be reviewed by a member of the Typeform team, who will merge it when/if they feel it is good to go.
+- In GitHub, send a pull request to `js-api-client:main`.
+- All pull requests must be reviewed by a member of the Typeform team, who will merge it when/if they feel it is good to go.
 
 ## Commit Message Guidelines
 
-We have very precise rules over how our git commit messages can be formatted.  This leads to **more readable messages** that are easy to follow when looking through the **project history**.  But also, we use the git commit messages to **generate the project change log**.
+We have very precise rules over how our git commit messages can be formatted. This leads to **more readable messages** that are easy to follow when looking through the **project history**. But also, we use the git commit messages to **generate the project change log**.
 
 ### Commit Message Format
 
-Each commit message consists of a **header**, a **body** and a **footer**.  The header has a special format that includes a **type**, a **scope** and a **subject**:
+Each commit message consists of a **header**, a **body** and a **footer**. The header has a special format that includes a **type**, a **scope** and a **subject**:
 
 ```text
 <type>(<scope>): <subject>
@@ -111,15 +111,15 @@ If the commit reverts a previous commit, it should begin with `revert:`, followe
 
 Must be one of the following:
 
-* **feat**: A new feature
-* **fix**: A bug fix
-* **docs**: Documentation only changes
-* **style**: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
-* **refactor**: A code change that neither fixes a bug nor adds a feature
-* **perf**: A code change that improves performance
-* **test**: Adding missing tests or correcting existing tests
-* **build**: Changes that affect the build system, CI configuration or external dependencies (example scopes: gulp, broccoli, npm)
-* **chore**: Other changes that don't modify `src` or `test` files
+- **feat**: A new feature
+- **fix**: A bug fix
+- **docs**: Documentation only changes
+- **style**: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+- **refactor**: A code change that neither fixes a bug nor adds a feature
+- **perf**: A code change that improves performance
+- **test**: Adding missing tests or correcting existing tests
+- **build**: Changes that affect the build system, CI configuration or external dependencies (example scopes: gulp, broccoli, npm)
+- **chore**: Other changes that don't modify `src` or `test` files
 
 That's it! Thank you for your contribution!
 
