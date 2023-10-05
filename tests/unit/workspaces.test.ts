@@ -5,6 +5,29 @@ import { Workspaces } from '../../src/workspaces'
 
 beforeEach(() => {
   axios.reset()
+
+  axios
+    .onGet(`${API_BASE_URL}/workspaces?page=1&page_size=200`)
+    .replyOnce(200, {
+      total_items: 403,
+      page_count: 3,
+      items: Array.from({ length: 200 }, (_, i) => i),
+    })
+  axios
+    .onGet(`${API_BASE_URL}/workspaces?page=2&page_size=200`)
+    .replyOnce(200, {
+      total_items: 403,
+      page_count: 3,
+      items: Array.from({ length: 200 }, (_, i) => 200 + i),
+    })
+  axios
+    .onGet(`${API_BASE_URL}/workspaces?page=3&page_size=200`)
+    .replyOnce(200, {
+      total_items: 402,
+      page_count: 3,
+      items: [400, 401, 402],
+    })
+
   axios.onAny().reply(200)
 })
 
@@ -28,6 +51,15 @@ test(`Get workspaces has the correct query parameters`, async () => {
   expect(params.get('search')).toBe('hola')
   expect(params.get('page')).toBe('2')
   expect(params.get('page_size')).toBe('10')
+})
+
+test('get all workspaces with automatic pagination', async () => {
+  const list = await workspacesRequest.list({ page: 'auto' })
+  expect(list).toEqual({
+    total_items: 403,
+    page_count: 1,
+    items: Array.from({ length: 403 }, (_, i) => i),
+  })
 })
 
 test(`Get specific workscape has the correct path and method`, async () => {

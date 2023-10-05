@@ -16,7 +16,7 @@ if (!token) {
 const typeformAPI = createClient({ token })
 
 const [, , ...args] = process.argv
-const [methodName, methodParams] = args
+const [methodName, ...methodParams] = args
 
 if (!methodName || methodName === '-h' || methodName === '--help') {
   print('usage: typeform-api <method> [params]')
@@ -35,17 +35,18 @@ if (!typeformAPI[property]?.[method]) {
 
 let parsedParams = undefined
 
-if (methodParams) {
+if (methodParams && methodParams.length > 0) {
+  const methodParamsString = methodParams.join(',')
+  const normalizedParams = methodParamsString.startsWith('{')
+    ? methodParamsString
+    : `{${methodParamsString}}`
+
   try {
     // this eval executes code supplied by user on their own machine, this is safe
     // eslint-disable-next-line no-eval
-    eval(`parsedParams = ${methodParams}`)
+    eval(`parsedParams = ${normalizedParams}`)
   } catch (err) {
-    throw new Error(`Invalid params: ${methodParams}`)
-  }
-
-  if (typeof parsedParams !== 'object') {
-    throw new Error(`Invalid params: ${methodParams}`)
+    throw new Error(`Invalid params: ${normalizedParams}`)
   }
 }
 

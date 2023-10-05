@@ -5,7 +5,24 @@ import { Forms } from '../../src/forms'
 
 beforeEach(() => {
   axios.reset()
-  axios.onAny().reply(200)
+
+  axios.onGet(`${API_BASE_URL}/forms?page=1&page_size=200`).replyOnce(200, {
+    total_items: 403,
+    page_count: 3,
+    items: Array.from({ length: 200 }, (_, i) => i),
+  })
+  axios.onGet(`${API_BASE_URL}/forms?page=2&page_size=200`).replyOnce(200, {
+    total_items: 403,
+    page_count: 3,
+    items: Array.from({ length: 200 }, (_, i) => 200 + i),
+  })
+  axios.onGet(`${API_BASE_URL}/forms?page=3&page_size=200`).replyOnce(200, {
+    total_items: 402,
+    page_count: 3,
+    items: [400, 401, 402],
+  })
+
+  axios.onAny().replyOnce(200, {})
 })
 
 const http = clientConstructor({
@@ -19,7 +36,7 @@ test('get all forms has the correct method and path', async () => {
   expect(axios.history.get[0].method).toBe('get')
 })
 
-test('paramters are sent correctly', async () => {
+test('parameters are sent correctly', async () => {
   await formsRequest.list({
     page: 2,
     pageSize: 10,
@@ -32,6 +49,15 @@ test('paramters are sent correctly', async () => {
   expect(params.get('page_size')).toBe('10')
   expect(params.get('search')).toBe('hola')
   expect(params.get('workspace_id')).toBe('abc')
+})
+
+test('get all forms with automatic pagination', async () => {
+  const list = await formsRequest.list({ page: 'auto' })
+  expect(list).toEqual({
+    total_items: 403,
+    page_count: 1,
+    items: Array.from({ length: 403 }, (_, i) => i),
+  })
 })
 
 test('getForm sends the correct UID', async () => {

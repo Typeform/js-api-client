@@ -1,5 +1,6 @@
 import { Typeform } from './typeform-types'
 import { FONTS_AVAILABLE } from './constants'
+import { autoPageItems } from './auto-page-items'
 
 export class Themes {
   constructor(private _http: Typeform.HTTPClient) {}
@@ -34,19 +35,26 @@ export class Themes {
   }
 
   public list(args?: {
-    page?: number
+    page?: number | 'auto'
     pageSize?: number
   }): Promise<Typeform.API.Themes.List> {
     const { page, pageSize } = args || { page: null, pageSize: null }
 
-    return this._http.request({
-      method: 'get',
-      url: '/themes',
-      params: {
-        page,
-        page_size: pageSize,
-      },
-    })
+    const request = (page: number, pageSize: number) =>
+      this._http.request({
+        method: 'get',
+        url: '/themes',
+        params: {
+          page,
+          page_size: pageSize,
+        },
+      })
+
+    if (page === 'auto') {
+      return autoPageItems(request)
+    }
+
+    return request(page, pageSize)
   }
 
   public update(args: {

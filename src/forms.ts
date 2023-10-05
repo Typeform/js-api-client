@@ -1,4 +1,5 @@
 import { Typeform } from './typeform-types'
+import { autoPageItems } from './auto-page-items'
 
 export class Forms {
   private _messages: FormMessages
@@ -40,7 +41,7 @@ export class Forms {
   }
 
   public list(args?: {
-    page?: number
+    page?: number | 'auto'
     pageSize?: number
     search?: string
     workspaceId?: string
@@ -52,16 +53,23 @@ export class Forms {
       workspaceId: null,
     }
 
-    return this._http.request({
-      method: 'get',
-      url: `/forms`,
-      params: {
-        page,
-        page_size: pageSize,
-        search,
-        workspace_id: workspaceId,
-      },
-    })
+    const request = (page: number, pageSize: number) =>
+      this._http.request({
+        method: 'get',
+        url: `/forms`,
+        params: {
+          page,
+          page_size: pageSize,
+          search,
+          workspace_id: workspaceId,
+        },
+      })
+
+    if (page === 'auto') {
+      return autoPageItems(request)
+    }
+
+    return request(page, pageSize)
   }
 
   public update(args: {
