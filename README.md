@@ -34,7 +34,7 @@ npm install @typeform/api-client --save
 
 ## Usage
 
-### Initialize
+### In your project
 
 1. Import client library
 
@@ -70,6 +70,46 @@ const typeformAPI = createClient(
 typeformAPI.forms.list().then((response) => {
   // do what do you want with your typeforms
 })
+```
+
+**Note:** You can also execute the client binary directly via command line in your project:
+
+```shell
+yarn typeform-api <method> [params]
+```
+
+See [next section](#via-command-line) for more details.
+
+### Via command line
+
+1. Clone this repo on your machine
+
+2. Install all dependencies:
+
+```shell
+yarn install
+```
+
+3. Set your personal token as `TF_TOKEN` env variable
+
+```shell
+export TF_TOKEN=tfp_XXXXXXXXXX
+```
+
+4. Run the client:
+
+```shell
+yarn typeform-api <method> [params]
+```
+
+See [reference](#reference) for all available method names and their params.
+
+Example usage:
+
+```shell
+yarn typeform-api forms.list
+yarn typeform-api forms.get '{uid:"abcd1234"}'
+yarn typeform-api themes.list '{pageSize:3}'
 ```
 
 ## Reference

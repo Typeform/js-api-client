@@ -88,6 +88,43 @@ const config = [
       terser(),
     ],
   },
+  {
+    input: 'src/bin.ts',
+    output: [
+      {
+        file: pkg.bin['typeform-api'],
+        format: 'cjs',
+        exports: 'named',
+        banner: '#!/usr/bin/env node',
+      },
+    ],
+    onwarn(warning, warn) {
+      // supress warning on usa of eval()
+      // eval() in ./src/bin.ts executes code supplied by user on their own machine, which is safe
+      if (warning.code === 'EVAL') {
+        return
+      }
+      warn(warning)
+    },
+    plugins: [
+      resolveModule(),
+      commonjs({
+        include: ['node_modules/**'],
+      }),
+      ...plugins,
+    ],
+    external: [
+      'http',
+      'https',
+      'url',
+      'zlib',
+      'assert',
+      'stream',
+      'tty',
+      'util',
+      'os',
+    ],
+  },
 ]
 
 export default config
