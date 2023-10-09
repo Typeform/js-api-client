@@ -60,6 +60,7 @@ const config = [
       'tty',
       'util',
       'os',
+      'express',
     ],
   },
   {
@@ -87,6 +88,7 @@ const config = [
       builtins(),
       terser(),
     ],
+    external: ['crypto', 'express'],
   },
   {
     input: 'src/bin.ts',
@@ -111,6 +113,7 @@ const config = [
       commonjs({
         include: ['node_modules/**'],
       }),
+      builtins({ crypto: false }),
       ...plugins,
     ],
     external: [
@@ -123,6 +126,8 @@ const config = [
       'tty',
       'util',
       'os',
+      'crypto',
+      'express',
     ],
   },
 ]

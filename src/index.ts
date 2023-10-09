@@ -21,3 +21,6 @@ export const createClient = (args: Typeform.ClientArg = { token: null }) => {
     webhooks: new Webhooks(http),
   }
 }
+
+export { verifySignature } from './verify-signature'
+export { expressWebhook } from './express-middleware'
