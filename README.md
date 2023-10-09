@@ -177,6 +177,11 @@ Each one of them encapsulates the operations related to it (like listing, updati
 
 - Deletes a typeform by UID
 
+#### `forms.copy({ uid, workspaceUrl })`
+
+- Copies an existing typeform with UID
+- `workspaceUrl` (optional) The URL of a workspace to copy the typeform into.
+
 #### `forms.messages.get({ uid })`
 
 - Get custom messages of the typeform with the given UID
