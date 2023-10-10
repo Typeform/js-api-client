@@ -227,9 +227,9 @@ Each one of them encapsulates the operations related to it (like listing, updati
 - Creates a theme with the given configuration
 - See more details of the payload in [the documentation](https://developer.typeform.com/create/reference/create-theme/)
 
-#### `themes.update({ background, colors, font, hasTransparentButton, name })`
+#### `themes.update({ id, background, colors, font, hasTransparentButton, name })`
 
-- Updates a theme with the given configuration
+- Updates a theme with the given configuration, requires `id`
 - See more details of the payload in [the documentation](https://developer.typeform.com/create/reference/update-theme/)
 
 #### `themes.delete({ id })`

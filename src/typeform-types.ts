@@ -1141,6 +1141,10 @@ export namespace Typeform {
      */
     colors?: ThemeColors
     /**
+     * Font size and alignment for fields.
+     */
+    fields?: ThemeFontSizeAndAlignment
+    /**
      * Default: `"Source Sans Pro"`
      * Font for the theme.
      */
@@ -1157,6 +1161,14 @@ export namespace Typeform {
      * Name of the theme.
      */
     name?: string
+    /**
+     * Specifies border radius style of buttons and other elements in the form.
+     */
+    rounded_corners?: ThemeRoundedCorners
+    /**
+     * Font size and alignment for welcome and thankyou screens.
+     */
+    screens?: ThemeFontSizeAndAlignment
     /**
      * Default: `"private"`
      * Specifies whether the theme is `public` (one of Typeform's built-in themes that are available in all accounts) or `private`
@@ -1203,6 +1215,17 @@ export namespace Typeform {
      */
     question?: string
   }
+  /**
+   * Font size and alignment.
+   */
+  export interface ThemeFontSizeAndAlignment {
+    alignment?: 'left' | 'center'
+    font_size?: 'small' | 'medium' | 'large'
+  }
+  /**
+   * Specifies border radius style of buttons and other elements in the form.
+   */
+  export type ThemeRoundedCorners = 'none' | 'small' | 'large'
   /**
    * Object that specifies the settings and properties for the form's thank you screen.
    */

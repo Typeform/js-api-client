@@ -99,3 +99,8 @@ test('Updating a theme has the correct path and method', async () => {
   expect(axios.history.put[0].url).toBe(`${API_BASE_URL}/themes/2`)
   expect(axios.history.put[0].method).toBe('put')
 })
+
+test('Updating a theme without id throws', async () => {
+  // @ts-ignore
+  expect(() => themesRequest.update(mockThemePayload)).toThrow()
+})
