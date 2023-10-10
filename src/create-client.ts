@@ -27,7 +27,6 @@ export const clientConstructor = ({
       const authorization = token ? { Authorization: `bearer ${token}` } : {}
       const requestParameters = { ...options, ...otherArgs }
 
-      // @ts-ignore
       return axios({
         url: requestUrl,
         ...requestParameters,
@@ -41,16 +40,12 @@ export const clientConstructor = ({
       })
         .then((response) => response.data)
         .catch((error) => {
-          if (
-            error &&
-            error.response &&
-            error.response.data &&
-            error.response.data.description
-          ) {
-            throw new Error(error.response.data.description)
-          } else {
-            throw new Error("Couldn't make request")
-          }
+          const {
+            code,
+            description = "Couldn't make request",
+            details,
+          } = error?.response?.data || {}
+          throw new Typeform.ApiError(code, description, details)
         })
     },
   }

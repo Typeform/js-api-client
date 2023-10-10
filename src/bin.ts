@@ -1,6 +1,6 @@
 import { inspect } from 'util'
 
-import { createClient } from './index'
+import { createClient, Typeform } from './index'
 
 const print = (message: string) => {
   // eslint-disable-next-line no-console
@@ -57,6 +57,14 @@ typeformAPI[property][method](parsedParams)
   .then((result: Object) => {
     print(inspect(result, { showHidden: false, depth: null, colors: true }))
   })
-  .catch((err: Error) => {
-    print(`Error: ${err.message}`)
+  .catch((err: Typeform.ApiError) => {
+    const detailsString = inspect(err.details, {
+      showHidden: false,
+      depth: null,
+      colors: true,
+    })
+    print(`---------------------------------------------`)
+    print(`Error: ${err.code}: ${err.message}`)
+    print(`Details: ${detailsString}`)
+    print(`---------------------------------------------`)
   })

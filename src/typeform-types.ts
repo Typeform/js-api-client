@@ -201,7 +201,7 @@ export namespace Typeform {
       /**
        * Type of value the condition object refers to.
        */
-      type?: 'field' | 'hidden' | 'variable' | 'constant' | 'end'| 'choice'
+      type?: 'field' | 'hidden' | 'variable' | 'constant' | 'end' | 'choice'
       /**
        * Value to check for in the "type" field to evaluate with the operator.
        */
@@ -212,13 +212,13 @@ export namespace Typeform {
    * Conditions for a logic jump can be combined using the `and` and `or` operators
    */
   export interface AndOrOperator {
-  /**
-   * Operator for the condition.
-   */
+    /**
+     * Operator for the condition.
+     */
     op?: 'and' | 'or'
-  /**
-   * Object that defines the field type and value to evaluate with the operator.
-   */
+    /**
+     * Object that defines the field type and value to evaluate with the operator.
+     */
     vars: Array<AndOrOperator | Condition>
   }
   /**
@@ -1377,5 +1377,15 @@ export namespace Typeform {
       email: string
       role: 'owner' | 'member'
     }[]
+  }
+  export class ApiError extends Error {
+    code: string
+    details: Object[]
+
+    constructor(code: string, message: string, details: Object[]) {
+      super(message)
+      this.code = code
+      this.details = details
+    }
   }
 }
