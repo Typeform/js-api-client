@@ -147,6 +147,10 @@ export namespace Typeform {
    */
   export interface Choice {
     /**
+     * Only available when retrieving a form.
+     */
+    id?: string
+    /**
      * Readable name you can use to reference the answer choice. Available for `multiple_choice` and `picture_choice` types.
      * Not available for dropdown types.
      */
@@ -1031,10 +1035,7 @@ export namespace Typeform {
       /**
        * Represents single choice answers for dropdown-like fields.
        */
-      choice?: {
-        label?: string
-        other?: string
-      }
+      choice?: Omit<Choice, 'attachment'>
       /**
        * Represents multiple choice answers.
        */
