@@ -17,6 +17,23 @@ const mockThemePayload = {
 
 beforeEach(() => {
   axios.reset()
+
+  axios.onGet(`${API_BASE_URL}/themes?page=1&page_size=200`).replyOnce(200, {
+    total_items: 403,
+    page_count: 3,
+    items: Array.from({ length: 200 }, (_, i) => i),
+  })
+  axios.onGet(`${API_BASE_URL}/themes?page=2&page_size=200`).replyOnce(200, {
+    total_items: 403,
+    page_count: 3,
+    items: Array.from({ length: 200 }, (_, i) => 200 + i),
+  })
+  axios.onGet(`${API_BASE_URL}/themes?page=3&page_size=200`).replyOnce(200, {
+    total_items: 402,
+    page_count: 3,
+    items: [400, 401, 402],
+  })
+
   axios.onAny().reply(200)
 })
 
@@ -35,6 +52,15 @@ test('Get themes has the correct parameters', async () => {
   const params = new URL(axios.history.get[0].url).searchParams
   expect(params.get('page')).toBe('3')
   expect(params.get('page_size')).toBe('15')
+})
+
+test('get all themes with automatic pagination', async () => {
+  const list = await themesRequest.list({ page: 'auto' })
+  expect(list).toEqual({
+    total_items: 403,
+    page_count: 1,
+    items: Array.from({ length: 403 }, (_, i) => i),
+  })
 })
 
 test('Get themes has the correct path', async () => {

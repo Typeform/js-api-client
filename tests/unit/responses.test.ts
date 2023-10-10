@@ -5,6 +5,35 @@ import { Responses } from '../../src/responses'
 
 beforeEach(() => {
   axios.reset()
+
+  axios
+    .onGet(`${API_BASE_URL}/forms/2/responses?page_size=1000`)
+    .replyOnce(200, {
+      total_items: 2003,
+      page_count: 3,
+      items: Array.from({ length: 1000 }, (_, i) => ({ response_id: i })),
+    })
+  axios
+    .onGet(`${API_BASE_URL}/forms/2/responses?page_size=1000&before=999`)
+    .replyOnce(200, {
+      total_items: 2003,
+      page_count: 3,
+      items: Array.from({ length: 1000 }, (_, i) => ({
+        response_id: 1000 + i,
+      })),
+    })
+  axios
+    .onGet(`${API_BASE_URL}/forms/2/responses?page_size=1000&before=1999`)
+    .replyOnce(200, {
+      total_items: 2003,
+      page_count: 3,
+      items: [
+        { response_id: 2000 },
+        { response_id: 2001 },
+        { response_id: 2002 },
+      ],
+    })
+
   axios.onAny().reply(200)
 })
 
@@ -25,6 +54,15 @@ test('List responses with the given filters', async () => {
   const params = new URL(axios.history.get[0].url).searchParams
   expect(params.get('page_size')).toBe('15')
   expect(params.get('after')).toBe('12345')
+})
+
+test('List responses with automatic pagination', async () => {
+  const list = await responsesRequest.list({ uid: '2', page: 'auto' })
+  expect(list).toEqual({
+    total_items: 2003,
+    page_count: 1,
+    items: Array.from({ length: 2003 }, (_, i) => ({ response_id: i })),
+  })
 })
 
 test('Delete responses has the correct path and method when given string for `ids`', async () => {

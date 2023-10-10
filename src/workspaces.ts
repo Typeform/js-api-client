@@ -1,5 +1,6 @@
 import { Typeform } from './typeform-types'
 import { isMemberPropValid, createMemberPatchQuery } from './utils'
+import { autoPageItems } from './auto-page-items'
 
 export class Workspaces {
   constructor(private _http: Typeform.HTTPClient) {}
@@ -53,7 +54,7 @@ export class Workspaces {
 
   public list(args?: {
     search?: string
-    page?: number
+    page?: number | 'auto'
     pageSize?: number
   }): Promise<Typeform.API.Workspaces.List> {
     const { search, page, pageSize } = args || {
@@ -62,15 +63,22 @@ export class Workspaces {
       pageSize: null,
     }
 
-    return this._http.request({
-      method: 'get',
-      url: '/workspaces',
-      params: {
-        page,
-        page_size: pageSize,
-        search,
-      },
-    })
+    const request = (page: number, pageSize: number) =>
+      this._http.request({
+        method: 'get',
+        url: '/workspaces',
+        params: {
+          page,
+          page_size: pageSize,
+          search,
+        },
+      })
+
+    if (page === 'auto') {
+      return autoPageItems(request)
+    }
+
+    return request(page, pageSize)
   }
 
   public removeMembers(args: {

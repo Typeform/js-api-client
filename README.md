@@ -156,6 +156,7 @@ Each one of them encapsulates the operations related to it (like listing, updati
 
 - Get a list of your typeforms
 - Returns a list of typeforms with the payload [referenced here](https://developer.typeform.com/create/reference/retrieve-forms/).
+- You can set `page: "auto"` to automatically fetch all pages if there are more. It fetches with maximum `pageSize: 200`. 
 
 #### `forms.get({ uid })`
 
@@ -214,6 +215,7 @@ Each one of them encapsulates the operations related to it (like listing, updati
 
 - Gets your themes collection
 - `page`: default `1`
+  - set `page: "auto"` to automatically fetch all pages if there are more, it fetches with maximum `pageSize: 200` 
 - `pageSize: default `10`
 
 #### `themes.get({ id })`
@@ -262,6 +264,7 @@ Each one of them encapsulates the operations related to it (like listing, updati
 
 - Retrieve all workspaces in your account.
 - `page`: The page of results to retrieve. Default `1` is the first page of results.
+  - set `page: "auto"` to automatically fetch all pages if there are more, it fetches with maximum `pageSize: 200` 
 - `pageSize`: Number of results to retrieve per page. Default is 10. Maximum is 200.
 - `search`: Returns items that contain the specified string.
 
@@ -290,6 +293,7 @@ Each one of them encapsulates the operations related to it (like listing, updati
 - Returns form responses and date and time of form landing and submission.
 - `uid`: Unique ID for the form.
 - `pageSize`: Maximum number of responses. Default value is 25. Maximum value is 1000.
+- `page`: Set to `"auto"` to automatically fetch all pages if there are more. It fetches with maximum `pageSize: 1000`. The `after` value is ignored when automatic paging is enabled. The responses will be sorted in the order that our system processed them (instead of the default order, `submitted_at`). **Note that it does not accept numeric value to identify page number.**
 - `since`: Limit request to responses submitted since the specified date and time. In ISO 8601 format, UTC time, to the second, with T as a delimiter between the date and time.
 - `until`: Limit request to responses submitted until the specified date and time. In ISO 8601 format, UTC time, to the second, with T as a delimiter between the date and time.
 - `after`: Limit request to responses submitted after the specified token. If you use the `after` parameter, the responses will be sorted in the order that our system processed them (instead of the default order, `submitted_at`).
