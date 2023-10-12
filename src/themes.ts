@@ -6,12 +6,14 @@ export class Themes {
   constructor(private _http: Typeform.HTTPClient) {}
 
   public create(args: {
-    id?: string
     background?: Typeform.ThemeBackground
     colors: Typeform.ThemeColors
     font: Typeform.Font
     hasTransparentButton?: boolean
     name: string
+    fields?: Typeform.ThemeFontSizeAndAlignment
+    screens?: Typeform.ThemeFontSizeAndAlignment
+    roundedCorners?: Typeform.ThemeRoundedCorners
   }): Promise<Typeform.Theme> {
     return createOrUpdateTheme(this._http, args)
   }
@@ -58,13 +60,19 @@ export class Themes {
   }
 
   public update(args: {
-    id?: string
+    id: string
     background?: Typeform.ThemeBackground
     colors: Typeform.ThemeColors
     font: Typeform.Font
     hasTransparentButton?: boolean
     name: string
+    fields?: Typeform.ThemeFontSizeAndAlignment
+    screens?: Typeform.ThemeFontSizeAndAlignment
+    roundedCorners?: Typeform.ThemeRoundedCorners
   }): Promise<Typeform.Theme> {
+    if (!args.id) {
+      throw new Error(`The property id is required`)
+    }
     return createOrUpdateTheme(this._http, args)
   }
 }
@@ -78,9 +86,22 @@ const createOrUpdateTheme = (
     font: Typeform.Font
     hasTransparentButton?: boolean
     name: string
+    fields?: Typeform.ThemeFontSizeAndAlignment
+    screens?: Typeform.ThemeFontSizeAndAlignment
+    roundedCorners?: Typeform.ThemeRoundedCorners
   }
 ): Promise<Typeform.Theme> => {
-  const { id, background, colors, font, hasTransparentButton, name } = args
+  const {
+    id,
+    background,
+    colors,
+    font,
+    hasTransparentButton,
+    name,
+    fields,
+    screens,
+    roundedCorners,
+  } = args
   // check if required properties are defined
   const requiredProperties: Typeform.Theme = { name, font, colors }
   Object.getOwnPropertyNames(requiredProperties).forEach(
@@ -98,10 +119,15 @@ const createOrUpdateTheme = (
   return http.request({
     method: id ? 'put' : 'post',
     url: id ? `/themes/${id}` : '/themes',
-    background,
-    colors,
-    font,
-    has_transparent_button: !!hasTransparentButton,
-    name,
+    data: {
+      background,
+      colors,
+      font,
+      has_transparent_button: !!hasTransparentButton,
+      fields,
+      screens,
+      rounded_corners: roundedCorners,
+      name,
+    },
   })
 }

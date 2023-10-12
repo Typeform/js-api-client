@@ -5,3 +5,5 @@ lib
 yarn-error.log
 .DS_STORE
 .idea/
+params.js
+params.json

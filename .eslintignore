@@ -1,3 +1,5 @@
 # output folder
 dist/
 rollup.config.js
+params.js
+params.json

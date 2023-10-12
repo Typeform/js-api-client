@@ -1,4 +1,5 @@
 import { inspect } from 'util'
+import { readFileSync, existsSync } from 'fs'
 
 import { createClient, Typeform } from './index'
 
@@ -34,13 +35,25 @@ if (!typeformAPI[property]?.[method]) {
 }
 
 let parsedParams = undefined
+let normalizedParams = undefined
 
 if (methodParams && methodParams.length > 0) {
   const methodParamsString = methodParams.join(',')
-  const normalizedParams = methodParamsString.startsWith('{')
+  normalizedParams = methodParamsString.startsWith('{')
     ? methodParamsString
     : `{${methodParamsString}}`
+} else {
+  const dir = process.cwd()
+  const jsonFile = `${dir}/params.json`
+  const jsFile = `${dir}/params.js`
+  if (existsSync(jsonFile)) {
+    normalizedParams = `JSON.parse(\`${readFileSync(jsonFile, 'utf-8')}\`)`
+  } else if (existsSync(jsFile)) {
+    normalizedParams = readFileSync(jsFile, 'utf-8')
+  }
+}
 
+if (normalizedParams) {
   try {
     // this eval executes code supplied by user on their own machine, this is safe
     // eslint-disable-next-line no-eval
