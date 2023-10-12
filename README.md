@@ -310,6 +310,14 @@ Each one of them encapsulates the operations related to it (like listing, updati
 - `fields`: Limit request to only responses for the specified fields. Accepts either a string or an array of strings.
 - For parameter details check [the documentation](https://developer.typeform.com/responses/reference/retrieve-responses/)
 
+### Insights
+
+#### `insights.summary({ uid })`
+
+- Returns form level and individual question level insights for a given form.
+- `uid`: Unique ID for the form.
+
+
 ### Webhooks
 
 #### `webhooks.create({ uid, tag, url, enabled = false, secret, verifySSL })`
