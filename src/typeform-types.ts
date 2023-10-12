@@ -1408,6 +1408,37 @@ export namespace Typeform {
       role: 'owner' | 'member'
     }[]
   }
+  /**
+   * Field level insights.
+   */
+  export interface FieldInsights {
+    id: string
+    ref: string
+    title: string
+    type: Type
+    dropoffs: number
+    views: number
+  }
+  /**
+   * Counters and calculations for the results of form.
+   */
+  interface FormInsights {
+    average_time: number
+    completion_rate: number
+    responses_count: number
+    total_visits: number
+    unique_visits: number
+  }
+  interface PlatformFormInsights extends FormInsights {
+    platform: 'desktop' | 'other' | 'phone' | 'tablet'
+  }
+  export interface Insights {
+    fields: FieldInsights[]
+    form: {
+      platforms: PlatformFormInsights[]
+      summary: FormInsights
+    }
+  }
   export class ApiError extends Error {
     code: string
     details: Object[]

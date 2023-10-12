@@ -6,6 +6,7 @@ import { Workspaces } from './workspaces'
 import { Responses } from './responses'
 import { Webhooks } from './webhooks'
 import { Typeform } from './typeform-types'
+import { Insights } from './insights'
 
 export { Typeform } from './typeform-types'
 
@@ -19,5 +20,6 @@ export const createClient = (args: Typeform.ClientArg = { token: null }) => {
     workspaces: new Workspaces(http),
     responses: new Responses(http),
     webhooks: new Webhooks(http),
+    insights: new Insights(http),
   }
 }
