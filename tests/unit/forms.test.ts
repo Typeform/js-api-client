@@ -2,6 +2,7 @@ import { axios } from '../common'
 import { clientConstructor } from '../../src/create-client'
 import { API_BASE_URL } from '../../src/constants'
 import { Forms } from '../../src/forms'
+import * as utils from '../../src/utils'
 
 beforeEach(() => {
   axios.reset()
@@ -116,6 +117,40 @@ test('create form has the correct path and method ', async () => {
   await formsRequest.create({})
   expect(axios.history.post[0].method).toBe('post')
   expect(axios.history.post[0].url).toBe(`${API_BASE_URL}/forms`)
+})
+
+test('copy form retrieves form and creates form with correct payload', async () => {
+  const uid = 'foo'
+  const workspaceHref = 'http://localhost/workspace/bar'
+  const formDefinition = {
+    id: uid,
+    title: 'hola',
+    fields: [
+      { id: '1', title: 'foo', description: 'foobar' },
+      { id: '2', title: 'bar', supersized: true },
+    ],
+  }
+  const getSpy = jest
+    .spyOn(formsRequest, 'get')
+    .mockImplementationOnce(() => Promise.resolve(formDefinition))
+  const removeFormKeysSpy = jest.spyOn(utils, 'removeFormKeys')
+  const createSpy = jest.spyOn(formsRequest, 'create')
+  await formsRequest.copy({
+    uid,
+    workspaceHref,
+  })
+  expect(getSpy).toHaveBeenCalledWith({ uid })
+  expect(removeFormKeysSpy).toHaveBeenCalledWith(formDefinition)
+  expect(createSpy).toHaveBeenCalledWith({
+    data: {
+      title: 'hola',
+      fields: [
+        { title: 'foo', description: 'foobar' },
+        { title: 'bar', supersized: true },
+      ],
+      workspace: { href: workspaceHref },
+    },
+  })
 })
 
 test('get messages has the correct path and method ', async () => {

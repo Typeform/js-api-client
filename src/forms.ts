@@ -1,5 +1,6 @@
 import { Typeform } from './typeform-types'
 import { autoPageItems } from './auto-page-items'
+import { removeFormKeys } from './utils'
 
 export class Forms {
   private _messages: FormMessages
@@ -85,6 +86,22 @@ export class Forms {
       url: `/forms/${uid}`,
       data,
     })
+  }
+
+  public async copy(args: {
+    uid: string
+    workspaceHref: string
+  }): Promise<Typeform.Form> {
+    const { uid, workspaceHref } = args
+    const input = await this.get({ uid })
+
+    const data = removeFormKeys(input) as Typeform.Form
+
+    if (workspaceHref) {
+      data.workspace = { href: workspaceHref }
+    }
+
+    return this.create({ data })
   }
 }
 
