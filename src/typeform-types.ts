@@ -147,6 +147,10 @@ export namespace Typeform {
    */
   export interface Choice {
     /**
+     * Only available when retrieving a form.
+     */
+    id?: string
+    /**
      * Readable name you can use to reference the answer choice. Available for `multiple_choice` and `picture_choice` types.
      * Not available for dropdown types.
      */
@@ -1031,10 +1035,7 @@ export namespace Typeform {
       /**
        * Represents single choice answers for dropdown-like fields.
        */
-      choice?: {
-        label?: string
-        other?: string
-      }
+      choice?: Omit<Choice, 'attachment'>
       /**
        * Represents multiple choice answers.
        */
@@ -1229,6 +1230,9 @@ export namespace Typeform {
    * The type of field.
    */
   type Type =
+    | 'address'
+    | 'calendly'
+    | 'contact_info'
     | 'date'
     | 'dropdown'
     | 'email'
@@ -1236,17 +1240,20 @@ export namespace Typeform {
     | 'group'
     | 'legal'
     | 'long_text'
+    | 'matrix'
     | 'multiple_choice'
+    | 'nps'
     | 'number'
     | 'opinion_scale'
     | 'payment'
+    | 'phone_number'
     | 'picture_choice'
+    | 'ranking'
     | 'rating'
     | 'short_text'
     | 'statement'
     | 'website'
     | 'yes_no'
-    | 'phone_number'
   /**
    * Validations of a field.
    */
