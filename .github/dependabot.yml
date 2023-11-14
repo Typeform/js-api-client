@@ -1,0 +1,14 @@
+version: 2
+
+updates:
+  - package-ecosystem: npm
+    directory: '/'
+    schedule:
+      interval: daily
+    open-pull-requests-limit: 99
+    versioning-strategy: increase
+    allow:
+      - dependency-name: '@typeform*'
+    commit-message:
+      prefix: 'chore'
+      include: 'scope'
