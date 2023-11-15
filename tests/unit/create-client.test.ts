@@ -21,7 +21,7 @@ test('request pass correct headers', async () => {
     },
   })
   expect(axios.history.get[0].url).toBe(`${API_BASE_URL}/forms`)
-  expect(axios.history.get[0].headers).toEqual({
+  expect({ ...axios.history.get[0].headers }).toEqual({
     Accept: 'application/json, text/plain, */*',
     Accepts: 'application/json',
     Authorization: 'bearer abc',
