@@ -1,1 +1,4 @@
-export const axios = new (require('axios-mock-adapter'))(require('axios'))
+import axiosLib from 'axios'
+import MockAdapter from 'axios-mock-adapter'
+
+export const axios = new MockAdapter(axiosLib)
