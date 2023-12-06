@@ -16,7 +16,7 @@
     "release": "npm config set @typeform:registry https://registry.npmjs.org/ && yarn semantic-release",
     "server": "node ./tests/integration/mockServer.js",
     "server:dev": "nodemon ./tests/integration/mockServer.js",
-    "publish:github": "npm config set '//npm.pkg.github.com/:_authToken' $GH_TOKEN && npm publish --registry https://npm.pkg.github.com",
+    "publish:github": "npm config set @typeform:registry https://npm.pkg.github.com/ && npm publish",
     "typeform-api": "node ./dist/bin"
   },
   "bin": {
