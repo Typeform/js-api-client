@@ -1,3 +1,4 @@
+<a href=https://engineering-metrics.typeform.tf/standards-adoption-tool/reports/js-api-client/><img src=https://api.typeform.com/repositories/js-api-client/badges.svg /></a>
 # Typeform JavaScript SDK
 
 [![Pull Request](https://github.com/Typeform/js-api-client/actions/workflows/pr.yml/badge.svg)](https://github.com/Typeform/js-api-client/actions/workflows/pr.yml)
