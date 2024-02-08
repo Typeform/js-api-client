@@ -1032,6 +1032,7 @@ export namespace Typeform {
         | 'boolean'
         | 'text'
         | 'payment'
+        | 'phone_number'
       /**
        * Represents single choice answers for dropdown-like fields.
        */
@@ -1055,6 +1056,7 @@ export namespace Typeform {
         last4?: string
         name?: string
       }
+      phone_number?: string
     }[]
     calculated?: {
       score?: number
