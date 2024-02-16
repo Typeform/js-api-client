@@ -113,9 +113,9 @@ export namespace Typeform {
         items: Workspace[]
       }
     }
-    export interface PATCH {
-      op: string
-      path: string
+    export interface PATCH<T extends string> {
+      op: 'add' | 'remove' | 'replace'
+      path: T
       value: any
     }
   }

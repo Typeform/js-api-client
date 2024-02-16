@@ -93,7 +93,7 @@ export class Workspaces {
 
   public update(args: {
     id: string
-    data: Typeform.API.PATCH[]
+    data: Typeform.API.PATCH<'/name' | '/members'>[]
   }): Promise<null> {
     const { id, data } = args
 
@@ -109,9 +109,9 @@ export class Workspaces {
 }
 
 const addOrRemoveMembers = (
-  operation: string,
+  operation: Typeform.API.PATCH<'/members'>['op'],
   members: string | string[]
-): Typeform.API.PATCH[] => {
+): Typeform.API.PATCH<'/members'>[] => {
   if (!isMemberPropValid(members)) {
     throw new Error(`No member(s) provided`)
   }
