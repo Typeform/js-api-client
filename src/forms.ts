@@ -73,11 +73,23 @@ export class Forms {
     return request(page, pageSize)
   }
 
-  public update(args: {
+  public update<T extends boolean>(args: {
     uid: string
-    override?: boolean
-    data: Typeform.Form
-  }): Promise<Typeform.Form> {
+    override?: T
+    data: T extends true
+      ? Typeform.Form
+      : Typeform.API.PATCH<
+          | '/settings/facebook_pixel'
+          | '/settings/google_analytics'
+          | '/settings/google_tag_manager'
+          | '/settings/is_public'
+          | '/settings/meta'
+          | '/cui_settings'
+          | '/theme'
+          | '/title'
+          | '/workspace'
+        >[]
+  }): Promise<T extends true ? Typeform.Form : null> {
     const { uid, override, data } = args
     const methodType = override ? 'put' : 'patch'
 

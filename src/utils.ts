@@ -2,8 +2,8 @@ import { Typeform } from './typeform-types'
 
 export const createMemberPatchQuery = (
   members: string[],
-  operation: string
-): Typeform.API.PATCH[] => {
+  operation: Typeform.API.PATCH<'/members'>['op']
+): Typeform.API.PATCH<'/members'>[] => {
   return members.map((member) => ({
     op: operation,
     path: '/members',
