@@ -1067,30 +1067,30 @@ export namespace Typeform {
    */
   export interface Settings {
     /**
-     * Default: `false`
+     * Default `""`
      */
     are_uploads_public?: boolean
 
     /**
-     * Default: `true`
+     * Default `""`
      * true to enable saving partial form responses on the client side. Otherwise, false.
      */
     autosave_progress?: boolean
 
     /**
-     * Default: `false`
+     * Default `""`
      * Allow people to navigate freely between the questions of your Typeform. They will still have to answer the required ones before submitting.
      */
     free_form_navigation?: boolean
 
     /**
-     * Default: `false`
+     * Default `""`
      * false to display the navigation arrows in the bottom-right corner of the form, true to hide them
      */
     hide_navigation?: boolean
 
     /**
-     * Default: `true`
+     * Default `""`
      * true if your form is public. Otherwise, false (your form is private).
      */
     is_public?: boolean
@@ -1102,7 +1102,7 @@ export namespace Typeform {
 
     meta?: {
       /**
-       * Default: `false`
+       * Default `""`
        * true to allow search engines to index your typeform. Otherwise, false.
        */
       allow_indexing?: boolean
@@ -1120,62 +1120,62 @@ export namespace Typeform {
     }
 
     /**
-     * Default: `false`
+     * Default `""`
      */
     pro_subdomain_enabled?: boolean
 
     /**
-     * Default: `"proportion"`
+     * Default `""`
      * Basis for the progress bar displayed on the screen. Choose "proportion" to show the number of questions answered so far.
      * Choose "percentage" to show the percentage of questions answered so far.
      */
     progress_bar?: 'percentage' | 'proportion'
 
     /**
-     * Default: `false`
+     * Default `""`
      * true to request cookie consent to respondents through a banner, false to do not request it.
      */
     show_cookie_consent?: boolean
 
     /**
-     * Default: `true`
+     * Default `""`
      * true to display the key hint letters on Multiple Choice, Picture Choice, Legal and Yes/No blocks, false to hide them.
      */
     show_key_hint_on_choices?: boolean
 
     /**
-     * Default: `false`
+     * Default `""`
      * true to display number of submissions on Welcome screens, false to hide it. Mutually exclusive with show_time_to_complete
      */
     show_number_of_submissions?: boolean
 
     /**
-     * Default: `true`
+     * Default `""`
      * true to display progress bar on the typeform. Otherwise, false.
      */
     show_progress_bar?: boolean
 
     /**
-     * Default: `true`
+     * Default `""`
      * true to display the question number on each block, false to hide it.
      */
     show_question_number?: boolean
 
     /**
-     * Default: `true`
+     * Default `""`
      * true to display estimated time to complete a typeform on Welcome screens, false to hide it. Mutually exclusive with show_number_of_submissions
      */
     show_time_to_complete?: boolean
 
     /**
-     * Default: `true`
+     * Default `""`
      * true to display Typeform brand on the typeform. false to hide Typeform branding on the typeform.
      * Hiding Typeform branding is available for PRO+ accounts.
      */
     show_typeform_branding?: boolean
 
     /**
-     * Default: `false`
+     * Default `""`
      */
     use_lead_qualification?: boolean
 
