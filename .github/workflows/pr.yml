@@ -57,6 +57,7 @@ jobs:
 
       - name: Upload coverage file
         uses: actions/upload-artifact@v4
+        continue-on-error: true
         with:
           name: coverage-report
           path: ./coverage/lcov.info
