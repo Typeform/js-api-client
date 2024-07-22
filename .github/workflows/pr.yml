@@ -44,7 +44,45 @@ jobs:
         run: yarn lint
 
       - name: Unit tests
-        run: yarn test:unit
+        run: yarn test:unit --coverage
 
       - name: Integration tests
-        run: (yarn server &) && sleep 1 && yarn test:integration
+        run: (yarn server &) && sleep 1 && yarn test:integration --coverage
+
+      - name: Merge coverage reports and generate lcov.info
+        run: npx nyc merge ./coverage && npx nyc report --reporter=lcov
+
+      - name: Upload coverage file
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: ./coverage/lcov.info
+          retention-days: 1
+
+  sonarcloud:
+    name: Test and Code Quality Report (SonarCloud)
+    needs:
+      - build-lint-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download coverage file
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-report
+
+      - name: Verify coverage file download
+        run: find . | grep lcov.info
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v2
+        with:
+          args: >
+            -Dsonar.projectVersion=${{ github.run_id }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_CLOUD_TOKEN }}
