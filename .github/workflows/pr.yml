@@ -53,7 +53,7 @@ jobs:
         run: |
           mkdir -p .nyc_output
           npx nyc merge ./coverage
-          npx nyc report --reporter=lcov
+          npx nyc report --reporter=lcov --temp-dir ./coverage
 
       - name: Upload coverage file
         uses: actions/upload-artifact@v4
