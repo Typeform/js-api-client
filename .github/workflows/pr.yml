@@ -50,7 +50,10 @@ jobs:
         run: (yarn server &) && sleep 1 && yarn test:integration --coverage
 
       - name: Merge coverage reports and generate lcov.info
-        run: npx nyc merge ./coverage && npx nyc report --reporter=lcov
+        run: |
+          mkdir -p .nyc_output
+          npx nyc merge ./coverage
+          npx nyc report --reporter=lcov
 
       - name: Upload coverage file
         uses: actions/upload-artifact@v4
