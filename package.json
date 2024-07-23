@@ -61,6 +61,7 @@
   "devDependencies": {
     "@commitlint/cli": "^8.1.0",
     "@commitlint/config-conventional": "^8.1.0",
+    "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@semantic-release/commit-analyzer": "^11.1.0",
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/github": "^9.2.4",
@@ -75,6 +76,7 @@
     "json-server": "^0.15.1",
     "lint-staged": "^13.2.2",
     "nodemon": "^1.19.2",
+    "nyc": "^17.0.0",
     "prettier": "^2.8.8",
     "rollup": "^1.21.2",
     "rollup-plugin-commonjs": "^10.1.0",
