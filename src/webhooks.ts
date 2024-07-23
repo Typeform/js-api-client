@@ -80,7 +80,7 @@ const createOrUpdateWebhook = (
     const {uid, tag, url, enabled = false, secret, verifySSL} = args
 
     if (!url) {
-        throw new Error(`Please provide an url for ${tag}`)
+        throw new Error(`Please provide a url for ${tag}`)
     }
 
     if (!tag) {
