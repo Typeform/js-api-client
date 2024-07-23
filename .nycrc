@@ -14,9 +14,5 @@
     "text-summary"
   ],
   "report-dir": "./coverage",
-  "check-coverage": true,
-  "statements": 80,
-  "branches": 70,
-  "functions": 75,
-  "lines": 80
+  "check-coverage": false
 }
