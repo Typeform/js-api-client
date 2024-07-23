@@ -79,13 +79,13 @@ jobs:
         with:
           name: coverage-report
 
-      - name: Verify coverage file download
-        run: find . | grep lcov.info
-
       - name: Move the coverage file to a proper location
         run: |
           mkdir -p coverage
           mv lcov.info coverage/lcov.info
+
+      - name: Verify coverage file ready
+        run: ls -lah ./coverage/lcov.info
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2
