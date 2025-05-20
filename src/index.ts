@@ -9,6 +9,7 @@ import { Typeform } from './typeform-types'
 import { Insights } from './insights'
 
 export { Typeform } from './typeform-types'
+export { clientConstructor } from './create-client'
 
 export const createClient = (args: Typeform.ClientArg = { token: null }) => {
   const http = clientConstructor(args)
