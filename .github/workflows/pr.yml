@@ -88,10 +88,11 @@ jobs:
         run: ls -lah ./coverage/lcov.info
 
       - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v2
+        uses: SonarSource/sonarqube-scan-action@v5
         with:
           args: >
             -Dsonar.projectVersion=${{ github.run_id }}
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_CLOUD_TOKEN }}
+          LC_ALL: "C.UTF-8"
