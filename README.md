@@ -126,17 +126,26 @@ const typeformClient = createClient({ token: '<your token>' })
 const typeformAPI = createClient()
 ```
 
-If your account is configured to store responses in the EU Data Center
-you can pass the `apiBaseUrl` as `https://api.eu.typeform.com`.
+For EU Data Center accounts, the `apiBaseUrl` varies based on your onboarding date:
 
-```javascript
-const typeformAPI = createClient(
-  {
-    token: '<your token>',
-    apiBaseUrl: 'https://api.eu.typeform.com'
-  }
-)
-```
+* **For accounts onboarded before August 2025**:
+    ```javascript
+    const typeformAPI = createClient(
+      {
+        token: '<your token>',
+        apiBaseUrl: 'https://api.eu.typeform.com'
+      }
+    )
+    ```
+* **For accounts onboarded on or after August 2025**:
+    ```javascript
+    const typeformAPI = createClient(
+      {
+        token: '<your token>',
+        apiBaseUrl: 'https://api.typeform.eu'
+      }
+    )
+    ```
 
 Client returns the following properties:
 
