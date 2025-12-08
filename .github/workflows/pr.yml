@@ -11,6 +11,8 @@ jobs:
     strategy:
       matrix:
         node_version:
+          - 18 # end of life 2025-04-30
+          - 20 # end of life 2025-04-30 
           - 22 # please update "Upload coverage file" step if you change this
     name: build-lint-test - node ${{ matrix.node_version }}
     steps:
