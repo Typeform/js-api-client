@@ -11,8 +11,7 @@ jobs:
     strategy:
       matrix:
         node_version:
-          - 18 # end of life 2025-04-30
-          - 20 # end of life 2025-04-30 # please update "Upload coverage file" step if you change this
+          - 22 # end of life 2027-04-30 # coverage file uploaded from this version
     name: build-lint-test - node ${{ matrix.node_version }}
     steps:
       - name: Check out Git repository
@@ -57,7 +56,6 @@ jobs:
 
       - name: Upload coverage file
         uses: actions/upload-artifact@v4
-        if: ${{ matrix.node_version == '20' }}
         with:
           name: coverage-report
           path: ./coverage/lcov.info

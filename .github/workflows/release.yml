@@ -10,6 +10,9 @@ jobs:
   release:
     name: release
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v3
@@ -17,7 +20,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Get yarn cache
         uses: actions/cache@v3
@@ -35,9 +38,8 @@ jobs:
       - name: Build
         run: yarn build
 
-      # update registry and tokens with write access for releasing.
+      # Configure registry for GitHub Packages
       - run: rm ./.npmrc
-      - run: npm config set '//registry.npmjs.org/:_authToken' $NPM_TOKEN
       - run: npm config set '//npm.pkg.github.com/:_authToken' $GH_TOKEN
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
@@ -47,4 +49,3 @@ jobs:
         run: yarn release
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
