@@ -29,7 +29,7 @@ jobs:
           path: |
             **/node_modules
             ~/.cache
-          key: ${{ runner.os }}-node-16-yarn-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('.github/workflows/**.yml') }}
+          key: ${{ runner.os }}-node-22-yarn-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('.github/workflows/**.yml') }}
 
       - name: Install Node.js dependencies
         if: steps.yarn-cache.outputs.cache-hit != 'true'
