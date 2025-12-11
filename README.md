@@ -453,4 +453,4 @@ yarn test:unit
 
 ## Suggestions or feedback
 
-Feel free to [open a Github issue](https://github.com/Typeform/js-api-client/issues). 
+Feel free to [open a GitHub issue](https://github.com/Typeform/js-api-client/issues). 
