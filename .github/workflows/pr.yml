@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         node_version:
-          - 22 # end of life 2027-04-30 # coverage file uploaded from this version
+          - 24 # end of life 2028-04-30 # coverage file uploaded from this version
     name: build-lint-test - node ${{ matrix.node_version }}
     steps:
       - name: Check out Git repository
