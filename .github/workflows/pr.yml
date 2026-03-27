@@ -15,15 +15,15 @@ jobs:
     name: build-lint-test - node ${{ matrix.node_version }}
     steps:
       - name: Check out Git repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node_version }}
 
       - name: Get yarn cache
-        uses: actions/cache@v3
+        uses: actions/cache@v5
         id: yarn-cache
         with:
           path: |
@@ -55,7 +55,7 @@ jobs:
           npx nyc report --reporter=lcov --temp-dir ./coverage
 
       - name: Upload coverage file
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: coverage-report
           path: ./coverage/lcov.info
@@ -68,12 +68,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out Git repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
       - name: Download coverage file
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: coverage-report
 
@@ -86,7 +86,7 @@ jobs:
         run: ls -lah ./coverage/lcov.info
 
       - name: SonarCloud Scan
-        uses: SonarSource/sonarqube-scan-action@v5
+        uses: SonarSource/sonarqube-scan-action@v7
         with:
           args: >
             -Dsonar.projectVersion=${{ github.run_id }}
