@@ -55,7 +55,7 @@ jobs:
           npx nyc report --reporter=lcov --temp-dir ./coverage
 
       - name: Upload coverage file
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: coverage-report
           path: ./coverage/lcov.info
@@ -73,7 +73,7 @@ jobs:
           fetch-depth: 0
 
       - name: Download coverage file
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: coverage-report
 
