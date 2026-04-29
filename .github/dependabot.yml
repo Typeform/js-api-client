@@ -18,8 +18,6 @@ updates:
       dependencies:
         patterns:
           - "*"
-    directories:
-      - "/"
     commit-message:
       prefix: fix(dependabot)
     registries:
@@ -33,6 +31,7 @@ updates:
       - dependency-name: semantic-release
         versions:
           - '>=25.0.0'
+    directory: "/"
   - package-ecosystem: github-actions
     schedule:
       interval: weekly
