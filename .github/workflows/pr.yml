@@ -86,8 +86,9 @@ jobs:
         run: ls -lah ./coverage/lcov.info
 
       - name: SonarCloud Scan
-        uses: SonarSource/sonarqube-scan-action@v7
+        uses: SonarSource/sonarqube-scan-action@v8
         with:
+          skipSignatureVerification: true
           args: >
             -Dsonar.projectVersion=${{ github.run_id }}
         env:
