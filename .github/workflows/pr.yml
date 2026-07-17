@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         node_version:
-          - 24 # end of life 2028-04-30 # coverage file uploaded from this version
+          - 24 # end of life 2028-04-30
     name: build-lint-test - node ${{ matrix.node_version }}
     steps:
       - name: Check out Git repository
@@ -43,21 +43,8 @@ jobs:
         run: yarn lint
 
       - name: Unit tests
-        run: yarn test:unit --coverage
+        run: yarn test:unit
 
       - name: Integration tests
-        run: (yarn server &) && sleep 1 && yarn test:integration --coverage
-
-      - name: Merge coverage reports and generate lcov.info
-        run: |
-          mkdir -p .nyc_output
-          npx nyc merge ./coverage
-          npx nyc report --reporter=lcov --temp-dir ./coverage
-
-      - name: Upload coverage file
-        uses: actions/upload-artifact@v7
-        with:
-          name: coverage-report
-          path: ./coverage/lcov.info
-          retention-days: 1
+        run: (yarn server &) && sleep 1 && yarn test:integration
 
