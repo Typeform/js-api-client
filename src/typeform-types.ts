@@ -894,6 +894,10 @@ export namespace Typeform {
        * Character to use between month, day, and year in answer. Available for `date` types.
        */
       separator?: '/' | '-' | '.'
+      /**
+       * Display format for the time component. Omit to collect a date only. Available for `date` types.
+       */
+      time_format?: 'HH:mm' | 'hh:mm a'
       currency?:
         | 'AUD'
         | 'BRL'
