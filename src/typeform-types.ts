@@ -885,7 +885,7 @@ export namespace Typeform {
        */
       start_at_one?: boolean
       /**
-       * Default: `"DDMMYYYY"`
+       * Default: `"MMDDYYYY"`
        * Format for month, date, and year in answer. Available for `date` types.
        */
       structure?: 'MMDDYYYY' | 'DDMMYYYY' | 'YYYYMMDD'
