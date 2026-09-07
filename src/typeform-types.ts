@@ -1049,6 +1049,14 @@ export namespace Typeform {
         other?: string
       }
       date?: string
+      /**
+       * IANA time zone identifier (e.g. `"America/New_York"`) for the respondent's clock when the answer includes a time.
+       * `date` is always a UTC instant, so `time_zone` is required to recover the time the respondent actually saw.
+       * Omitted when the answer carries no time of day, and also when the respondent's device could not resolve a zone.
+       * To tell whether a field collects a time of day, check for `time_format` on the field definition: a date-only
+       * answer is serialized with a `T00:00:00.000Z` suffix too, so neither `date` nor `time_zone` distinguishes them.
+       */
+      time_zone?: string
       email?: string
       file_url?: string
       number?: number
