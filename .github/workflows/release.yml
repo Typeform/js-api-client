@@ -42,10 +42,10 @@ jobs:
       - run: rm ./.npmrc
       - run: npm config set '//npm.pkg.github.com/:_authToken' $GH_TOKEN
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.JENKINS_PAT_TOKEN }}
 
       - name: Release
         if: ${{ contains(github.ref, 'refs/heads/main') || contains(github.ref, 'refs/heads/beta') }}
         run: yarn release
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.JENKINS_PAT_TOKEN }}
