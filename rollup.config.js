@@ -51,6 +51,7 @@ const config = [
       ...plugins,
     ],
     external: [
+      'axios',
       'http',
       'https',
       'url',
@@ -114,6 +115,7 @@ const config = [
       ...plugins,
     ],
     external: [
+      'axios',
       'http',
       'https',
       'url',
