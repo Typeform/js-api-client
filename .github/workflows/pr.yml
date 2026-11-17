@@ -7,7 +7,10 @@ on:
 
 jobs:
   build-lint-test:
-    runs-on: ubuntu-latest
+    # Pinned on purpose: `ubuntu-latest` moves to the next Ubuntu LTS without any change in this repo.
+    # To upgrade, change the label in every workflow in one PR, so this job validates the new image.
+    # release.yml only runs on main and beta: watch the first Release run after merging, revert if it fails.
+    runs-on: ubuntu-26.04
     strategy:
       matrix:
         node_version:
